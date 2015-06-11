@@ -1,12 +1,14 @@
 package models.bot;
 
+import models.action.Action;
+import models.action.Route;
 import models.basic.Couleur;
 import models.basic.Orientation;
 import models.basic.Position;
 
 /**
  * Réprésentation d'un Bot
- *
+ * 
  */
 public class Bot {
 
@@ -28,18 +30,22 @@ public class Bot {
 	 */
 	private Couleur pCouleur;
 
+	private Route pRouteMain;
+
 	/**
 	 * Constructeur par défault. Placé en 0,0, Orienté vers Nord et de Couleur Blanche
 	 */
+
 	public Bot() {
 		this.pCouleur = Couleur.BLANC;
 		this.pPosition = new Position();
 		this.pOrientation = Orientation.NORD;
+		this.pRouteMain = new Route();
 	}
 
 	/**
 	 * Création dun bot selon les paramètres données
-	 *
+	 * 
 	 * @param aPosition
 	 *            Position du bot
 	 * @param aOrientation
@@ -51,11 +57,28 @@ public class Bot {
 		this.pPosition = aPosition;
 		this.pOrientation = aOrientation;
 		this.pCouleur = aCouleur;
+		this.pRouteMain = new Route();
+	}
+
+	/**
+	 * ajouter un action au list
+	 */
+	public void addAction(Action aAction) {
+		this.pRouteMain.addAction(aAction);
+	}
+
+	/**
+	 * retourne le list de action de bot
+	 * 
+	 * @return bot_Action du Bot
+	 */
+	public Route getBot_Route() {
+		return this.pRouteMain;
 	}
 
 	/**
 	 * Retourne la Couleur du Bot
-	 *
+	 * 
 	 * @return Couleur du Bot
 	 */
 	public Couleur getCouleur() {
@@ -64,7 +87,7 @@ public class Bot {
 
 	/**
 	 * Retourne l'Orientation du Bot
-	 *
+	 * 
 	 * @return Orientation du Bot
 	 */
 	public Orientation getOrientation() {
@@ -73,7 +96,7 @@ public class Bot {
 
 	/**
 	 * Retourne la Position du Bot
-	 *
+	 * 
 	 * @return Position du Bot
 	 */
 	public Position getPosition() {
@@ -81,8 +104,22 @@ public class Bot {
 	}
 
 	/**
+	 * remove un action
+	 */
+	public void removeAction(int numberAction) {
+		this.pRouteMain.remove_Action(numberAction);
+	}
+
+	/**
+	 * arrange le action du Bot
+	 */
+	public void setAction(Action aAction, int numberAction) {
+		this.pRouteMain.set_Action(aAction, numberAction);
+	}
+
+	/**
 	 * Définit la Couleur du Bot
-	 *
+	 * 
 	 * @param aCouleur
 	 *            nouvelle Couleur du Bot
 	 */
@@ -92,7 +129,7 @@ public class Bot {
 
 	/**
 	 * Définit l'Orientation du Bot
-	 *
+	 * 
 	 * @param aOrientation
 	 *            nouvelle Orientation du Bot
 	 */
@@ -102,7 +139,7 @@ public class Bot {
 
 	/**
 	 * Définit la Position du Bot
-	 *
+	 * 
 	 * @param aPosition
 	 *            nouvelle Position du Bot
 	 */
