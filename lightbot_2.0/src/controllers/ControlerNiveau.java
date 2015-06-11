@@ -6,14 +6,14 @@ import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.niveau.Niveau;
-import views.niveau.VNiveau;
+import views.fenetre.FenetreNiveau;
 
 public class ControlerNiveau {
 
 	private Niveau pNiveau;
-	private VNiveau pVNiveau;
+	private FenetreNiveau pVNiveau;
 
-	public ControlerNiveau(Niveau aNiveau, VNiveau aVNiveau) {
+	public ControlerNiveau(Niveau aNiveau, FenetreNiveau aVNiveau) {
 		this.pNiveau = aNiveau;
 		this.pVNiveau = aVNiveau;
 	}

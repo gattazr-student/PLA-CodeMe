@@ -72,7 +72,7 @@ public class VBot implements Drawable {
 		Vector2f wPositionFinal = Vector2f.add(wOrigin, wDeplacement);
 
 		/* pour affichage de la hauteur */
-		Vector2f wW = new Vector2f(0, -VCase.DEPL_Z);
+		Vector2f wW = new Vector2f(0, -VCase.HAUTEUR);
 		for (int wI = 0; wI < this.pHauteur; wI++) {
 			wPositionFinal = Vector2f.add(wPositionFinal, wW);
 		}

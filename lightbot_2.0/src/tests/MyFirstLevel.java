@@ -9,7 +9,7 @@ import models.niveau.CaseBasique;
 import models.niveau.CaseLampe;
 import models.niveau.Niveau;
 import views.fenetre.Fenetre;
-import views.niveau.VNiveau;
+import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
 
 public class MyFirstLevel {
@@ -56,7 +56,7 @@ public class MyFirstLevel {
 		/* Création du model */
 		Niveau wModelNiveau = createModel();
 		/* Création de la vue */
-		VNiveau wViewNiveau = new VNiveau(Fenetre.FENETRE, wModelNiveau);
+		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
 		ControlerNiveau wControlerNiveau = new ControlerNiveau(wModelNiveau, wViewNiveau);
 
