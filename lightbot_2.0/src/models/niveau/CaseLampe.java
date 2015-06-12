@@ -31,7 +31,7 @@ public class CaseLampe extends Case {
 		} else {
 			this.pEtat = ETAT_LAMPE.ETEINT;
 		}
-
+		notifyObserver("caseLampe_etat", null);
 	}
 
 	/**

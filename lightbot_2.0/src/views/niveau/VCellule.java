@@ -5,13 +5,14 @@ import java.util.List;
 
 import models.niveau.Case;
 import models.niveau.Cellule;
+import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
 
 import views.View;
 import views.bot.VBot;
 
-public class VCellule extends View {
+public class VCellule extends View implements Observer {
 
 	private Cellule pCellule;
 	private List<VCase> pVCases;
@@ -23,6 +24,7 @@ public class VCellule extends View {
 		super(aZone);
 		this.pCellule = aCellule;
 		this.pVBot = aVBot;
+		this.pCellule.addObserver(this);
 		initView(); // initialise la vue
 	}
 
@@ -48,6 +50,19 @@ public class VCellule extends View {
 				this.pVBot.setZone(new FloatRect(VBot.DEPL_X, wCase.getHauteur() * -VCase.DEPL_HAUTEUR
 						+ -VBot.DEPL_Y, this.pVBot.getWidth(), this.pVBot.getHeight()));
 			}
+		}
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		// TODO Auto-generated method stub
+		if (aString.equals("cellule_switch")) {
+			clearView();
+			initView();
+		}
+		if (aString.equals("cellule_reset")) {
+			clearView();
+			initView();
 		}
 	}
 

@@ -1,5 +1,6 @@
 package models.bot;
 
+import models.ObservableModel;
 import models.action.Action;
 import models.action.Route;
 import models.basic.Couleur;
@@ -8,12 +9,12 @@ import models.basic.Position;
 
 /**
  * Réprésentation d'un Bot
- * 
+ *
  */
-public class Bot {
+public class Bot extends ObservableModel {
 
 	/**
-	 * List des actions disponible pour le Bot
+	 * Liste des actions disponibles pour le Bot
 	 */
 	// private List<Action> pActions;
 
@@ -44,8 +45,8 @@ public class Bot {
 	}
 
 	/**
-	 * Création dun bot selon les paramètres données
-	 * 
+	 * Création d'un bot selon les paramètres données
+	 *
 	 * @param aPosition
 	 *            Position du bot
 	 * @param aOrientation
@@ -61,15 +62,15 @@ public class Bot {
 	}
 
 	/**
-	 * ajouter un action au list
+	 * ajoute une action a la liste
 	 */
 	public void addAction(Action aAction) {
 		this.pRouteMain.addAction(aAction);
 	}
 
 	/**
-	 * retourne le list de action de bot
-	 * 
+	 * retourne la liste d'actions du bot
+	 *
 	 * @return bot_Action du Bot
 	 */
 	public Route getBot_Route() {
@@ -78,7 +79,7 @@ public class Bot {
 
 	/**
 	 * Retourne la Couleur du Bot
-	 * 
+	 *
 	 * @return Couleur du Bot
 	 */
 	public Couleur getCouleur() {
@@ -87,7 +88,7 @@ public class Bot {
 
 	/**
 	 * Retourne l'Orientation du Bot
-	 * 
+	 *
 	 * @return Orientation du Bot
 	 */
 	public Orientation getOrientation() {
@@ -96,7 +97,7 @@ public class Bot {
 
 	/**
 	 * Retourne la Position du Bot
-	 * 
+	 *
 	 * @return Position du Bot
 	 */
 	public Position getPosition() {
@@ -104,7 +105,7 @@ public class Bot {
 	}
 
 	/**
-	 * remove un action
+	 * remove une action
 	 */
 	public void removeAction(int numberAction) {
 		this.pRouteMain.remove_Action(numberAction);
@@ -119,33 +120,35 @@ public class Bot {
 
 	/**
 	 * Définit la Couleur du Bot
-	 * 
+	 *
 	 * @param aCouleur
 	 *            nouvelle Couleur du Bot
 	 */
 	public void setCouleur(Couleur aCouleur) {
 		this.pCouleur = aCouleur;
+		notifyObserver("couleur", null);
 	}
 
 	/**
 	 * Définit l'Orientation du Bot
-	 * 
+	 *
 	 * @param aOrientation
 	 *            nouvelle Orientation du Bot
 	 */
 	public void setOrientation(Orientation aOrientation) {
 		this.pOrientation = aOrientation;
+		notifyObserver("bot_orientation", null);
 	}
 
 	/**
 	 * Définit la Position du Bot
-	 * 
+	 *
 	 * @param aPosition
 	 *            nouvelle Position du Bot
 	 */
 	public void setPosition(Position aPosition) {
 		this.pPosition = aPosition;
-
+		notifyObserver("bot_position", null);
 	}
 
 }

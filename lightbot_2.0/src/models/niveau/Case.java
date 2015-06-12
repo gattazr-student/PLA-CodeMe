@@ -1,12 +1,13 @@
 package models.niveau;
 
+import models.ObservableModel;
 import models.basic.Position;
 
 /**
  * Case représente une case dans un Niveau.
  *
  */
-public abstract class Case {
+public abstract class Case extends ObservableModel {
 
 	private Position pPosition;
 	private int pHauteur;

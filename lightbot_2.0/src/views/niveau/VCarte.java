@@ -7,6 +7,7 @@ import models.basic.Position;
 import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.Cellule;
+import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Vector2f;
@@ -14,7 +15,7 @@ import org.jsfml.system.Vector2f;
 import views.View;
 import views.bot.VBot;
 
-public class VCarte extends View {
+public class VCarte extends View implements Observer {
 
 	private Carte pCarte;
 	private List<Bot> pBots;
@@ -24,6 +25,10 @@ public class VCarte extends View {
 		super(aZone);
 		this.pCarte = aCarte;
 		this.pBots = aBots;
+		this.pCarte.addObserver(this);
+		for (Bot wBot : this.pBots) {
+			wBot.addObserver(this);
+		}
 		initView(); // initialise la vue
 	}
 
@@ -44,20 +49,31 @@ public class VCarte extends View {
 				wPosition = new Position(wX, wY);
 				wDepl = Vector2f.add(wPositionFirst, VCase.deplacementCase(wPosition));
 				wVBot = null;
-				for (int i = 0; i < this.pVBots.size(); i++) {
-					Bot wParcours = this.pBots.get(i);
+				for (int wI = 0; wI < this.pVBots.size(); wI++) {
+					Bot wParcours = this.pBots.get(wI);
 					if (wParcours.getPosition().equals(wPosition)) {
-						wVBot = this.pVBots.get(i);
+						wVBot = this.pVBots.get(wI);
 						break;
 					}
 				}
-				/* TODO: remplacer par des statiques */
 				Cellule wCellule = this.pCarte.getCellule(wPosition);
 				VCellule wVCellule = new VCellule(wCellule, wVBot, new FloatRect(wDepl.x, wDepl.y,
 						VCase.LARGEUR, VCase.HAUTEUR));
 				addView(wVCellule);
 
 			}
+		}
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		if (aString.equals("carte_switch")) {
+			clearView();
+			initView();
+		}
+		if (aString.equals("bot_position")) {
+			clearView();
+			initView();
 		}
 	}
 }

@@ -7,6 +7,7 @@ import models.basic.Position;
 import models.niveau.Case;
 import models.niveau.CaseBasique;
 import models.niveau.CaseLampe;
+import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
@@ -17,7 +18,7 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
-public abstract class VCase extends View {
+public abstract class VCase extends View implements Observer {
 
 	public static final float DIAG_HORIZONTALE = 78;
 	public static final float DIAG_VERTICALE = 37;

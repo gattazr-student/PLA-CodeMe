@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import models.bot.Bot;
+import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
@@ -14,7 +15,7 @@ import org.jsfml.graphics.Transform;
 
 import views.View;
 
-public class VBot extends View {
+public class VBot extends View implements Observer {
 
 	public static float DEPL_X = 19;
 	public static float DEPL_Y = 73;
@@ -27,6 +28,7 @@ public class VBot extends View {
 	public VBot(Bot aBot, FloatRect aZone) {
 		super(aZone);
 		this.pBot = aBot;
+		this.pBot.addObserver(this);
 		initView();
 	}
 
@@ -82,5 +84,18 @@ public class VBot extends View {
 		}
 		wSprite.setTexture(wTexture);
 		this.pSprite = wSprite;
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		// TODO Auto-generated method stub
+		if (aString.equals("bot_couleur")) {
+			clearView();
+			initView();
+		}
+		if (aString.equals("bot_orientation")) {
+			clearView();
+			initView();
+		}
 	}
 }

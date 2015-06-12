@@ -18,6 +18,7 @@ public class VCaseLampe extends VCase {
 	public VCaseLampe(CaseLampe aCaseLampe, FloatRect aZone) {
 		super(aZone);
 		this.pCaseLampe = aCaseLampe;
+		this.pCaseLampe.addObserver(this);
 		initView();
 	}
 
@@ -48,6 +49,15 @@ public class VCaseLampe extends VCase {
 			wSprite.setPosition(wOrigin);
 			wSprite.setTexture(wTexture);
 			addSprite(wSprite);
+		}
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		// TODO Auto-generated method stub
+		if (aString.equals("caseLampe_etat")) {
+			clearView();
+			initView();
 		}
 	}
 }

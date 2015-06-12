@@ -1,12 +1,13 @@
 package models.niveau;
 
+import models.ObservableModel;
 import models.basic.Position;
 
 /**
  * Carte représente le monde d'un Niveau
  *
  */
-public class Carte {
+public class Carte extends ObservableModel {
 	/**
 	 * Position maximum sur l'axe des abscisses
 	 */
@@ -103,7 +104,7 @@ public class Carte {
 
 	/**
 	 * Retourne la cellule a la position donnée
-	 * 
+	 *
 	 * @param aPosition
 	 *            position de la cellule
 	 * @return la cellule a la position donnée
@@ -156,5 +157,6 @@ public class Carte {
 	 */
 	public void switchCase(Position aPosition) {
 		this.pCellules[aPosition.getY()][aPosition.getX()].nextCourante();
+		notifyObserver("carte_switch", null);
 	}
 }

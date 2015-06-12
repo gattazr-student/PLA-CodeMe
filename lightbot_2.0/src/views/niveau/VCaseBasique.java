@@ -17,6 +17,7 @@ public class VCaseBasique extends VCase {
 	public VCaseBasique(CaseBasique aCaseBasique, FloatRect aZone) {
 		super(aZone);
 		this.pCaseBasique = aCaseBasique;
+		this.pCaseBasique.addObserver(this);
 		initView();
 	}
 
@@ -44,5 +45,10 @@ public class VCaseBasique extends VCase {
 			wSprite.setTexture(wTexture);
 			addSprite(wSprite);
 		}
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		// Pas de mise à jour de cette classe
 	}
 }
