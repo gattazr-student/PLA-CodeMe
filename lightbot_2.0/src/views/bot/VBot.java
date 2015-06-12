@@ -27,6 +27,7 @@ public class VBot extends View {
 	public VBot(Bot aBot, FloatRect aZone) {
 		super(aZone);
 		this.pBot = aBot;
+		initView();
 	}
 
 	@Override
@@ -36,9 +37,9 @@ public class VBot extends View {
 		}
 		/* Calcul de la position asbolue */
 		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
-		new RenderStates(aState.blendMode, Transform.combine(wTranslation, aState.transform), aState.texture,
-				aState.shader);
-		this.pSprite.draw(aTarget, aState);
+		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
+				aState.transform), aState.texture, aState.shader);
+		this.pSprite.draw(aTarget, wNewState);
 	}
 
 	@Override

@@ -45,8 +45,8 @@ public class VCellule extends View {
 			this.pVBot = aBot;
 			Case wCase = this.pCellule.getCase();
 			if (wCase != null) {
-				this.pVBot.setZone(new FloatRect(VBot.DEPL_X, wCase.getHauteur() * VCase.DEPL_HAUTEUR
-						+ VBot.DEPL_Y, this.pVBot.getWidth(), this.pVBot.getHeight()));
+				this.pVBot.setZone(new FloatRect(VBot.DEPL_X, wCase.getHauteur() * -VCase.DEPL_HAUTEUR
+						+ -VBot.DEPL_Y, this.pVBot.getWidth(), this.pVBot.getHeight()));
 			}
 		}
 	}
