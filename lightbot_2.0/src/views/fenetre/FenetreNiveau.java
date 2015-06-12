@@ -7,14 +7,17 @@ import mvc.Observer;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderWindow;
-import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Transform;
+import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard.Key;
+import org.jsfml.window.Mouse.Button;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.KeyEvent;
+import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.jsfml.VBouton;
 import views.niveau.VCarte;
 import views.niveau.VCase;
 import controllers.ControlerNiveau;
@@ -29,7 +32,6 @@ public class FenetreNiveau extends View implements Observer {
 	private Panel pPanelRoutes;
 	private Panel pPanelActions;
 	private Panel pPanelMenu;
-	private Sprite pInterface;
 
 	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
 		this.pWindow = aWindow;
@@ -43,14 +45,23 @@ public class FenetreNiveau extends View implements Observer {
 		wYSep = (float) (wSize.y * 0.85); // Calcul 85% de la hauteur de la fenêtre
 		/* Ajoute les 4 panels dans la liste des éléments de la vue */
 		this.pPanelCarte = new Panel(new FloatRect(0, 0, wXSep, wYSep));
-		this.pPanelRoutes = new Panel(new FloatRect(0, wYSep, wXSep, wSize.y - wYSep));
-		this.pPanelActions = new Panel(new FloatRect(wXSep, 0, wSize.x - wXSep, wYSep));
+		this.pPanelActions = new Panel(new FloatRect(0, wYSep, wXSep, wSize.y - wYSep));
+		this.pPanelRoutes = new Panel(new FloatRect(wXSep, 0, wSize.x - wXSep, wYSep));
 		this.pPanelMenu = new Panel(new FloatRect(wXSep, wYSep, wSize.x - wXSep, wSize.y - wYSep));
 		addView(this.pPanelCarte);
 		addView(this.pPanelRoutes);
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
 		initView();
+	}
+
+	/**
+	 * Dessinne les boutons actions
+	 */
+	private void initActions() {
+		VBouton wButton = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allume.png");
+		this.pPanelActions.addView(wButton);
+
 	}
 
 	/**
@@ -68,22 +79,11 @@ public class FenetreNiveau extends View implements Observer {
 				wLargeur, wHauteur)));
 	}
 
-	/**
-	 * Dessinne l'interface si elle n'a pas déja été dessiné et stocké dans pInterface
-	 */
-	private void initInterface() {
-		if (this.pInterface != null) {
-			/* Calcul du vecteur scale à appliquer */
-			this.pWindow.draw(this.pInterface);
-		}
-		/* TODO: Ajouter les boutons Play + retour menu */
-	}
-
 	@Override
 	public void initView() {
 		/* TODO: complete function */
-		initInterface();
 		initCarte();
+		initActions();
 	}
 
 	public void redraw() {
@@ -99,15 +99,15 @@ public class FenetreNiveau extends View implements Observer {
 		this.pWindow.setFramerateLimit(30);
 		while (this.pWindow.isOpen()) {
 			/* Gère les events */
-			for (Event event : this.pWindow.pollEvents()) {
-				if (event.type == Event.Type.CLOSED) {
+			for (Event wEvent : this.pWindow.pollEvents()) {
+				if (wEvent.type == Event.Type.CLOSED) {
 					this.pWindow.close();
 				}
-				if (event.type == Event.Type.RESIZED) {
+				if (wEvent.type == Event.Type.RESIZED) {
 					redraw();
 				}
-				if (event.type == Event.Type.KEY_RELEASED) {
-					KeyEvent wSMFLKeyEvent = event.asKeyEvent();
+				if (wEvent.type == Event.Type.KEY_RELEASED) {
+					KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
 					if (wSMFLKeyEvent.key.compareTo(Key.UP) == 0) {
 						this.pControler.avancerBot();
 					} else if (wSMFLKeyEvent.key.compareTo(Key.LEFT) == 0) {
@@ -118,6 +118,13 @@ public class FenetreNiveau extends View implements Observer {
 						this.pControler.allumerCase();
 					} else if (wSMFLKeyEvent.key.compareTo(Key.SPACE) == 0) {
 						this.pControler.sauterBot();
+					}
+				}
+				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
+					if (wMouseEvent.button == Button.LEFT) {
+						View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
+						System.out.println(String.format("Left click on %s", wClicked.getClass()));
 					}
 				}
 			}

@@ -2,6 +2,7 @@ package views;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.jsfml.graphics.Drawable;
 import org.jsfml.graphics.FloatRect;
@@ -102,6 +103,24 @@ public abstract class View implements Drawable {
 	public abstract void initView();
 
 	/**
+	 * Retourne l'objet View qui a été la cible du click
+	 *
+	 * @return View qui a été clické
+	 */
+	public View isClickedOn(Vector2f aPosition) {
+		ListIterator<View> wIterator = this.pViews.listIterator(this.pViews.size());
+		View wView;
+		while (wIterator.hasPrevious()) {
+			wView = wIterator.previous();
+			if (wView.contains(aPosition)) {
+				Vector2f wNewPos = Vector2f.sub(aPosition, wView.getOrigin());
+				return wView.isClickedOn(wNewPos);
+			}
+		}
+		return this;
+	}
+
+	/**
 	 * Définit la zone de la vue
 	 *
 	 * @param aZone
@@ -110,4 +129,5 @@ public abstract class View implements Drawable {
 	public void setZone(FloatRect aZone) {
 		this.pZone = aZone;
 	}
+
 }
