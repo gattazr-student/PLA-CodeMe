@@ -45,7 +45,7 @@ public class Cellule {
 
 	/**
 	 * Retoune l'indice de la cellule courante
-	 * 
+	 *
 	 * @return indice de la cellule courante
 	 */
 	public int getCourant() {

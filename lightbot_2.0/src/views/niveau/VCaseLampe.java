@@ -41,7 +41,7 @@ public class VCaseLampe extends VCase {
 		wSprite.setPosition(wOrigin);
 		addSprite(wSprite);
 		/* pour affichage de la hauteur */
-		Vector2f wW = new Vector2f(0, -VCase.HAUTEUR);
+		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
 		for (int wI = 0; wI < this.pCaseLampe.getHauteur(); wI++) {
 			wSprite = new Sprite();
 			wOrigin = Vector2f.add(wOrigin, wW);

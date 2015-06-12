@@ -21,7 +21,7 @@ public class MyFirstLevel {
 	 */
 	public static Niveau createModel() {
 		Niveau wLevel1 = new Niveau();
-		wLevel1.addBot(new Bot(new Position(0, 0), Orientation.EST, Couleur.BLANC));
+		wLevel1.addBot(new Bot(new Position(3, 3), Orientation.EST, Couleur.BLANC));
 		// wLevel1.addBot(new Bot(new Position(1, 2), Orientation.EST, Couleur.ROUGE));
 		// wLevel1.addBot(new Bot(new Position(2, 0), Orientation.EST, Couleur.VERT));
 		// wLevel1.addBot(new Bot(new Position(3, 3), Orientation.EST, Couleur.BLANC));

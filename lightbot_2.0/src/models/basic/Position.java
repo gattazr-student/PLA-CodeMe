@@ -46,6 +46,17 @@ public class Position {
 		this.pY = aPosition.getY();
 	}
 
+	@Override
+	public boolean equals(Object aPosition) {
+		if (aPosition instanceof Position) {
+			Position wPosition = (Position) aPosition;
+			if ((wPosition.pX == this.pX) && (wPosition.pY == this.pY)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Retourne la valeur sur l'axe des abscisses
 	 *

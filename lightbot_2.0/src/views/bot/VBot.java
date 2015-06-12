@@ -5,30 +5,44 @@ import java.nio.file.Paths;
 
 import models.bot.Bot;
 
-import org.jsfml.graphics.Drawable;
+import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
-import org.jsfml.system.Vector2f;
+import org.jsfml.graphics.Transform;
 
-import views.niveau.VCase;
+import views.View;
 
-public class VBot implements Drawable {
+public class VBot extends View {
 
 	public static float DEPL_X = 19;
 	public static float DEPL_Y = 73;
+	public static float HAUTEUR = 102;
+	public static float LARGEUR = 47;
 
 	private Bot pBot;
-	private int pHauteur;
+	private Sprite pSprite;
 
-	public VBot(Bot aBot, int aHauteur) {
+	public VBot(Bot aBot, FloatRect aZone) {
+		super(aZone);
 		this.pBot = aBot;
-		this.pHauteur = aHauteur; // hauteur de la case dans lequel est le bot
 	}
 
 	@Override
 	public void draw(RenderTarget aTarget, RenderStates aState) {
+		if (this.pSprite == null) {
+			initView();
+		}
+		/* Calcul de la position asbolue */
+		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
+		new RenderStates(aState.blendMode, Transform.combine(wTranslation, aState.transform), aState.texture,
+				aState.shader);
+		this.pSprite.draw(aTarget, aState);
+	}
+
+	@Override
+	public void initView() {
 		Texture wTexture = new Texture();
 		Sprite wSprite = new Sprite();
 		try {
@@ -66,21 +80,6 @@ public class VBot implements Drawable {
 			e.printStackTrace();
 		}
 		wSprite.setTexture(wTexture);
-
-		Vector2f wOrigin = aState.transform.transformPoint(new Vector2f(0, 0));
-		Vector2f wDeplacement = VCase.deplacementCase(this.pBot.getPosition());
-		Vector2f wPositionFinal = Vector2f.add(wOrigin, wDeplacement);
-
-		/* pour affichage de la hauteur */
-		Vector2f wW = new Vector2f(0, -VCase.HAUTEUR);
-		for (int wI = 0; wI < this.pHauteur; wI++) {
-			wPositionFinal = Vector2f.add(wPositionFinal, wW);
-		}
-		/* Déplace le bot pour le placer au milieu de la case */
-		wW = new Vector2f(DEPL_X, -DEPL_Y);
-		wPositionFinal = Vector2f.add(wPositionFinal, wW);
-
-		wSprite.setPosition(wPositionFinal);
-		aTarget.draw(wSprite);
+		this.pSprite = wSprite;
 	}
 }
