@@ -119,6 +119,7 @@ public class FenetreNiveau extends View implements Observer {
 					} else if (wSMFLKeyEvent.key.compareTo(Key.SPACE) == 0) {
 						this.pControler.sauterBot();
 					}
+					redraw();
 				}
 				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();

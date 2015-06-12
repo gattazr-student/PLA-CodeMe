@@ -126,7 +126,7 @@ public class Bot extends ObservableModel {
 	 */
 	public void setCouleur(Couleur aCouleur) {
 		this.pCouleur = aCouleur;
-		notifyObserver("couleur", null);
+		notifyObserver("bot_couleur", null);
 	}
 
 	/**

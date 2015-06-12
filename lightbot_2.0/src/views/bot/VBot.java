@@ -46,56 +46,60 @@ public class VBot extends View implements Observer {
 
 	@Override
 	public void initView() {
-		Texture wTexture = new Texture();
 		Sprite wSprite = new Sprite();
-		try {
-			StringBuilder wStringBuilder = new StringBuilder();
-			wStringBuilder.append("res/lightbot/bot_");
-			switch (this.pBot.getCouleur()) {
-			case BLANC:
-				wStringBuilder.append("BLANC_");
-				break;
-			case ROUGE:
-				wStringBuilder.append("ROUGE_");
-				break;
-			case VERT:
-				wStringBuilder.append("VERT_");
-				break;
-			}
-
-			switch (this.pBot.getOrientation()) {
-			case NORD:
-				wStringBuilder.append("NORD");
-				break;
-			case SUD:
-				wStringBuilder.append("SUD");
-				break;
-			case EST:
-				wStringBuilder.append("EST");
-				break;
-			case OUEST:
-				wStringBuilder.append("OUEST");
-				break;
-			}
-			wStringBuilder.append(".png");
-			wTexture.loadFromFile(Paths.get(wStringBuilder.toString()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		wSprite.setTexture(wTexture);
 		this.pSprite = wSprite;
+		resetTexture();
+	}
+
+	public void resetTexture() {
+		if (this.pSprite != null) {
+			Texture wTexture = new Texture();
+
+			try {
+				StringBuilder wStringBuilder = new StringBuilder();
+				wStringBuilder.append("res/lightbot/bot_");
+				switch (this.pBot.getCouleur()) {
+				case BLANC:
+					wStringBuilder.append("BLANC_");
+					break;
+				case ROUGE:
+					wStringBuilder.append("ROUGE_");
+					break;
+				case VERT:
+					wStringBuilder.append("VERT_");
+					break;
+				}
+
+				switch (this.pBot.getOrientation()) {
+				case NORD:
+					wStringBuilder.append("NORD");
+					break;
+				case SUD:
+					wStringBuilder.append("SUD");
+					break;
+				case EST:
+					wStringBuilder.append("EST");
+					break;
+				case OUEST:
+					wStringBuilder.append("OUEST");
+					break;
+				}
+				wStringBuilder.append(".png");
+				wTexture.loadFromFile(Paths.get(wStringBuilder.toString()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			this.pSprite.setTexture(wTexture);
+		}
 	}
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
 		if (aString.equals("bot_couleur")) {
-			clearView();
-			initView();
+			resetTexture();
 		}
 		if (aString.equals("bot_orientation")) {
-			clearView();
-			initView();
+			resetTexture();
 		}
 	}
 }
