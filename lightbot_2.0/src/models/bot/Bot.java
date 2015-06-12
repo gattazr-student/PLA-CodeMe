@@ -33,6 +33,8 @@ public class Bot extends ObservableModel {
 
 	private Route pRouteMain;
 
+	private String pName;
+
 	/**
 	 * Constructeur par défault. Placé en 0,0, Orienté vers Nord et de Couleur Blanche
 	 */
@@ -87,6 +89,13 @@ public class Bot extends ObservableModel {
 	}
 
 	/**
+	 * Retourne le nom du Bot
+	 */
+	public String getName() {
+		return this.pName;
+	}
+
+	/**
 	 * Retourne l'Orientation du Bot
 	 *
 	 * @return Orientation du Bot
@@ -127,6 +136,13 @@ public class Bot extends ObservableModel {
 	public void setCouleur(Couleur aCouleur) {
 		this.pCouleur = aCouleur;
 		notifyObserver("bot_couleur", null);
+	}
+
+	/**
+	 * Modifie le nom du Bot
+	 */
+	public void setName(String aName) {
+		this.pName = aName;
 	}
 
 	/**
