@@ -1,6 +1,7 @@
 package models.niveau;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Cellule {
 
@@ -31,6 +32,24 @@ public class Cellule {
 			return null;
 		}
 		return this.pCases.get(this.pCourante - 1);
+	}
+
+	/**
+	 * Retounre la liste des Cases contenues dans la cellule
+	 *
+	 * @return liste de Cases
+	 */
+	public List<Case> getCases() {
+		return this.pCases;
+	}
+
+	/**
+	 * Retoune l'indice de la cellule courante
+	 * 
+	 * @return indice de la cellule courante
+	 */
+	public int getCourant() {
+		return this.pCourante;
 	}
 
 	public void nextCourante() {

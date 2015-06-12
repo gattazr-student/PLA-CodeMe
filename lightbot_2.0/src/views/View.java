@@ -43,6 +43,13 @@ public abstract class View implements Drawable {
 	}
 
 	/**
+	 * Vide la vue
+	 */
+	public void clearView() {
+		this.pViews.clear();
+	}
+
+	/**
 	 * Retourne vrai si la position passé en paramètre est contenue dans la vue
 	 *
 	 * @param aPosition

@@ -2,7 +2,7 @@ package views.niveau;
 
 import models.basic.Position;
 import models.niveau.Carte;
-import models.niveau.Case;
+import models.niveau.Cellule;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Vector2f;
@@ -29,13 +29,11 @@ public class VCarte extends View {
 		for (int wX = 0; wX < wMaxX; wX++) {
 			for (int wY = 0; wY < wMaxY; wY++) {
 				wPosition = new Position(wX, wY);
-				Case wCase = this.pCarte.getCase(wPosition);
-				if (wCase != null) {
-					wDepl = Vector2f.add(wPositionFirst, VCase.deplacementCase(wPosition));
-					/* TODO: remplacer par des statiques */
-					VCase wVCase = VCase.makeVCase(wCase, new FloatRect(wDepl.x, wDepl.y, 78, 60));
-					addView(wVCase);
-				}
+				wDepl = Vector2f.add(wPositionFirst, VCase.deplacementCase(wPosition));
+				/* TODO: remplacer par des statiques */
+				Cellule wCellule = this.pCarte.getCellule(wPosition);
+				VCellule wVCellule = new VCellule(wCellule, new FloatRect(wDepl.x, wDepl.y, 78, 60));
+				addView(wVCellule);
 			}
 		}
 	}

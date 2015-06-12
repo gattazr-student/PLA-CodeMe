@@ -102,6 +102,21 @@ public class Carte {
 	}
 
 	/**
+	 * Retourne la cellule a la position donnée
+	 * 
+	 * @param aPosition
+	 *            position de la cellule
+	 * @return la cellule a la position donnée
+	 */
+	public Cellule getCellule(Position aPosition) {
+		if (aPosition.getX() < 0 || aPosition.getX() > this.pMaxX - 1 || aPosition.getY() < 0
+				|| aPosition.getY() > this.pMaxY - 1) {
+			return null;
+		}
+		return this.pCellules[aPosition.getY()][aPosition.getX()];
+	}
+
+	/**
 	 * Retourne la valeur maximum de la Position des Cases sur l'axe des abscisses
 	 *
 	 * @return valeur maximum sur l'axe des abscisses
