@@ -18,6 +18,7 @@ public class VCaseLampe extends VCase {
 	public VCaseLampe(CaseLampe aCaseLampe, FloatRect aZone) {
 		super(aZone);
 		this.pCaseLampe = aCaseLampe;
+		this.pCaseLampe.addObserver(this);
 		initView();
 	}
 
@@ -41,13 +42,22 @@ public class VCaseLampe extends VCase {
 		wSprite.setPosition(wOrigin);
 		addSprite(wSprite);
 		/* pour affichage de la hauteur */
-		Vector2f wW = new Vector2f(0, -VCase.HAUTEUR);
+		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
 		for (int wI = 0; wI < this.pCaseLampe.getHauteur(); wI++) {
 			wSprite = new Sprite();
 			wOrigin = Vector2f.add(wOrigin, wW);
 			wSprite.setPosition(wOrigin);
 			wSprite.setTexture(wTexture);
 			addSprite(wSprite);
+		}
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		// TODO Auto-generated method stub
+		if (aString.equals("caseLampe_etat")) {
+			clearView();
+			initView();
 		}
 	}
 }

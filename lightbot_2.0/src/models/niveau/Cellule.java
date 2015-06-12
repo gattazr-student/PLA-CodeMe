@@ -3,7 +3,9 @@ package models.niveau;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Cellule {
+import models.ObservableModel;
+
+public class Cellule extends ObservableModel {
 
 	private LinkedList<Case> pCases;
 	private int pCourante;
@@ -45,7 +47,7 @@ public class Cellule {
 
 	/**
 	 * Retoune l'indice de la cellule courante
-	 * 
+	 *
 	 * @return indice de la cellule courante
 	 */
 	public int getCourant() {
@@ -58,10 +60,12 @@ public class Cellule {
 			return;
 		}
 		this.pCourante++;
+		notifyObserver("cellule_switch", null);
 	}
 
 	public void resetCourante() {
 		this.pCourante = 1;
+		notifyObserver("cellule_reset", null);
 	}
 
 }

@@ -7,6 +7,7 @@ import models.basic.Position;
 import models.niveau.Case;
 import models.niveau.CaseBasique;
 import models.niveau.CaseLampe;
+import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
@@ -17,23 +18,25 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
-public abstract class VCase extends View {
+public abstract class VCase extends View implements Observer {
 
 	public static final float DIAG_HORIZONTALE = 78;
 	public static final float DIAG_VERTICALE = 37;
-	public static final float HAUTEUR = 19;
+	public static final float DEPL_HAUTEUR = 19;
+	public static final float HAUTEUR = 78;
+	public static final float LARGEUR = 60;
 
 	public static Vector2f deplacementCase(Position aPosition) {
-		/* Déplacment selon u */
+		/* Déplacement selon u */
 		Transform wU = Transform.translate(new Transform(),
 				new Vector2f(DIAG_HORIZONTALE / 2 * aPosition.getX(), ((int) (DIAG_VERTICALE / 2))
 						* aPosition.getX()));
-		/* Déplacment selon v */
+		/* Déplacement selon v */
 		Transform wV = Transform.translate(new Transform(),
 				new Vector2f(-DIAG_HORIZONTALE / 2 * aPosition.getY(), ((int) (DIAG_VERTICALE / 2))
 						* aPosition.getY()));
 
-		/* Déplacment combiné */
+		/* Déplacement combiné */
 		Transform wFinalTransform = Transform.combine(wU, wV);
 		Vector2f wDepl = new Vector2f(0, 0);
 		wDepl = wFinalTransform.transformPoint(wDepl);

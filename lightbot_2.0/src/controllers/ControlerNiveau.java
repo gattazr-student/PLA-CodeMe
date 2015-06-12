@@ -24,7 +24,6 @@ public class ControlerNiveau {
 		Allumer wAllumer = new Allumer();
 		if (wAllumer.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
 			wAllumer.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
-			this.pNiveau.notifyObserver("update-all-view", null);
 		} else {
 			System.err.println("Avencer impossible");
 		}
@@ -35,7 +34,6 @@ public class ControlerNiveau {
 		Avancer wAvancer = new Avancer();
 		if (wAvancer.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
 			wAvancer.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
-			this.pNiveau.notifyObserver("update-all-view", null);
 		} else {
 			System.err.println("Avencer impossible");
 		}
@@ -47,7 +45,6 @@ public class ControlerNiveau {
 		Sauter wSauter = new Sauter();
 		if (wSauter.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
 			wSauter.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
-			this.pNiveau.notifyObserver("update-all-view", null);
 		} else {
 			System.err.println("Sauter impossible");
 		}
@@ -58,13 +55,11 @@ public class ControlerNiveau {
 		this.pNiveau.getBots().get(0);
 		TournerDroite wTournerDroite = new TournerDroite();
 		wTournerDroite.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
-		this.pNiveau.notifyObserver("update-all-view", null);
 	}
 
 	public void tournerGauche() {
 		this.pNiveau.getBots().get(0);
 		TournerGauche wTournerGauche = new TournerGauche();
 		wTournerGauche.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
-		this.pNiveau.notifyObserver("update-all-view", null);
 	}
 }

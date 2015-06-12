@@ -75,7 +75,8 @@ public class FenetreNiveau extends View implements Observer {
 		float wHauteur = Math.max(wCarte.getMaxX(), wCarte.getMaxY()) * VCase.DIAG_VERTICALE;
 		float wOriginX = (this.pPanelCarte.getWidth() - wLargeur) / 2;
 		float wOriginY = (this.pPanelCarte.getHeight() - wHauteur) / 2;
-		this.pPanelCarte.addView(new VCarte(wCarte, new FloatRect(wOriginX, wOriginY, wLargeur, wHauteur)));
+		this.pPanelCarte.addView(new VCarte(wCarte, this.pNiveau.getBots(), new FloatRect(wOriginX, wOriginY,
+				wLargeur, wHauteur)));
 	}
 
 	@Override
@@ -118,6 +119,7 @@ public class FenetreNiveau extends View implements Observer {
 					} else if (wSMFLKeyEvent.key.compareTo(Key.SPACE) == 0) {
 						this.pControler.sauterBot();
 					}
+					redraw();
 				}
 				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();

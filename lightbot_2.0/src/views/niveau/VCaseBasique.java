@@ -17,6 +17,7 @@ public class VCaseBasique extends VCase {
 	public VCaseBasique(CaseBasique aCaseBasique, FloatRect aZone) {
 		super(aZone);
 		this.pCaseBasique = aCaseBasique;
+		this.pCaseBasique.addObserver(this);
 		initView();
 	}
 
@@ -25,7 +26,7 @@ public class VCaseBasique extends VCase {
 		/* TODO: REMOVE DEBUG MESSAGE */
 		Texture wTexture = new Texture();
 		try {
-			wTexture.loadFromFile(Paths.get("res/cases/CASE_BLANC.png"));
+			wTexture.loadFromFile(Paths.get("res/cases/case_BLANC.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +37,7 @@ public class VCaseBasique extends VCase {
 		wSprite.setPosition(wOrigin);
 		addSprite(wSprite);
 		/* pour affichage de la hauteur */
-		Vector2f wW = new Vector2f(0, -VCase.HAUTEUR);
+		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
 		for (int wI = 0; wI < this.pCaseBasique.getHauteur(); wI++) {
 			wSprite = new Sprite();
 			wOrigin = Vector2f.add(wOrigin, wW);
@@ -44,5 +45,10 @@ public class VCaseBasique extends VCase {
 			wSprite.setTexture(wTexture);
 			addSprite(wSprite);
 		}
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		// Pas de mise à jour de cette classe
 	}
 }

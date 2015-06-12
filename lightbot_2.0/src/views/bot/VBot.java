@@ -4,83 +4,102 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import models.bot.Bot;
+import mvc.Observer;
 
-import org.jsfml.graphics.Drawable;
+import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
-import org.jsfml.system.Vector2f;
+import org.jsfml.graphics.Transform;
 
-import views.niveau.VCase;
+import views.View;
 
-public class VBot implements Drawable {
+public class VBot extends View implements Observer {
 
 	public static float DEPL_X = 19;
 	public static float DEPL_Y = 73;
+	public static float HAUTEUR = 102;
+	public static float LARGEUR = 47;
 
 	private Bot pBot;
-	private int pHauteur;
+	private Sprite pSprite;
 
-	public VBot(Bot aBot, int aHauteur) {
+	public VBot(Bot aBot, FloatRect aZone) {
+		super(aZone);
 		this.pBot = aBot;
-		this.pHauteur = aHauteur; // hauteur de la case dans lequel est le bot
+		this.pBot.addObserver(this);
+		initView();
 	}
 
 	@Override
 	public void draw(RenderTarget aTarget, RenderStates aState) {
-		Texture wTexture = new Texture();
+		if (this.pSprite == null) {
+			initView();
+		}
+		/* Calcul de la position asbolue */
+		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
+		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
+				aState.transform), aState.texture, aState.shader);
+		this.pSprite.draw(aTarget, wNewState);
+	}
+
+	@Override
+	public void initView() {
 		Sprite wSprite = new Sprite();
-		try {
-			StringBuilder wStringBuilder = new StringBuilder();
-			wStringBuilder.append("res/lightbot/bot_");
-			switch (this.pBot.getCouleur()) {
-			case BLANC:
-				wStringBuilder.append("BLANC_");
-				break;
-			case ROUGE:
-				wStringBuilder.append("ROUGE_");
-				break;
-			case VERT:
-				wStringBuilder.append("VERT_");
-				break;
+		this.pSprite = wSprite;
+		resetTexture();
+	}
+
+	public void resetTexture() {
+		if (this.pSprite != null) {
+			Texture wTexture = new Texture();
+
+			try {
+				StringBuilder wStringBuilder = new StringBuilder();
+				wStringBuilder.append("res/lightbot/bot_");
+				switch (this.pBot.getCouleur()) {
+				case BLANC:
+					wStringBuilder.append("BLANC_");
+					break;
+				case ROUGE:
+					wStringBuilder.append("ROUGE_");
+					break;
+				case VERT:
+					wStringBuilder.append("VERT_");
+					break;
+				}
+
+				switch (this.pBot.getOrientation()) {
+				case NORD:
+					wStringBuilder.append("NORD");
+					break;
+				case SUD:
+					wStringBuilder.append("SUD");
+					break;
+				case EST:
+					wStringBuilder.append("EST");
+					break;
+				case OUEST:
+					wStringBuilder.append("OUEST");
+					break;
+				}
+				wStringBuilder.append(".png");
+				wTexture.loadFromFile(Paths.get(wStringBuilder.toString()));
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-			switch (this.pBot.getOrientation()) {
-			case NORD:
-				wStringBuilder.append("NORD");
-				break;
-			case SUD:
-				wStringBuilder.append("SUD");
-				break;
-			case EST:
-				wStringBuilder.append("EST");
-				break;
-			case OUEST:
-				wStringBuilder.append("OUEST");
-				break;
-			}
-			wStringBuilder.append(".png");
-			wTexture.loadFromFile(Paths.get(wStringBuilder.toString()));
-		} catch (IOException e) {
-			e.printStackTrace();
+			this.pSprite.setTexture(wTexture);
 		}
-		wSprite.setTexture(wTexture);
+	}
 
-		Vector2f wOrigin = aState.transform.transformPoint(new Vector2f(0, 0));
-		Vector2f wDeplacement = VCase.deplacementCase(this.pBot.getPosition());
-		Vector2f wPositionFinal = Vector2f.add(wOrigin, wDeplacement);
-
-		/* pour affichage de la hauteur */
-		Vector2f wW = new Vector2f(0, -VCase.HAUTEUR);
-		for (int wI = 0; wI < this.pHauteur; wI++) {
-			wPositionFinal = Vector2f.add(wPositionFinal, wW);
+	@Override
+	public void update(String aString, Object aObjet) {
+		if (aString.equals("bot_couleur")) {
+			resetTexture();
 		}
-		/* Déplace le bot pour le placer au milieu de la case */
-		wW = new Vector2f(DEPL_X, -DEPL_Y);
-		wPositionFinal = Vector2f.add(wPositionFinal, wW);
-
-		wSprite.setPosition(wPositionFinal);
-		aTarget.draw(wSprite);
+		if (aString.equals("bot_orientation")) {
+			resetTexture();
+		}
 	}
 }
