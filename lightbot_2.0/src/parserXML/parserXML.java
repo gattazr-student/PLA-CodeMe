@@ -93,9 +93,6 @@ public class parserXML {
 					wLevel.addAction(aAction);
 				}
 
-				// Affichage d'une action
-				// System.out.println("Action : " + action.getTextContent());
-
 			}
 
 			// Noeud 3 : list de bots
@@ -108,43 +105,41 @@ public class parserXML {
 				if (botslist.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element bot = (Element) botslist.item(i);
 
-					System.out.println("\n************ BOT ************");
-					System.out.println(" Bot " + bot.getAttribute("couleur") + "\n");
+					final String aName = bot.getAttribute("couleur");
 
-					// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 					// position
 					final Element position = (Element) bot.getElementsByTagName("position").item(0);
 
-					// Affichage de la position
-					System.out.println("Position X : " + position.getAttribute("x"));
-					System.out.println("Position Y : " + position.getAttribute("y"));
-
 					final Position aPosBot = new Position(Integer.parseInt(position.getAttribute("x")),
 							Integer.parseInt(position.getAttribute("y")));
-					// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 					// Orientation
 					final Element orient = (Element) bot.getElementsByTagName("orientation").item(0);
 
 					if ((orient.getAttribute("init")).equals("EST")) {
 						final Orientation aOrientBot = Orientation.EST;
-						new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						aBot.setName(aName);
+						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("SUD")) {
 						final Orientation aOrientBot = Orientation.SUD;
-						new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						aBot.setName(aName);
+						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("OUEST")) {
 						final Orientation aOrientBot = Orientation.OUEST;
-						new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						aBot.setName(aName);
+						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("NORD")) {
 						final Orientation aOrientBot = Orientation.NORD;
-						new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						aBot.setName(aName);
+						wLevel.addBot(aBot);
 					}
-
-					// Affichage de l'orientation
-					System.out.println("Orientation : " + orient.getAttribute("init"));
 
 				}
 
@@ -157,10 +152,6 @@ public class parserXML {
 			final int aRecord = Integer.parseInt(record.getAttribute("num"));
 			wLevel.setRecord(aRecord);
 
-			// Affichage du record
-			System.out.println("\n************* RECORD ************");
-			System.out.println("Record " + record.getAttribute("num"));
-
 			/*
 			 * Noeud 5 : La map
 			 */
@@ -172,11 +163,6 @@ public class parserXML {
 			final Carte aCarte = new Carte(Integer.parseInt(dimension.getAttribute("x")),
 					Integer.parseInt(dimension.getAttribute("y")));
 
-			// Affichage de la dimention
-			System.out.println("\n************* DIMENTION ************");
-			System.out.println("Position X : " + dimension.getAttribute("x"));
-			System.out.println("Position Y : " + dimension.getAttribute("y"));
-
 			// Cellules
 			final Element cellules = (Element) map.getElementsByTagName("cellules").item(0);
 			final NodeList cellulelist = cellules.getElementsByTagName("cellule");
@@ -185,16 +171,9 @@ public class parserXML {
 			for (int x = 0; x < nbCellule; x++) {
 
 				final Element cellule = (Element) cellulelist.item(x);
-				System.out.println("___________________________________");
-				System.out.println("              Cellule");
-				System.out.println("___________________________________");
 
 				// Position
 				final Element laPosition = (Element) cellule.getElementsByTagName("position").item(0);
-
-				// Affichage de la position
-				System.out.println("Position X : " + laPosition.getAttribute("x"));
-				System.out.println("Position Y : " + laPosition.getAttribute("y"));
 
 				final Position aPosCase = new Position(Integer.parseInt(laPosition.getAttribute("x")),
 						Integer.parseInt(laPosition.getAttribute("y")));
@@ -204,7 +183,6 @@ public class parserXML {
 				final NodeList caseslist = cases.getElementsByTagName("case");
 				final int nbCases = caseslist.getLength();
 
-				System.out.println("\n************* CASES ************");
 				for (int k = 0; k < nbCases; k++) {
 					final Element uneCase = (Element) caseslist.item(k);
 
@@ -219,10 +197,6 @@ public class parserXML {
 								Integer.parseInt(uneCase.getAttribute("h")));
 						aCarte.addCase(aCase);
 					}
-					// Affichage d'un type de case
-					System.out.println("Case type : " + uneCase.getAttribute("type"));
-					// Affichages de la hauteur
-					System.out.println("Hauteur : " + uneCase.getAttribute("h"));
 				}
 
 			}
@@ -243,7 +217,9 @@ public class parserXML {
 
 	public static void main(final String[] args) {
 
+		/* Création du model */
 		Niveau wModelNiveau = creatLevelXML("res/xml/level1.xml");
+		/* Création de la vue */
 		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
 		ControlerNiveau wControlerNiveau = new ControlerNiveau(wModelNiveau, wViewNiveau);
@@ -255,7 +231,6 @@ public class parserXML {
 
 		/* Démarrage du niveau */
 		wViewNiveau.run();
-		System.out.println("Goodbye World!");
 
 	}
 

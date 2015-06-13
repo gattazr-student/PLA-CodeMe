@@ -14,7 +14,7 @@
 	</actions>
 	<bots>
     		<bot couleur="bleu">
-        		<position x="22" y="0" />
+        		<position x="0" y="0" />
 			<orientation init="EST" />
     		</bot>
 	</bots>
@@ -25,7 +25,7 @@
 			<cellule>
 				<position x="0" y="0" />
 				<cases>
-					<case type = "basique" h="3" />
+					<case type = "interrupteur" h="3" />
 					<case type = "interrupteur" h="1" />
 				</cases>
 			</cellule>
