@@ -1,8 +1,11 @@
 package models.niveau;
 
 import java.util.LinkedList;
+import java.util.List;
 
-public class Cellule {
+import models.ObservableModel;
+
+public class Cellule extends ObservableModel {
 
 	private LinkedList<Case> pCases;
 	private int pCourante;
@@ -33,16 +36,36 @@ public class Cellule {
 		return this.pCases.get(this.pCourante - 1);
 	}
 
+	/**
+	 * Retounre la liste des Cases contenues dans la cellule
+	 *
+	 * @return liste de Cases
+	 */
+	public List<Case> getCases() {
+		return this.pCases;
+	}
+
+	/**
+	 * Retoune l'indice de la cellule courante
+	 *
+	 * @return indice de la cellule courante
+	 */
+	public int getCourant() {
+		return this.pCourante;
+	}
+
 	public void nextCourante() {
 		if (this.pCourante + 1 > this.pCases.size()) {
 			// throw new Exception("Pas assez de case dans la cellule");
 			return;
 		}
 		this.pCourante++;
+		notifyObserver("cellule_switch", null);
 	}
 
 	public void resetCourante() {
 		this.pCourante = 1;
+		notifyObserver("cellule_reset", null);
 	}
 
 }
