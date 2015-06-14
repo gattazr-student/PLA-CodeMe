@@ -11,7 +11,7 @@ public class Attendre extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
-		/* TODO: */
+		/* TODO: Attendre.apply : make function */
 	}
 
 	@Override

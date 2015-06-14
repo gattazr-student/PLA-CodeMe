@@ -6,8 +6,8 @@ import models.bot.Bot;
 import models.niveau.Carte;
 
 /**
- * Ensemble d'Action ¨¤ effectuer
- * 
+ * Ensemble d'Action Ã  effectuer
+ *
  */
 public class Route extends Action {
 
@@ -32,7 +32,6 @@ public class Route extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
-		/* TODO make function */
 		int asize = this.action.size();
 		for (int i = 0; i < asize; i++) {
 			this.action.get(i).apply(aBot, aCarte);
@@ -65,7 +64,7 @@ public class Route extends Action {
 
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		/* On peut toujours ¨¦valuer une route */
+		/* On peut toujours ï¿½ï¿½valuer une route */
 		int asize = this.action.size();
 		int i;
 		for (i = 0; i < asize; i++) {

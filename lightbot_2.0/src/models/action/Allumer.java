@@ -12,10 +12,6 @@ public class Allumer extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
-		/* TODO: */
-		/* 1 - Récupérer case courant */
-		/* 2 - Si case est interrupteur, inverser status */
-		/* 2'- Sinon électrocuter bot */
 		Case aCase = aCarte.getCase(aBot.getPosition());
 		if (aCase instanceof CaseLampe) {
 			((CaseLampe) aCase).activate();

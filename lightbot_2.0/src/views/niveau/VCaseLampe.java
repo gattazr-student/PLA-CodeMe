@@ -54,7 +54,7 @@ public class VCaseLampe extends VCase {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
+		/* TODO: Remplacer uniquement le dernier sprite plutot que de tout recréer */
 		if (aString.equals("caseLampe_etat")) {
 			clearView();
 			initView();
