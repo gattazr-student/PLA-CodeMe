@@ -2,6 +2,7 @@ package models.action;
 
 import java.util.ArrayList;
 
+import models.basic.TypeRoute;
 import models.bot.Bot;
 import models.niveau.Carte;
 
@@ -13,15 +14,29 @@ public class Route extends Action {
 
 	private ArrayList<Action> action;
 	private int taille;
+	private TypeRoute atype;
+	private int aposition;
 
 	public Route() {
+		this.atype = TypeRoute.MAIN;
 		this.taille = 12;
 		this.action = new ArrayList<Action>();
+		if (this.action.size() != 0) {
+			this.aposition = this.action.size() - 1;
+		} else {
+			this.aposition = 0;
+		}
 	}
 
-	public Route(int aTaille, ArrayList<Action> aAction) {
+	public Route(int aTaille, ArrayList<Action> aAction, TypeRoute btype) {
 		this.taille = aTaille;
 		this.action = aAction;
+		this.atype = btype;
+		if (this.action.size() != 0) {
+			this.aposition = this.action.size() - 1;
+		} else {
+			this.aposition = 0;
+		}
 	}
 
 	public void addAction(Action aAction) {
@@ -47,6 +62,14 @@ public class Route extends Action {
 		return this.action;
 	}
 
+	public int getPosition() {
+		return this.aposition;
+	}
+
+	public TypeRoute getType() {
+		return this.atype;
+	}
+
 	public void remove_Action(int i) {
 		this.action.remove(i);
 	}
@@ -60,6 +83,14 @@ public class Route extends Action {
 	public void set_Taille(int i) {
 		this.taille = i;
 
+	}
+
+	public void setPosition(int bposition) {
+		this.aposition = bposition;
+	}
+
+	public void setType(TypeRoute btype) {
+		this.atype = btype;
 	}
 
 	@Override
