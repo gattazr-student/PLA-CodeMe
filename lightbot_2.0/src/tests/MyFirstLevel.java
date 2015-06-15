@@ -3,13 +3,11 @@ package tests;
 import models.action.Allumer;
 import models.action.Avancer;
 import models.action.Route;
-import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
 import models.basic.Orientation;
 import models.basic.Position;
-import models.basic.TypeRoute;
 import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.CaseBasique;
@@ -23,34 +21,48 @@ import controllers.Ordonnanceur;
 public class MyFirstLevel {
 
 	/**
-	 * Créataion d'un niveau en statique
-	 * 
+	 * Création d'un niveau en statique
+	 *
 	 * @return
 	 */
 	public static Niveau createModel() {
 		Niveau wLevel1 = new Niveau();
-		wLevel1.addBot(new Bot(new Position(0, 0), Orientation.EST, Couleur.BLANC));
 
-		Bot bBot = new Bot(new Position(1, 1), Orientation.EST, Couleur.BLANC);
-		wLevel1.addBot(bBot);
-		Route aRoute = new Route();// p1
-		TournerDroite td = new TournerDroite();
-		Sauter aSauter = new Sauter();
-		aRoute.addAction(td);
-		aRoute.addAction(aSauter);
-		wLevel1.addRoute(aRoute);
-		wLevel1.getRoutes().get(0).setType(TypeRoute.P1);
-		Route bRoute = new Route();// p2
-		Avancer aAvance = new Avancer();
-		new Allumer();
-		new TournerGauche();
-		bRoute.addAction(aAvance);
-		bRoute.addAction(aAvance);
-		wLevel1.addRoute(bRoute);
-		wLevel1.getRoutes().get(1).setType(TypeRoute.P2);
-		wLevel1.getBots().get(0).getBot_Route().addAction(aAvance);
-		wLevel1.getBots().get(0).getBot_Route().addAction(aAvance);
-		wLevel1.getBots().get(0).getBot_Route().addAction(aAvance);
+		// Creation et initialisation du robot 1
+		Bot wBot1 = new Bot(new Position(0, 0), Orientation.NORD, Couleur.BLANC);
+		wLevel1.addBot(wBot1);
+
+		// Creation et initialisation du robot 2
+		Bot wBot2 = new Bot(new Position(0, 1), Orientation.EST, Couleur.BLANC);
+		wLevel1.addBot(wBot2);
+
+		// Creation de la procedure P1
+		Route wRoute1 = new Route();
+		wRoute1.addAction(new TournerDroite());
+		wRoute1.addAction(new Avancer());
+		wRoute1.addAction(new Avancer());
+		wLevel1.addRoute(wRoute1);
+
+		// Creation de la procedure P2
+		Route wRoute2 = new Route();
+		wRoute2.addAction(new Allumer());
+		wRoute2.addAction(new Avancer());
+		wLevel1.addRoute(wRoute2);
+
+		// Creation du main du robot 1
+		Route wRouteMain1 = new Route();
+		wRouteMain1.addAction(wRoute1);
+		wRouteMain1.addAction(wRoute2);
+		wBot1.setRouteMain(wRouteMain1);
+
+		// Creation du main du robot 2
+		Route wRouteMain2 = new Route();
+		wRouteMain2.addAction(wRoute1);
+		wRouteMain2.addAction(new TournerGauche());
+		wRouteMain2.addAction(new Avancer());
+		wBot2.setRouteMain(wRouteMain2);
+
+		// Creation carte
 		Carte wCarte = new Carte(4, 4);
 		wCarte.addCase(new CaseBasique(new Position(0, 3), 0));
 		wCarte.addCase(new CaseBasique(new Position(0, 2), 1));
@@ -88,24 +100,28 @@ public class MyFirstLevel {
 		/* Rajout du controlleur dans la vue */
 		wViewNiveau.setController(wControlerNiveau);
 		/* Ajout de l'observer */
-
-		Ordonnanceur o1 = new Ordonnanceur(wModelNiveau);
-		Route aBotRoute = new Route();
-		Route bBotRoute = new Route();
-		aBotRoute = wModelNiveau.getBots().get(0).getBot_Route();
-		bBotRoute = wModelNiveau.getBots().get(1).getBot_Route();
-		int aBotsize = wModelNiveau.getBots().get(0).getBot_Route().getAction().size();
-		int bBotsize = wModelNiveau.getBots().get(1).getBot_Route().getAction().size();
-		while (aBotRoute.getPosition() < aBotsize || bBotRoute.getPosition() < bBotsize) {
-			o1.step();
-		}
 		wModelNiveau.addObserver(wViewNiveau);
-		wViewNiveau.run();
-		System.out.println(wModelNiveau.getBots().get(0).getPosition().getX());
-		System.out.println(wModelNiveau.getBots().get(0).getPosition().getY());
+
+		wViewNiveau.redraw();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Ordonnanceur o1 = new Ordonnanceur(wModelNiveau);
+		while (o1.step()) {
+			wViewNiveau.redraw();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		}
+		System.out.println("Fin ordonanceur");
 
 		/* Démarrage du niveau */
-
+		wViewNiveau.run();
 		System.out.println("Goodbye World!");
 
 	}

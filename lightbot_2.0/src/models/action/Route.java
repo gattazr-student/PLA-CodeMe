@@ -1,14 +1,15 @@
 package models.action;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import models.basic.TypeRoute;
 import models.bot.Bot;
 import models.niveau.Carte;
 
 /**
- * Ensemble d'Action ¨¤ effectuer
- * 
+ * Ensemble d'Action ï¿½ï¿½ effectuer
+ *
  */
 public class Route extends Action {
 
@@ -71,6 +72,10 @@ public class Route extends Action {
 		return this.atype;
 	}
 
+	public Iterator<Action> iterator() {
+		return this.action.iterator();
+	}
+
 	public void remove_Action(int i) {
 		this.action.remove(i);
 	}
@@ -96,7 +101,7 @@ public class Route extends Action {
 
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		/* On peut toujours ¨¦valuer une route */
+		/* On peut toujours ï¿½ï¿½valuer une route */
 		int asize = this.action.size();
 		int i;
 		for (i = 0; i < asize; i++) {
@@ -111,5 +116,4 @@ public class Route extends Action {
 			return true;
 		}
 	}
-
 }
