@@ -21,9 +21,6 @@ public class ObservableModel implements Observable {
 
 	@Override
 	public void notifyObserver(String aString, Object aObjet) {
-		/* TODO: REMOVE AFTER DEBUG */
-		System.out.println(String.format("!! EVENT !!  %s : %s", getClass().getSimpleName(), aString));
-
 		/* TODO: QUICK FIX TRES MAUVAIS */
 		try {
 			for (Observer wObs : this.pObservers) {

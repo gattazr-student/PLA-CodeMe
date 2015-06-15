@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<level_Conditions>
+	<name> Sinon si </name>
+	    <actions> 
+	   		<action>  avancer 		 </action>
+			<action>  droite 		 </action>
+	   	    <action>  gauche 		 </action>
+	   	    <action>  sauter  		 </action>
+			<action>  douche  		 </action>
+			<action>  testAvancer    </action>
+			<action>  testSauter     </action>
+		</actions>
+	<bots>
+    		<bot couleur="bleu">
+        		<position x="4" y="0" />
+        		<orintation init="EST" />
+    		</bot>
+	</bots>
+	<record num="10" />
+	<map>
+		<dimensions x="6" y="6" />
+		<cellules>
+			<cellule>
+				<position x="0" y="5" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="5" />
+				<cases>
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="5" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="3" y="3" />
+				<cases>
+					<case type = "basique" h="1">
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="3" />
+					<x> 4 </x>
+					<y> 2 </y>
+				</position>
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="0" />
+				<cases>
+					<case type = "lampe" h="0" />>
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="5" y="1" />
+				<cases>
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+
+		</cellules>
+	</map>
+	<coups main="3" p1="7" p2="5" />
+ </level>

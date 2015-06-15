@@ -55,7 +55,6 @@ public class VCellule extends View implements Observer {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
 		if (aString.equals("cellule_switch")) {
 			clearView();
 			initView();

@@ -1,27 +1,43 @@
 package models.action;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import models.basic.TypeRoute;
 import models.bot.Bot;
 import models.niveau.Carte;
 
 /**
- * Ensemble d'Action ¨¤ effectuer
- * 
+ * Ensemble d'Action Ã  effectuer
+ *
  */
 public class Route extends Action {
 
 	private ArrayList<Action> action;
 	private int taille;
+	private TypeRoute atype;
+	private int aposition;
 
 	public Route() {
+		this.atype = TypeRoute.MAIN;
 		this.taille = 12;
 		this.action = new ArrayList<Action>();
+		if (this.action.size() != 0) {
+			this.aposition = this.action.size() - 1;
+		} else {
+			this.aposition = 0;
+		}
 	}
 
-	public Route(int aTaille, ArrayList<Action> aAction) {
+	public Route(int aTaille, ArrayList<Action> aAction, TypeRoute btype) {
 		this.taille = aTaille;
 		this.action = aAction;
+		this.atype = btype;
+		if (this.action.size() != 0) {
+			this.aposition = this.action.size() - 1;
+		} else {
+			this.aposition = 0;
+		}
 	}
 
 	public void addAction(Action aAction) {
@@ -32,7 +48,6 @@ public class Route extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
-		/* TODO make function */
 		int asize = this.action.size();
 		for (int i = 0; i < asize; i++) {
 			this.action.get(i).apply(aBot, aCarte);
@@ -46,6 +61,18 @@ public class Route extends Action {
 
 	public ArrayList<Action> getAction() {
 		return this.action;
+	}
+
+	public int getPosition() {
+		return this.aposition;
+	}
+
+	public TypeRoute getType() {
+		return this.atype;
+	}
+
+	public Iterator<Action> iterator() {
+		return this.action.iterator();
 	}
 
 	public void remove_Action(int i) {
@@ -63,9 +90,17 @@ public class Route extends Action {
 
 	}
 
+	public void setPosition(int bposition) {
+		this.aposition = bposition;
+	}
+
+	public void setType(TypeRoute btype) {
+		this.atype = btype;
+	}
+
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		/* On peut toujours ¨¦valuer une route */
+		/* On peut toujours ï¿½ï¿½valuer une route */
 		int asize = this.action.size();
 		int i;
 		for (i = 0; i < asize; i++) {
@@ -80,5 +115,4 @@ public class Route extends Action {
 			return true;
 		}
 	}
-
 }

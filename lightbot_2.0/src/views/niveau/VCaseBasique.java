@@ -23,7 +23,6 @@ public class VCaseBasique extends VCase {
 
 	@Override
 	public void initView() {
-		/* TODO: REMOVE DEBUG MESSAGE */
 		Texture wTexture = new Texture();
 		try {
 			wTexture.loadFromFile(Paths.get("res/cases/case_BLANC.png"));

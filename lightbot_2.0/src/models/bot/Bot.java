@@ -71,15 +71,6 @@ public class Bot extends ObservableModel {
 	}
 
 	/**
-	 * retourne la liste d'actions du bot
-	 *
-	 * @return bot_Action du Bot
-	 */
-	public Route getBot_Route() {
-		return this.pRouteMain;
-	}
-
-	/**
 	 * Retourne la Couleur du Bot
 	 *
 	 * @return Couleur du Bot
@@ -111,6 +102,15 @@ public class Bot extends ObservableModel {
 	 */
 	public Position getPosition() {
 		return this.pPosition;
+	}
+
+	/**
+	 * retourne la liste d'actions du bot
+	 *
+	 * @return bot_Action du Bot
+	 */
+	public Route getRouteMain() {
+		return this.pRouteMain;
 	}
 
 	/**
@@ -165,6 +165,16 @@ public class Bot extends ObservableModel {
 	public void setPosition(Position aPosition) {
 		this.pPosition = aPosition;
 		notifyObserver("bot_position", null);
+	}
+
+	/**
+	 * Définit la route main du Bot
+	 * 
+	 * @param aRouteMain
+	 *            nouvelle route main du Bot
+	 */
+	public void setRouteMain(Route aRouteMain) {
+		this.pRouteMain = aRouteMain;
 	}
 
 }
