@@ -1,5 +1,6 @@
 package views.fenetre;
 
+import models.action.Route;
 import models.niveau.Carte;
 import models.niveau.Niveau;
 import mvc.Observer;
@@ -106,9 +107,16 @@ public class FenetreNiveau extends View implements Observer {
 	private void initRoutes() {
 		/* TODO: Récupérer le main du robot courant */
 		System.out.println("Init routes");
-		VRouteListe wVRouteListe = new VRouteListe(this.pNiveau.getBots().get(0).getRouteMain(),
-				new FloatRect(0, 0, 5 * VRoute.LARGEUR, 4 * VRoute.HAUTEUR));
-		this.pPanelRoutes.addView(wVRouteListe);
+		VRouteListe wVRouteMain = new VRouteListe(this.pNiveau.getBots().get(0).getRouteMain(),
+				new FloatRect(0, 0, 4 * VRoute.LARGEUR, 3 * VRoute.HAUTEUR));
+		this.pPanelRoutes.addView(wVRouteMain);
+		int depl_cadre = 0;
+		for (Route wRoute : this.pNiveau.getRoutes()) {
+			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 165 + depl_cadre,
+					4 * VRoute.LARGEUR, 2 * VRoute.HAUTEUR));
+			this.pPanelRoutes.addView(wVRoute);
+			depl_cadre = depl_cadre + 110;
+		}
 	}
 
 	@Override

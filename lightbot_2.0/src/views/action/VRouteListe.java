@@ -33,7 +33,7 @@ public class VRouteListe extends VAction {
 		int wY = 0;
 		ArrayList<Action> wActions = this.pRoute.getAction();
 		for (Action wAction : wActions) {
-			if (wI == 5) {
+			if (wI == 4) {
 				wI = 0;
 				wX = 0;
 				wY = wY + VRoute.HAUTEUR;
