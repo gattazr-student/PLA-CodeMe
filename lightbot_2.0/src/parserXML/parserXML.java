@@ -20,6 +20,7 @@ import models.action.TournerGauche;
 import models.basic.Couleur;
 import models.basic.Orientation;
 import models.basic.Position;
+import models.basic.TypeRoute;
 import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.Case;
@@ -218,17 +219,17 @@ public class parserXML {
 				switch (i) {
 				case 0:
 					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
-							new ArrayList<Action>());
+							new ArrayList<Action>(), TypeRoute.MAIN);
 					wLevel.addRoute(aMain);
 					break;
 				case 1:
 					final Route aP1 = new Route(Integer.parseInt(coups.getAttribute("p1")),
-							new ArrayList<Action>());
+							new ArrayList<Action>(), TypeRoute.P1);
 					wLevel.addRoute(aP1);
 					break;
 				case 2:
 					final Route aP2 = new Route(Integer.parseInt(coups.getAttribute("p2")),
-							new ArrayList<Action>());
+							new ArrayList<Action>(), TypeRoute.P2);
 					wLevel.addRoute(aP2);
 					break;
 				default:
@@ -252,7 +253,7 @@ public class parserXML {
 	public static void main(final String[] args) {
 
 		/* Création du model */
-		Niveau wModelNiveau = creatLevelXML("res/xml/level1.xml");
+		Niveau wModelNiveau = creatLevelXML("res/xml/Conditions/level6.xml");
 		/* Création de la vue */
 		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
