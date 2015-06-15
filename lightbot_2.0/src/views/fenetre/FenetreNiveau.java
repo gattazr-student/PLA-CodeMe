@@ -61,7 +61,7 @@ public class FenetreNiveau extends View implements Observer {
 	 * Dessine les boutons actions
 	 */
 	private void initActions() {
-		VBouton wButton_Allume = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allume.png");
+		VBouton wButton_Allume = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allumer.png");
 		this.pPanelActions.addView(wButton_Allume);
 		VBouton wButton_Avancer = new VBouton(new FloatRect(25, 0, 59, 59), "res/action/avancer.png");
 		this.pPanelActions.addView(wButton_Avancer);

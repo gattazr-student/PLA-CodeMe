@@ -20,11 +20,11 @@ import views.View;
 
 public abstract class VCase extends View implements Observer {
 
-	public static final float DIAG_HORIZONTALE = 78;
+	public static final float DIAG_HORIZONTALE = 70;
 	public static final float DIAG_VERTICALE = 37;
-	public static final float DEPL_HAUTEUR = 19;
-	public static final float HAUTEUR = 78;
-	public static final float LARGEUR = 60;
+	public static final float DEPL_HAUTEUR = 18;
+	public static final float HAUTEUR = 74;
+	public static final float LARGEUR = 55;
 
 	public static Vector2f deplacementCase(Position aPosition) {
 		/* Déplacement selon u */

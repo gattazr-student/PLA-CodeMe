@@ -41,7 +41,15 @@ public class VCarte extends View implements Observer {
 		VBot wVBot;
 		Position wPosition;
 		Vector2f wDepl;
-		Vector2f wPositionFirst = new Vector2f(getWidth() / 4, 0);
+		float wFreeX = getWidth()
+				- ((this.pCarte.getMaxY() + this.pCarte.getMaxX()) * VCase.DIAG_HORIZONTALE / 2)
+				- VCase.DIAG_HORIZONTALE;
+		float wFirstX = wFreeX / 2 + this.pCarte.getMaxY() * VCase.DIAG_HORIZONTALE / 2;
+
+		float wFreeY = getHeight()
+				- ((this.pCarte.getMaxY() + this.pCarte.getMaxX()) * VCase.DIAG_VERTICALE / 2);
+		float wFirstY = wFreeY / 2;
+		Vector2f wPositionFirst = new Vector2f(wFirstX, wFirstY);
 		int wMaxX = this.pCarte.getMaxX();
 		int wMaxY = this.pCarte.getMaxY();
 		for (int wX = 0; wX < wMaxX; wX++) {

@@ -21,7 +21,7 @@ public class VAllumer extends VAction {
 	@Override
 	public void initView() {
 		VBouton wButton_Allumer = new VBouton(new FloatRect(0, 0, getWidth(), getHeight()),
-				"res/action/allume.png");
+				"res/action/allumer.png");
 		addView(wButton_Allumer);
 	}
 

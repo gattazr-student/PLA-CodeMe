@@ -13,6 +13,7 @@ import models.niveau.Carte;
 import models.niveau.CaseBasique;
 import models.niveau.CaseLampe;
 import models.niveau.Niveau;
+import parserXML.parserXML;
 import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
@@ -95,7 +96,8 @@ public class MyFirstLevel {
 		System.out.println("Hello World!");
 
 		/* Création du model */
-		Niveau wModelNiveau = createModel();
+		// Niveau wModelNiveau = createModel();
+		Niveau wModelNiveau = parserXML.creatLevelXML("res/XML/Conditions/level6.xml");
 		/* Création de la vue */
 		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
@@ -108,7 +110,7 @@ public class MyFirstLevel {
 
 		wViewNiveau.redraw();
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -116,7 +118,7 @@ public class MyFirstLevel {
 		while (o1.step()) {
 			wViewNiveau.redraw();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(250);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
