@@ -8,6 +8,7 @@ import models.niveau.Cellule;
 import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.system.Vector2f;
 
 import views.View;
 import views.bot.VBot;
@@ -26,6 +27,33 @@ public class VCellule extends View implements Observer {
 		this.pVBot = aVBot;
 		this.pCellule.addObserver(this);
 		initView(); // initialise la vue
+	}
+
+	@Override
+	public boolean contains(Vector2f aPosition) {
+		/* Récupère la hauteur */
+		Case wCase = this.pCellule.getCase();
+		int wHauteur;
+		if (wCase == null) {
+			wHauteur = 0;
+		} else {
+			wHauteur = wCase.getHauteur();
+		}
+		Vector2f wOrigin = getOrigin();
+		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
+		for (int wI = 0; wI < wHauteur; wI++) {
+			wOrigin = Vector2f.add(wOrigin, wW);
+		}
+		float wHauteurTotale = VCase.HAUTEUR;
+		if (this.pVBot != null) {
+			wHauteurTotale = wHauteurTotale + VBot.HAUTEUR;
+			wOrigin = Vector2f.sub(wOrigin, new Vector2f(0, VBot.HAUTEUR));
+		}
+		if (new FloatRect(wOrigin.x, wOrigin.y, VCase.LARGEUR, wHauteurTotale).contains(aPosition)) {
+			/* TODO: Dead zones */
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -77,5 +105,4 @@ public class VCellule extends View implements Observer {
 			addView(this.pVBot);
 		}
 	}
-
 }

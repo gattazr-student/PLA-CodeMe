@@ -19,6 +19,7 @@ public class VCaseLampe extends VCase {
 		super(aZone);
 		this.pCaseLampe = aCaseLampe;
 		this.pCaseLampe.addObserver(this);
+		setHauteur(aCaseLampe.getHauteur());
 		initView();
 	}
 

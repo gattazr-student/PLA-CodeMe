@@ -61,6 +61,8 @@ public abstract class VCase extends View implements Observer {
 		return null;
 	}
 
+	private int pHauteur;
+
 	private List<Sprite> pSprites;
 
 	public VCase(FloatRect aZone) {
@@ -70,6 +72,22 @@ public abstract class VCase extends View implements Observer {
 
 	public void addSprite(Sprite aSprite) {
 		this.pSprites.add(aSprite);
+	}
+
+	@Override
+	public boolean contains(Vector2f aPosition) {
+		/* Récupère la hauteur */
+		int wHauteur = getHauteur();
+		Vector2f wOrigin = getOrigin();
+		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
+		for (int wI = 0; wI < wHauteur; wI++) {
+			wOrigin = Vector2f.add(wOrigin, wW);
+		}
+		if (new FloatRect(wOrigin.x, wOrigin.y, VCase.LARGEUR, VCase.HAUTEUR).contains(aPosition)) {
+			/* TODO: Dead zones */
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -84,5 +102,13 @@ public abstract class VCase extends View implements Observer {
 		for (Sprite wSprite : this.pSprites) {
 			wSprite.draw(aTarget, aState);
 		}
+	}
+
+	public int getHauteur() {
+		return this.pHauteur;
+	}
+
+	public void setHauteur(int aHauteur) {
+		this.pHauteur = aHauteur;
 	}
 }
