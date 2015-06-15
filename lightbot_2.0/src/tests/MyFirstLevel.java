@@ -38,6 +38,7 @@ public class MyFirstLevel {
 
 		// Creation de la procedure P1
 		Route wRoute1 = new Route();
+		wRoute1.setName("p1");
 		wRoute1.addAction(new TournerDroite());
 		wRoute1.addAction(new Avancer());
 		wRoute1.addAction(new Avancer());
@@ -45,18 +46,21 @@ public class MyFirstLevel {
 
 		// Creation de la procedure P2
 		Route wRoute2 = new Route();
+		wRoute2.setName("p2");
 		wRoute2.addAction(new Allumer());
 		wRoute2.addAction(new Avancer());
 		wLevel1.addRoute(wRoute2);
 
 		// Creation du main du robot 1
 		Route wRouteMain1 = new Route();
+		wRouteMain1.setName("main");
 		wRouteMain1.addAction(wRoute1);
 		wRouteMain1.addAction(wRoute2);
 		wBot1.setRouteMain(wRouteMain1);
 
 		// Creation du main du robot 2
 		Route wRouteMain2 = new Route();
+		wRouteMain2.setName("main");
 		wRouteMain2.addAction(wRoute1);
 		wRouteMain2.addAction(new TournerGauche());
 		wRouteMain2.addAction(new Avancer());

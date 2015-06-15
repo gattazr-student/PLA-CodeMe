@@ -17,7 +17,9 @@ import org.jsfml.window.event.KeyEvent;
 import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.action.VRouteListe;
 import views.jsfml.VBouton;
+import views.jsfml.VRoute;
 import views.niveau.VCarte;
 import views.niveau.VCase;
 import controllers.ControlerNiveau;
@@ -56,12 +58,25 @@ public class FenetreNiveau extends View implements Observer {
 	}
 
 	/**
-	 * Dessinne les boutons actions
+	 * Dessine les boutons actions
 	 */
 	private void initActions() {
-		VBouton wButton = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allume.png");
-		this.pPanelActions.addView(wButton);
-
+		VBouton wButton_Allume = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allume.png");
+		this.pPanelActions.addView(wButton_Allume);
+		VBouton wButton_Avancer = new VBouton(new FloatRect(25, 0, 59, 59), "res/action/avancer.png");
+		this.pPanelActions.addView(wButton_Avancer);
+		VBouton wButton_Route1 = new VBouton(new FloatRect(50, 0, 59, 59), "res/action/route_p1.png");
+		this.pPanelActions.addView(wButton_Route1);
+		VBouton wButton_Route2 = new VBouton(new FloatRect(75, 0, 59, 59), "res/action/route_p2.png");
+		this.pPanelActions.addView(wButton_Route2);
+		VBouton wButton_Sauter = new VBouton(new FloatRect(100, 0, 59, 59), "res/action/sauter.png");
+		this.pPanelActions.addView(wButton_Sauter);
+		VBouton wButton_TournerDroit = new VBouton(new FloatRect(125, 0, 59, 59),
+				"res/action/tourner_droit.png");
+		this.pPanelActions.addView(wButton_TournerDroit);
+		VBouton wButton_TournerGauche = new VBouton(new FloatRect(150, 0, 59, 59),
+				"res/action/tourner_gauche.png");
+		this.pPanelActions.addView(wButton_TournerGauche);
 	}
 
 	/**
@@ -79,11 +94,30 @@ public class FenetreNiveau extends View implements Observer {
 				wLargeur, wHauteur)));
 	}
 
+	private void initMenu() {
+		VBouton wButton_BackToMenu = new VBouton(new FloatRect(0, 0, 59, 59), "res/menu/Back_To_Menu.png");
+		this.pPanelMenu.addView(wButton_BackToMenu);
+		VBouton wButton_Play = new VBouton(new FloatRect(28, 0, 59, 59), "res/menu/marche.png");
+		this.pPanelMenu.addView(wButton_Play);
+		VBouton wButton_Reset = new VBouton(new FloatRect(77, 0, 59, 59), "res/menu/refresh.png");
+		this.pPanelMenu.addView(wButton_Reset);
+	}
+
+	private void initRoutes() {
+		/* TODO: Récupérer le main du robot courant */
+		System.out.println("Init routes");
+		VRouteListe wVRouteListe = new VRouteListe(this.pNiveau.getBots().get(0).getRouteMain(),
+				new FloatRect(0, 0, 5 * VRoute.LARGEUR, 4 * VRoute.HAUTEUR));
+		this.pPanelRoutes.addView(wVRouteListe);
+	}
+
 	@Override
 	public void initView() {
 		/* TODO: complete function */
 		initCarte();
 		initActions();
+		initMenu();
+		initRoutes();
 	}
 
 	public void redraw() {

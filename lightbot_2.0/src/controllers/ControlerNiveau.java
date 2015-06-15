@@ -25,7 +25,7 @@ public class ControlerNiveau {
 		if (wAllumer.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
 			wAllumer.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
 		} else {
-			System.err.println("Avencer impossible");
+			System.err.println("Avancer impossible");
 		}
 	}
 
@@ -35,7 +35,7 @@ public class ControlerNiveau {
 		if (wAvancer.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
 			wAvancer.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
 		} else {
-			System.err.println("Avencer impossible");
+			System.err.println("Avancer impossible");
 		}
 
 	}

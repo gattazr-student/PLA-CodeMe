@@ -1,5 +1,6 @@
 package models.action;
 
+import models.ObservableModel;
 import models.basic.Couleur;
 import models.bot.Bot;
 import models.niveau.Carte;
@@ -8,7 +9,7 @@ import models.niveau.Carte;
  * Représentation d'une action de lightbot
  *
  */
-public abstract class Action {
+public abstract class Action extends ObservableModel {
 
 	/**
 	 * Couleur de l'Action
