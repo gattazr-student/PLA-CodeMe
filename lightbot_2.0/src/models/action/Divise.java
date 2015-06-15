@@ -11,12 +11,12 @@ public class Divise extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
-		/* TODO: */
+		/* TODO: Divise.apply : make function */
 	}
 
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		/* TODO: */
+		/* TODO: Divise.valid : make function */
 		return true;
 	};
 
