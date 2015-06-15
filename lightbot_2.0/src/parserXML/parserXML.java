@@ -20,7 +20,6 @@ import models.action.TournerGauche;
 import models.basic.Couleur;
 import models.basic.Orientation;
 import models.basic.Position;
-import models.basic.TypeRoute;
 import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.Case;
@@ -202,7 +201,7 @@ public class parserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 * 
+					 *
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
@@ -219,17 +218,17 @@ public class parserXML {
 				switch (i) {
 				case 0:
 					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
-							new ArrayList<Action>(), TypeRoute.MAIN);
+							new ArrayList<Action>(), "main");
 					wLevel.addRoute(aMain);
 					break;
 				case 1:
 					final Route aP1 = new Route(Integer.parseInt(coups.getAttribute("p1")),
-							new ArrayList<Action>(), TypeRoute.P1);
+							new ArrayList<Action>(), "p1");
 					wLevel.addRoute(aP1);
 					break;
 				case 2:
 					final Route aP2 = new Route(Integer.parseInt(coups.getAttribute("p2")),
-							new ArrayList<Action>(), TypeRoute.P2);
+							new ArrayList<Action>(), "p2");
 					wLevel.addRoute(aP2);
 					break;
 				default:
