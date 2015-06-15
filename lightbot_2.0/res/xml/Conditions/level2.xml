@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<level_Conditions>
+<level>
 	<name> Sauter </name>
 	    <actions> 
-	   		<action>  avancer 		 </action>
-	   	    <action>  sauter 		 </action>
-			<action>  douche 		 </action>
-			<action>  testSauter     </action>
-			<action>  allumer		 </action>
+	   		<action>avancer</action>
+	   	    	<action>sauter</action>
+			<action>douche</action>
+			<action>testSauter</action>
+			<action>allumer</action>
 		</actions>
 	<bots>
     		<bot couleur="bleu">
@@ -16,7 +16,7 @@
 	</bots>
 	<record num="3" />
 	<map>
-		<dimensions x="1" y="12" />
+		<dimensions x="12" y="1" />
 
 		<cellules>
 			<cellule>
@@ -27,82 +27,82 @@
 			</cellule>
 
 			<cellule>
-				<position x="0" y="1" />
+				<position x="1" y="0" />
 				<cases>
 					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="2" />
+				<position x="2" y="0" />
 				<cases>
 					<case type = "basique" h="0" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="3" />
+				<position x="3" y="0" />
 				<cases>
 					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="4" />
+				<position x="4" y="0" />
 				<cases>
 					<case type = "basique" h="0" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="5" />
+				<position x="5" y="0" />
 				<cases>
 					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="6" />
+				<position x="6" y="0" />
 				<cases>
 					<case type = "basique" h="0" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="7" />
+				<position x="7" y="0" />
 				<cases>
 					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="8" />
+				<position x="8" y="0" />
 				<cases>
 					<case type = "basique" h="0" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="9" />
+				<position x="9" y="0" />
 				<cases>
 					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="10" />
+				<position x="10" y="0" />
 				<cases>
 					<case type = "lampe" h="0" />
 				</cases>
 			</cellule>
 
 			<cellule>
-				<position x="0" y="11" />
+				<position x="11" y="0" />
 				<cases>
 					<case type = "basique" h="0" />
 				</cases>
 			</cellule>
 		</cellules>
 	</map>
-	<coups main="1" p1="4" />
+	<coups nb="2" main="1" p1="4" />
  </level>

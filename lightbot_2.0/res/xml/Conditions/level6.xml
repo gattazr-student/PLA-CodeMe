@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<level_Conditions>
-	<name> Avancer </name>
+<level>
+	<name>Avancer</name>
 	    <actions> 
-	   		<action>  avancer 		 </action>
-			<action>  droite 		 </action>
-	   	    <action>  gauche  		 </action>
-	   	    <action>  sauter 		 </action>
-			<action>  douche 		 </action>
-			<action>  break  		 </action>
-			<action>  testAvancer    </action>
-			<action>  allumer		 </action>
+	   	<action>avancer</action>
+		<action>droite</action>
+	   	<action>gauche</action>
+	   	<action>sauter</action>
+		<action>douche</action>
+		<action>break</action>
+		<action>testAvancer</action>
+		<action>allumer</action>
 		</actions>
 	<bots>
     		<bot couleur="bleu">
-
         		<position x="0" y="6" />
         		<orientation init="EST" />
     		</bot>
 	</bots>
-	<record num="" />
+	<record num="20" />
 	<map>
 		<dimensions x="12" y="7" />
 		<cellules>
@@ -67,7 +66,7 @@
 			<cellule>
 				<position x="6" y="0" />
 				<cases>
-					<case type = "basique"h="0" />
+					<case type = "basique" h="0" />
 				</cases>
 			</cellule>
 
@@ -94,6 +93,13 @@
 
 			<cellule>
 				<position x="10" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="1" />
 				<cases>
 					<case type = "basique" h="0" />
 				</cases>
@@ -164,7 +170,7 @@
 			</cellule>
 
 			<cellule>
-				<positionx="2" y="4" />
+				<position x="2" y="4" />
 				<cases>
 					<case type = "basique"  h="0" />
 				</cases>
@@ -277,5 +283,5 @@
 
 		</cellules>
 	</map>
-	<coups main="14" p1="8" />
+	<coups nb="2" main="14" p1="8" />
  </level>
