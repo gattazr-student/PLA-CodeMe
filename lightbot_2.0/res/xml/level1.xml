@@ -2,15 +2,16 @@
 <level>
 	<name> 1 </name>
 	<actions> 
-	    	<action>  avancer </action>
-	    	<action>  droite  </action>
-	    	<action>  gauche  </action>
-	    	<action>  sauter  </action>
-		<action>  wait    </action>
-		<action>  notify  </action>
-		<action>  douche  </action>
-		<action>  break   </action>
-		<action>  test    </action>
+	    	<action>avancer</action>
+	    	<action>droite</action>
+	    	<action>gauche</action>
+	    	<action>sauter</action>
+		<action>wait</action>
+		<action>notify</action>
+		<action>douche</action>
+		<action>break</action>
+		<action>test</action>
+		<action>divise</action>
 	</actions>
 	<bots>
     		<bot couleur="bleu">
@@ -25,24 +26,68 @@
 			<cellule>
 				<position x="0" y="0" />
 				<cases>
-					<case type = "interrupteur" h="3" />
-					<case type = "interrupteur" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="1" y="1" />
-				<cases>
 					<case type = "basique" h="0" />
-					<case type = "interrupteur" h="1" />
+					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 			<cellule>
 				<position x="0" y="1" />
 				<cases>
-					<case type = "basique" h="2" />
-					<case type = "interrupteur" h="1" />
+					<case type = "basique" h="0" />
+					<case type = "lampe" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="0" y="2" />
+				<cases>
+					<case type = "lampe" h="0" />
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="1" y="0" />
+				<cases>
+					<case type = "lampe" h="1" />
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="1" y="1" />
+				<cases>
+					<case type = "lampe" h="1" />
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="1" y="2" />
+				<cases>
+					<case type = "lampe" h="1" />
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="2" y="0" />
+				<cases>
+					<case type = "lampe" h="0" />
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="2" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+			<cellule>
+				<position x="2" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 		</cellules>
 	</map>
+	<!--Nombre de route possible et nombre d'actions possible dans chaque route-->
+	<coups nb="3" main="6" p1="6" p2="4" />
  </level>

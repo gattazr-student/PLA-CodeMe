@@ -2,6 +2,7 @@ package parserXML;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,6 +13,7 @@ import models.action.Allumer;
 import models.action.Attendre;
 import models.action.Avancer;
 import models.action.Divise;
+import models.action.Route;
 import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
@@ -68,7 +70,7 @@ public class parserXML {
 					final Action aAction = new Allumer();
 					wLevel.addAction(aAction);
 				}
-				if ((action.getTextContent()).equals("attendre")) {
+				if ((action.getTextContent()).equals("wait")) {
 					final Action aAction = new Attendre();
 					wLevel.addAction(aAction);
 				}
@@ -76,7 +78,7 @@ public class parserXML {
 					final Action aAction = new Avancer();
 					wLevel.addAction(aAction);
 				}
-				if ((action.getTextContent()).equals("Divise")) {
+				if ((action.getTextContent()).equals("divise")) {
 					final Action aAction = new Divise();
 					wLevel.addAction(aAction);
 				}
@@ -84,11 +86,11 @@ public class parserXML {
 					final Action aAction = new Sauter();
 					wLevel.addAction(aAction);
 				}
-				if ((action.getTextContent()).equals("tournerDroite")) {
+				if ((action.getTextContent()).equals("droite")) {
 					final Action aAction = new TournerDroite();
 					wLevel.addAction(aAction);
 				}
-				if ((action.getTextContent()).equals("tournerGauche")) {
+				if ((action.getTextContent()).equals("gauche")) {
 					final Action aAction = new TournerGauche();
 					wLevel.addAction(aAction);
 				}
@@ -191,14 +193,46 @@ public class parserXML {
 								.getAttribute("h")));
 						aCarte.addCase(aCase);
 					}
-					if ((uneCase.getAttribute("type")).equals("interrupteur")) {
+					if ((uneCase.getAttribute("type")).equals("lampe")) {
 
 						final Case aCase = new CaseLampe(aPosCase,
 								Integer.parseInt(uneCase.getAttribute("h")));
 						aCarte.addCase(aCase);
 					}
+					/*
+					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
+					 * 
+					 * final Case aCase = new CaseInterrupteur(aPosCase,
+					 * Integer.parseInt(uneCase.getAttribute("h")));
+					 * aCarte.addCase(aCase);
+					 * }
+					 */
 				}
 
+			}
+
+			// Nombre de coups possibles
+			final Element coups = (Element) racine.getElementsByTagName("coups").item(0);
+			final int aNbRoute = Integer.parseInt(coups.getAttribute("nb"));
+			for (int i = 0; i < aNbRoute; i++) {
+				switch (i) {
+				case 0:
+					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
+							new ArrayList<Action>());
+					wLevel.addRoute(aMain);
+					break;
+				case 1:
+					final Route aP1 = new Route(Integer.parseInt(coups.getAttribute("p1")),
+							new ArrayList<Action>());
+					wLevel.addRoute(aP1);
+					break;
+				case 2:
+					final Route aP2 = new Route(Integer.parseInt(coups.getAttribute("p2")),
+							new ArrayList<Action>());
+					wLevel.addRoute(aP2);
+					break;
+				default:
+				}
 			}
 
 			wLevel.setCarte(aCarte);
