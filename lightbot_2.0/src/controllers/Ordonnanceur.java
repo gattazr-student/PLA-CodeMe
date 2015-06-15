@@ -39,7 +39,7 @@ public class Ordonnanceur {
 		int i = 0;
 		boolean wRes = false;
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
-			wRes = wRes || stepOne(wStack, this.pNiveau.getBots().get(i));
+			wRes = wRes | stepOne(wStack, this.pNiveau.getBots().get(i));
 			i++;
 		}
 		return wRes;
