@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<level_Conditions>
+	<name> Avancer </name>
+	    <actions> 
+	   		<action>  avancer 		 </action>
+			<action>  droite 		 </action>
+	   	    <action>  gauche  		 </action>
+	   	    <action>  sauter 		 </action>
+			<action>  douche 		 </action>
+			<action>  break  		 </action>
+			<action>  testAvancer    </action>
+			<action>  allumer		 </action>
+		</actions>
+	<bots>
+    		<bot couleur="bleu">
+
+        		<position x="0" y="6" />
+        		<orientation init="EST" />
+    		</bot>
+	</bots>
+	<record num="" />
+	<map>
+		<dimensions x="12" y="7" />
+		<cellules>
+			<cellule>
+				<position x="0" y="0" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="3" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="5" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="6" y="0" />
+				<cases>
+					<case type = "basique"h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="7" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="8" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+
+			<cellule>
+				<position x="1" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<positionx="2" y="4" />
+				<cases>
+					<case type = "basique"  h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="5" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="5" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="0" y="6"/>
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="3" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="5" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="6" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="7" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="8" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+		</cellules>
+	</map>
+	<coups main="14" p1="8" />
+ </level>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<level_Conditions>
+	<name> Saut </name>
+	    <actions> 
+	   		<action>  avancer 		 </action>
+	   	    <action>  sauter 		 </action>
+			<action>  douche 		 </action>
+			<action>  testAvancer    </action>
+			<action>  testSauter     </action>
+			<action>  allumer		 </action>
+		</actions>
+	<bots>
+    		<bot couleur="bleu">
+        		<position x="0" y="0" />
+        		<orientation init="EST" />
+    		</bot>
+	</bots>
+	<record num="4" />
+	<map>
+		<dimensions x="1" y="9" />
+		<cellules>
+			<cellule>
+				<position x="2" y="3" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="1" y="0" />
+				<cases>
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="2" y="0" />
+				</position>
+				<cases>
+					<case type = "lampe" h="1" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="3" y="0" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="4" y="0" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="5" y="0" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="6" y="0" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="7" y="0" />
+				<cases>
+					<case type = "lampe" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="8" y="0" />
+				<cases>
+					<case type = "basique" h="3" />
+				</cases>
+			</cellule>
+
+		</cellules>
+	</map>
+	<coups main="1" p1="6" p2="4" />
+ </level>
