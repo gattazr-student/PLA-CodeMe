@@ -61,6 +61,7 @@ public class FenetreNiveau extends View implements Observer {
 		for (Event wEvent : this.pWindow.pollEvents()) {
 			if (wEvent.type == Event.Type.CLOSED) {
 				this.pWindow.close();
+				System.exit(0);
 			}
 			if (wEvent.type == Event.Type.RESIZED) {
 				redraw();
