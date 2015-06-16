@@ -3,6 +3,7 @@ package views.jsfml;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderStates;
@@ -41,7 +42,6 @@ public class VTexte extends View {
 
 	@Override
 	public void initView() {
-
 		try {
 			this.wFont.loadFromFile(Paths.get("res/font/BlackKids.ttf"));
 		} catch (IOException e) {
@@ -53,5 +53,9 @@ public class VTexte extends View {
 
 		wTexte.setPosition(wOrigin);
 		this.pTexte = wTexte;
+	}
+
+	public void setColor(Color aColor) {
+		this.pTexte.setColor(aColor);
 	}
 }
