@@ -21,8 +21,8 @@ import views.View;
 
 public abstract class VAction extends View implements Observer {
 
-	public static final int HAUTEUR = 59;
-	public static final int LARGEUR = 59;
+	public static final int HAUTEUR = 55;
+	public static final int LARGEUR = 55;
 
 	public static VAction makeVAction(Action aAction, FloatRect aZone) {
 		if (aAction instanceof Allumer) {

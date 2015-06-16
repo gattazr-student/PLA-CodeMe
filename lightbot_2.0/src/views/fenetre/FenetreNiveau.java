@@ -1,5 +1,8 @@
 package views.fenetre;
 
+import java.util.ArrayList;
+
+import models.action.Action;
 import models.action.Route;
 import models.niveau.Carte;
 import models.niveau.Niveau;
@@ -17,6 +20,7 @@ import org.jsfml.window.event.KeyEvent;
 import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.action.VAction;
 import views.action.VRoute;
 import views.action.VRouteListe;
 import views.jsfml.VBouton;
@@ -90,22 +94,15 @@ public class FenetreNiveau extends View implements Observer {
 	 * Dessine les boutons actions
 	 */
 	private void initActions() {
-		VBouton wButton_Allume = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allumer.png");
-		this.pPanelActions.addView(wButton_Allume);
-		VBouton wButton_Avancer = new VBouton(new FloatRect(25, 0, 59, 59), "res/action/avancer.png");
-		this.pPanelActions.addView(wButton_Avancer);
-		VBouton wButton_Route1 = new VBouton(new FloatRect(50, 0, 59, 59), "res/action/route_p1.png");
-		this.pPanelActions.addView(wButton_Route1);
-		VBouton wButton_Route2 = new VBouton(new FloatRect(75, 0, 59, 59), "res/action/route_p2.png");
-		this.pPanelActions.addView(wButton_Route2);
-		VBouton wButton_Sauter = new VBouton(new FloatRect(100, 0, 59, 59), "res/action/sauter.png");
-		this.pPanelActions.addView(wButton_Sauter);
-		VBouton wButton_TournerDroit = new VBouton(new FloatRect(125, 0, 59, 59),
-				"res/action/tourner_droit.png");
-		this.pPanelActions.addView(wButton_TournerDroit);
-		VBouton wButton_TournerGauche = new VBouton(new FloatRect(150, 0, 59, 59),
-				"res/action/tourner_gauche.png");
-		this.pPanelActions.addView(wButton_TournerGauche);
+		ArrayList<Action> wAvailable = this.pNiveau.getActions();
+		float wY = (this.pPanelActions.getHeight() - VAction.HAUTEUR) / 2;
+		float wX = (this.pPanelActions.getWidth() - wAvailable.size() * VAction.LARGEUR) / 2;
+
+		for (Action wAction : wAvailable) {
+			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
+					VAction.HAUTEUR)));
+			wX += VAction.LARGEUR;
+		}
 	}
 
 	/**

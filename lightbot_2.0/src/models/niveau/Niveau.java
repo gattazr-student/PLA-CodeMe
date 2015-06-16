@@ -79,6 +79,15 @@ public class Niveau extends ObservableModel {
 	}
 
 	/**
+	 * Ajoute une action en fin de la liste d'action
+	 * 
+	 * @return
+	 */
+	public ArrayList<Action> getActions() {
+		return this.pActions;
+	}
+
+	/**
 	 * Retourne la liste des Bots présent dans le Niveau
 	 *
 	 * @return List des Bots présents dans le Niveau
@@ -126,7 +135,7 @@ public class Niveau extends ObservableModel {
 	/**
 	 * Retourne true si toutes les cases Lampe dans le Niveau sont allumé et que le niveau est donc terminé.
 	 * False sinon
-	 * 
+	 *
 	 * @return true si le niveau est terminé. False sinon
 	 */
 	public boolean isFinished() {
