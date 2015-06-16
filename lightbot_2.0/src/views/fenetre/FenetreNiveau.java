@@ -25,6 +25,7 @@ import views.View;
 import views.action.VAction;
 import views.action.VRoute;
 import views.action.VRouteListe;
+import views.bot.VBot;
 import views.jsfml.VBouton;
 import views.jsfml.VImage;
 import views.niveau.VCarte;
@@ -42,6 +43,7 @@ public class FenetreNiveau extends View implements Observer {
 	private Panel pPanelActions;
 	private Panel pPanelMenu;
 
+	private Route pRouteMain;
 	private List<VRouteListe> pVRoutesList;
 
 	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
@@ -64,9 +66,10 @@ public class FenetreNiveau extends View implements Observer {
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
 
-		VImage wImage_Fond = new VImage(new FloatRect(0, 0, 59, 59), "res/menu/ciel.jpeg");
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/menu/ciel.jpeg");
 		this.pPanelCarte.addView(wImage_Fond);
 
+		this.pRouteMain = aNiveau.getBots().get(0).getRouteMain();
 		this.pVRoutesList = new LinkedList<VRouteListe>();
 
 		initView();
@@ -90,7 +93,6 @@ public class FenetreNiveau extends View implements Observer {
 				return wVRouteListe;
 			}
 		}
-		/* TODO: Récupérer la route courante sinon -> main */
 		return null;
 	}
 
@@ -125,6 +127,9 @@ public class FenetreNiveau extends View implements Observer {
 							this.pControler.startRunning();
 							break;
 						}
+					} else if (wView instanceof VBot) {
+						/* Changement du bot courant */
+						this.pControler.setBotCourant(((VBot) wView).getBot());
 					} else if (wView instanceof VRouteListe) {
 						/* Change la route courante */
 						this.pControler.setRouteCourant(((VRouteListe) wView).getRoute());
@@ -195,10 +200,10 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 
-	private void initRoutes() {
-		/* TODO: Récupérer le main du robot courant */
-		VRouteListe wVRouteMain = new VRouteListe(this.pNiveau.getBots().get(0).getRouteMain(),
-				new FloatRect(0, 0, 4 * VRoute.LARGEUR, 3 * VRoute.HAUTEUR));
+	public void initRoutes() {
+		VRouteListe wVRouteMain = new VRouteListe(this.pRouteMain, new FloatRect(0, 0, 4 * VRoute.LARGEUR,
+				3 * VRoute.HAUTEUR));
+		this.pVRoutesList.clear();
 		this.pVRoutesList.add(wVRouteMain);
 		this.pPanelRoutes.addView(wVRouteMain);
 		int depl_cadre = 3 * VRoute.HAUTEUR + 10;
@@ -227,6 +232,11 @@ public class FenetreNiveau extends View implements Observer {
 
 	public void setController(ControlerNiveau aControlerNiveau) {
 		this.pControler = aControlerNiveau;
+	}
+
+	public void setRouteMain(Route aRouteMain) {
+		this.pRouteMain = aRouteMain;
+
 	}
 
 	@Override

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Level2_MultiBots>
+	<name> prog bloc </name>
+	    <actions> 
+	   		<action>avancer</action>
+			<action>droite</action>
+	   	    <action>gauche</action>
+	   	    <action>sauter</action>
+			<action>douche</action>
+			<action>break</action>
+			<action>testAvancer</action>
+			<action>testSauter</action>
+			<action>allumer</action>
+		</actions>
+	<bots>
+    		<bot couleur="bleu">
+        		<position  x="0" y="2" />
+        		<orientation init="EST" />
+    		</bot>
+
+    		<bot couleur="rouge">
+        		<position  x="11" y="2" />
+        		<orientation init="OUEST" />
+    		</bot>
+	</bots>
+	<record num="20" />
+	<map>
+		<dimensions  x="15" y="5" />
+
+		<cellules>
+        <cellule>
+				<position  x="0" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+        <cellule>
+				<position  x="1" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+        <cellule>
+				<position  x="1" y="1" />
+				<cases>
+					<case type = "basique" h="0" />>
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="1" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="1" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="1" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="2" y="0" />
+				<cases>
+					<case type = "basique"  h="2" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="2" y="1" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="2" y="2" />
+				<cases>
+					<case type = "basique" h="2" />
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position  x="2" y="3" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="2" y="4" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="3" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="3" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="3" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="3" y="3" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="3" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="4" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="4" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+        
+        <cellule>
+				<position x="4" y="2" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+		</cellule>
+       	
+       	<cellule>
+				<position x="4" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+    
+        <cellule>
+				<position x="4" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+      	
+      	<cellule>
+				<position x="5" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+      	
+      	<cellule>
+				<position x="5" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+    
+        <cellule>
+				<position x="5" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+      	
+      	<cellule>
+				<position x="5" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+      
+        <cellule>
+				<position x="5" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="6" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="6" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="6" y="2" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="6" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="6" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="7" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="7" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="7" y="2" />
+				<cases>
+					<case type = "lampe" h="3" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="7" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="7" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="8" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+		<cellule>
+				<position x="8" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		</cellule>
+
+			<cellule>
+				<position x="8" y="2" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="8" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="8" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="0" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="2" />
+				<cases>
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="9" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="2" />
+				<cases>
+					<case type = "interrupteur" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="10" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+
+			<cellule>
+				<position x="11" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+		</cellules>
+	</map>
+	<coups nb="3" main="15" p1="8" p2="8" />
+ </Level2_MultiBots>
