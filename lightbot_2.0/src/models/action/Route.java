@@ -12,6 +12,8 @@ import models.niveau.Carte;
  */
 public class Route extends Action {
 
+	final static String pNameAction = "route";
+
 	private ArrayList<Action> action;
 	private int taille;
 	private String pName;
@@ -31,6 +33,7 @@ public class Route extends Action {
 	public void addAction(Action aAction) {
 		if (this.action.size() < this.taille) {
 			this.action.add(aAction);
+			notifyObserver("route_add", null);
 		}
 	}
 
@@ -43,10 +46,6 @@ public class Route extends Action {
 
 	}
 
-	public int get_Taille() {
-		return this.taille;
-	}
-
 	public ArrayList<Action> getAction() {
 		return this.action;
 	}
@@ -55,12 +54,19 @@ public class Route extends Action {
 		return this.pName;
 	}
 
+	public int getTailleMax() {
+		return this.taille;
+	}
+
 	public Iterator<Action> iterator() {
 		return this.action.iterator();
 	}
 
-	public void remove_Action(int i) {
-		this.action.remove(i);
+	public void removeAction(int aPosition) {
+		if (aPosition < this.taille) {
+			this.action.remove(aPosition);
+			notifyObserver("route_remove", null);
+		}
 	}
 
 	public void set_Action(Action aAction, int i) {
@@ -69,13 +75,16 @@ public class Route extends Action {
 		}
 	}
 
-	public void set_Taille(int i) {
-		this.taille = i;
-
-	}
-
 	public void setName(String aName) {
 		this.pName = aName;
+	}
+
+	public void setTailleMax(int i) {
+		this.taille = i;
+	}
+
+	public int size() {
+		return this.action.size();
 	}
 
 	@Override

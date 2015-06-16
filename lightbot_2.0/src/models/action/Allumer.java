@@ -10,6 +10,8 @@ import models.niveau.CaseLampe;
  */
 public class Allumer extends Action {
 
+	final static String pNameAction = "allumer";
+
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
 		Case aCase = aCarte.getCase(aBot.getPosition());

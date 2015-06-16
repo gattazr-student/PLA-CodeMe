@@ -10,6 +10,8 @@ import models.niveau.Carte;
  */
 public class TournerDroite extends Action {
 
+	final static String pNameAction = "droite";
+
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
 		// apply->tourner_droit

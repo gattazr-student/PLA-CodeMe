@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VAllumer extends VAction {
 
-	private Allumer pAllumer;
-
 	public VAllumer(Allumer aAllumer, FloatRect aZone) {
-		super(aZone);
-		this.pAllumer = aAllumer;
-		this.pAllumer.addObserver(this);
+		super(aAllumer, aZone);
+		aAllumer.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pAllumer != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/allumer");
 
-			switch (this.pAllumer.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

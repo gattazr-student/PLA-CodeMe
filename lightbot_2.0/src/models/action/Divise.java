@@ -9,6 +9,8 @@ import models.niveau.Carte;
  */
 public class Divise extends Action {
 
+	final static String pNameAction = "divise";
+
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
 		/* TODO: Divise.apply : make function */

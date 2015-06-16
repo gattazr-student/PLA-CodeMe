@@ -23,6 +23,10 @@ public class VRouteListe extends View implements Observer {
 		initView();
 	}
 
+	public Route getRoute() {
+		return this.pRoute;
+	}
+
 	@Override
 	public void initView() {
 		VRectangle wContainer = new VRectangle(new FloatRect(0, 0, getWidth(), getHeight()));
@@ -48,5 +52,13 @@ public class VRouteListe extends View implements Observer {
 
 	@Override
 	public void update(String aString, Object aObjet) {
+		if (aString.equals("route_add")) {
+			clearView();
+			initView();
+		}
+		if (aString.equals("route_remove")) {
+			clearView();
+			initView();
+		}
 	}
 }

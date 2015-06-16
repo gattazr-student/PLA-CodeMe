@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VSauter extends VAction {
 
-	private Sauter pSauter;
-
 	public VSauter(Sauter aSauter, FloatRect aZone) {
-		super(aZone);
-		this.pSauter = aSauter;
-		this.pSauter.addObserver(this);
+		super(aSauter, aZone);
+		aSauter.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pSauter != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/sauter");
 
-			switch (this.pSauter.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

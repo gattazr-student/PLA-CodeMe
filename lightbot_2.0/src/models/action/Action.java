@@ -15,6 +15,7 @@ public abstract class Action extends ObservableModel {
 	 * Couleur de l'Action
 	 */
 	private Couleur pCouleur;
+	private String pNameAction;
 
 	public Action() {
 		this.pCouleur = Couleur.BLANC;
@@ -37,6 +38,15 @@ public abstract class Action extends ObservableModel {
 	 */
 	public Couleur getCouleur() {
 		return this.pCouleur;
+	}
+
+	/**
+	 * Retourne le nom de l'action
+	 *
+	 * @return Nom de l'Action
+	 */
+	public String getName() {
+		return this.pNameAction;
 	}
 
 	/**

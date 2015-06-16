@@ -11,6 +11,8 @@ import models.niveau.Case;
  */
 public class Sauter extends Action {
 
+	final static String pNameAction = "sauter";
+
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
 		/*
