@@ -15,11 +15,6 @@ import models.basic.Position;
 public class Bot extends ObservableModel {
 
 	/**
-	 * Liste des actions disponibles pour le Bot
-	 */
-	// private List<Action> pActions;
-
-	/**
 	 * Position du bot sur une Carte
 	 */
 	private Position pPosition;
@@ -40,6 +35,9 @@ public class Bot extends ObservableModel {
 	 * Etat du Bot (Actif ou Passif)
 	 */
 	private Etat pEtat;
+	private Couleur pCouleurSauvegarde;
+	private Orientation pOrientationSauvergarde;
+	private Position pPositionSauvergarde;
 
 	/**
 	 * Constructeur par défault. Placé en 0,0, Orienté vers Nord et de Couleur Blanche
@@ -65,8 +63,12 @@ public class Bot extends ObservableModel {
 	 */
 	public Bot(Position aPosition, Orientation aOrientation, Couleur aCouleur, Etat aEtat) {
 		this.pPosition = aPosition;
+		this.pPositionSauvergarde = this.pPosition;
 		this.pOrientation = aOrientation;
+		this.pOrientationSauvergarde = this.pOrientation;
 		this.pCouleur = aCouleur;
+		this.pCouleurSauvegarde = this.pCouleur;
+
 		this.pRouteMain = new Route();
 		this.pEtat = aEtat;
 	}
@@ -89,7 +91,7 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * retoune l'etat du Bot
-	 * 
+	 *
 	 * @return Etat du Bot
 	 */
 	public Etat getEtat() {
@@ -135,6 +137,13 @@ public class Bot extends ObservableModel {
 	 */
 	public void removeAction(int numberAction) {
 		this.pRouteMain.removeAction(numberAction);
+	}
+
+	public void reset() {
+		this.pCouleur = this.pCouleurSauvegarde;
+		this.pOrientation = this.pOrientationSauvergarde;
+		this.pPosition = this.pPositionSauvergarde;
+		notifyObserver("bot_reset", null);
 	}
 
 	/**
@@ -200,5 +209,4 @@ public class Bot extends ObservableModel {
 	public void setRouteMain(Route aRouteMain) {
 		this.pRouteMain = aRouteMain;
 	}
-
 }

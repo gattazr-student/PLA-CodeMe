@@ -2,6 +2,7 @@ package models.niveau;
 
 import models.ObservableModel;
 import models.basic.Position;
+import models.niveau.CaseLampe.ETAT_LAMPE;
 
 /**
  * Carte représente le monde d'un Niveau
@@ -39,7 +40,6 @@ public class Carte extends ObservableModel {
 				this.pCellules[wY][wX] = new Cellule();
 			}
 		}
-
 	}
 
 	/**
@@ -97,15 +97,6 @@ public class Carte extends ObservableModel {
 	}
 
 	/**
-	 * Retourne le tableau de Cellule contenant la carte
-	 *
-	 * @return Tableau à deux dimensions de Cellules
-	 */
-	public Cellule[][] getCellules() {
-		return this.pCellules;
-	}
-
-	/**
 	 * Retourne la cellule à la position donnée
 	 *
 	 * @param aPosition
@@ -117,6 +108,15 @@ public class Carte extends ObservableModel {
 			/* TODO Cellule.getCellule : throw which exception ? */
 		}
 		return this.pCellules[aPosition.getY()][aPosition.getX()];
+	}
+
+	/**
+	 * Retourne le tableau de Cellule contenant la carte
+	 *
+	 * @return Tableau à deux dimensions de Cellules
+	 */
+	public Cellule[][] getCellules() {
+		return this.pCellules;
 	}
 
 	/**
@@ -164,6 +164,21 @@ public class Carte extends ObservableModel {
 	 */
 	private boolean positionValid(Position aPosition) {
 		return positionValid(aPosition.getX(), aPosition.getY());
+	}
+
+	public void reset() {
+		for (int wY = 0; wY < this.pMaxY; wY++) {
+			for (int wX = 0; wX < this.pMaxX; wX++) {
+				this.pCellules[wY][wX].resetCourante();
+				Case wCase = this.pCellules[wY][wX].getCase();
+				if (wCase instanceof CaseLampe) {
+					if (((CaseLampe) wCase).getEtat() == ETAT_LAMPE.ALLUMEE) {
+						((CaseLampe) wCase).activate();
+					}
+				}
+			}
+		}
+		notifyObserver("carte_reset", null);
 	}
 
 	/**

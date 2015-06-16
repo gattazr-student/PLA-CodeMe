@@ -102,6 +102,10 @@ public class ControlerNiveau {
 	public void resetLevel() {
 		/* TODO: ControllerNiveau.resetLevel */
 		/* Crééer la fonction reset dans Niveau */
+		this.pNiveau.resetCarte();
+		this.pNiveau.resetBot();
+		this.pVNiveau.redraw();
+		System.out.println("reset ok");
 	}
 
 	public void run() {
