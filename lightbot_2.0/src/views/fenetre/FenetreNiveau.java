@@ -138,10 +138,16 @@ public class FenetreNiveau extends View implements Observer {
 	 */
 	private void initActions() {
 		ArrayList<Action> wAvailable = this.pNiveau.getActions();
+		ArrayList<Route> wRoutes = this.pNiveau.getRoutes();
 		float wY = (this.pPanelActions.getHeight() - VAction.HAUTEUR) / 2;
-		float wX = (this.pPanelActions.getWidth() - wAvailable.size() * VAction.LARGEUR) / 2;
+		float wX = (this.pPanelActions.getWidth() - (wAvailable.size() + wRoutes.size()) * VAction.LARGEUR) / 2;
 
 		for (Action wAction : wAvailable) {
+			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
+					VAction.HAUTEUR)));
+			wX += VAction.LARGEUR;
+		}
+		for (Action wAction : wRoutes) {
 			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
 					VAction.HAUTEUR)));
 			wX += VAction.LARGEUR;
