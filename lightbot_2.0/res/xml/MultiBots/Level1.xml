@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Level1_MultliBots>
+	<name> 2 Robots </name>
+	    <actions> 
+	    	<action>avancer</action>
+	    	<action>droite</action>
+	    	<action>gauche</action>
+			<action>douche</action>
+			<action>break</action>
+			<action>testAvancer</action>
+		</actions>
+	<bots>
+    		<bot couleur="bleu">
+
+        		<position x="0" y="0" />
+        		<orientation init="SUD" />
+    		</bot>
+    		<bot couleur="rouge">
+        		<position x="4" y="0" />
+        		<orientation init="SUD" />
+    		</bot>
+	</bots>
+	<record num="11" />
+	<map>
+        <dimensions x="6" y="6" />
+		<cellules>
+			<cellule>
+				<position x="0" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="0" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+		<cellule>
+				<position x="0" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="1" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="2" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="2" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="2" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="2" y="5" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+
+        <cellule>
+				<position x="3" y="2" />
+				<cases>
+					<case type = "basique" h="1" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="4" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="4" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>        
+		<cellule>
+				<position x="4" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>        
+		<cellule>
+				<position x="4" y="3" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		    </cellule>
+         <cellule>
+				<position x="4" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+		    </cellule>		    
+        <cellule>
+				<position x="4" y="5" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+		</cellules>
+	</map>
+	<coups nb="2" main="7" p1="4" />
+ </Level1_MultliBots>
