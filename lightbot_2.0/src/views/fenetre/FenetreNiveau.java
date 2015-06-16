@@ -21,6 +21,7 @@ import views.View;
 import views.action.VRoute;
 import views.action.VRouteListe;
 import views.jsfml.VBouton;
+import views.jsfml.VImage;
 import views.niveau.VCarte;
 import views.niveau.VCase;
 import controllers.ControlerNiveau;
@@ -44,7 +45,7 @@ public class FenetreNiveau extends View implements Observer {
 		Vector2i wSize = this.pWindow.getSize();
 		setZone(new FloatRect(0, 0, wSize.x, wSize.y));
 
-		wXSep = (float) (wSize.x * 0.7); // Calcul 70% de la largeur de la fenêtre
+		wXSep = wSize.x - 4 * VRoute.LARGEUR; // Calcul 70% de la largeur de la fenêtre
 		wYSep = (float) (wSize.y * 0.85); // Calcul 85% de la hauteur de la fenêtre
 		/* Ajoute les 4 panels dans la liste des éléments de la vue */
 		this.pPanelCarte = new Panel(new FloatRect(0, 0, wXSep, wYSep));
@@ -55,6 +56,10 @@ public class FenetreNiveau extends View implements Observer {
 		addView(this.pPanelRoutes);
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
+
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, 59, 59), "res/menu/ciel.jpeg");
+		this.pPanelCarte.addView(wImage_Fond);
+
 		initView();
 	}
 
@@ -112,10 +117,10 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelRoutes.addView(wVRouteMain);
 		int depl_cadre = 0;
 		for (Route wRoute : this.pNiveau.getRoutes()) {
-			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 165 + depl_cadre,
+			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 185 + depl_cadre,
 					4 * VRoute.LARGEUR, 2 * VRoute.HAUTEUR));
 			this.pPanelRoutes.addView(wVRoute);
-			depl_cadre = depl_cadre + 110;
+			depl_cadre = depl_cadre + 125;
 		}
 	}
 
