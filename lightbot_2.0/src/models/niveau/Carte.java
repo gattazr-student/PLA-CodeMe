@@ -49,13 +49,18 @@ public class Carte extends ObservableModel {
 	 *            Case à rajouter dans la Cellule
 	 */
 	public void addCase(Case aCase) {
-		Position wPos = aCase.getPosition();
-		Cellule wCell = this.pCellules[wPos.getY()][wPos.getX()];
-		if (wCell == null) {
-			this.pCellules[wPos.getY()][wPos.getX()] = new Cellule();
-			wCell = this.pCellules[wPos.getY()][wPos.getX()];
+		if (aCase != null) {
+			Position wPos = aCase.getPosition();
+			if (!positionValid(wPos)) {
+				/* TODO: throw which exception ? */
+			}
+			Cellule wCell = this.pCellules[wPos.getY()][wPos.getX()];
+			if (wCell == null) {
+				this.pCellules[wPos.getY()][wPos.getX()] = new Cellule();
+				wCell = this.pCellules[wPos.getY()][wPos.getX()];
+			}
+			wCell.addCase(aCase);
 		}
-		wCell.addCase(aCase);
 	}
 
 	/**
@@ -66,6 +71,9 @@ public class Carte extends ObservableModel {
 	 * @return une Case. Null si il n'y a pas de case à la position donnée.
 	 */
 	public Case getCase(int aX, int aY) {
+		if (!positionValid(aX, aY)) {
+			return null;
+		}
 		Cellule wCell = this.pCellules[aY][aX];
 		if (wCell != null) {
 			return wCell.getCase();
@@ -79,40 +87,34 @@ public class Carte extends ObservableModel {
 	 *
 	 * @param aPosition
 	 *            Position à utiliser
-	 * @return une Case. Null si il n'y a pas de case à la position donnée.
+	 * @return une Case. Null si il n'y a pas de case à la position donnée où la position n'existe pas.
 	 */
 	public Case getCase(Position aPosition) {
-		if (aPosition.getX() < 0 || aPosition.getX() > this.pMaxX - 1 || aPosition.getY() < 0
-				|| aPosition.getY() > this.pMaxY - 1) {
+		if (aPosition == null) {
 			return null;
 		}
-		Cellule wCell = this.pCellules[aPosition.getY()][aPosition.getX()];
-		if (wCell != null) {
-			return wCell.getCase();
-		}
-		return null;
+		return getCase(aPosition.getX(), aPosition.getY());
 	}
 
 	/**
-	 * Retourne la e tableau de Cellul contenant la carte
+	 * Retourne le tableau de Cellule contenant la carte
 	 *
-	 * @return HashMap<Position, Case> des Cases de la Carte
+	 * @return Tableau à deux dimensions de Cellules
 	 */
-	public Cellule[][] getCases() {
+	public Cellule[][] getCellules() {
 		return this.pCellules;
 	}
 
 	/**
-	 * Retourne la cellule a la position donnée
+	 * Retourne la cellule à la position donnée
 	 *
 	 * @param aPosition
 	 *            position de la cellule
 	 * @return la cellule a la position donnée
 	 */
 	public Cellule getCellule(Position aPosition) {
-		if (aPosition.getX() < 0 || aPosition.getX() > this.pMaxX - 1 || aPosition.getY() < 0
-				|| aPosition.getY() > this.pMaxY - 1) {
-			return null;
+		if (!positionValid(aPosition)) {
+			/* TODO Cellule.getCellule : throw which exception ? */
 		}
 		return this.pCellules[aPosition.getY()][aPosition.getX()];
 	}
@@ -136,6 +138,35 @@ public class Carte extends ObservableModel {
 	}
 
 	/**
+	 * Retourne vrai si la position passé en paramètre est atteignable dans la carte
+	 *
+	 * @param aX
+	 *            Abscisses de la position
+	 * @param aY
+	 *            Ordonnée de la position
+	 * @return true si la position passé en paramètre est atteignable dans la Carte
+	 */
+	private boolean positionValid(float aX, float aY) {
+		if (aX < 0 || aX > this.pMaxX - 1 || aY < 0 || aY > this.pMaxY - 1) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Retourne vrai si la position passé en paramètre est atteignable dans la carte
+	 *
+	 * @param aX
+	 *            Abscisses de la position
+	 * @param aY
+	 *            Ordonnée de la position
+	 * @return true si la position passé en paramètre est atteignable dans la Carte
+	 */
+	private boolean positionValid(Position aPosition) {
+		return positionValid(aPosition.getX(), aPosition.getY());
+	}
+
+	/**
 	 * Définit la taille de la Carte en définissant les valeurs maximum sur l'axe des Absicess et des
 	 * ordonnées des Positions des Cases
 	 *
@@ -156,7 +187,14 @@ public class Carte extends ObservableModel {
 	 *            Position de la cellule à modifier
 	 */
 	public void switchCase(Position aPosition) {
-		this.pCellules[aPosition.getY()][aPosition.getX()].nextCourante();
+		if (!positionValid(aPosition)) {
+			/* TODO: throw which exception ? */
+		}
+		Cellule wCell = this.pCellules[aPosition.getY()][aPosition.getX()];
+		if (wCell == null) {
+			/* TODO: throw which exception ? */
+		}
+		wCell.nextCourante();
 		notifyObserver("carte_switch", null);
 	}
 }

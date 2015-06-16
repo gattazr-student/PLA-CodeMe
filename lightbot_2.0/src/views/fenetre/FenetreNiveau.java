@@ -1,5 +1,8 @@
 package views.fenetre;
 
+import java.util.ArrayList;
+
+import models.action.Action;
 import models.action.Route;
 import models.niveau.Carte;
 import models.niveau.Niveau;
@@ -11,16 +14,17 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
-import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.Mouse.Button;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.KeyEvent;
 import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.action.VAction;
+import views.action.VRoute;
 import views.action.VRouteListe;
 import views.jsfml.VBouton;
-import views.jsfml.VRoute;
+import views.jsfml.VImage;
 import views.niveau.VCarte;
 import views.niveau.VCase;
 import controllers.ControlerNiveau;
@@ -44,7 +48,7 @@ public class FenetreNiveau extends View implements Observer {
 		Vector2i wSize = this.pWindow.getSize();
 		setZone(new FloatRect(0, 0, wSize.x, wSize.y));
 
-		wXSep = (float) (wSize.x * 0.7); // Calcul 70% de la largeur de la fenêtre
+		wXSep = wSize.x - 4 * VRoute.LARGEUR; // Calcul 70% de la largeur de la fenêtre
 		wYSep = (float) (wSize.y * 0.85); // Calcul 85% de la hauteur de la fenêtre
 		/* Ajoute les 4 panels dans la liste des éléments de la vue */
 		this.pPanelCarte = new Panel(new FloatRect(0, 0, wXSep, wYSep));
@@ -55,29 +59,50 @@ public class FenetreNiveau extends View implements Observer {
 		addView(this.pPanelRoutes);
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
+
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, 59, 59), "res/menu/ciel.jpeg");
+		this.pPanelCarte.addView(wImage_Fond);
+
 		initView();
+	}
+
+	public void handleEvents() {
+		for (Event wEvent : this.pWindow.pollEvents()) {
+			if (wEvent.type == Event.Type.CLOSED) {
+				this.pWindow.close();
+				System.exit(0);
+			}
+			if (wEvent.type == Event.Type.RESIZED) {
+				redraw();
+			}
+			if (wEvent.type == Event.Type.KEY_RELEASED) {
+				KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
+				this.pControler.keyboardAction(wSMFLKeyEvent);
+				redraw();
+			}
+			if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+				MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
+				if (wMouseEvent.button == Button.LEFT) {
+					View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
+					System.out.println(String.format("Left click on %s", wClicked.getClass()));
+				}
+			}
+		}
 	}
 
 	/**
 	 * Dessine les boutons actions
 	 */
 	private void initActions() {
-		VBouton wButton_Allume = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allumer.png");
-		this.pPanelActions.addView(wButton_Allume);
-		VBouton wButton_Avancer = new VBouton(new FloatRect(25, 0, 59, 59), "res/action/avancer.png");
-		this.pPanelActions.addView(wButton_Avancer);
-		VBouton wButton_Route1 = new VBouton(new FloatRect(50, 0, 59, 59), "res/action/route_p1.png");
-		this.pPanelActions.addView(wButton_Route1);
-		VBouton wButton_Route2 = new VBouton(new FloatRect(75, 0, 59, 59), "res/action/route_p2.png");
-		this.pPanelActions.addView(wButton_Route2);
-		VBouton wButton_Sauter = new VBouton(new FloatRect(100, 0, 59, 59), "res/action/sauter.png");
-		this.pPanelActions.addView(wButton_Sauter);
-		VBouton wButton_TournerDroit = new VBouton(new FloatRect(125, 0, 59, 59),
-				"res/action/tourner_droit.png");
-		this.pPanelActions.addView(wButton_TournerDroit);
-		VBouton wButton_TournerGauche = new VBouton(new FloatRect(150, 0, 59, 59),
-				"res/action/tourner_gauche.png");
-		this.pPanelActions.addView(wButton_TournerGauche);
+		ArrayList<Action> wAvailable = this.pNiveau.getActions();
+		float wY = (this.pPanelActions.getHeight() - VAction.HAUTEUR) / 2;
+		float wX = (this.pPanelActions.getWidth() - wAvailable.size() * VAction.LARGEUR) / 2;
+
+		for (Action wAction : wAvailable) {
+			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
+					VAction.HAUTEUR)));
+			wX += VAction.LARGEUR;
+		}
 	}
 
 	/**
@@ -112,16 +137,16 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelRoutes.addView(wVRouteMain);
 		int depl_cadre = 0;
 		for (Route wRoute : this.pNiveau.getRoutes()) {
-			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 165 + depl_cadre,
+			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 185 + depl_cadre,
 					4 * VRoute.LARGEUR, 2 * VRoute.HAUTEUR));
 			this.pPanelRoutes.addView(wVRoute);
-			depl_cadre = depl_cadre + 110;
+			depl_cadre = depl_cadre + 125;
 		}
 	}
 
 	@Override
 	public void initView() {
-		/* TODO: complete function */
+		/* TODO: FenetreNiveau.initView : complete function */
 		initCarte();
 		initActions();
 		initMenu();
@@ -141,36 +166,7 @@ public class FenetreNiveau extends View implements Observer {
 		this.pWindow.setFramerateLimit(30);
 		while (this.pWindow.isOpen()) {
 			/* Gère les events */
-			for (Event wEvent : this.pWindow.pollEvents()) {
-				if (wEvent.type == Event.Type.CLOSED) {
-					this.pWindow.close();
-				}
-				if (wEvent.type == Event.Type.RESIZED) {
-					redraw();
-				}
-				if (wEvent.type == Event.Type.KEY_RELEASED) {
-					KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
-					if (wSMFLKeyEvent.key.compareTo(Key.UP) == 0) {
-						this.pControler.avancerBot();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.LEFT) == 0) {
-						this.pControler.tournerGauche();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.RIGHT) == 0) {
-						this.pControler.tournerDroite();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.DOWN) == 0) {
-						this.pControler.allumerCase();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.SPACE) == 0) {
-						this.pControler.sauterBot();
-					}
-					redraw();
-				}
-				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
-					if (wMouseEvent.button == Button.LEFT) {
-						View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
-						System.out.println(String.format("Left click on %s", wClicked.getClass()));
-					}
-				}
-			}
+
 		}
 	}
 

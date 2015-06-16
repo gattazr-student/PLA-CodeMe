@@ -6,7 +6,5 @@ public class VMenu extends View {
 
 	@Override
 	public void initView() {
-		// TODO Auto-generated method stub
-
 	}
 }

@@ -3,30 +3,31 @@ package views.action;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import models.action.TournerDroite;
+import models.action.Route;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
-public class VTournerDroite extends VAction {
+public class VRoute extends VAction {
 
-	private TournerDroite pTournerDroite;
+	private Route pRoute;
 
-	public VTournerDroite(TournerDroite aTournerDroite, FloatRect aZone) {
+	public VRoute(Route aRoute, FloatRect aZone) {
 		super(aZone);
-		this.pTournerDroite = aTournerDroite;
-		this.pTournerDroite.addObserver(this);
+		this.pRoute = aRoute;
+		this.pRoute.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pTournerDroite != null && getSprite() != null) {
+		if (this.pRoute != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
-			wStringBuilder.append("res/action/tourner_droit");
+			wStringBuilder.append("res/action/route_");
+			wStringBuilder.append(this.pRoute.getName());
 
-			switch (this.pTournerDroite.getCouleur()) {
+			switch (this.pRoute.getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;
@@ -50,5 +51,4 @@ public class VTournerDroite extends VAction {
 	@Override
 	public void update(String aString, Object aObjet) {
 	}
-
 }

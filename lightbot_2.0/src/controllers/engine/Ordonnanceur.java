@@ -1,4 +1,4 @@
-package controllers;
+package controllers.engine;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -68,7 +68,6 @@ public class Ordonnanceur {
 			if (wIt.hasNext()) {
 				Action wAction = wIt.next();
 				if (wAction instanceof Route) {
-					// TODO : inserer wAction dans la pile
 					aStack.push(((Route) wAction).iterator());
 					return stepOne(aStack, aBot);
 				} else {

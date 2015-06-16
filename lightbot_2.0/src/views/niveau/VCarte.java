@@ -33,6 +33,14 @@ public class VCarte extends View implements Observer {
 	}
 
 	@Override
+	public boolean contains(Vector2f aPosition) {
+		/* Retourne vrai si le click est sur la carte ou les 100 pixels au dessus */
+		Vector2f wOrigin = getOrigin();
+		FloatRect wFloatRect = new FloatRect(wOrigin.x, wOrigin.y - 100, getWidth(), getHeight() + 100);
+		return wFloatRect.contains(aPosition);
+	}
+
+	@Override
 	public void initView() {
 		this.pVBots = new LinkedList<VBot>();
 		for (Bot wBot : this.pBots) {

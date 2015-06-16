@@ -18,6 +18,7 @@ public class VCaseBasique extends VCase {
 		super(aZone);
 		this.pCaseBasique = aCaseBasique;
 		this.pCaseBasique.addObserver(this);
+		setHauteur(aCaseBasique.getHauteur());
 		initView();
 	}
 

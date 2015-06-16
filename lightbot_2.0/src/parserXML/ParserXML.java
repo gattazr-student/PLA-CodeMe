@@ -3,6 +3,7 @@ package parserXML;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,7 +39,7 @@ import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
 
-public class parserXML {
+public class ParserXML {
 
 	public static Niveau creatLevelXML(String fichierXML) {
 
@@ -202,7 +203,7 @@ public class parserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 * 
+					 *
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
@@ -220,7 +221,12 @@ public class parserXML {
 				case 0:
 					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
 							new ArrayList<Action>(), "main");
-					wLevel.addRoute(aMain);
+					List<Bot> aBotList = wLevel.getBots();
+					for (int j = 0; j < aBotList.size(); j++) {
+						(aBotList.get(j)).setRouteMain(aMain);
+						wLevel.addBot(aBotList.get(j));
+					}
+
 					break;
 				case 1:
 					final Route aP1 = new Route(Integer.parseInt(coups.getAttribute("p1")),
