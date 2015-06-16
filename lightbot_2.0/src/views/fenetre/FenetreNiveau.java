@@ -121,7 +121,7 @@ public class FenetreNiveau extends View implements Observer {
 
 	@Override
 	public void initView() {
-		/* TODO: complete function */
+		/* TODO: FenetreNiveau.initView : complete function */
 		initCarte();
 		initActions();
 		initMenu();

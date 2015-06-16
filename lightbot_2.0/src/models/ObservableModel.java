@@ -22,6 +22,7 @@ public class ObservableModel implements Observable {
 	@Override
 	public void notifyObserver(String aString, Object aObjet) {
 		/* TODO: QUICK FIX TRES MAUVAIS */
+		/* Real Fix : Ne pas remplacer les objets VBOts lors VCarte.update() */
 		try {
 			for (Observer wObs : this.pObservers) {
 				wObs.update(aString, aObjet);

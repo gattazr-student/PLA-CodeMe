@@ -49,8 +49,6 @@ public class VDivise extends VAction {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

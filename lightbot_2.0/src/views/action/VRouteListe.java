@@ -48,7 +48,5 @@ public class VRouteListe extends View implements Observer {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
-
 	}
 }

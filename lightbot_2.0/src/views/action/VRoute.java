@@ -50,7 +50,5 @@ public class VRoute extends VAction {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
-
 	}
 }

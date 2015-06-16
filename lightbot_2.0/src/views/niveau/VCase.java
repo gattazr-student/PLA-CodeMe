@@ -77,17 +77,8 @@ public abstract class VCase extends View implements Observer {
 	@Override
 	public boolean contains(Vector2f aPosition) {
 		/* Récupère la hauteur */
-		int wHauteur = getHauteur();
-		Vector2f wOrigin = getOrigin();
-		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
-		for (int wI = 0; wI < wHauteur; wI++) {
-			wOrigin = Vector2f.add(wOrigin, wW);
-		}
-		if (new FloatRect(wOrigin.x, wOrigin.y, VCase.LARGEUR, VCase.HAUTEUR).contains(aPosition)) {
-			/* TODO: Dead zones */
-			return true;
-		}
-		return false;
+		/* On a déja vérifié la hauteur et les zones mortes */
+		return true;
 	}
 
 	@Override

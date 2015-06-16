@@ -72,7 +72,7 @@ public class Carte extends ObservableModel {
 	 */
 	public Case getCase(int aX, int aY) {
 		if (!positionValid(aX, aY)) {
-			/* TODO throw which exception ? */
+			/* TODO Carte.getCase : throw which exception ? */
 		}
 		Cellule wCell = this.pCellules[aY][aX];
 		if (wCell != null) {
@@ -91,7 +91,7 @@ public class Carte extends ObservableModel {
 	 */
 	public Case getCase(Position aPosition) {
 		if (aPosition == null) {
-			/* TODO throw which exception ? */
+			/* TODO Carte.getCase : throw which exception ? */
 		}
 		return getCase(aPosition.getX(), aPosition.getY());
 	}
@@ -114,7 +114,7 @@ public class Carte extends ObservableModel {
 	 */
 	public Cellule getCellule(Position aPosition) {
 		if (!positionValid(aPosition)) {
-			/* TODO throw which exception ? */
+			/* TODO Cellule.getCellule : throw which exception ? */
 		}
 		return this.pCellules[aPosition.getY()][aPosition.getX()];
 	}

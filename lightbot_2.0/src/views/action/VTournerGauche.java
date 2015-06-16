@@ -49,8 +49,6 @@ public class VTournerGauche extends VAction {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

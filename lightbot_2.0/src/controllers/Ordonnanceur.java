@@ -67,11 +67,9 @@ public class Ordonnanceur {
 			if (wIt.hasNext()) {
 				Action wAction = wIt.next();
 				if (wAction instanceof Route) {
-					// TODO : inserer wAction dans la pile
 					aStack.push(((Route) wAction).iterator());
 					return stepOne(aStack, aBot);
 				} else {
-					// TODO : effectuer l'action sur le bot
 					if (wAction.valid(aBot, this.pNiveau.getCarte())) {
 						wAction.apply(aBot, this.pNiveau.getCarte());
 						return true;
