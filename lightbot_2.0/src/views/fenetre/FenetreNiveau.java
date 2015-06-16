@@ -200,7 +200,7 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 
-	private void initRoutes() {
+	public void initRoutes() {
 		VRouteListe wVRouteMain = new VRouteListe(this.pRouteMain, new FloatRect(0, 0, 4 * VRoute.LARGEUR,
 				3 * VRoute.HAUTEUR));
 		this.pVRoutesList.clear();
