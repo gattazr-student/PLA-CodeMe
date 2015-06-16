@@ -112,7 +112,20 @@ public class FenetreNiveau extends View implements Observer {
 				Vector2f wPosition = new Vector2f(wMouseEvent.position);
 				if (wMouseEvent.button == Button.LEFT) {
 					View wView = isClickedOn(wPosition);
-					if (wView instanceof VRouteListe) {
+					if (wView instanceof VBouton) {
+						String wName = ((VBouton) wView).getName();
+						switch (wName) {
+						case "reset":
+							this.pControler.resetLevel();
+							break;
+						case "back":
+							/* TODO: back to Menu */
+							break;
+						case "play":
+							this.pControler.startRunning();
+							break;
+						}
+					} else if (wView instanceof VRouteListe) {
 						/* Change la route courante */
 						this.pControler.setRouteCourant(((VRouteListe) wView).getRoute());
 					} else if (wView instanceof VAction) {
@@ -170,11 +183,15 @@ public class FenetreNiveau extends View implements Observer {
 	}
 
 	private void initMenu() {
-		VBouton wButton_BackToMenu = new VBouton(new FloatRect(0, 0, 59, 59), "res/menu/Back_To_Menu.png");
+		float wY = (this.pPanelMenu.getHeight() - 54) / 2;
+		float wX = (this.pPanelMenu.getWidth() - 154 - 59) / 2;
+		VBouton wButton_BackToMenu = new VBouton(new FloatRect(wX, wY, 54, 53), "back",
+				"res/menu/Back_To_Menu.png");
 		this.pPanelMenu.addView(wButton_BackToMenu);
-		VBouton wButton_Play = new VBouton(new FloatRect(28, 0, 59, 59), "res/menu/marche.png");
+		VBouton wButton_Play = new VBouton(new FloatRect(wX + 56, wY, 96, 54), "play", "res/menu/marche.png");
 		this.pPanelMenu.addView(wButton_Play);
-		VBouton wButton_Reset = new VBouton(new FloatRect(77, 0, 59, 59), "res/menu/refresh.png");
+		VBouton wButton_Reset = new VBouton(new FloatRect(wX + 154, wY, 59, 54), "reset",
+				"res/menu/refresh.png");
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 

@@ -113,7 +113,7 @@ public class ControlerNiveau {
 			/* Exécution de l'ordonanceur */
 			if (this.pOrdonnanceur != null) {
 				wI++;
-				if (wI == 100000) {
+				if (wI == 10000) {
 					try {
 						if (!this.pOrdonnanceur.step()) {
 							this.pOrdonnanceur = null;
@@ -121,6 +121,7 @@ public class ControlerNiveau {
 					} catch (Exception aException) {
 						/* TODO: ControllerNiveau.run : gérer exception provenant de l'ordonanceur */
 					}
+					this.pVNiveau.redraw();
 					wI = 0;
 				}
 			}
