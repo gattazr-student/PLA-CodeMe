@@ -16,7 +16,7 @@ import models.niveau.Niveau;
 import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
-import controllers.Ordonnanceur;
+import controllers.engine.Ordonnanceur;
 
 public class MyFirstLevel {
 
@@ -128,7 +128,6 @@ public class MyFirstLevel {
 		/* Démarrage du niveau */
 		wViewNiveau.run();
 		System.out.println("Goodbye World!");
-
 	}
 
 }

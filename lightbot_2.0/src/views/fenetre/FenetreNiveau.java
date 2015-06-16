@@ -11,7 +11,6 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
-import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.Mouse.Button;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.KeyEvent;
@@ -61,6 +60,30 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelCarte.addView(wImage_Fond);
 
 		initView();
+	}
+
+	public void handleEvents() {
+		for (Event wEvent : this.pWindow.pollEvents()) {
+			if (wEvent.type == Event.Type.CLOSED) {
+				this.pWindow.close();
+				System.exit(0);
+			}
+			if (wEvent.type == Event.Type.RESIZED) {
+				redraw();
+			}
+			if (wEvent.type == Event.Type.KEY_RELEASED) {
+				KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
+				this.pControler.keyboardAction(wSMFLKeyEvent);
+				redraw();
+			}
+			if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+				MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
+				if (wMouseEvent.button == Button.LEFT) {
+					View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
+					System.out.println(String.format("Left click on %s", wClicked.getClass()));
+				}
+			}
+		}
 	}
 
 	/**
@@ -146,36 +169,7 @@ public class FenetreNiveau extends View implements Observer {
 		this.pWindow.setFramerateLimit(30);
 		while (this.pWindow.isOpen()) {
 			/* Gère les events */
-			for (Event wEvent : this.pWindow.pollEvents()) {
-				if (wEvent.type == Event.Type.CLOSED) {
-					this.pWindow.close();
-				}
-				if (wEvent.type == Event.Type.RESIZED) {
-					redraw();
-				}
-				if (wEvent.type == Event.Type.KEY_RELEASED) {
-					KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
-					if (wSMFLKeyEvent.key.compareTo(Key.UP) == 0) {
-						this.pControler.avancerBot();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.LEFT) == 0) {
-						this.pControler.tournerGauche();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.RIGHT) == 0) {
-						this.pControler.tournerDroite();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.DOWN) == 0) {
-						this.pControler.allumerCase();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.SPACE) == 0) {
-						this.pControler.sauterBot();
-					}
-					redraw();
-				}
-				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
-					if (wMouseEvent.button == Button.LEFT) {
-						View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
-						System.out.println(String.format("Left click on %s", wClicked.getClass()));
-					}
-				}
-			}
+
 		}
 	}
 

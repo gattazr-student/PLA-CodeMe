@@ -37,7 +37,7 @@ import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
 
-public class parserXML {
+public class ParserXML {
 
 	public static Niveau creatLevelXML(String fichierXML) {
 

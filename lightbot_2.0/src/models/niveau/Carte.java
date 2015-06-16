@@ -72,7 +72,7 @@ public class Carte extends ObservableModel {
 	 */
 	public Case getCase(int aX, int aY) {
 		if (!positionValid(aX, aY)) {
-			/* TODO Carte.getCase : throw which exception ? */
+			return null;
 		}
 		Cellule wCell = this.pCellules[aY][aX];
 		if (wCell != null) {
@@ -87,11 +87,11 @@ public class Carte extends ObservableModel {
 	 *
 	 * @param aPosition
 	 *            Position à utiliser
-	 * @return une Case. Null si il n'y a pas de case à la position donnée.
+	 * @return une Case. Null si il n'y a pas de case à la position donnée où la position n'existe pas.
 	 */
 	public Case getCase(Position aPosition) {
 		if (aPosition == null) {
-			/* TODO Carte.getCase : throw which exception ? */
+			return null;
 		}
 		return getCase(aPosition.getX(), aPosition.getY());
 	}
@@ -101,7 +101,7 @@ public class Carte extends ObservableModel {
 	 *
 	 * @return Tableau à deux dimensions de Cellules
 	 */
-	public Cellule[][] getCases() {
+	public Cellule[][] getCellules() {
 		return this.pCellules;
 	}
 
