@@ -18,6 +18,7 @@ import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
+import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 import models.bot.Bot;
@@ -120,25 +121,25 @@ public class parserXML {
 
 					if ((orient.getAttribute("init")).equals("EST")) {
 						final Orientation aOrientBot = Orientation.EST;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("SUD")) {
 						final Orientation aOrientBot = Orientation.SUD;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("OUEST")) {
 						final Orientation aOrientBot = Orientation.OUEST;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("NORD")) {
 						final Orientation aOrientBot = Orientation.NORD;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
@@ -201,7 +202,7 @@ public class parserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 *
+					 * 
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);

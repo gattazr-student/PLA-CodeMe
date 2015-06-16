@@ -21,7 +21,7 @@ public class VAttendre extends VAction {
 	@Override
 	public void initView() {
 		VBouton wButton_Attendre = new VBouton(new FloatRect(0, 0, getWidth(), getHeight()),
-				"res/action/attendre.png");
+				"res/action/wait.png");
 		addView(wButton_Attendre);
 	}
 

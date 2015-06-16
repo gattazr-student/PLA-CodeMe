@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import models.action.Action;
 import models.action.Route;
+import models.basic.Etat;
 import models.bot.Bot;
 import models.niveau.Niveau;
 
@@ -72,9 +73,19 @@ public class Ordonnanceur {
 					return stepOne(aStack, aBot);
 				} else {
 					// TODO : effectuer l'action sur le bot
-					if (wAction.valid(aBot, this.pNiveau.getCarte())) {
-						wAction.apply(aBot, this.pNiveau.getCarte());
-						return true;
+					if (aBot.getEtat() == Etat.ACTIF && wAction.valid(aBot, this.pNiveau.getCarte())) {
+						if (wAction.getName() != "break") {
+							wAction.apply(aBot, this.pNiveau.getCarte());
+							return true;
+						} else {
+							aStack.pop();
+							return true;
+						}
+					}
+					if (aBot.getEtat() == Etat.PASSIF) {
+						// inserer wAction dans la pile et passer au Bot suivant
+						// aStack.push(((Route) wAction).iterator());
+						return false;
 					} else {
 						/* TODO: throw Exception pour gérer les erreurs d'éxecutions */
 						return true;

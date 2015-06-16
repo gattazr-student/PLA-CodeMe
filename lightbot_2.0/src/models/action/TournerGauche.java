@@ -10,6 +10,8 @@ import models.niveau.Carte;
  */
 public class TournerGauche extends Action {
 
+	final static String pNameAction = "gauche";
+
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
 		if (aBot.getOrientation() == Orientation.EST) {
