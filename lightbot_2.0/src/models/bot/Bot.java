@@ -4,6 +4,7 @@ import models.ObservableModel;
 import models.action.Action;
 import models.action.Route;
 import models.basic.Couleur;
+import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 
@@ -36,6 +37,11 @@ public class Bot extends ObservableModel {
 	private String pName;
 
 	/**
+	 * Etat du Bot (Actif ou Passif)
+	 */
+	private Etat pEtat;
+
+	/**
 	 * Constructeur par défault. Placé en 0,0, Orienté vers Nord et de Couleur Blanche
 	 */
 
@@ -44,6 +50,7 @@ public class Bot extends ObservableModel {
 		this.pPosition = new Position();
 		this.pOrientation = Orientation.NORD;
 		this.pRouteMain = new Route();
+		this.pEtat = Etat.ACTIF;
 	}
 
 	/**
@@ -56,11 +63,12 @@ public class Bot extends ObservableModel {
 	 * @param aCouleur
 	 *            Couleur du bot
 	 */
-	public Bot(Position aPosition, Orientation aOrientation, Couleur aCouleur) {
+	public Bot(Position aPosition, Orientation aOrientation, Couleur aCouleur, Etat aEtat) {
 		this.pPosition = aPosition;
 		this.pOrientation = aOrientation;
 		this.pCouleur = aCouleur;
 		this.pRouteMain = new Route();
+		this.pEtat = aEtat;
 	}
 
 	/**
@@ -77,6 +85,15 @@ public class Bot extends ObservableModel {
 	 */
 	public Couleur getCouleur() {
 		return this.pCouleur;
+	}
+
+	/**
+	 * retoune l'etat du Bot
+	 * 
+	 * @return Etat du Bot
+	 */
+	public Etat getEtat() {
+		return this.pEtat;
 	}
 
 	/**
@@ -139,6 +156,13 @@ public class Bot extends ObservableModel {
 	}
 
 	/**
+	 * Modifie l'etat du Bot
+	 */
+	public void setEtat(Etat aEtat) {
+		this.pEtat = aEtat;
+	}
+
+	/**
 	 * Modifie le nom du Bot
 	 */
 	public void setName(String aName) {
@@ -169,7 +193,7 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * Définit la route main du Bot
-	 * 
+	 *
 	 * @param aRouteMain
 	 *            nouvelle route main du Bot
 	 */

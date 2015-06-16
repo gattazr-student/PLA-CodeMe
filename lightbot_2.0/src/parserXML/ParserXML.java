@@ -3,6 +3,7 @@ package parserXML;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,6 +19,7 @@ import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
+import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 import models.bot.Bot;
@@ -116,25 +118,25 @@ public class ParserXML {
 
 					if ((orient.getAttribute("init")).equals("EST")) {
 						final Orientation aOrientBot = Orientation.EST;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("SUD")) {
 						final Orientation aOrientBot = Orientation.SUD;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("OUEST")) {
 						final Orientation aOrientBot = Orientation.OUEST;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("NORD")) {
 						final Orientation aOrientBot = Orientation.NORD;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
@@ -215,7 +217,12 @@ public class ParserXML {
 				case 0:
 					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
 							new ArrayList<Action>(), "main");
-					wLevel.addRoute(aMain);
+					List<Bot> aBotList = wLevel.getBots();
+					for (int j = 0; j < aBotList.size(); j++) {
+						(aBotList.get(j)).setRouteMain(aMain);
+						wLevel.addBot(aBotList.get(j));
+					}
+
 					break;
 				case 1:
 					final Route aP1 = new Route(Integer.parseInt(coups.getAttribute("p1")),

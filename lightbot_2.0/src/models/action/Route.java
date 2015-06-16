@@ -12,6 +12,8 @@ import models.niveau.Carte;
  */
 public class Route extends Action {
 
+	final static String pNameAction = "route";
+
 	private ArrayList<Action> action;
 	private int taille;
 	private String pName;
