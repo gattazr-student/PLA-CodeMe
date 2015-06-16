@@ -24,7 +24,6 @@ public class ObservableModel implements Observable {
 		/* TODO: QUICK FIX TRES MAUVAIS */
 		/* Real Fix : Ne pas remplacer les objets VBOts lors VCarte.update() */
 		try {
-			System.out.println(aString);
 			for (Observer wObs : this.pObservers) {
 				wObs.update(aString, aObjet);
 			}
