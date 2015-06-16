@@ -126,7 +126,7 @@ public class MyFirstLevel {
 		System.out.println("Fin ordonanceur");
 
 		/* Démarrage du niveau */
-		wViewNiveau.run();
+		wControlerNiveau.run();
 		System.out.println("Goodbye World!");
 	}
 

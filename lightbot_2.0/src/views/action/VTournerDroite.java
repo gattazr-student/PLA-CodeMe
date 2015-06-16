@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VTournerDroite extends VAction {
 
-	private TournerDroite pTournerDroite;
-
 	public VTournerDroite(TournerDroite aTournerDroite, FloatRect aZone) {
-		super(aZone);
-		this.pTournerDroite = aTournerDroite;
-		this.pTournerDroite.addObserver(this);
+		super(aTournerDroite, aZone);
+		aTournerDroite.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pTournerDroite != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/tourner_droit");
 
-			switch (this.pTournerDroite.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

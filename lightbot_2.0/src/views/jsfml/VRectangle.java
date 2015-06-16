@@ -20,6 +20,11 @@ public class VRectangle extends View {
 	}
 
 	@Override
+	public boolean contains(Vector2f aPosition) {
+		return false;
+	}
+
+	@Override
 	public void draw(RenderTarget aTarget, RenderStates aState) {
 		/* Dessine un rectangle à la position */
 		if (this.pRectangle == null) {

@@ -3,9 +3,11 @@ package controllers;
 import models.action.Action;
 import models.action.Allumer;
 import models.action.Avancer;
+import models.action.Route;
 import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
+import models.bot.Bot;
 import models.niveau.Niveau;
 
 import org.jsfml.window.Keyboard.Key;
@@ -20,10 +22,26 @@ public class ControlerNiveau {
 	private FenetreNiveau pVNiveau;
 	private Ordonnanceur pOrdonnanceur;
 
+	private Bot pBotCourant;
+	private Route pRouteCourant;
+
 	public ControlerNiveau(Niveau aNiveau, FenetreNiveau aVNiveau) {
 		this.pNiveau = aNiveau;
 		this.pVNiveau = aVNiveau;
 		this.pOrdonnanceur = null;
+		this.pBotCourant = this.pNiveau.getBots().get(0);
+		this.pRouteCourant = this.pBotCourant.getRouteMain();
+	}
+
+	/**
+	 * Ajout l'action passé en paramètre à la route courante
+	 *
+	 * @param aAction
+	 *            Action à ajouter dans la Route
+	 */
+	public void addToRouteCourante(Action aAction) {
+		this.pRouteCourant.addAction(aAction);
+		this.pVNiveau.redraw();
 	}
 
 	/**
@@ -56,9 +74,25 @@ public class ControlerNiveau {
 		if (wAction != null) {
 			if (wAction.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
 				wAction.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
+				this.pVNiveau.redraw();
 			} else {
 				System.err.println("Action impossible");
 			}
+		}
+	}
+
+	/**
+	 * Retire l'Action à la position aPosition de la Route donnée
+	 *
+	 * @param aRoute
+	 *            Route dans laquelle retirer l'Action
+	 * @param aPosition
+	 *            Position de l'Action à retirer dans la Route
+	 */
+	public void removeFromRoute(Route aRoute, int aPosition) {
+		if (aPosition < aRoute.size()) {
+			aRoute.removeAction(aPosition);
+			this.pVNiveau.redraw();
 		}
 	}
 
@@ -91,6 +125,10 @@ public class ControlerNiveau {
 				}
 			}
 		}
+	}
+
+	public void setRouteCourant(Route aRouteCourant) {
+		this.pRouteCourant = aRouteCourant;
 	}
 
 	/**

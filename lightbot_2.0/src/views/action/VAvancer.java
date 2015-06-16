@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VAvancer extends VAction {
 
-	private Avancer pAvancer;
-
 	public VAvancer(Avancer aAvancer, FloatRect aZone) {
-		super(aZone);
-		this.pAvancer = aAvancer;
-		this.pAvancer.addObserver(this);
+		super(aAvancer, aZone);
+		aAvancer.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pAvancer != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/avancer");
 
-			switch (this.pAvancer.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

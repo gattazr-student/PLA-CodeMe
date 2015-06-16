@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VDivise extends VAction {
 
-	private Divise pDivise;
-
 	public VDivise(Divise aDivise, FloatRect aZone) {
-		super(aZone);
-		this.pDivise = aDivise;
-		this.pDivise.addObserver(this);
+		super(aDivise, aZone);
+		aDivise.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pDivise != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/diviser");
 
-			switch (this.pDivise.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

@@ -117,7 +117,7 @@ public class Bot extends ObservableModel {
 	 * remove une action
 	 */
 	public void removeAction(int numberAction) {
-		this.pRouteMain.remove_Action(numberAction);
+		this.pRouteMain.removeAction(numberAction);
 	}
 
 	/**

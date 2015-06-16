@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VAttendre extends VAction {
 
-	private Attendre pAttendre;
-
 	public VAttendre(Attendre aAttendre, FloatRect aZone) {
-		super(aZone);
-		this.pAttendre = aAttendre;
-		this.pAttendre.addObserver(this);
+		super(aAttendre, aZone);
+		aAttendre.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pAttendre != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/wait");
 
-			switch (this.pAttendre.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

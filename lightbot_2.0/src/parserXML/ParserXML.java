@@ -33,10 +33,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import views.fenetre.Fenetre;
-import views.fenetre.FenetreNiveau;
-import controllers.ControlerNiveau;
-
 public class ParserXML {
 
 	public static Niveau creatLevelXML(String fichierXML) {
@@ -201,7 +197,7 @@ public class ParserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 *
+					 * 
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
@@ -247,25 +243,6 @@ public class ParserXML {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	public static void main(final String[] args) {
-
-		/* Création du model */
-		Niveau wModelNiveau = creatLevelXML("res/xml/Conditions/level6.xml");
-		/* Création de la vue */
-		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
-		/* Création du contrôleur */
-		ControlerNiveau wControlerNiveau = new ControlerNiveau(wModelNiveau, wViewNiveau);
-
-		/* Rajout du controlleur dans la vue */
-		wViewNiveau.setController(wControlerNiveau);
-		/* Ajout de l'observer */
-		wModelNiveau.addObserver(wViewNiveau);
-
-		/* Démarrage du niveau */
-		wViewNiveau.run();
-
 	}
 
 }

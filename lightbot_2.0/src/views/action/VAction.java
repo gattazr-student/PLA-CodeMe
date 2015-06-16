@@ -52,10 +52,12 @@ public abstract class VAction extends View implements Observer {
 		return null;
 	}
 
+	private Action pAction;
 	private Sprite pSprite;
 
-	public VAction(FloatRect aZone) {
+	public VAction(Action aAction, FloatRect aZone) {
 		setZone(aZone);
+		this.pAction = aAction;
 	}
 
 	@Override
@@ -69,6 +71,10 @@ public abstract class VAction extends View implements Observer {
 		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
 				aState.transform), aState.texture, aState.shader);
 		this.pSprite.draw(aTarget, wNewState);
+	}
+
+	public Action getAction() {
+		return this.pAction;
 	}
 
 	public Sprite getSprite() {

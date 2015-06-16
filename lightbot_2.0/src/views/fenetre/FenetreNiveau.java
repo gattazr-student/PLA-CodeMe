@@ -1,6 +1,8 @@
 package views.fenetre;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import models.action.Action;
 import models.action.Route;
@@ -40,6 +42,8 @@ public class FenetreNiveau extends View implements Observer {
 	private Panel pPanelActions;
 	private Panel pPanelMenu;
 
+	private List<VRouteListe> pVRoutesList;
+
 	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
 		this.pWindow = aWindow;
 		this.pNiveau = aNiveau;
@@ -63,7 +67,31 @@ public class FenetreNiveau extends View implements Observer {
 		VImage wImage_Fond = new VImage(new FloatRect(0, 0, 59, 59), "res/menu/ciel.jpeg");
 		this.pPanelCarte.addView(wImage_Fond);
 
+		this.pVRoutesList = new LinkedList<VRouteListe>();
+
 		initView();
+	}
+
+	private int findPosition(Vector2f aPosition) {
+		int wDeplX = (int) aPosition.x / VRoute.LARGEUR;
+		int wDplY = (int) aPosition.y / VRoute.HAUTEUR;
+		return wDplY * 4 + wDeplX;
+	}
+
+	/**
+	 * Retrouve la VRouteListe sur laquelle un click a été effectué
+	 *
+	 * @param wPosition
+	 * @return
+	 */
+	private VRouteListe findVRoute(Vector2f aPosition) {
+		for (VRouteListe wVRouteListe : this.pVRoutesList) {
+			if (wVRouteListe.contains(aPosition)) {
+				return wVRouteListe;
+			}
+		}
+		/* TODO: Récupérer la route courante sinon -> main */
+		return null;
 	}
 
 	public void handleEvents() {
@@ -78,13 +106,28 @@ public class FenetreNiveau extends View implements Observer {
 			if (wEvent.type == Event.Type.KEY_RELEASED) {
 				KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
 				this.pControler.keyboardAction(wSMFLKeyEvent);
-				redraw();
 			}
 			if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 				MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
+				Vector2f wPosition = new Vector2f(wMouseEvent.position);
 				if (wMouseEvent.button == Button.LEFT) {
-					View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
-					System.out.println(String.format("Left click on %s", wClicked.getClass()));
+					View wView = isClickedOn(wPosition);
+					if (wView instanceof VRouteListe) {
+						/* Change la route courante */
+						this.pControler.setRouteCourant(((VRouteListe) wView).getRoute());
+					} else if (wView instanceof VAction) {
+						if (this.pPanelActions.contains(wPosition)) {
+							/* Ajoute une action dans la courante */
+							this.pControler.addToRouteCourante(((VAction) wView).getAction());
+						} else if (this.pPanelRoutes.contains(wPosition)) {
+							/* Retire l'action dans bonne liste */
+							wPosition = Vector2f.sub(wPosition, this.pPanelRoutes.getOrigin());
+							VRouteListe wVRoute = findVRoute(wPosition);
+							wPosition = Vector2f.sub(wPosition, wVRoute.getOrigin());
+							int wIndice = findPosition(wPosition);
+							this.pControler.removeFromRoute(wVRoute.getRoute(), wIndice);
+						}
+					}
 				}
 			}
 		}
@@ -131,22 +174,22 @@ public class FenetreNiveau extends View implements Observer {
 
 	private void initRoutes() {
 		/* TODO: Récupérer le main du robot courant */
-		System.out.println("Init routes");
 		VRouteListe wVRouteMain = new VRouteListe(this.pNiveau.getBots().get(0).getRouteMain(),
 				new FloatRect(0, 0, 4 * VRoute.LARGEUR, 3 * VRoute.HAUTEUR));
+		this.pVRoutesList.add(wVRouteMain);
 		this.pPanelRoutes.addView(wVRouteMain);
-		int depl_cadre = 0;
+		int depl_cadre = 3 * VRoute.HAUTEUR + 10;
 		for (Route wRoute : this.pNiveau.getRoutes()) {
-			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 185 + depl_cadre,
-					4 * VRoute.LARGEUR, 2 * VRoute.HAUTEUR));
+			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, depl_cadre, 4 * VRoute.LARGEUR,
+					2 * VRoute.HAUTEUR));
+			this.pVRoutesList.add(wVRoute);
 			this.pPanelRoutes.addView(wVRoute);
-			depl_cadre = depl_cadre + 125;
+			depl_cadre = depl_cadre + 2 * VRoute.HAUTEUR + 10;
 		}
 	}
 
 	@Override
 	public void initView() {
-		/* TODO: FenetreNiveau.initView : complete function */
 		initCarte();
 		initActions();
 		initMenu();
@@ -157,17 +200,6 @@ public class FenetreNiveau extends View implements Observer {
 		this.pWindow.clear();
 		draw(this.pWindow, new RenderStates(new Transform()));
 		this.pWindow.display();
-	}
-
-	public void run() {
-		redraw();
-
-		/* Limite le framerate */
-		this.pWindow.setFramerateLimit(30);
-		while (this.pWindow.isOpen()) {
-			/* Gère les events */
-
-		}
 	}
 
 	public void setController(ControlerNiveau aControlerNiveau) {

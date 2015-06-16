@@ -10,24 +10,21 @@ import org.jsfml.graphics.Texture;
 
 public class VRoute extends VAction {
 
-	private Route pRoute;
-
 	public VRoute(Route aRoute, FloatRect aZone) {
-		super(aZone);
-		this.pRoute = aRoute;
-		this.pRoute.addObserver(this);
+		super(aRoute, aZone);
+		aRoute.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pRoute != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/route_");
-			wStringBuilder.append(this.pRoute.getName());
+			wStringBuilder.append(((Route) getAction()).getName());
 
-			switch (this.pRoute.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;
