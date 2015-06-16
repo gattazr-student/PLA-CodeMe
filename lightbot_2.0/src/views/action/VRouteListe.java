@@ -11,8 +11,11 @@ import org.jsfml.graphics.FloatRect;
 
 import views.View;
 import views.jsfml.VRectangle;
+import views.jsfml.VTexte;
 
 public class VRouteListe extends View implements Observer {
+
+	public static final int OFFSET = 35;
 
 	private Route pRoute;
 
@@ -32,9 +35,14 @@ public class VRouteListe extends View implements Observer {
 		VRectangle wContainer = new VRectangle(new FloatRect(0, 0, getWidth(), getHeight()));
 		wContainer.setFillColor(Color.YELLOW);
 		addView(wContainer);
+
+		VTexte wTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pRoute.getName(), 25);
+		wTexte.setColor(Color.BLACK);
+		addView(wTexte);
+
 		int wI = 0;
 		int wX = 0;
-		int wY = 0;
+		int wY = VRouteListe.OFFSET;
 		ArrayList<Action> wActions = this.pRoute.getAction();
 		for (Action wAction : wActions) {
 			if (wI == 4) {
