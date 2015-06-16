@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 import models.action.Action;
 import models.action.Route;
+import mvc.Observer;
 
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 
+import views.View;
 import views.jsfml.VRectangle;
 
-public class VRouteListe extends VAction {
+public class VRouteListe extends View implements Observer {
 
 	private Route pRoute;
 
@@ -34,12 +36,12 @@ public class VRouteListe extends VAction {
 			if (wI == 4) {
 				wI = 0;
 				wX = 0;
-				wY = wY + VRoute.HAUTEUR;
+				wY = wY + VAction.HAUTEUR;
 			}
-			VAction wVAction = VAction.makeVAction(wAction, new FloatRect(wX, wY, VRoute.LARGEUR,
-					VRoute.HAUTEUR));
+			VAction wVAction = VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
+					VAction.HAUTEUR));
 			addView(wVAction);
-			wX = wX + VRoute.LARGEUR;
+			wX = wX + VAction.LARGEUR;
 			wI++;
 		}
 	}

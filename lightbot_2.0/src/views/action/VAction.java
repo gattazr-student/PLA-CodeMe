@@ -12,10 +12,17 @@ import models.action.TournerGauche;
 import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.RenderStates;
+import org.jsfml.graphics.RenderTarget;
+import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Transform;
 
 import views.View;
 
 public abstract class VAction extends View implements Observer {
+
+	public static final int HAUTEUR = 59;
+	public static final int LARGEUR = 59;
 
 	public static VAction makeVAction(Action aAction, FloatRect aZone) {
 		if (aAction instanceof Allumer) {
@@ -31,7 +38,7 @@ public abstract class VAction extends View implements Observer {
 			return new VDivise((Divise) aAction, aZone);
 		}
 		if (aAction instanceof Route) {
-			return new VRouteBouton((Route) aAction, aZone);
+			return new VRoute((Route) aAction, aZone);
 		}
 		if (aAction instanceof Sauter) {
 			return new VSauter((Sauter) aAction, aZone);
@@ -45,7 +52,39 @@ public abstract class VAction extends View implements Observer {
 		return null;
 	}
 
+	private Sprite pSprite;
+
 	public VAction(FloatRect aZone) {
 		setZone(aZone);
 	}
+
+	@Override
+	public void draw(RenderTarget aTarget, RenderStates aState) {
+		if (this.pSprite == null) {
+			initView();
+			this.pSprite = getSprite();
+		}
+		/* Calcul de la position asbolue */
+		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
+		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
+				aState.transform), aState.texture, aState.shader);
+		this.pSprite.draw(aTarget, wNewState);
+	}
+
+	public Sprite getSprite() {
+		return this.pSprite;
+	}
+
+	@Override
+	public void initView() {
+		this.pSprite = new Sprite();
+		setTexture();
+	}
+
+	public void setSprite(Sprite aSprite) {
+		this.pSprite = aSprite;
+	}
+
+	public abstract void setTexture();
+
 }
