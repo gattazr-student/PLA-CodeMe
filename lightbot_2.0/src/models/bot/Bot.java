@@ -89,7 +89,7 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * retoune l'etat du Bot
-	 * 
+	 *
 	 * @return Etat du Bot
 	 */
 	public Etat getEtat() {
