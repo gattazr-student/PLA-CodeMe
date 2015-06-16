@@ -199,7 +199,7 @@ public class ParserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 * 
+					 *
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
@@ -220,7 +220,6 @@ public class ParserXML {
 					List<Bot> aBotList = wLevel.getBots();
 					for (int j = 0; j < aBotList.size(); j++) {
 						(aBotList.get(j)).setRouteMain(aMain);
-						wLevel.addBot(aBotList.get(j));
 					}
 
 					break;
