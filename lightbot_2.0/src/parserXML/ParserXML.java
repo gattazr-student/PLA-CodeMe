@@ -199,7 +199,7 @@ public class ParserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 *
+					 * 
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
@@ -215,11 +215,12 @@ public class ParserXML {
 			for (int i = 0; i < aNbRoute; i++) {
 				switch (i) {
 				case 0:
-					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
-							new ArrayList<Action>(), "main");
+					Route wMain;
+					int wLongeur = Integer.parseInt(coups.getAttribute("main"));
 					List<Bot> aBotList = wLevel.getBots();
 					for (int j = 0; j < aBotList.size(); j++) {
-						(aBotList.get(j)).setRouteMain(aMain);
+						wMain = new Route(wLongeur, new ArrayList<Action>(), "main");
+						(aBotList.get(j)).setRouteMain(wMain);
 					}
 
 					break;
