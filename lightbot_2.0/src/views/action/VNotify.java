@@ -10,23 +10,20 @@ import org.jsfml.graphics.Texture;
 
 public class VNotify extends VAction {
 
-	private Notify pNotify;
-
 	public VNotify(Notify aNotify, FloatRect aZone) {
-		super(aZone);
-		this.pNotify = aNotify;
-		this.pNotify.addObserver(this);
+		super(aNotify, aZone);
+		aNotify.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pNotify != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/notify");
 
-			switch (this.pNotify.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;

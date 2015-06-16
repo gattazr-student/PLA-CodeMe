@@ -10,23 +10,21 @@ import org.jsfml.graphics.Texture;
 
 public class VBreak extends VAction {
 
-	private Break pBreak;
-
 	public VBreak(Break aBreak, FloatRect aZone) {
-		super(aZone);
-		this.pBreak = aBreak;
-		this.pBreak.addObserver(this);
+
+		super(aBreak, aZone);
+		aBreak.addObserver(this);
 		initView();
 	}
 
 	@Override
 	public void setTexture() {
-		if (this.pBreak != null && getSprite() != null) {
+		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
 			wStringBuilder.append("res/action/break");
 
-			switch (this.pBreak.getCouleur()) {
+			switch (getAction().getCouleur()) {
 			case BLANC:
 				wStringBuilder.append(".png");
 				break;
