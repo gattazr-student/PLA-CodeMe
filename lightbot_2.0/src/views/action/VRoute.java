@@ -1,4 +1,4 @@
-package views.jsfml;
+package views.action;
 
 import models.action.Route;
 import mvc.Observer;

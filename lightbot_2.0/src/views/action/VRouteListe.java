@@ -8,9 +8,7 @@ import models.action.Route;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 
-import views.jsfml.VAction;
 import views.jsfml.VRectangle;
-import views.jsfml.VRoute;
 
 public class VRouteListe extends VAction {
 

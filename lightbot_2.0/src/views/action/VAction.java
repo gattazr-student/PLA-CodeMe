@@ -1,4 +1,4 @@
-package views.jsfml;
+package views.action;
 
 import models.action.Action;
 import models.action.Allumer;
@@ -14,14 +14,6 @@ import mvc.Observer;
 import org.jsfml.graphics.FloatRect;
 
 import views.View;
-import views.action.VAllumer;
-import views.action.VAttendre;
-import views.action.VAvancer;
-import views.action.VDivise;
-import views.action.VRouteBouton;
-import views.action.VSauter;
-import views.action.VTournerDroite;
-import views.action.VTournerGauche;
 
 public abstract class VAction extends View implements Observer {
 

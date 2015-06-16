@@ -4,7 +4,6 @@ import models.action.Route;
 
 import org.jsfml.graphics.FloatRect;
 
-import views.jsfml.VAction;
 import views.jsfml.VBouton;
 
 public class VRouteBouton extends VAction {

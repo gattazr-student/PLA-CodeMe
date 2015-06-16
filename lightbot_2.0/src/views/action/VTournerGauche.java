@@ -4,7 +4,6 @@ import models.action.TournerGauche;
 
 import org.jsfml.graphics.FloatRect;
 
-import views.jsfml.VAction;
 import views.jsfml.VBouton;
 
 public class VTournerGauche extends VAction {

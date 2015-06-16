@@ -18,9 +18,9 @@ import org.jsfml.window.event.KeyEvent;
 import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.action.VRoute;
 import views.action.VRouteListe;
 import views.jsfml.VBouton;
-import views.jsfml.VRoute;
 import views.niveau.VCarte;
 import views.niveau.VCase;
 import controllers.ControlerNiveau;
