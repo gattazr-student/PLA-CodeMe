@@ -171,6 +171,14 @@ public class FenetreNiveau extends View implements Observer {
 					VAction.HAUTEUR)));
 			wX += VAction.LARGEUR;
 		}
+		/* Ajout des boutons pour le changement des couleurs */
+		this.pPanelActions.addView(new VBouton(new FloatRect(0, 0, 40, 40), "couleur_blanc",
+				"res/action/BLANC.bmp"));
+		this.pPanelActions.addView(new VBouton(new FloatRect(40, 0, 40, 40), "couleur_vert",
+				"res/action/VERT.bmp"));
+		this.pPanelActions.addView(new VBouton(new FloatRect(80, 0, 40, 40), "couleur_rouge",
+				"res/action/ROUGE.bmp"));
+
 	}
 
 	/**
