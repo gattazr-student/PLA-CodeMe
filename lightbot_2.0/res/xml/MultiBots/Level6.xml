@@ -13,16 +13,16 @@
 		<action>allumer</action>
 	</actions>
 	<bots>
-    		<bot couleur="bleu">
+    		<bot name="minion1">
         		<position x="0" y="0" />
 			<orientation init="EST" />
     		</bot>
-    		<bot couleur="rouge">
+    		<bot name="minion2">
         		<position x="0" y="2" />
 			<orientation init="EST" />
     		</bot>
 	</bots>
-	<record num="20" />
+	<record coups="20" actions="" />
 	<map>
 		<dimensions x="7" y="3" />
 		<cellules>

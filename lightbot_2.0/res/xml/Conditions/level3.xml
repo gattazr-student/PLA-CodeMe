@@ -11,12 +11,12 @@
 		<action>testSauter</action>
 	</actions>
 	<bots>
-    		<bot couleur="bleu">
+    		<bot name="minion1">
         		<position x="0" y="4" />
         		<orientation init="EST" />
     		</bot>
 	</bots>
-	<record num="10" />
+	<record coups="10" actions="" />
 	<map>
 		<dimensions x="6" y="6" />
 		<cellules>
