@@ -3,6 +3,7 @@ package views.jsfml;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderStates;
@@ -48,9 +49,9 @@ public class VTexte extends View {
 			e.printStackTrace();
 		}
 		Text wTexte = new Text(this.pMessageAfficher, this.wFont, this.pTailleTexte);
-		wTexte.getColor();
-		Vector2f wOrigin = getOrigin();
+		wTexte.setColor(Color.BLUE);
 
+		Vector2f wOrigin = getOrigin();
 		wTexte.setPosition(wOrigin);
 		this.pTexte = wTexte;
 	}
