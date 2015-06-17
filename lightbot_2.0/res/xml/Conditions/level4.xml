@@ -15,7 +15,7 @@
         		<orientation init="EST" />
     		</bot>
 	</bots>
-	<record coups="4" actions="" />
+	<record coups="4" actions="0" />
 	<map>
 		<dimensions x="9" y="1" />
 		<cellules>

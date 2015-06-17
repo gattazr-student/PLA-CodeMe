@@ -22,7 +22,7 @@
 			<orientation init="EST" />
     		</bot>
 	</bots>
-	<record coups="20" actions="" />
+	<record coups="20" actions="0" />
 	<map>
 		<dimensions x="7" y="3" />
 		<cellules>

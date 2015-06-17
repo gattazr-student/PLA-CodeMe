@@ -23,7 +23,7 @@
         		<orientation init="OUEST" />
     		</bot>
 	</bots>
-	<record coups="20" actions="" />
+	<record coups="20" actions="0" />
 	<map>
 		<dimensions  x="15" y="5" />
 
