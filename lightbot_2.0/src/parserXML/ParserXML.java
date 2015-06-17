@@ -168,8 +168,10 @@ public class ParserXML {
 			 * Noeud 4 : Record
 			 */
 			final Element record = (Element) racine.getElementsByTagName("record").item(0);
-			final int aRecord = Integer.parseInt(record.getAttribute("num"));
-			wLevel.setRecord(aRecord);
+			final int aRecordCoups = Integer.parseInt(record.getAttribute("coups"));
+			final int aRecordActions = Integer.parseInt(record.getAttribute("actions"));
+			wLevel.setRecordCoups(aRecordCoups);
+			wLevel.setRecordActions(aRecordActions);
 
 			/*
 			 * Noeud 5 : La map
@@ -224,7 +226,7 @@ public class ParserXML {
 						for (int j = 0; j < nbPos; j++) {
 							wCase.addPosition(new Position(Integer.parseInt(((Element) positionlist.item(j))
 									.getAttribute("x")), Integer.parseInt(((Element) positionlist.item(j))
-											.getAttribute("y"))));
+									.getAttribute("y"))));
 						}
 						aCase = wCase;
 						break;

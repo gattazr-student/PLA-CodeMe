@@ -111,9 +111,12 @@ public class EditeurXML {
 			 * Record
 			 */
 			final Element aRecord = document.createElement("record");
-			System.out.println("Veuillez saisir le record :");
-			String rec = sc.nextLine();
-			aRecord.setAttribute("num", rec);
+			System.out.println("Veuillez saisir le record en nombre de coups:");
+			String coups = sc.nextLine();
+			System.out.println("Veuillez saisir le record en nombre d'actions:");
+			String actions = sc.nextLine();
+			aRecord.setAttribute("coups", coups);
+			aRecord.setAttribute("actions", actions);
 			racine.appendChild(aRecord);
 
 			/**

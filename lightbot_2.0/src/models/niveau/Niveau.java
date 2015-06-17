@@ -28,7 +28,8 @@ public class Niveau extends ObservableModel {
 	/**
 	 * Record du niveau (nombre de coups à battre)
 	 */
-	private int pRecord;
+	private int pRecordCoups;
+	private int pRecordActions;
 
 	/**
 	 * P1,P2....
@@ -119,8 +120,17 @@ public class Niveau extends ObservableModel {
 	 *
 	 * @return record du Niveau
 	 */
-	public int getRecord() {
-		return this.pRecord;
+	public int getRecordActions() {
+		return this.pRecordActions;
+	}
+
+	/**
+	 * Retourne le record du Niveau.
+	 *
+	 * @return record du Niveau
+	 */
+	public int getRecordCoups() {
+		return this.pRecordCoups;
 	}
 
 	/**
@@ -188,8 +198,18 @@ public class Niveau extends ObservableModel {
 	 * @param aRecord
 	 *            Nouveau record à utiliser
 	 */
-	public void setRecord(int aRecord) {
-		this.pRecord = aRecord;
+	public void setRecordActions(int aRecordActions) {
+		this.pRecordActions = aRecordActions;
+	}
+
+	/**
+	 * Définit le record du Niveau
+	 *
+	 * @param aRecord
+	 *            Nouveau record à utiliser
+	 */
+	public void setRecordCoups(int aRecordCoups) {
+		this.pRecordCoups = aRecordCoups;
 	}
 
 }
