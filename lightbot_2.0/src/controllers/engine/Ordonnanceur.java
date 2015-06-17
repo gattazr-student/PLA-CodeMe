@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import models.action.Action;
 import models.action.Break;
+import models.action.Notify;
 import models.action.Route;
 import models.basic.Couleur;
 import models.basic.Etat;
@@ -17,12 +18,14 @@ import exceptions.LightBotException;
 public class Ordonnanceur {
 
 	private int pNbCoups = 0;
+	boolean pNotify;
 
 	List<Stack<Iterator<Action>>> pStacks;
 	private Niveau pNiveau;
 
 	public Ordonnanceur(Niveau aNiveau) {
 		this.pNiveau = aNiveau;
+		this.pNotify = false;
 		this.pStacks = new LinkedList<Stack<Iterator<Action>>>();
 		for (Bot wBot : aNiveau.getBots()) {
 			Route wMain = wBot.getRouteMain();
@@ -42,7 +45,7 @@ public class Ordonnanceur {
 
 	/**
 	 * @param : none
-	 * 
+	 *
 	 * @return : true s'il reste des actions a effectuer
 	 */
 	public boolean step() throws LightBotException {
@@ -52,11 +55,16 @@ public class Ordonnanceur {
 			wRes = wRes | stepOne(wStack, this.pNiveau.getBots().get(i));
 			i++;
 		}
+		if (this.pNotify) {
+			for (Bot wBot : this.pNiveau.getBots()) {
+				wBot.setEtat(Etat.ACTIF);
+			}
+		}
 		return wRes;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aStack
 	 *            : pile d'iterator d'actions
 	 * @param aBot
@@ -66,7 +74,7 @@ public class Ordonnanceur {
 	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) throws LightBotException {
 
 		if (aBot.getEtat() == Etat.PASSIF) {
-			/* Le bot est en attente d'Ãªtre rÃ©veillÃ© */
+			/* Le bot est en attente d'¨ºtre r¨¦veill¨¦ */
 			return true;
 		}
 
@@ -95,14 +103,17 @@ public class Ordonnanceur {
 						if (wAction instanceof Break) {
 							aStack.pop();
 							return stepOne(aStack, aBot);
+						} else if (wAction instanceof Notify) {
+							this.pNotify = true;
+							return true;
 						} else {
 							try {
 								wAction.apply(aBot, this.pNiveau.getCarte());
 								this.pNbCoups++;
 							} catch (LightBotException wException) {
-								/* TODO GÃ©rer les Exceptions */
+								/* TODO G¨¦rer les Exceptions */
 								/*
-								 * Arreter l'execution de l'ordonanceur Ã  la fin de ce step
+								 * Arreter l'execution de l'ordonanceur ¨¤ la fin de ce step
 								 */
 								System.err.println(wException.getMessage());
 							}
