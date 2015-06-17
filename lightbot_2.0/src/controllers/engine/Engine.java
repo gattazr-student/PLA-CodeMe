@@ -8,7 +8,7 @@ import controllers.ControlerNiveau;
 
 /**
  * Utilisé pour lancer et gérer un Niveau
- *
+ * 
  */
 public class Engine {
 
@@ -30,5 +30,14 @@ public class Engine {
 
 		/* Démarrage du niveau */
 		wControlerNiveau.run();
+
+		/* Comparaison des records */
+		int pNbCoups = wControlerNiveau.getNbCoups();
+		int pNbActions = wControlerNiveau.getNbAction();
+		
+		
+		if()
+		
+		
 	}
 }

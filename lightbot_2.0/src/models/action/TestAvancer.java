@@ -3,14 +3,13 @@ package models.action;
 import models.basic.Couleur;
 import models.bot.Bot;
 import models.niveau.Carte;
+import exceptions.LightBotException;
 
 public class TestAvancer extends Action {
 
-	// ATTENTION : rajouter vérifiaction case suivante libre (non occupée par un robot)
-
 	@Override
-	public void apply(Bot aBot, Carte aCarte) {
-		Action aAvancer = new Avancer();
+	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
+		Avancer aAvancer = new Avancer();
 
 		if (aAvancer.valid(aBot, aCarte)) {
 			aBot.setCouleur(Couleur.VERT);

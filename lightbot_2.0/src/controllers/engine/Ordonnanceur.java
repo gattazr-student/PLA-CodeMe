@@ -12,8 +12,11 @@ import models.basic.Couleur;
 import models.basic.Etat;
 import models.bot.Bot;
 import models.niveau.Niveau;
+import exceptions.LightBotException;
 
 public class Ordonnanceur {
+
+	private int pNbCoups = 0;
 
 	List<Stack<Iterator<Action>>> pStacks;
 	private Niveau pNiveau;
@@ -29,16 +32,20 @@ public class Ordonnanceur {
 		}
 	}
 
+	public int getNbCoups() {
+		return this.pNbCoups;
+	}
+
 	public Niveau getNiveau() {
 		return this.pNiveau;
 	}
 
 	/**
 	 * @param : none
-	 *
+	 * 
 	 * @return : true s'il reste des actions a effectuer
 	 */
-	public boolean step() {
+	public boolean step() throws LightBotException {
 		int i = 0;
 		boolean wRes = false;
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
@@ -49,15 +56,21 @@ public class Ordonnanceur {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param aStack
 	 *            : pile d'iterator d'actions
 	 * @param aBot
 	 *            : robot courant
 	 * @return : s'il reste des actions
 	 */
-	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) {
-		while (aStack.isEmpty() == false && aStack.peek() == null) {
+	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) throws LightBotException {
+
+		if (aBot.getEtat() == Etat.PASSIF) {
+			/* Le bot est en attente d'être réveillé */
+			return true;
+		}
+
+		while (!aStack.isEmpty() && aStack.peek() == null) {
 			aStack.pop();
 		}
 		if (aStack.isEmpty()) {
@@ -68,35 +81,33 @@ public class Ordonnanceur {
 			System.err.println("Unexpected iterator null");
 		} else {
 			if (wIt.hasNext()) {
+				Action wAction = wIt.next();
 
-				if (aBot.getEtat() == Etat.ACTIF) {
-					Action wAction = wIt.next();
-					while ((wAction.getCouleur() == Couleur.ROUGE || wAction.getCouleur() == Couleur.VERT)
-							&& wAction.getCouleur() != aBot.getCouleur() && wIt.hasNext()) {
-						wAction = wIt.next();
-					}
-					if (wAction.getCouleur() == Couleur.BLANC || wAction.getCouleur() == aBot.getCouleur()) {
-						if (wAction instanceof Route) {
-							aStack.push(((Route) wAction).iterator());
+				while ((wAction.getCouleur() == Couleur.ROUGE || wAction.getCouleur() == Couleur.VERT)
+						&& wAction.getCouleur() != aBot.getCouleur() && wIt.hasNext()) {
+					wAction = wIt.next();
+				}
+				if (wAction.getCouleur() == Couleur.BLANC || wAction.getCouleur() == aBot.getCouleur()) {
+					if (wAction instanceof Route) {
+						aStack.push(((Route) wAction).iterator());
+						return stepOne(aStack, aBot);
+					} else {
+						if (wAction instanceof Break) {
+							aStack.pop();
 							return stepOne(aStack, aBot);
 						} else {
-							// TODO : effectuer l'action sur le bot
-							if (wAction.valid(aBot, this.pNiveau.getCarte())) {
-								if (wAction instanceof Break) {
-									aStack.pop();
-									return true;
-								} else {
-									wAction.apply(aBot, this.pNiveau.getCarte());
-									return true;
-								}
-							} else {
-								/* TODO: throw Exception pour g�rer les erreurs d'�xecutions */
-								return true;
+							try {
+								wAction.apply(aBot, this.pNiveau.getCarte());
+								this.pNbCoups++;
+							} catch (LightBotException wException) {
+								/* TODO Gérer les Exceptions */
+								/*
+								 * Arreter l'execution de l'ordonanceur à la fin de ce step
+								 */
+								System.err.println(wException.getMessage());
 							}
+							return true;
 						}
-					} else {
-						aStack.pop();
-						return stepOne(aStack, aBot);
 					}
 				} else {
 					return true;
@@ -109,5 +120,4 @@ public class Ordonnanceur {
 		}
 		return false;
 	}
-
 }

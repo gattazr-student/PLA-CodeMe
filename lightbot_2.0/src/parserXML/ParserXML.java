@@ -124,7 +124,7 @@ public class ParserXML {
 				if (botslist.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element bot = (Element) botslist.item(i);
 
-					final String aName = bot.getAttribute("couleur");
+					final String aName = bot.getAttribute("name");
 
 					// position
 					final Element position = (Element) bot.getElementsByTagName("position").item(0);
@@ -168,8 +168,10 @@ public class ParserXML {
 			 * Noeud 4 : Record
 			 */
 			final Element record = (Element) racine.getElementsByTagName("record").item(0);
-			final int aRecord = Integer.parseInt(record.getAttribute("num"));
-			wLevel.setRecord(aRecord);
+			final int aRecordCoups = Integer.parseInt(record.getAttribute("coups"));
+			final int aRecordActions = Integer.parseInt(record.getAttribute("actions"));
+			wLevel.setRecordCoups(aRecordCoups);
+			wLevel.setRecordActions(aRecordActions);
 
 			/*
 			 * Noeud 5 : La map
@@ -216,9 +218,16 @@ public class ParserXML {
 					case "interrupteur":
 						CaseInterrupteur wCase = new CaseInterrupteur(aPosCase, Integer.parseInt(uneCase
 								.getAttribute("h")));
+
 						/* TODO: Récupérer les positions ici */
 						// eg : wCase.addPosition(new Position(11, 3));
-
+						final NodeList positionlist = cases.getElementsByTagName("position");
+						final int nbPos = positionlist.getLength();
+						for (int j = 0; j < nbPos; j++) {
+							wCase.addPosition(new Position(Integer.parseInt(((Element) positionlist.item(j))
+									.getAttribute("x")), Integer.parseInt(((Element) positionlist.item(j))
+									.getAttribute("y"))));
+						}
 						aCase = wCase;
 						break;
 					case "vide":

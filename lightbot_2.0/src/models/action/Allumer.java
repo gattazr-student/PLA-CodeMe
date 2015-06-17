@@ -5,6 +5,7 @@ import models.niveau.Carte;
 import models.niveau.Case;
 import models.niveau.CaseInterrupteur;
 import models.niveau.CaseLampe;
+import exceptions.LightBotException;
 
 /**
  * Action Allumer
@@ -14,7 +15,10 @@ public class Allumer extends Action {
 	final static String pNameAction = "allumer";
 
 	@Override
-	public void apply(Bot aBot, Carte aCarte) {
+	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
+		if (!valid(aBot, aCarte)) {
+			throw new LightBotException("Cette case ne peut pas être allumé");
+		}
 		Case aCase = aCarte.getCase(aBot.getPosition());
 		if (aCase instanceof CaseLampe) {
 			((CaseLampe) aCase).activate();
