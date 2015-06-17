@@ -216,9 +216,16 @@ public class ParserXML {
 					case "interrupteur":
 						CaseInterrupteur wCase = new CaseInterrupteur(aPosCase, Integer.parseInt(uneCase
 								.getAttribute("h")));
+
 						/* TODO: Récupérer les positions ici */
 						// eg : wCase.addPosition(new Position(11, 3));
-
+						final NodeList positionlist = cases.getElementsByTagName("position");
+						final int nbPos = positionlist.getLength();
+						for (int j = 0; j < nbPos; j++) {
+							wCase.addPosition(new Position(Integer.parseInt(((Element) positionlist.item(j))
+									.getAttribute("x")), Integer.parseInt(((Element) positionlist.item(j))
+											.getAttribute("y"))));
+						}
 						aCase = wCase;
 						break;
 					case "vide":

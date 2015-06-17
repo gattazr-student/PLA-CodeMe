@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<Level4_MultiBots>
+<level>
 	<name> Intro Wait </name>
 	<actions> 
 	    <action>avancer</action>
@@ -147,10 +147,13 @@
 		<cellule>
 				<position x="4" y="3" />
 				<cases>
-					<case type = "interrupteur" h="0" />
+					<case type = "interrupteur" h="0">
+						<position x="2" y="2"/>
+						<position x="0" y="3"/>
+					</case>
 				</cases>
 			</cellule>
 		</cellules>
 	</map>
 	<coups nb="1" main="14" />
- </Level4_MultiBots>
+ </level>

@@ -176,6 +176,20 @@ public class EditeurXML {
 					final Element aCase = document.createElement("case");
 					System.out.println("Veuillez saisir le type de la case : ");
 					String aType = sc.nextLine();
+					if (aType.equals("interrupteur")) {
+						System.out.println("Veuillez saisir le nombre de case lié à l'interrupteur : ");
+						String aNbPos = sc.nextLine();
+						for (int p = 0; p < Integer.parseInt(aNbPos); p++) {
+							final Element aPositionI = document.createElement("position");
+							System.out.println("Veuillez saisir la position X = ");
+							String aPosX = sc.nextLine();
+							System.out.println("Veuillez saisir la position Y = ");
+							String aPosY = sc.nextLine();
+							aPos.setAttribute("x", aPosX);
+							aPos.setAttribute("y", aPosY);
+							aCase.appendChild(aPositionI);
+						}
+					}
 					System.out.println("Veuillez saisir la hauteur de la case : ");
 					String aHauteur = sc.nextLine();
 					aCase.setAttribute("type", aType);
