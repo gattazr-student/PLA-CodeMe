@@ -107,9 +107,7 @@ public class ParserXML {
 				default:
 					break;
 				}
-				System.out.print("\n add " + action.getTextContent() + " ?");
 				if (aAction != null) {
-					System.out.print(" added");
 					wLevel.addAction(aAction);
 				}
 			}
@@ -218,7 +216,7 @@ public class ParserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 * 
+					 *
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
