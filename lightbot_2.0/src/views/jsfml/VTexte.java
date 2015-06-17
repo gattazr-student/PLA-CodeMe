@@ -40,6 +40,10 @@ public class VTexte extends View {
 		this.pTexte.draw(aTarget, wNewState);
 	}
 
+	public FloatRect getLocalBounds() {
+		return this.pTexte.getLocalBounds();
+	}
+
 	@Override
 	public void initView() {
 		try {
