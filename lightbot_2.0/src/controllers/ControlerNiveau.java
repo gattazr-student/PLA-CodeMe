@@ -136,7 +136,6 @@ public class ControlerNiveau {
 		this.pBotCourant = aBot;
 		setRouteCourant(aBot.getRouteMain());
 		this.pVNiveau.setRouteMain(aBot.getRouteMain());
-		this.pVNiveau.initRoutes();
 		this.pVNiveau.redraw();
 	}
 

@@ -200,7 +200,7 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 
-	public void initRoutes() {
+	private void initRoutes() {
 		int wLargeurRoute = 4 * VRoute.LARGEUR;
 		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
 		VRouteListe wVRouteMain = new VRouteListe(this.pRouteMain, new FloatRect(0, 0, wLargeurRoute,
@@ -239,6 +239,17 @@ public class FenetreNiveau extends View implements Observer {
 
 	public void setRouteMain(Route aRouteMain) {
 		this.pRouteMain = aRouteMain;
+		int wLargeurRoute = 4 * VRoute.LARGEUR;
+		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
+		VRouteListe wVRouteMain = new VRouteListe(aRouteMain, new FloatRect(0, 0, wLargeurRoute, depl_cadre));
+		if (!this.pVRoutesList.isEmpty()) {
+			this.pVRoutesList.remove(0);
+			this.pVRoutesList.add(0, wVRouteMain);
+		}
+		this.pPanelRoutes.clearView();
+		for (VRouteListe wVRoute : this.pVRoutesList) {
+			this.pPanelRoutes.addView(wVRoute);
+		}
 
 	}
 
