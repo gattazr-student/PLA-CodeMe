@@ -89,7 +89,7 @@ public class ControlerNiveau {
 		}
 		if (wAction != null) {
 			try {
-				wAction.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
+				wAction.apply(this.pBotCourant, this.pNiveau.getCarte());
 			} catch (LightBotException wException) {
 				new VPopup(Fenetre.FENETRE, wException.getMessage(), Color.RED).run();
 			}
