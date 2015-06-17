@@ -30,7 +30,9 @@ import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.Case;
 import models.niveau.CaseBasique;
+import models.niveau.CaseInterrupteur;
 import models.niveau.CaseLampe;
+import models.niveau.CaseVide;
 import models.niveau.Niveau;
 
 import org.w3c.dom.Document;
@@ -200,28 +202,32 @@ public class ParserXML {
 				final NodeList caseslist = cases.getElementsByTagName("case");
 				final int nbCases = caseslist.getLength();
 
+				Case aCase;
 				for (int k = 0; k < nbCases; k++) {
 					final Element uneCase = (Element) caseslist.item(k);
-
-					if ((uneCase.getAttribute("type")).equals("basique")) {
-						final Case aCase = new CaseBasique(aPosCase, Integer.parseInt(uneCase
+					aCase = null;
+					switch (uneCase.getAttribute("type")) {
+					case "basique":
+						aCase = new CaseBasique(aPosCase, Integer.parseInt(uneCase.getAttribute("h")));
+						break;
+					case "lampe":
+						aCase = new CaseLampe(aPosCase, Integer.parseInt(uneCase.getAttribute("h")));
+						break;
+					case "interrupteur":
+						CaseInterrupteur wCase = new CaseInterrupteur(aPosCase, Integer.parseInt(uneCase
 								.getAttribute("h")));
-						aCarte.addCase(aCase);
-					}
-					if ((uneCase.getAttribute("type")).equals("lampe")) {
+						/* TODO: Récupérer les positions ici */
+						// eg : wCase.addPosition(new Position(11, 3));
 
-						final Case aCase = new CaseLampe(aPosCase,
-								Integer.parseInt(uneCase.getAttribute("h")));
-						aCarte.addCase(aCase);
+						aCase = wCase;
+						break;
+					case "vide":
+						aCase = new CaseVide(aPosCase);
+						break;
+					default:
+						break;
 					}
-					/*
-					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 *
-					 * final Case aCase = new CaseInterrupteur(aPosCase,
-					 * Integer.parseInt(uneCase.getAttribute("h")));
-					 * aCarte.addCase(aCase);
-					 * }
-					 */
+					aCarte.addCase(aCase);
 				}
 
 			}

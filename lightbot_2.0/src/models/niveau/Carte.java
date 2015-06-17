@@ -105,7 +105,7 @@ public class Carte extends ObservableModel {
 	 */
 	public Cellule getCellule(Position aPosition) {
 		if (!positionValid(aPosition)) {
-			/* TODO Cellule.getCellule : throw which exception ? */
+			return null;
 		}
 		return this.pCellules[aPosition.getY()][aPosition.getX()];
 	}

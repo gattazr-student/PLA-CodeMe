@@ -6,7 +6,9 @@ import java.util.List;
 import models.basic.Position;
 import models.niveau.Case;
 import models.niveau.CaseBasique;
+import models.niveau.CaseInterrupteur;
 import models.niveau.CaseLampe;
+import models.niveau.CaseVide;
 import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
@@ -58,6 +60,12 @@ public abstract class VCase extends View implements Observer {
 		if (aCase instanceof CaseLampe) {
 			return new VCaseLampe((CaseLampe) aCase, aZone);
 		}
+		if (aCase instanceof CaseInterrupteur) {
+			return new VCaseInterrupteur((CaseInterrupteur) aCase, aZone);
+		}
+		if (aCase instanceof CaseVide) {
+			return new VCaseVide((CaseVide) aCase, aZone);
+		}
 		return null;
 	}
 
@@ -76,7 +84,6 @@ public abstract class VCase extends View implements Observer {
 
 	@Override
 	public boolean contains(Vector2f aPosition) {
-		/* Récupère la hauteur */
 		/* On a déja vérifié la hauteur et les zones mortes */
 		return true;
 	}
