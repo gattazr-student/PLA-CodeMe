@@ -9,12 +9,12 @@
 			<action>allumer</action>
 		</actions>
 	<bots>
-    		<bot couleur="bleu">
+    		<bot name="minion1">
         		<position x="0" y="0" />
         		<orientation init="EST" />
     		</bot>
 	</bots>
-	<record num="3" />
+	<record coups="3" actions="0" />
 	<map>
 		<dimensions x="12" y="1" />
 
