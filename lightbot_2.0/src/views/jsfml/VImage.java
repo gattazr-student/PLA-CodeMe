@@ -26,6 +26,11 @@ public class VImage extends View {
 	}
 
 	@Override
+	public boolean contains(Vector2f aPosition) {
+		return false;
+	}
+
+	@Override
 	public void draw(RenderTarget aTarget, RenderStates aState) {
 		if (this.pSprite == null) {
 			initView();
