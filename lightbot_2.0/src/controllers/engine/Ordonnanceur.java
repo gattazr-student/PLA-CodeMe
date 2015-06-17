@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import models.action.Action;
 import models.action.Route;
+import models.basic.Couleur;
 import models.basic.Etat;
 import models.bot.Bot;
 import models.niveau.Niveau;
@@ -67,29 +68,38 @@ public class Ordonnanceur {
 		} else {
 			if (wIt.hasNext()) {
 				Action wAction = wIt.next();
-				if (wAction instanceof Route) {
-					aStack.push(((Route) wAction).iterator());
-					return stepOne(aStack, aBot);
-				} else {
-					// TODO : effectuer l'action sur le bot
-					if (aBot.getEtat() == Etat.ACTIF && wAction.valid(aBot, this.pNiveau.getCarte())) {
-						if (wAction.getName() != "break") {
-							wAction.apply(aBot, this.pNiveau.getCarte());
-							return true;
+				while ((wAction.getCouleur() == Couleur.ROUGE || wAction.getCouleur() == Couleur.VERT)
+						&& wAction.getCouleur() != aBot.getCouleur() && wIt.hasNext()) {
+					wAction = wIt.next();
+				}
+				if (wAction.getCouleur() == Couleur.BLANC || wAction.getCouleur() == aBot.getCouleur()) {
+					if (wAction instanceof Route) {
+						aStack.push(((Route) wAction).iterator());
+						return stepOne(aStack, aBot);
+					} else {
+						// TODO : effectuer l'action sur le bot
+						if (aBot.getEtat() == Etat.ACTIF && wAction.valid(aBot, this.pNiveau.getCarte())) {
+							if (wAction.getName() != "break") {
+								wAction.apply(aBot, this.pNiveau.getCarte());
+								return true;
+							} else {
+								aStack.pop();
+								return true;
+							}
+						}
+						if (aBot.getEtat() == Etat.PASSIF) {
+							// inserer wAction dans la pile et passer au Bot suivant
+							// aStack.push(((Route) wAction).iterator());
+							return false;
 						} else {
-							aStack.pop();
+							/* TODO: throw Exception pour gérer les erreurs d'éxecutions */
 							return true;
 						}
-					}
-					if (aBot.getEtat() == Etat.PASSIF) {
-						// inserer wAction dans la pile et passer au Bot suivant
-						// aStack.push(((Route) wAction).iterator());
-						return false;
-					} else {
-						/* TODO: throw Exception pour gÃ©rer les erreurs d'Ã©xecutions */
-						return true;
-					}
 
+					}
+				} else {
+					aStack.pop();
+					return stepOne(aStack, aBot);
 				}
 			} else {
 				aStack.pop();
