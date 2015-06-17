@@ -8,6 +8,7 @@ import mvc.Observer;
 
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.system.Vector2f;
 
 import views.View;
 import views.jsfml.VRectangle;
@@ -24,6 +25,12 @@ public class VRouteListe extends View implements Observer {
 		this.pRoute = aRoute;
 		this.pRoute.addObserver(this);
 		initView();
+	}
+
+	public int findPosition(Vector2f aPosition) {
+		int wDeplX = (int) aPosition.x / VRoute.LARGEUR;
+		int wDplY = (int) (aPosition.y - OFFSET) / VRoute.HAUTEUR;
+		return wDplY * 4 + wDeplX;
 	}
 
 	public Route getRoute() {

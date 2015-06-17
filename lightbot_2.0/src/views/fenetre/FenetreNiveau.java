@@ -75,12 +75,6 @@ public class FenetreNiveau extends View implements Observer {
 		initView();
 	}
 
-	private int findPosition(Vector2f aPosition) {
-		int wDeplX = (int) aPosition.x / VRoute.LARGEUR;
-		int wDplY = (int) aPosition.y / VRoute.HAUTEUR;
-		return wDplY * 4 + wDeplX;
-	}
-
 	/**
 	 * Retrouve la VRouteListe sur laquelle un click a été effectué
 	 *
@@ -142,7 +136,7 @@ public class FenetreNiveau extends View implements Observer {
 							wPosition = Vector2f.sub(wPosition, this.pPanelRoutes.getOrigin());
 							VRouteListe wVRoute = findVRoute(wPosition);
 							wPosition = Vector2f.sub(wPosition, wVRoute.getOrigin());
-							int wIndice = findPosition(wPosition);
+							int wIndice = wVRoute.findPosition(wPosition);
 							this.pControler.removeFromRoute(wVRoute.getRoute(), wIndice);
 						}
 					}
