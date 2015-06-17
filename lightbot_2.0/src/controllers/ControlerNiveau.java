@@ -19,6 +19,9 @@ import exceptions.LightBotException;
 
 public class ControlerNiveau {
 
+	private int pNbAction = 0;
+	private int pNbCoups = 0;
+
 	private Niveau pNiveau;
 	private FenetreNiveau pVNiveau;
 	private Ordonnanceur pOrdonnanceur;
@@ -36,18 +39,27 @@ public class ControlerNiveau {
 
 	/**
 	 * Ajout l'action passé en paramètre à la route courante
-	 *
+	 * 
 	 * @param aAction
 	 *            Action à ajouter dans la Route
 	 */
 	public void addToRouteCourante(Action aAction) {
 		this.pRouteCourant.addAction(aAction);
 		this.pVNiveau.redraw();
+		this.pNbAction++;
+	}
+
+	public int getNbAction() {
+		return this.pNbAction;
+	}
+
+	public int getNbCoups() {
+		return this.pNbCoups;
 	}
 
 	/**
 	 * Retourne vrai si toutes les cases lampe ont été allumé et que le niveau est terminé
-	 *
+	 * 
 	 * @return vrai si le niveau est terminé
 	 */
 	public boolean isFinished() {
@@ -56,7 +68,7 @@ public class ControlerNiveau {
 
 	/**
 	 * Fonction temporaire permettant de tester facilement les actions
-	 *
+	 * 
 	 * @param wSMFLKeyEvent
 	 */
 	public void keyboardAction(KeyEvent aSMFLKeyEvent) {
@@ -84,7 +96,7 @@ public class ControlerNiveau {
 
 	/**
 	 * Retire l'Action à la position aPosition de la Route donnée
-	 *
+	 * 
 	 * @param aRoute
 	 *            Route dans laquelle retirer l'Action
 	 * @param aPosition
@@ -94,6 +106,7 @@ public class ControlerNiveau {
 		if (aPosition < aRoute.size()) {
 			aRoute.removeAction(aPosition);
 			this.pVNiveau.redraw();
+			this.pNbAction--;
 		}
 	}
 
@@ -119,6 +132,7 @@ public class ControlerNiveau {
 				if (wI == 10000) {
 					try {
 						if (!this.pOrdonnanceur.step()) {
+							this.pNbCoups = this.pOrdonnanceur.getNbCoups();
 							this.pOrdonnanceur = null;
 						}
 					} catch (LightBotException aException) {
@@ -129,6 +143,10 @@ public class ControlerNiveau {
 				}
 			}
 		}
+		if (this.pOrdonnanceur != null) {
+			this.pNbCoups = this.pOrdonnanceur.getNbCoups();
+		}
+
 	}
 
 	public void setBotCourant(Bot aBot) {
