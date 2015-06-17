@@ -68,7 +68,8 @@ public class FenetreNiveau extends View implements Observer {
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
 
-		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/menu/ciel.jpeg");
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
+				"res/menu/fond_minion.png");
 		this.pPanelCarte.addView(wImage_Fond);
 
 		this.pRouteMain = aNiveau.getBots().get(0).getRouteMain();

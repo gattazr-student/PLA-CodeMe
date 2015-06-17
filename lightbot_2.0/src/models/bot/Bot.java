@@ -143,6 +143,7 @@ public class Bot extends ObservableModel {
 		this.pCouleur = this.pCouleurSauvegarde;
 		this.pOrientation = this.pOrientationSauvergarde;
 		this.pPosition = this.pPositionSauvergarde;
+		this.pEtat = Etat.ACTIF;
 		notifyObserver("bot_reset", null);
 	}
 
