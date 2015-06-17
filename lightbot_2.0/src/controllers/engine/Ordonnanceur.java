@@ -13,6 +13,8 @@ import models.niveau.Niveau;
 
 public class Ordonnanceur {
 
+	private int pNbCoups = 0;
+
 	List<Stack<Iterator<Action>>> pStacks;
 	private Niveau pNiveau;
 
@@ -27,13 +29,17 @@ public class Ordonnanceur {
 		}
 	}
 
+	public int getNbCoups() {
+		return this.pNbCoups;
+	}
+
 	public Niveau getNiveau() {
 		return this.pNiveau;
 	}
 
 	/**
 	 * @param : none
-	 *
+	 * 
 	 * @return : true s'il reste des actions a effectuer
 	 */
 	public boolean step() {
@@ -47,7 +53,7 @@ public class Ordonnanceur {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param aStack
 	 *            : pile d'iterator d'actions
 	 * @param aBot
@@ -75,6 +81,7 @@ public class Ordonnanceur {
 					if (aBot.getEtat() == Etat.ACTIF && wAction.valid(aBot, this.pNiveau.getCarte())) {
 						if (wAction.getName() != "break") {
 							wAction.apply(aBot, this.pNiveau.getCarte());
+							this.pNbCoups++;
 							return true;
 						} else {
 							aStack.pop();
