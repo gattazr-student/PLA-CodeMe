@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Stack;
 
 import models.action.Action;
+import models.action.Break;
 import models.action.Route;
 import models.basic.Couleur;
 import models.basic.Etat;
 import models.bot.Bot;
 import models.niveau.Niveau;
+import exceptions.LightBotException;
 
 public class Ordonnanceur {
 
@@ -37,7 +39,7 @@ public class Ordonnanceur {
 	 *
 	 * @return : true s'il reste des actions a effectuer
 	 */
-	public boolean step() {
+	public boolean step() throws LightBotException {
 		int i = 0;
 		boolean wRes = false;
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
@@ -55,7 +57,13 @@ public class Ordonnanceur {
 	 *            : robot courant
 	 * @return : s'il reste des actions
 	 */
-	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) {
+	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) throws LightBotException {
+
+		if (aBot.getEtat() == Etat.PASSIF) {
+			/* Le bot est en attente d'être réveillé */
+			return true;
+		}
+
 		while (aStack.isEmpty() == false && aStack.peek() == null) {
 			aStack.pop();
 		}
@@ -77,25 +85,21 @@ public class Ordonnanceur {
 						aStack.push(((Route) wAction).iterator());
 						return stepOne(aStack, aBot);
 					} else {
-						// TODO : effectuer l'action sur le bot
-						if (aBot.getEtat() == Etat.ACTIF && wAction.valid(aBot, this.pNiveau.getCarte())) {
-							if (wAction.getName() != "break") {
-								wAction.apply(aBot, this.pNiveau.getCarte());
-								return true;
-							} else {
-								aStack.pop();
-								return true;
-							}
-						}
-						if (aBot.getEtat() == Etat.PASSIF) {
-							// inserer wAction dans la pile et passer au Bot suivant
-							// aStack.push(((Route) wAction).iterator());
-							return false;
+						if (wAction instanceof Break) {
+							aStack.pop();
+							return stepOne(aStack, aBot);
 						} else {
-							/* TODO: throw Exception pour g�rer les erreurs d'�xecutions */
+							try {
+								wAction.apply(aBot, this.pNiveau.getCarte());
+							} catch (LightBotException wException) {
+								/* TODO Gérer les Exceptions */
+								/*
+								 * Arreter l'execution de l'ordonanceur à la fin de ce step
+								 */
+								System.err.println(wException.getMessage());
+							}
 							return true;
 						}
-
 					}
 				} else {
 					aStack.pop();
@@ -108,5 +112,4 @@ public class Ordonnanceur {
 		}
 		return false;
 	}
-
 }

@@ -52,7 +52,7 @@ public class Carte extends ObservableModel {
 		if (aCase != null) {
 			Position wPos = aCase.getPosition();
 			if (!positionValid(wPos)) {
-				/* TODO: throw which exception ? */
+				return;
 			}
 			Cellule wCell = this.pCellules[wPos.getY()][wPos.getX()];
 			if (wCell == null) {
@@ -203,11 +203,11 @@ public class Carte extends ObservableModel {
 	 */
 	public void switchCase(Position aPosition) {
 		if (!positionValid(aPosition)) {
-			/* TODO: throw which exception ? */
+			return;
 		}
 		Cellule wCell = this.pCellules[aPosition.getY()][aPosition.getX()];
 		if (wCell == null) {
-			/* TODO: throw which exception ? */
+			return;
 		}
 		wCell.nextCourante();
 		notifyObserver("carte_switch", null);

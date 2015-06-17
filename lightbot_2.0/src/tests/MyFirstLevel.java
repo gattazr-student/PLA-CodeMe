@@ -18,6 +18,7 @@ import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
 import controllers.engine.Ordonnanceur;
+import exceptions.LightBotException;
 
 public class MyFirstLevel {
 
@@ -115,16 +116,17 @@ public class MyFirstLevel {
 			e.printStackTrace();
 		}
 		Ordonnanceur o1 = new Ordonnanceur(wModelNiveau);
-		while (o1.step()) {
-			wViewNiveau.redraw();
-			try {
+		try {
+			while (o1.step()) {
+				wViewNiveau.redraw();
 				Thread.sleep(250);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 
+			}
+		} catch (LightBotException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		System.out.println("Fin ordonanceur");
 
 		/* Démarrage du niveau */
 		wControlerNiveau.run();
