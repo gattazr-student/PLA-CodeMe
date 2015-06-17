@@ -169,6 +169,7 @@ public class ControlerNiveau {
 	 * Démarre l'éxécution du programme décrit par les Actions du Niveau et des Bots
 	 */
 	public void startRunning() {
+		resetLevel();
 		this.pOrdonnanceur = new Ordonnanceur(this.pNiveau);
 	}
 }
