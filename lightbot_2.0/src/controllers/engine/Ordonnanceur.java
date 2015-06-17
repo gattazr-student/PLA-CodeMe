@@ -64,7 +64,7 @@ public class Ordonnanceur {
 			return true;
 		}
 
-		while (aStack.isEmpty() == false && aStack.peek() == null) {
+		while (!aStack.isEmpty() && aStack.peek() == null) {
 			aStack.pop();
 		}
 		if (aStack.isEmpty()) {
@@ -102,9 +102,9 @@ public class Ordonnanceur {
 						}
 					}
 				} else {
-					aStack.pop();
-					return stepOne(aStack, aBot);
+					return true;
 				}
+
 			} else {
 				aStack.pop();
 				return stepOne(aStack, aBot);
