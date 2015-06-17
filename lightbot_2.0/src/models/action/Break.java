@@ -11,6 +11,7 @@ public class Break extends Action {
 	@Override
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
 		/* L'action Break ne peut pas être appliqué. */
+		throw new LightBotException("Break ne peut pas etre applique");
 	}
 
 	@Override

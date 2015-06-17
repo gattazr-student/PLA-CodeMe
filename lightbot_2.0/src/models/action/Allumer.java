@@ -17,7 +17,7 @@ public class Allumer extends Action {
 	@Override
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
 		if (!valid(aBot, aCarte)) {
-			throw new LightBotException("Cette case ne peut pas être allumé");
+			throw new LightBotException("Cette case ne peut pas etre allumee");
 		}
 		Case aCase = aCarte.getCase(aBot.getPosition());
 		if (aCase instanceof CaseLampe) {

@@ -18,7 +18,7 @@ import exceptions.LightBotException;
 public class Ordonnanceur {
 
 	private int pNbCoups = 0;
-	boolean pNotify;
+	private boolean pNotify;
 
 	List<Stack<Iterator<Action>>> pStacks;
 	private Niveau pNiveau;
@@ -55,9 +55,23 @@ public class Ordonnanceur {
 			wRes = wRes | stepOne(wStack, this.pNiveau.getBots().get(i));
 			i++;
 		}
+		List<Bot> wBots = this.pNiveau.getBots();
 		if (this.pNotify) {
-			for (Bot wBot : this.pNiveau.getBots()) {
+			for (Bot wBot : wBots) {
 				wBot.setEtat(Etat.ACTIF);
+			}
+		}
+
+		/* V√©rifie que les Bots sont tous sur des cases diff√©rentes. Retourne une exception sinon */
+		int wNbBots = wBots.size();
+		Bot wBot1, wBot2;
+		for (int wI = 0; wI < wNbBots; wI++) {
+			wBot1 = wBots.get(wI);
+			for (int wJ = wI + 1; wJ < wNbBots; wJ++) {
+				wBot2 = wBots.get(wJ);
+				if (wBot1.getPosition().equals(wBot2.getPosition())) {
+					throw new LightBotException("Deux bots ne peuvent pas se trouver sur la meme case");
+				}
 			}
 		}
 		return wRes;
@@ -74,7 +88,7 @@ public class Ordonnanceur {
 	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) throws LightBotException {
 
 		if (aBot.getEtat() == Etat.PASSIF) {
-			/* Le bot est en attente d'®∫tre r®¶veill®¶ */
+			/* Le bot est en attente d'√™tre r√©veill√© */
 			return true;
 		}
 
@@ -103,22 +117,14 @@ public class Ordonnanceur {
 						if (wAction instanceof Break) {
 							aStack.pop();
 							return stepOne(aStack, aBot);
-						} else if (wAction instanceof Notify) {
-							this.pNotify = true;
-							return true;
-						} else {
-							try {
-								wAction.apply(aBot, this.pNiveau.getCarte());
-								this.pNbCoups++;
-							} catch (LightBotException wException) {
-								/* TODO G®¶rer les Exceptions */
-								/*
-								 * Arreter l'execution de l'ordonanceur ®§ la fin de ce step
-								 */
-								System.err.println(wException.getMessage());
-							}
-							return true;
 						}
+						if (wAction instanceof Notify) {
+							this.pNotify = true;
+						} else {
+							wAction.apply(aBot, this.pNiveau.getCarte());
+						}
+						this.pNbCoups++;
+						return true;
 					}
 				} else {
 					return true;

@@ -41,7 +41,7 @@ public class Route extends Action {
 	@Override
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
 		/* Un Route ne peut pas être appliqué */
-		throw new LightBotException("Une route ne peut pas être appliqué");
+		throw new LightBotException("Route ne peut pas etre applique");
 	}
 
 	public ArrayList<Action> getAction() {

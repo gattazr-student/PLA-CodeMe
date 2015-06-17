@@ -10,10 +10,13 @@ import models.action.TournerGauche;
 import models.bot.Bot;
 import models.niveau.Niveau;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.KeyEvent;
 
+import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
+import views.jsfml.VPopup;
 import controllers.engine.Ordonnanceur;
 import exceptions.LightBotException;
 
@@ -39,7 +42,7 @@ public class ControlerNiveau {
 
 	/**
 	 * Ajout l'action passé en paramètre à la route courante
-	 * 
+	 *
 	 * @param aAction
 	 *            Action à ajouter dans la Route
 	 */
@@ -59,7 +62,7 @@ public class ControlerNiveau {
 
 	/**
 	 * Retourne vrai si toutes les cases lampe ont été allumé et que le niveau est terminé
-	 * 
+	 *
 	 * @return vrai si le niveau est terminé
 	 */
 	public boolean isFinished() {
@@ -68,7 +71,7 @@ public class ControlerNiveau {
 
 	/**
 	 * Fonction temporaire permettant de tester facilement les actions
-	 * 
+	 *
 	 * @param wSMFLKeyEvent
 	 */
 	public void keyboardAction(KeyEvent aSMFLKeyEvent) {
@@ -88,7 +91,7 @@ public class ControlerNiveau {
 			try {
 				wAction.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
 			} catch (LightBotException wException) {
-				System.err.println(wException.getMessage());
+				new VPopup(Fenetre.FENETRE, wException.getMessage(), Color.RED).run();
 			}
 			this.pVNiveau.redraw();
 		}
@@ -96,7 +99,7 @@ public class ControlerNiveau {
 
 	/**
 	 * Retire l'Action à la position aPosition de la Route donnée
-	 * 
+	 *
 	 * @param aRoute
 	 *            Route dans laquelle retirer l'Action
 	 * @param aPosition
@@ -135,8 +138,9 @@ public class ControlerNiveau {
 							this.pNbCoups = this.pOrdonnanceur.getNbCoups();
 							this.pOrdonnanceur = null;
 						}
-					} catch (LightBotException aException) {
-						/* TODO: ControllerNiveau.run : gérer exception provenant de l'ordonanceur */
+					} catch (LightBotException wException) {
+						new VPopup(Fenetre.FENETRE, wException.getMessage(), Color.RED).run();
+						this.pOrdonnanceur = null;
 					}
 					this.pVNiveau.redraw();
 					wI = 0;

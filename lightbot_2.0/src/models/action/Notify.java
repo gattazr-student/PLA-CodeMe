@@ -11,6 +11,7 @@ public class Notify extends Action {
 	@Override
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
 		/* Notify ne doit pas être appliqué */
+		throw new LightBotException("Apply ne peut pas etre applique");
 	}
 
 	@Override

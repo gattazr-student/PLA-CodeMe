@@ -1,14 +1,18 @@
 package controllers.engine;
 
 import models.niveau.Niveau;
+
+import org.jsfml.graphics.Color;
+
 import parserXML.ParserXML;
 import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
+import views.jsfml.VPopup;
 import controllers.ControlerNiveau;
 
 /**
  * Utilisé pour lancer et gérer un Niveau
- * 
+ *
  */
 public class Engine {
 
@@ -34,12 +38,12 @@ public class Engine {
 		/* Comparaison des records */
 		int pNbCoups = wControlerNiveau.getNbCoups();
 		int pNbActions = wControlerNiveau.getNbAction();
+		// TODO Améliorer les messages
 		if (wModelNiveau.getRecordActions() != 0 && pNbActions <= wModelNiveau.getRecordActions()) {
-			System.out.println("Ok gros t'as pas utilisé trop d'actions bien ouèje next step ;)");
-			// TODO affichage pop up
-		} else if (wModelNiveau.getRecordCoups() != 0 && pNbCoups <= wModelNiveau.getRecordCoups()) {
-			System.out.println("Bien frér tu t'es pas fait avoir ;) Pas dépassé nombre de coups max");
-			// TODO affichage pop up
+			new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN).run();
+		}
+		if (wModelNiveau.getRecordCoups() != 0 && pNbCoups <= wModelNiveau.getRecordCoups()) {
+			new VPopup(Fenetre.FENETRE, "Bravo ! Le temps d'execution etait tres court", Color.GREEN).run();
 		}
 	}
 }
