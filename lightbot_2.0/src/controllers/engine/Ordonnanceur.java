@@ -16,6 +16,8 @@ import exceptions.LightBotException;
 
 public class Ordonnanceur {
 
+	private int pNbCoups = 0;
+
 	List<Stack<Iterator<Action>>> pStacks;
 	private Niveau pNiveau;
 
@@ -30,13 +32,17 @@ public class Ordonnanceur {
 		}
 	}
 
+	public int getNbCoups() {
+		return this.pNbCoups;
+	}
+
 	public Niveau getNiveau() {
 		return this.pNiveau;
 	}
 
 	/**
 	 * @param : none
-	 *
+	 * 
 	 * @return : true s'il reste des actions a effectuer
 	 */
 	public boolean step() throws LightBotException {
@@ -50,7 +56,7 @@ public class Ordonnanceur {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param aStack
 	 *            : pile d'iterator d'actions
 	 * @param aBot
@@ -76,6 +82,7 @@ public class Ordonnanceur {
 		} else {
 			if (wIt.hasNext()) {
 				Action wAction = wIt.next();
+
 				while ((wAction.getCouleur() == Couleur.ROUGE || wAction.getCouleur() == Couleur.VERT)
 						&& wAction.getCouleur() != aBot.getCouleur() && wIt.hasNext()) {
 					wAction = wIt.next();
@@ -91,6 +98,7 @@ public class Ordonnanceur {
 						} else {
 							try {
 								wAction.apply(aBot, this.pNiveau.getCarte());
+								this.pNbCoups++;
 							} catch (LightBotException wException) {
 								/* TODO Gérer les Exceptions */
 								/*

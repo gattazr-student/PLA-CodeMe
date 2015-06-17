@@ -75,7 +75,7 @@ public class EditeurXML {
 				/**
 				 * Bot et couleur
 				 */
-				System.out.println("Veuillez saisir la couleur du bot  " + (i + 1) + " : ");
+				System.out.println("Veuillez saisir le nom du bot  (minion1 ou minion2) " + (i + 1) + " : ");
 				String couleur = sc.nextLine();
 				final Element aBot = document.createElement("bot");
 				aBot.setAttribute("couleur", couleur);
@@ -111,9 +111,12 @@ public class EditeurXML {
 			 * Record
 			 */
 			final Element aRecord = document.createElement("record");
-			System.out.println("Veuillez saisir le record :");
-			String rec = sc.nextLine();
-			aRecord.setAttribute("num", rec);
+			System.out.println("Veuillez saisir le record en nombre de coups:");
+			String coups = sc.nextLine();
+			System.out.println("Veuillez saisir le record en nombre d'actions:");
+			String actions = sc.nextLine();
+			aRecord.setAttribute("coups", coups);
+			aRecord.setAttribute("actions", actions);
 			racine.appendChild(aRecord);
 
 			/**
@@ -176,6 +179,20 @@ public class EditeurXML {
 					final Element aCase = document.createElement("case");
 					System.out.println("Veuillez saisir le type de la case : ");
 					String aType = sc.nextLine();
+					if (aType.equals("interrupteur")) {
+						System.out.println("Veuillez saisir le nombre de case lié à l'interrupteur : ");
+						String aNbPos = sc.nextLine();
+						for (int p = 0; p < Integer.parseInt(aNbPos); p++) {
+							final Element aPositionI = document.createElement("position");
+							System.out.println("Veuillez saisir la position X = ");
+							String aPosX = sc.nextLine();
+							System.out.println("Veuillez saisir la position Y = ");
+							String aPosY = sc.nextLine();
+							aPos.setAttribute("x", aPosX);
+							aPos.setAttribute("y", aPosY);
+							aCase.appendChild(aPositionI);
+						}
+					}
 					System.out.println("Veuillez saisir la hauteur de la case : ");
 					String aHauteur = sc.nextLine();
 					aCase.setAttribute("type", aType);
