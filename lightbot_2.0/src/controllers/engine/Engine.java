@@ -34,10 +34,12 @@ public class Engine {
 		/* Comparaison des records */
 		int pNbCoups = wControlerNiveau.getNbCoups();
 		int pNbActions = wControlerNiveau.getNbAction();
-		
-		
-		if()
-		
-		
+		if (wModelNiveau.getRecordActions() != 0 && pNbActions <= wModelNiveau.getRecordActions()) {
+			System.out.println("Ok gros t'as pas utilisé trop d'actions bien ouèje next step ;)");
+			// TODO affichage pop up
+		} else if (wModelNiveau.getRecordCoups() != 0 && pNbCoups <= wModelNiveau.getRecordCoups()) {
+			System.out.println("Bien frér tu t'es pas fait avoir ;) Pas dépassé nombre de coups max");
+			// TODO affichage pop up
+		}
 	}
 }
