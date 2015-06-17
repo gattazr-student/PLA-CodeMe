@@ -8,6 +8,7 @@ import models.ObservableModel;
 import models.action.Action;
 import models.action.Route;
 import models.bot.Bot;
+import models.niveau.CaseLampe.ETAT_LAMPE;
 
 /**
  * Niveau Représente un niveau du jeu. Contenant des informations lus depuis un fichier XML, c'est le contenu
@@ -54,6 +55,13 @@ public class Niveau extends ObservableModel {
 	}
 
 	/**
+	 * Ajoute une action en fin de la liste d'action
+	 */
+	public void addAction(Action aAction) {
+		(this.pActions).add(aAction);
+	}
+
+	/**
 	 * Ajout d'un bot dans le Niveau
 	 *
 	 * @param aBot
@@ -68,6 +76,15 @@ public class Niveau extends ObservableModel {
 	 */
 	public void addRoute(Route aRoute) {
 		this.pRoutes.add(aRoute);
+	}
+
+	/**
+	 * Ajoute une action en fin de la liste d'action
+	 *
+	 * @return
+	 */
+	public ArrayList<Action> getActions() {
+		return this.pActions;
 	}
 
 	/**
@@ -96,7 +113,6 @@ public class Niveau extends ObservableModel {
 	public String getNom() {
 		return this.nom;
 	}
-	
 
 	/**
 	 * Retourne le record du Niveau.
@@ -114,6 +130,39 @@ public class Niveau extends ObservableModel {
 	 */
 	public ArrayList<Route> getRoutes() {
 		return this.pRoutes;
+	}
+
+	/**
+	 * Retourne true si toutes les cases Lampe dans le Niveau sont allumé et que le niveau est donc terminé.
+	 * False sinon
+	 *
+	 * @return true si le niveau est terminé. False sinon
+	 */
+	public boolean isFinished() {
+		Carte wCarte = getCarte();
+		int wMaxX = wCarte.getMaxX();
+		int wMaxY = wCarte.getMaxY();
+		for (int wX = 0; wX < wMaxX; wX++) {
+			for (int wY = 0; wY < wMaxY; wY++) {
+				Case wCase = wCarte.getCase(wX, wY);
+				if (wCase != null) {
+					if (wCase instanceof CaseLampe && ((CaseLampe) wCase).getEtat() == ETAT_LAMPE.ETEINT) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public void resetBot() {
+		for (Bot wBot : this.pBots) {
+			wBot.reset();
+		}
+	}
+
+	public void resetCarte() {
+		this.pCarte.reset();
 	}
 
 	/**
@@ -142,12 +191,5 @@ public class Niveau extends ObservableModel {
 	public void setRecord(int aRecord) {
 		this.pRecord = aRecord;
 	}
-	
-	/**
-	 * Ajoute une action en fin de la liste d'action
-	 */
-	public void addAction(Action aAction){
-		(this.pActions).add(aAction);
-	}
-	
+
 }

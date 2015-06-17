@@ -50,7 +50,7 @@ public class VCellule extends View implements Observer {
 			wOrigin = Vector2f.sub(wOrigin, new Vector2f(0, VBot.HAUTEUR));
 		}
 		if (new FloatRect(wOrigin.x, wOrigin.y, VCase.LARGEUR, wHauteurTotale).contains(aPosition)) {
-			/* TODO: Dead zones */
+			/* Pas besoin de vérifier les zones mortes */
 			return true;
 		}
 		return false;

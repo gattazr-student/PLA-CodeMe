@@ -2,6 +2,7 @@ package models.niveau;
 
 import models.ObservableModel;
 import models.basic.Position;
+import models.niveau.CaseLampe.ETAT_LAMPE;
 
 /**
  * Carte représente le monde d'un Niveau
@@ -39,7 +40,6 @@ public class Carte extends ObservableModel {
 				this.pCellules[wY][wX] = new Cellule();
 			}
 		}
-
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Carte extends ObservableModel {
 	 */
 	public Case getCase(int aX, int aY) {
 		if (!positionValid(aX, aY)) {
-			/* TODO throw which exception ? */
+			return null;
 		}
 		Cellule wCell = this.pCellules[aY][aX];
 		if (wCell != null) {
@@ -87,22 +87,13 @@ public class Carte extends ObservableModel {
 	 *
 	 * @param aPosition
 	 *            Position à utiliser
-	 * @return une Case. Null si il n'y a pas de case à la position donnée.
+	 * @return une Case. Null si il n'y a pas de case à la position donnée où la position n'existe pas.
 	 */
 	public Case getCase(Position aPosition) {
 		if (aPosition == null) {
-			/* TODO throw which exception ? */
+			return null;
 		}
 		return getCase(aPosition.getX(), aPosition.getY());
-	}
-
-	/**
-	 * Retourne le tableau de Cellule contenant la carte
-	 *
-	 * @return Tableau à deux dimensions de Cellules
-	 */
-	public Cellule[][] getCases() {
-		return this.pCellules;
 	}
 
 	/**
@@ -114,9 +105,18 @@ public class Carte extends ObservableModel {
 	 */
 	public Cellule getCellule(Position aPosition) {
 		if (!positionValid(aPosition)) {
-			/* TODO throw which exception ? */
+			/* TODO Cellule.getCellule : throw which exception ? */
 		}
 		return this.pCellules[aPosition.getY()][aPosition.getX()];
+	}
+
+	/**
+	 * Retourne le tableau de Cellule contenant la carte
+	 *
+	 * @return Tableau à deux dimensions de Cellules
+	 */
+	public Cellule[][] getCellules() {
+		return this.pCellules;
 	}
 
 	/**
@@ -164,6 +164,21 @@ public class Carte extends ObservableModel {
 	 */
 	private boolean positionValid(Position aPosition) {
 		return positionValid(aPosition.getX(), aPosition.getY());
+	}
+
+	public void reset() {
+		for (int wY = 0; wY < this.pMaxY; wY++) {
+			for (int wX = 0; wX < this.pMaxX; wX++) {
+				this.pCellules[wY][wX].resetCourante();
+				Case wCase = this.pCellules[wY][wX].getCase();
+				if (wCase instanceof CaseLampe) {
+					if (((CaseLampe) wCase).getEtat() == ETAT_LAMPE.ALLUMEE) {
+						((CaseLampe) wCase).activate();
+					}
+				}
+			}
+		}
+		notifyObserver("carte_reset", null);
 	}
 
 	/**

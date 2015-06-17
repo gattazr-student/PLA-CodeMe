@@ -27,6 +27,12 @@ public class Panel extends View {
 	}
 
 	@Override
+	public void clearView() {
+		super.clearView();
+		initView();
+	}
+
+	@Override
 	public void initView() {
 		VRectangle wRect = new VRectangle(new FloatRect(0, 0, getWidth(), getHeight()));
 		wRect.setFillColor(Color.TRANSPARENT);

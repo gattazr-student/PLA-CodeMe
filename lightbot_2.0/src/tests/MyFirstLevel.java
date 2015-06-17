@@ -6,6 +6,7 @@ import models.action.Route;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
+import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 import models.bot.Bot;
@@ -13,11 +14,10 @@ import models.niveau.Carte;
 import models.niveau.CaseBasique;
 import models.niveau.CaseLampe;
 import models.niveau.Niveau;
-import parserXML.parserXML;
 import views.fenetre.Fenetre;
 import views.fenetre.FenetreNiveau;
 import controllers.ControlerNiveau;
-import controllers.Ordonnanceur;
+import controllers.engine.Ordonnanceur;
 
 public class MyFirstLevel {
 
@@ -30,11 +30,11 @@ public class MyFirstLevel {
 		Niveau wLevel1 = new Niveau();
 
 		// Creation et initialisation du robot 1
-		Bot wBot1 = new Bot(new Position(0, 0), Orientation.NORD, Couleur.BLANC);
+		Bot wBot1 = new Bot(new Position(0, 0), Orientation.NORD, Couleur.BLANC, Etat.ACTIF);
 		wLevel1.addBot(wBot1);
 
 		// Creation et initialisation du robot 2
-		Bot wBot2 = new Bot(new Position(0, 1), Orientation.EST, Couleur.BLANC);
+		Bot wBot2 = new Bot(new Position(0, 1), Orientation.EST, Couleur.BLANC, Etat.ACTIF);
 		wLevel1.addBot(wBot2);
 
 		// Creation de la procedure P1
@@ -96,8 +96,8 @@ public class MyFirstLevel {
 		System.out.println("Hello World!");
 
 		/* Création du model */
-		// Niveau wModelNiveau = createModel();
-		Niveau wModelNiveau = parserXML.creatLevelXML("res/XML/Conditions/level6.xml");
+		Niveau wModelNiveau = createModel();
+		// Niveau wModelNiveau = parserXML.creatLevelXML("res/XML/Conditions/level6.xml");
 		/* Création de la vue */
 		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
@@ -127,9 +127,8 @@ public class MyFirstLevel {
 		System.out.println("Fin ordonanceur");
 
 		/* Démarrage du niveau */
-		wViewNiveau.run();
+		wControlerNiveau.run();
 		System.out.println("Goodbye World!");
-
 	}
 
 }

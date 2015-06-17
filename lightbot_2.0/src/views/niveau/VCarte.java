@@ -91,5 +91,13 @@ public class VCarte extends View implements Observer {
 			clearView();
 			initView();
 		}
+		if (aString.equals("carte_reset")) {
+			clearView();
+			initView();
+		}
+		if (aString.equals("bot_reset")) {
+			clearView();
+			initView();
+		}
 	}
 }

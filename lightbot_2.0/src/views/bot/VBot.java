@@ -44,6 +44,10 @@ public class VBot extends View implements Observer {
 		this.pSprite.draw(aTarget, wNewState);
 	}
 
+	public Bot getBot() {
+		return this.pBot;
+	}
+
 	@Override
 	public void initView() {
 		Sprite wSprite = new Sprite();
@@ -99,6 +103,9 @@ public class VBot extends View implements Observer {
 			resetTexture();
 		}
 		if (aString.equals("bot_orientation")) {
+			resetTexture();
+		}
+		if (aString.equals("bot_reset")) {
 			resetTexture();
 		}
 	}

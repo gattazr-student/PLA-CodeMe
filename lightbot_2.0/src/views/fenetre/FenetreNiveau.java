@@ -1,26 +1,34 @@
 package views.fenetre;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import models.action.Action;
 import models.action.Route;
 import models.niveau.Carte;
 import models.niveau.Niveau;
 import mvc.Observer;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
-import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.Mouse.Button;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.KeyEvent;
 import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.action.VAction;
+import views.action.VRoute;
 import views.action.VRouteListe;
+import views.bot.VBot;
 import views.jsfml.VBouton;
-import views.jsfml.VRoute;
+import views.jsfml.VImage;
 import views.niveau.VCarte;
 import views.niveau.VCase;
 import controllers.ControlerNiveau;
@@ -36,6 +44,10 @@ public class FenetreNiveau extends View implements Observer {
 	private Panel pPanelActions;
 	private Panel pPanelMenu;
 
+	private Route pRouteMain;
+	private VRouteListe pVRouteListCourrante;
+	private List<VRouteListe> pVRoutesList;
+
 	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
 		this.pWindow = aWindow;
 		this.pNiveau = aNiveau;
@@ -44,7 +56,7 @@ public class FenetreNiveau extends View implements Observer {
 		Vector2i wSize = this.pWindow.getSize();
 		setZone(new FloatRect(0, 0, wSize.x, wSize.y));
 
-		wXSep = (float) (wSize.x * 0.7); // Calcul 70% de la largeur de la fenêtre
+		wXSep = wSize.x - 4 * VRoute.LARGEUR; // Calcul 70% de la largeur de la fenêtre
 		wYSep = (float) (wSize.y * 0.85); // Calcul 85% de la hauteur de la fenêtre
 		/* Ajoute les 4 panels dans la liste des éléments de la vue */
 		this.pPanelCarte = new Panel(new FloatRect(0, 0, wXSep, wYSep));
@@ -55,29 +67,109 @@ public class FenetreNiveau extends View implements Observer {
 		addView(this.pPanelRoutes);
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
+
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/menu/ciel.jpeg");
+		this.pPanelCarte.addView(wImage_Fond);
+
+		this.pRouteMain = aNiveau.getBots().get(0).getRouteMain();
+		this.pVRouteListCourrante = null;
+		this.pVRoutesList = new LinkedList<VRouteListe>();
+
 		initView();
+	}
+
+	/**
+	 * Retrouve la VRouteListe sur laquelle un click a été effectué
+	 *
+	 * @param wPosition
+	 * @return
+	 */
+	private VRouteListe findVRoute(Vector2f aPosition) {
+		for (VRouteListe wVRouteListe : this.pVRoutesList) {
+			if (wVRouteListe.contains(aPosition)) {
+				return wVRouteListe;
+			}
+		}
+		return null;
+	}
+
+	public void handleEvents() {
+		for (Event wEvent : this.pWindow.pollEvents()) {
+			if (wEvent.type == Event.Type.CLOSED) {
+				this.pWindow.close();
+				System.exit(0);
+			}
+			if (wEvent.type == Event.Type.RESIZED) {
+				redraw();
+			}
+			if (wEvent.type == Event.Type.KEY_RELEASED) {
+				KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
+				this.pControler.keyboardAction(wSMFLKeyEvent);
+			}
+			if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+				MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
+				Vector2f wPosition = new Vector2f(wMouseEvent.position);
+				if (wMouseEvent.button == Button.LEFT) {
+					View wView = isClickedOn(wPosition);
+					if (wView instanceof VBouton) {
+						String wName = ((VBouton) wView).getName();
+						switch (wName) {
+						case "reset":
+							this.pControler.resetLevel();
+							break;
+						case "back":
+							/* TODO: back to Menu */
+							break;
+						case "play":
+							this.pControler.startRunning();
+							break;
+						}
+					} else if (wView instanceof VBot) {
+						/* Changement du bot courant */
+						this.pControler.setBotCourant(((VBot) wView).getBot());
+					} else if (wView instanceof VRouteListe) {
+						/* Change la route courante */
+						this.pVRouteListCourrante.setTitreColor(Color.BLACK);
+						this.pVRouteListCourrante = ((VRouteListe) wView);
+						this.pVRouteListCourrante.setTitreColor(Color.RED);
+						this.pControler.setRouteCourant(this.pVRouteListCourrante.getRoute());
+					} else if (wView instanceof VAction) {
+						if (this.pPanelActions.contains(wPosition)) {
+							/* Ajoute une action dans la courante */
+							this.pControler.addToRouteCourante(((VAction) wView).getAction());
+						} else if (this.pPanelRoutes.contains(wPosition)) {
+							/* Retire l'action dans bonne liste */
+							wPosition = Vector2f.sub(wPosition, this.pPanelRoutes.getOrigin());
+							VRouteListe wVRoute = findVRoute(wPosition);
+							wPosition = Vector2f.sub(wPosition, wVRoute.getOrigin());
+							int wIndice = wVRoute.findPosition(wPosition);
+							this.pControler.removeFromRoute(wVRoute.getRoute(), wIndice);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
 	 * Dessine les boutons actions
 	 */
 	private void initActions() {
-		VBouton wButton_Allume = new VBouton(new FloatRect(0, 0, 59, 59), "res/action/allumer.png");
-		this.pPanelActions.addView(wButton_Allume);
-		VBouton wButton_Avancer = new VBouton(new FloatRect(25, 0, 59, 59), "res/action/avancer.png");
-		this.pPanelActions.addView(wButton_Avancer);
-		VBouton wButton_Route1 = new VBouton(new FloatRect(50, 0, 59, 59), "res/action/route_p1.png");
-		this.pPanelActions.addView(wButton_Route1);
-		VBouton wButton_Route2 = new VBouton(new FloatRect(75, 0, 59, 59), "res/action/route_p2.png");
-		this.pPanelActions.addView(wButton_Route2);
-		VBouton wButton_Sauter = new VBouton(new FloatRect(100, 0, 59, 59), "res/action/sauter.png");
-		this.pPanelActions.addView(wButton_Sauter);
-		VBouton wButton_TournerDroit = new VBouton(new FloatRect(125, 0, 59, 59),
-				"res/action/tourner_droit.png");
-		this.pPanelActions.addView(wButton_TournerDroit);
-		VBouton wButton_TournerGauche = new VBouton(new FloatRect(150, 0, 59, 59),
-				"res/action/tourner_gauche.png");
-		this.pPanelActions.addView(wButton_TournerGauche);
+		ArrayList<Action> wAvailable = this.pNiveau.getActions();
+		ArrayList<Route> wRoutes = this.pNiveau.getRoutes();
+		float wY = (this.pPanelActions.getHeight() - VAction.HAUTEUR) / 2;
+		float wX = (this.pPanelActions.getWidth() - (wAvailable.size() + wRoutes.size()) * VAction.LARGEUR) / 2;
+
+		for (Action wAction : wAvailable) {
+			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
+					VAction.HAUTEUR)));
+			wX += VAction.LARGEUR;
+		}
+		for (Action wAction : wRoutes) {
+			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
+					VAction.HAUTEUR)));
+			wX += VAction.LARGEUR;
+		}
 	}
 
 	/**
@@ -96,32 +188,41 @@ public class FenetreNiveau extends View implements Observer {
 	}
 
 	private void initMenu() {
-		VBouton wButton_BackToMenu = new VBouton(new FloatRect(0, 0, 59, 59), "res/menu/Back_To_Menu.png");
+		float wY = (this.pPanelMenu.getHeight() - 54) / 2;
+		float wX = (this.pPanelMenu.getWidth() - 154 - 59) / 2;
+		VBouton wButton_BackToMenu = new VBouton(new FloatRect(wX, wY, 54, 53), "back",
+				"res/menu/Back_To_Menu.png");
 		this.pPanelMenu.addView(wButton_BackToMenu);
-		VBouton wButton_Play = new VBouton(new FloatRect(28, 0, 59, 59), "res/menu/marche.png");
+		VBouton wButton_Play = new VBouton(new FloatRect(wX + 56, wY, 96, 54), "play", "res/menu/marche.png");
 		this.pPanelMenu.addView(wButton_Play);
-		VBouton wButton_Reset = new VBouton(new FloatRect(77, 0, 59, 59), "res/menu/refresh.png");
+		VBouton wButton_Reset = new VBouton(new FloatRect(wX + 154, wY, 59, 54), "reset",
+				"res/menu/refresh.png");
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 
 	private void initRoutes() {
-		/* TODO: Récupérer le main du robot courant */
-		System.out.println("Init routes");
-		VRouteListe wVRouteMain = new VRouteListe(this.pNiveau.getBots().get(0).getRouteMain(),
-				new FloatRect(0, 0, 4 * VRoute.LARGEUR, 3 * VRoute.HAUTEUR));
+		int wLargeurRoute = 4 * VRoute.LARGEUR;
+		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
+		VRouteListe wVRouteMain = new VRouteListe(this.pRouteMain, new FloatRect(0, 0, wLargeurRoute,
+				depl_cadre));
+		this.pVRoutesList.clear();
+		this.pVRouteListCourrante = wVRouteMain;
+		this.pVRouteListCourrante.setTitreColor(Color.RED);
+		this.pVRoutesList.add(wVRouteMain);
 		this.pPanelRoutes.addView(wVRouteMain);
-		int depl_cadre = 0;
+		depl_cadre = depl_cadre + 15;
+		int wHauteurRoute = 2 * VRoute.HAUTEUR + VRouteListe.OFFSET;
 		for (Route wRoute : this.pNiveau.getRoutes()) {
-			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, 165 + depl_cadre,
-					4 * VRoute.LARGEUR, 2 * VRoute.HAUTEUR));
+			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, depl_cadre, wLargeurRoute,
+					wHauteurRoute));
+			this.pVRoutesList.add(wVRoute);
 			this.pPanelRoutes.addView(wVRoute);
-			depl_cadre = depl_cadre + 110;
+			depl_cadre = depl_cadre + wHauteurRoute + 10;
 		}
 	}
 
 	@Override
 	public void initView() {
-		/* TODO: complete function */
 		initCarte();
 		initActions();
 		initMenu();
@@ -134,48 +235,28 @@ public class FenetreNiveau extends View implements Observer {
 		this.pWindow.display();
 	}
 
-	public void run() {
-		redraw();
-
-		/* Limite le framerate */
-		this.pWindow.setFramerateLimit(30);
-		while (this.pWindow.isOpen()) {
-			/* Gère les events */
-			for (Event wEvent : this.pWindow.pollEvents()) {
-				if (wEvent.type == Event.Type.CLOSED) {
-					this.pWindow.close();
-				}
-				if (wEvent.type == Event.Type.RESIZED) {
-					redraw();
-				}
-				if (wEvent.type == Event.Type.KEY_RELEASED) {
-					KeyEvent wSMFLKeyEvent = wEvent.asKeyEvent();
-					if (wSMFLKeyEvent.key.compareTo(Key.UP) == 0) {
-						this.pControler.avancerBot();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.LEFT) == 0) {
-						this.pControler.tournerGauche();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.RIGHT) == 0) {
-						this.pControler.tournerDroite();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.DOWN) == 0) {
-						this.pControler.allumerCase();
-					} else if (wSMFLKeyEvent.key.compareTo(Key.SPACE) == 0) {
-						this.pControler.sauterBot();
-					}
-					redraw();
-				}
-				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
-					if (wMouseEvent.button == Button.LEFT) {
-						View wClicked = isClickedOn(new Vector2f(wMouseEvent.position));
-						System.out.println(String.format("Left click on %s", wClicked.getClass()));
-					}
-				}
-			}
-		}
-	}
-
 	public void setController(ControlerNiveau aControlerNiveau) {
 		this.pControler = aControlerNiveau;
+	}
+
+	public void setRouteMain(Route aRouteMain) {
+		this.pVRouteListCourrante.setTitreColor(Color.BLACK);
+		this.pRouteMain = aRouteMain;
+		int wLargeurRoute = 4 * VRoute.LARGEUR;
+		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
+		VRouteListe wVRouteMain = new VRouteListe(aRouteMain, new FloatRect(0, 0, wLargeurRoute, depl_cadre));
+
+		this.pVRouteListCourrante = wVRouteMain;
+		wVRouteMain.setTitreColor(Color.RED);
+		if (!this.pVRoutesList.isEmpty()) {
+			this.pVRoutesList.remove(0);
+			this.pVRoutesList.add(0, wVRouteMain);
+		}
+		this.pPanelRoutes.clearView();
+		for (VRouteListe wVRoute : this.pVRoutesList) {
+			this.pPanelRoutes.addView(wVRoute);
+		}
+
 	}
 
 	@Override

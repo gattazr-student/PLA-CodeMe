@@ -1,4 +1,4 @@
-package views.jsfml;
+package views.action;
 
 import models.action.Action;
 import models.action.Allumer;
@@ -12,18 +12,17 @@ import models.action.TournerGauche;
 import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.RenderStates;
+import org.jsfml.graphics.RenderTarget;
+import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Transform;
 
 import views.View;
-import views.action.VAllumer;
-import views.action.VAttendre;
-import views.action.VAvancer;
-import views.action.VDivise;
-import views.action.VRouteBouton;
-import views.action.VSauter;
-import views.action.VTournerDroite;
-import views.action.VTournerGauche;
 
 public abstract class VAction extends View implements Observer {
+
+	public static final int HAUTEUR = 55;
+	public static final int LARGEUR = 55;
 
 	public static VAction makeVAction(Action aAction, FloatRect aZone) {
 		if (aAction instanceof Allumer) {
@@ -39,7 +38,7 @@ public abstract class VAction extends View implements Observer {
 			return new VDivise((Divise) aAction, aZone);
 		}
 		if (aAction instanceof Route) {
-			return new VRouteBouton((Route) aAction, aZone);
+			return new VRoute((Route) aAction, aZone);
 		}
 		if (aAction instanceof Sauter) {
 			return new VSauter((Sauter) aAction, aZone);
@@ -53,7 +52,45 @@ public abstract class VAction extends View implements Observer {
 		return null;
 	}
 
-	public VAction(FloatRect aZone) {
+	private Action pAction;
+	private Sprite pSprite;
+
+	public VAction(Action aAction, FloatRect aZone) {
 		setZone(aZone);
+		this.pAction = aAction;
 	}
+
+	@Override
+	public void draw(RenderTarget aTarget, RenderStates aState) {
+		if (this.pSprite == null) {
+			initView();
+			this.pSprite = getSprite();
+		}
+		/* Calcul de la position asbolue */
+		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
+		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
+				aState.transform), aState.texture, aState.shader);
+		this.pSprite.draw(aTarget, wNewState);
+	}
+
+	public Action getAction() {
+		return this.pAction;
+	}
+
+	public Sprite getSprite() {
+		return this.pSprite;
+	}
+
+	@Override
+	public void initView() {
+		this.pSprite = new Sprite();
+		setTexture();
+	}
+
+	public void setSprite(Sprite aSprite) {
+		this.pSprite = aSprite;
+	}
+
+	public abstract void setTexture();
+
 }

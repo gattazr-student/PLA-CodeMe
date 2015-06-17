@@ -8,19 +8,18 @@ import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
+import org.jsfml.graphics.Transform;
 import org.jsfml.system.Vector2f;
 
 import views.View;
 
-public class VBouton extends View {
+public class VImage extends View {
 
 	private String pTextureFileName;
 	private Sprite pSprite;
-	private String pName;
 
-	public VBouton(FloatRect aZone, String aName, String aTextureFileName) {
+	public VImage(FloatRect aZone, String aTextureFileName) {
 		setZone(aZone);
-		this.pName = aName;
 		this.pTextureFileName = aTextureFileName;
 		initView();
 	}
@@ -30,11 +29,11 @@ public class VBouton extends View {
 		if (this.pSprite == null) {
 			initView();
 		}
-		this.pSprite.draw(aTarget, aState);
-	}
-
-	public String getName() {
-		return this.pName;
+		/* Calcul de la position asbolue */
+		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
+		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
+				aState.transform), aState.texture, aState.shader);
+		this.pSprite.draw(aTarget, wNewState);
 	}
 
 	@Override

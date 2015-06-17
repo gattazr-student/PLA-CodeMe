@@ -3,16 +3,16 @@ package views.action;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import models.action.Attendre;
+import models.action.Route;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
-public class VAttendre extends VAction {
+public class VRoute extends VAction {
 
-	public VAttendre(Attendre aAttendre, FloatRect aZone) {
-		super(aAttendre, aZone);
-		aAttendre.addObserver(this);
+	public VRoute(Route aRoute, FloatRect aZone) {
+		super(aRoute, aZone);
+		aRoute.addObserver(this);
 		initView();
 	}
 
@@ -21,7 +21,8 @@ public class VAttendre extends VAction {
 		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
-			wStringBuilder.append("res/action/wait");
+			wStringBuilder.append("res/action/route_");
+			wStringBuilder.append(((Route) getAction()).getName());
 
 			switch (getAction().getCouleur()) {
 			case BLANC:
@@ -47,5 +48,4 @@ public class VAttendre extends VAction {
 	@Override
 	public void update(String aString, Object aObjet) {
 	}
-
 }

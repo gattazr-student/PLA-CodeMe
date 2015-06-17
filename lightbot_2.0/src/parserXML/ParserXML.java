@@ -3,6 +3,7 @@ package parserXML;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,6 +19,7 @@ import models.action.Sauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
+import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 import models.bot.Bot;
@@ -33,11 +35,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import views.fenetre.Fenetre;
-import views.fenetre.FenetreNiveau;
-import controllers.ControlerNiveau;
-
-public class parserXML {
+public class ParserXML {
 
 	public static Niveau creatLevelXML(String fichierXML) {
 
@@ -120,25 +118,25 @@ public class parserXML {
 
 					if ((orient.getAttribute("init")).equals("EST")) {
 						final Orientation aOrientBot = Orientation.EST;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("SUD")) {
 						final Orientation aOrientBot = Orientation.SUD;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("OUEST")) {
 						final Orientation aOrientBot = Orientation.OUEST;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
 					if ((orient.getAttribute("init")).equals("NORD")) {
 						final Orientation aOrientBot = Orientation.NORD;
-						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC);
+						final Bot aBot = new Bot(aPosBot, aOrientBot, Couleur.BLANC, Etat.ACTIF);
 						aBot.setName(aName);
 						wLevel.addBot(aBot);
 					}
@@ -201,7 +199,7 @@ public class parserXML {
 					}
 					/*
 					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 *
+					 * 
 					 * final Case aCase = new CaseInterrupteur(aPosCase,
 					 * Integer.parseInt(uneCase.getAttribute("h")));
 					 * aCarte.addCase(aCase);
@@ -217,9 +215,14 @@ public class parserXML {
 			for (int i = 0; i < aNbRoute; i++) {
 				switch (i) {
 				case 0:
-					final Route aMain = new Route(Integer.parseInt(coups.getAttribute("main")),
-							new ArrayList<Action>(), "main");
-					wLevel.addRoute(aMain);
+					Route wMain;
+					int wLongeur = Integer.parseInt(coups.getAttribute("main"));
+					List<Bot> aBotList = wLevel.getBots();
+					for (int j = 0; j < aBotList.size(); j++) {
+						wMain = new Route(wLongeur, new ArrayList<Action>(), "main");
+						(aBotList.get(j)).setRouteMain(wMain);
+					}
+
 					break;
 				case 1:
 					final Route aP1 = new Route(Integer.parseInt(coups.getAttribute("p1")),
@@ -247,25 +250,6 @@ public class parserXML {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	public static void main(final String[] args) {
-
-		/* Création du model */
-		Niveau wModelNiveau = creatLevelXML("res/xml/Conditions/level6.xml");
-		/* Création de la vue */
-		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
-		/* Création du contrôleur */
-		ControlerNiveau wControlerNiveau = new ControlerNiveau(wModelNiveau, wViewNiveau);
-
-		/* Rajout du controlleur dans la vue */
-		wViewNiveau.setController(wControlerNiveau);
-		/* Ajout de l'observer */
-		wModelNiveau.addObserver(wViewNiveau);
-
-		/* Démarrage du niveau */
-		wViewNiveau.run();
-
 	}
 
 }

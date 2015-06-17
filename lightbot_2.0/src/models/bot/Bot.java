@@ -4,6 +4,7 @@ import models.ObservableModel;
 import models.action.Action;
 import models.action.Route;
 import models.basic.Couleur;
+import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 
@@ -12,11 +13,6 @@ import models.basic.Position;
  *
  */
 public class Bot extends ObservableModel {
-
-	/**
-	 * Liste des actions disponibles pour le Bot
-	 */
-	// private List<Action> pActions;
 
 	/**
 	 * Position du bot sur une Carte
@@ -36,6 +32,14 @@ public class Bot extends ObservableModel {
 	private String pName;
 
 	/**
+	 * Etat du Bot (Actif ou Passif)
+	 */
+	private Etat pEtat;
+	private Couleur pCouleurSauvegarde;
+	private Orientation pOrientationSauvergarde;
+	private Position pPositionSauvergarde;
+
+	/**
 	 * Constructeur par défault. Placé en 0,0, Orienté vers Nord et de Couleur Blanche
 	 */
 
@@ -44,6 +48,7 @@ public class Bot extends ObservableModel {
 		this.pPosition = new Position();
 		this.pOrientation = Orientation.NORD;
 		this.pRouteMain = new Route();
+		this.pEtat = Etat.ACTIF;
 	}
 
 	/**
@@ -56,11 +61,16 @@ public class Bot extends ObservableModel {
 	 * @param aCouleur
 	 *            Couleur du bot
 	 */
-	public Bot(Position aPosition, Orientation aOrientation, Couleur aCouleur) {
+	public Bot(Position aPosition, Orientation aOrientation, Couleur aCouleur, Etat aEtat) {
 		this.pPosition = aPosition;
+		this.pPositionSauvergarde = this.pPosition;
 		this.pOrientation = aOrientation;
+		this.pOrientationSauvergarde = this.pOrientation;
 		this.pCouleur = aCouleur;
+		this.pCouleurSauvegarde = this.pCouleur;
+
 		this.pRouteMain = new Route();
+		this.pEtat = aEtat;
 	}
 
 	/**
@@ -77,6 +87,15 @@ public class Bot extends ObservableModel {
 	 */
 	public Couleur getCouleur() {
 		return this.pCouleur;
+	}
+
+	/**
+	 * retoune l'etat du Bot
+	 *
+	 * @return Etat du Bot
+	 */
+	public Etat getEtat() {
+		return this.pEtat;
 	}
 
 	/**
@@ -117,7 +136,14 @@ public class Bot extends ObservableModel {
 	 * remove une action
 	 */
 	public void removeAction(int numberAction) {
-		this.pRouteMain.remove_Action(numberAction);
+		this.pRouteMain.removeAction(numberAction);
+	}
+
+	public void reset() {
+		this.pCouleur = this.pCouleurSauvegarde;
+		this.pOrientation = this.pOrientationSauvergarde;
+		this.pPosition = this.pPositionSauvergarde;
+		notifyObserver("bot_reset", null);
 	}
 
 	/**
@@ -136,6 +162,13 @@ public class Bot extends ObservableModel {
 	public void setCouleur(Couleur aCouleur) {
 		this.pCouleur = aCouleur;
 		notifyObserver("bot_couleur", null);
+	}
+
+	/**
+	 * Modifie l'etat du Bot
+	 */
+	public void setEtat(Etat aEtat) {
+		this.pEtat = aEtat;
 	}
 
 	/**
@@ -169,12 +202,11 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * Définit la route main du Bot
-	 * 
+	 *
 	 * @param aRouteMain
 	 *            nouvelle route main du Bot
 	 */
 	public void setRouteMain(Route aRouteMain) {
 		this.pRouteMain = aRouteMain;
 	}
-
 }
