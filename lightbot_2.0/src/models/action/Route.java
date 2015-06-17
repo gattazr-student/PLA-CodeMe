@@ -16,23 +16,24 @@ public class Route extends Action {
 	final static String pNameAction = "route";
 
 	private ArrayList<Action> action;
-	private int taille;
+
+	private int pTailleMax;
 	private String pName;
 
 	public Route() {
-		this.taille = 12;
+		this.pTailleMax = 12;
 		this.action = new ArrayList<Action>();
 		setName(new String());
 	}
 
 	public Route(int aTaille, ArrayList<Action> aAction, String aName) {
-		this.taille = aTaille;
+		this.pTailleMax = aTaille;
 		this.action = aAction;
 		setName(aName);
 	}
 
 	public void addAction(Action aAction) {
-		if (this.action.size() < this.taille) {
+		if (this.action.size() < this.pTailleMax) {
 			this.action.add(aAction);
 			notifyObserver("route_add", null);
 		}
@@ -42,6 +43,16 @@ public class Route extends Action {
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
 		/* Un Route ne peut pas être appliqué */
 		throw new LightBotException("Route ne peut pas etre applique");
+	}
+
+	@Override
+	public Action copy() {
+		Route wRoute = new Route();
+		wRoute.setName(this.pName);
+		wRoute.setTailleMax(this.pTailleMax);
+
+		wRoute.setCouleur(getCouleur());
+		return wRoute;
 	}
 
 	public ArrayList<Action> getAction() {
@@ -54,7 +65,7 @@ public class Route extends Action {
 	}
 
 	public int getTailleMax() {
-		return this.taille;
+		return this.pTailleMax;
 	}
 
 	public Iterator<Action> iterator() {
@@ -62,15 +73,9 @@ public class Route extends Action {
 	}
 
 	public void removeAction(int aPosition) {
-		if (aPosition < this.taille) {
+		if (aPosition < this.pTailleMax) {
 			this.action.remove(aPosition);
 			notifyObserver("route_remove", null);
-		}
-	}
-
-	public void set_Action(Action aAction, int i) {
-		if (this.action.size() < (this.taille - 1)) {
-			this.action.set(i, aAction);
 		}
 	}
 
@@ -79,7 +84,7 @@ public class Route extends Action {
 	}
 
 	public void setTailleMax(int i) {
-		this.taille = i;
+		this.pTailleMax = i;
 	}
 
 	public int size() {

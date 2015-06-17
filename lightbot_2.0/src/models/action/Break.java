@@ -15,6 +15,13 @@ public class Break extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		Break wBreak = new Break();
+		wBreak.setCouleur(getCouleur());
+		return wBreak;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		return false;
 	}

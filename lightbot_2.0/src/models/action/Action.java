@@ -35,6 +35,13 @@ public abstract class Action extends ObservableModel {
 	abstract public void apply(Bot aBot, Carte aCarte) throws LightBotException;
 
 	/**
+	 * Retourne une copie de l'Objet
+	 * 
+	 * @return
+	 */
+	public abstract Action copy();
+
+	/**
 	 * Retourne la couleur de l'Action.
 	 *
 	 * @return couleur de l'Action

@@ -148,13 +148,6 @@ public class Bot extends ObservableModel {
 	}
 
 	/**
-	 * arrange le action du Bot
-	 */
-	public void setAction(Action aAction, int numberAction) {
-		this.pRouteMain.set_Action(aAction, numberAction);
-	}
-
-	/**
 	 * Définit la Couleur du Bot
 	 *
 	 * @param aCouleur

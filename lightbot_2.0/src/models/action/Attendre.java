@@ -19,6 +19,13 @@ public class Attendre extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		Attendre wAttendre = new Attendre();
+		wAttendre.setCouleur(getCouleur());
+		return wAttendre;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		return true;
 	}

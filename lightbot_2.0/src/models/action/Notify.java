@@ -15,6 +15,13 @@ public class Notify extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		Notify wNotify = new Notify();
+		wNotify.setCouleur(getCouleur());
+		return wNotify;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		return false;
 	}

@@ -47,7 +47,7 @@ public class ControlerNiveau {
 	 *            Action à ajouter dans la Route
 	 */
 	public void addToRouteCourante(Action aAction) {
-		this.pRouteCourant.addAction(aAction);
+		this.pRouteCourant.addAction(aAction.copy());
 		this.pVNiveau.redraw();
 		this.pNbAction++;
 	}

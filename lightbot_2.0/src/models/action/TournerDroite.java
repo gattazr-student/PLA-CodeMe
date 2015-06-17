@@ -27,6 +27,13 @@ public class TournerDroite extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		TournerDroite wTournerDroite = new TournerDroite();
+		wTournerDroite.setCouleur(getCouleur());
+		return wTournerDroite;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		return true;
 	}

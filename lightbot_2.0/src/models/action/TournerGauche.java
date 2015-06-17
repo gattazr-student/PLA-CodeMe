@@ -1,9 +1,9 @@
 package models.action;
 
-import exceptions.LightBotException;
 import models.basic.Orientation;
 import models.bot.Bot;
 import models.niveau.Carte;
+import exceptions.LightBotException;
 
 /**
  * Action TournerGauche
@@ -24,6 +24,13 @@ public class TournerGauche extends Action {
 		} else {
 			aBot.setOrientation(Orientation.EST);
 		}
+	}
+
+	@Override
+	public Action copy() {
+		TournerGauche wTournerGauche = new TournerGauche();
+		wTournerGauche.setCouleur(getCouleur());
+		return wTournerGauche;
 	}
 
 	@Override

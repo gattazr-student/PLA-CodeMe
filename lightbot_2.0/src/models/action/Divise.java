@@ -18,6 +18,13 @@ public class Divise extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		Divise wDivise = new Divise();
+		wDivise.setCouleur(getCouleur());
+		return wDivise;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		// /* TODO: Divise.valid : make function */
 		return false;

@@ -29,6 +29,13 @@ public class Allumer extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		Allumer wAllumer = new Allumer();
+		wAllumer.setCouleur(getCouleur());
+		return wAllumer;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		Case aCase = aCarte.getCase(aBot.getPosition());
 		if (aCase instanceof CaseLampe) {

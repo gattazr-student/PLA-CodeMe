@@ -19,6 +19,13 @@ public class TestSauter extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		TestSauter wTestSauter = new TestSauter();
+		wTestSauter.setCouleur(getCouleur());
+		return wTestSauter;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		return true;
 	}

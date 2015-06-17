@@ -31,6 +31,13 @@ public class Avancer extends Action {
 
 	}
 
+	@Override
+	public Action copy() {
+		Avancer wAvancer = new Avancer();
+		wAvancer.setCouleur(getCouleur());
+		return wAvancer;
+	}
+
 	private boolean destinationExists(Bot aBot, Carte aCarte) {
 		/*
 		 * Acion valide si pas de case (segfault) ou si case destination sur même niveau

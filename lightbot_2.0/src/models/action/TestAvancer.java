@@ -19,6 +19,13 @@ public class TestAvancer extends Action {
 	}
 
 	@Override
+	public Action copy() {
+		TestAvancer wTestAvancer = new TestAvancer();
+		wTestAvancer.setCouleur(getCouleur());
+		return wTestAvancer;
+	}
+
+	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
 		return true;
 	}
