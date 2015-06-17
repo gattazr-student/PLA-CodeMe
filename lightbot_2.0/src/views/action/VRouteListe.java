@@ -11,7 +11,7 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Vector2f;
 
 import views.View;
-import views.jsfml.VRectangle;
+import views.jsfml.VImage;
 import views.jsfml.VTexte;
 
 public class VRouteListe extends View implements Observer {
@@ -20,7 +20,7 @@ public class VRouteListe extends View implements Observer {
 
 	private Route pRoute;
 	private VTexte pVTexte;
-	private VRectangle pContainer;
+	private VImage pFond;
 
 	public VRouteListe(Route aRoute, FloatRect aZone) {
 		super(aZone);
@@ -42,10 +42,8 @@ public class VRouteListe extends View implements Observer {
 
 	@Override
 	public void initView() {
-		VRectangle wContainer = new VRectangle(new FloatRect(0, 0, getWidth(), getHeight()));
-		wContainer.setFillColor(Color.YELLOW);
-		this.pContainer = wContainer;
-
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/menu/pourpre.png");
+		this.pFond = wImage_Fond;
 		VTexte wVTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pRoute.getName(), 25);
 		wVTexte.setColor(Color.BLACK);
 		this.pVTexte = wVTexte;
@@ -68,7 +66,7 @@ public class VRouteListe extends View implements Observer {
 
 	private void updateActions() {
 		clearView();
-		addView(this.pContainer);
+		addView(this.pFond);
 		addView(this.pVTexte);
 		int wI = 0;
 		int wX = 0;
