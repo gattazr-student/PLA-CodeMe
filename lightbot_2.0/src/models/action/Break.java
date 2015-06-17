@@ -9,13 +9,12 @@ public class Break extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) {
-		// TODO Auto-generated method stub
-
+		/* L'action Break ne peut pas être appliqué. */
 	}
 
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		// TODO Auto-generated method stub
+		/* L'action Break ne peut pas être appliquée. */
 		return false;
 	}
 

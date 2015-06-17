@@ -13,9 +13,13 @@ import models.action.Action;
 import models.action.Allumer;
 import models.action.Attendre;
 import models.action.Avancer;
+import models.action.Break;
 import models.action.Divise;
+import models.action.Notify;
 import models.action.Route;
 import models.action.Sauter;
+import models.action.TestAvancer;
+import models.action.TestSauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
@@ -61,38 +65,53 @@ public class ParserXML {
 			final NodeList actionslist = actions.getElementsByTagName("action");
 			final int nbActions = actionslist.getLength();
 
+			Element action;
+			Action aAction;
 			for (int j = 0; j < nbActions; j++) {
-				final Element action = (Element) actionslist.item(j);
-
-				if ((action.getTextContent()).equals("allumer")) {
-					final Action aAction = new Allumer();
+				aAction = null;
+				action = (Element) actionslist.item(j);
+				switch (action.getTextContent()) {
+				case "allumer":
+					aAction = new Allumer();
+					break;
+				case "wait":
+					aAction = new Attendre();
+					break;
+				case "avancer":
+					aAction = new Avancer();
+					break;
+				case "break":
+					aAction = new Break();
+					break;
+				case "divise":
+					aAction = new Divise();
+					break;
+				case "notify":
+					aAction = new Notify();
+					break;
+				case "sauter":
+					aAction = new Sauter();
+					break;
+				case "testAvancer":
+					aAction = new TestAvancer();
+					break;
+				case "testSauter":
+					aAction = new TestSauter();
+					break;
+				case "droite":
+					aAction = new TournerDroite();
+					break;
+				case "gauche":
+					aAction = new TournerGauche();
+					break;
+				default:
+					break;
+				}
+				System.out.print("\n add " + action.getTextContent() + " ?");
+				if (aAction != null) {
+					System.out.print(" added");
 					wLevel.addAction(aAction);
 				}
-				if ((action.getTextContent()).equals("wait")) {
-					final Action aAction = new Attendre();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("avancer")) {
-					final Action aAction = new Avancer();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("divise")) {
-					final Action aAction = new Divise();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("sauter")) {
-					final Action aAction = new Sauter();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("droite")) {
-					final Action aAction = new TournerDroite();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("gauche")) {
-					final Action aAction = new TournerGauche();
-					wLevel.addAction(aAction);
-				}
-
 			}
 
 			// Noeud 3 : list de bots
@@ -251,5 +270,4 @@ public class ParserXML {
 		}
 		return null;
 	}
-
 }

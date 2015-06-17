@@ -3,16 +3,16 @@ package views.action;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import models.action.Break;
+import models.action.TestAvancer;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
-public class VBreak extends VAction {
+public class VTestAvancer extends VAction {
 
-	public VBreak(Break aBreak, FloatRect aZone) {
-		super(aBreak, aZone);
-		aBreak.addObserver(this);
+	public VTestAvancer(TestAvancer aTestAvancer, FloatRect aZone) {
+		super(aTestAvancer, aZone);
+		aTestAvancer.addObserver(this);
 		initView();
 	}
 
@@ -21,7 +21,7 @@ public class VBreak extends VAction {
 		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
-			wStringBuilder.append("res/action/break");
+			wStringBuilder.append("res/action/test_avancer");
 
 			switch (getAction().getCouleur()) {
 			case BLANC:
