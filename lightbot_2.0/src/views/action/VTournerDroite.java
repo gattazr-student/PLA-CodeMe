@@ -21,7 +21,7 @@ public class VTournerDroite extends VAction {
 		if (getAction() != null && getSprite() != null) {
 			Texture wTexture = new Texture();
 			StringBuilder wStringBuilder = new StringBuilder();
-			wStringBuilder.append("res/action/tourner_droit");
+			wStringBuilder.append("res/action/tourner_droite");
 
 			switch (getAction().getCouleur()) {
 			case BLANC:

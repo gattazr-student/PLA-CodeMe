@@ -6,6 +6,7 @@ import java.util.List;
 
 import models.action.Action;
 import models.action.Route;
+import models.basic.Couleur;
 import models.niveau.Carte;
 import models.niveau.Niveau;
 import mvc.Observer;
@@ -48,6 +49,8 @@ public class FenetreNiveau extends View implements Observer {
 	private VRouteListe pVRouteListCourrante;
 	private List<VRouteListe> pVRoutesList;
 
+	private List<VAction> pVActionsDisponibles;
+
 	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
 		this.pWindow = aWindow;
 		this.pNiveau = aNiveau;
@@ -71,6 +74,8 @@ public class FenetreNiveau extends View implements Observer {
 		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
 				"res/menu/fond_minion.png");
 		this.pPanelCarte.addView(wImage_Fond);
+
+		this.pVActionsDisponibles = new LinkedList<VAction>();
 
 		this.pRouteMain = aNiveau.getBots().get(0).getRouteMain();
 		this.pVRouteListCourrante = null;
@@ -124,6 +129,18 @@ public class FenetreNiveau extends View implements Observer {
 						case "play":
 							this.pControler.startRunning();
 							break;
+						case "couleur_blanc":
+							setCouleurActions(Couleur.BLANC);
+							redraw();
+							break;
+						case "couleur_vert":
+							setCouleurActions(Couleur.VERT);
+							redraw();
+							break;
+						case "couleur_rouge":
+							setCouleurActions(Couleur.ROUGE);
+							redraw();
+							break;
 						}
 					} else if (wView instanceof VBot) {
 						/* Changement du bot courant */
@@ -160,15 +177,17 @@ public class FenetreNiveau extends View implements Observer {
 		ArrayList<Route> wRoutes = this.pNiveau.getRoutes();
 		float wY = (this.pPanelActions.getHeight() - VAction.HAUTEUR) / 2;
 		float wX = (this.pPanelActions.getWidth() - (wAvailable.size() + wRoutes.size()) * VAction.LARGEUR) / 2;
-
+		VAction wVAction;
 		for (Action wAction : wAvailable) {
-			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
-					VAction.HAUTEUR)));
+			wVAction = VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR, VAction.HAUTEUR));
+			this.pPanelActions.addView(wVAction);
+			this.pVActionsDisponibles.add(wVAction);
 			wX += VAction.LARGEUR;
 		}
 		for (Action wAction : wRoutes) {
-			this.pPanelActions.addView(VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR,
-					VAction.HAUTEUR)));
+			wVAction = VAction.makeVAction(wAction, new FloatRect(wX, wY, VAction.LARGEUR, VAction.HAUTEUR));
+			this.pVActionsDisponibles.add(wVAction);
+			this.pPanelActions.addView(wVAction);
 			wX += VAction.LARGEUR;
 		}
 		/* Ajout des boutons pour le changement des couleurs */
@@ -178,7 +197,6 @@ public class FenetreNiveau extends View implements Observer {
 				"res/action/VERT.bmp"));
 		this.pPanelActions.addView(new VBouton(new FloatRect(80, 0, 40, 40), "couleur_rouge",
 				"res/action/ROUGE.bmp"));
-
 	}
 
 	/**
@@ -246,6 +264,12 @@ public class FenetreNiveau extends View implements Observer {
 
 	public void setController(ControlerNiveau aControlerNiveau) {
 		this.pControler = aControlerNiveau;
+	}
+
+	private void setCouleurActions(Couleur aCouleur) {
+		for (VAction VAction : this.pVActionsDisponibles) {
+			VAction.setCouleur(aCouleur);
+		}
 	}
 
 	public void setRouteMain(Route aRouteMain) {

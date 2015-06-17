@@ -13,6 +13,7 @@ import models.action.TestAvancer;
 import models.action.TestSauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
+import models.basic.Couleur;
 import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;
@@ -100,6 +101,11 @@ public abstract class VAction extends View implements Observer {
 	@Override
 	public void initView() {
 		this.pSprite = new Sprite();
+		setTexture();
+	}
+
+	public void setCouleur(Couleur aCouleur) {
+		this.pAction.setCouleur(aCouleur);
 		setTexture();
 	}
 
