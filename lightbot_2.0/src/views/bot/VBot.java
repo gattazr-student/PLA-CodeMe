@@ -105,5 +105,8 @@ public class VBot extends View implements Observer {
 		if (aString.equals("bot_orientation")) {
 			resetTexture();
 		}
+		if (aString.equals("bot_reset")) {
+			resetTexture();
+		}
 	}
 }

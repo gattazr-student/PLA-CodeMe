@@ -42,7 +42,6 @@ public class VTexte extends View {
 
 	@Override
 	public void initView() {
-
 		try {
 			this.wFont.loadFromFile(Paths.get("res/font/BlackKids.ttf"));
 		} catch (IOException e) {
@@ -54,5 +53,9 @@ public class VTexte extends View {
 		Vector2f wOrigin = getOrigin();
 		wTexte.setPosition(wOrigin);
 		this.pTexte = wTexte;
+	}
+
+	public void setColor(Color aColor) {
+		this.pTexte.setColor(aColor);
 	}
 }

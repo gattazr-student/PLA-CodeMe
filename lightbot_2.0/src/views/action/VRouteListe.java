@@ -8,19 +8,32 @@ import mvc.Observer;
 
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.system.Vector2f;
 
 import views.View;
 import views.jsfml.VRectangle;
+import views.jsfml.VTexte;
 
 public class VRouteListe extends View implements Observer {
 
+	public static final int OFFSET = 35;
+
 	private Route pRoute;
+	private VTexte pVTexte;
+	private VRectangle pContainer;
 
 	public VRouteListe(Route aRoute, FloatRect aZone) {
 		super(aZone);
 		this.pRoute = aRoute;
 		this.pRoute.addObserver(this);
+		this.pVTexte = null;
 		initView();
+	}
+
+	public int findPosition(Vector2f aPosition) {
+		int wDeplX = (int) aPosition.x / VRoute.LARGEUR;
+		int wDplY = (int) (aPosition.y - OFFSET) / VRoute.HAUTEUR;
+		return wDplY * 4 + wDeplX;
 	}
 
 	public Route getRoute() {
@@ -31,10 +44,35 @@ public class VRouteListe extends View implements Observer {
 	public void initView() {
 		VRectangle wContainer = new VRectangle(new FloatRect(0, 0, getWidth(), getHeight()));
 		wContainer.setFillColor(Color.YELLOW);
-		addView(wContainer);
+		this.pContainer = wContainer;
+
+		VTexte wVTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pRoute.getName(), 25);
+		wVTexte.setColor(Color.BLACK);
+		this.pVTexte = wVTexte;
+		updateActions();
+	}
+
+	public void setTitreColor(Color aColor) {
+		this.pVTexte.setColor(aColor);
+	}
+
+	@Override
+	public void update(String aString, Object aObjet) {
+		if (aString.equals("route_add")) {
+			updateActions();
+		}
+		if (aString.equals("route_remove")) {
+			updateActions();
+		}
+	}
+
+	private void updateActions() {
+		clearView();
+		addView(this.pContainer);
+		addView(this.pVTexte);
 		int wI = 0;
 		int wX = 0;
-		int wY = 0;
+		int wY = VRouteListe.OFFSET;
 		ArrayList<Action> wActions = this.pRoute.getAction();
 		for (Action wAction : wActions) {
 			if (wI == 4) {
@@ -47,18 +85,6 @@ public class VRouteListe extends View implements Observer {
 			addView(wVAction);
 			wX = wX + VAction.LARGEUR;
 			wI++;
-		}
-	}
-
-	@Override
-	public void update(String aString, Object aObjet) {
-		if (aString.equals("route_add")) {
-			clearView();
-			initView();
-		}
-		if (aString.equals("route_remove")) {
-			clearView();
-			initView();
 		}
 	}
 }

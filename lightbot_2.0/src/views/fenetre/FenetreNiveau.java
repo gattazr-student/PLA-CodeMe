@@ -10,6 +10,7 @@ import models.niveau.Carte;
 import models.niveau.Niveau;
 import mvc.Observer;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderWindow;
@@ -44,6 +45,7 @@ public class FenetreNiveau extends View implements Observer {
 	private Panel pPanelMenu;
 
 	private Route pRouteMain;
+	private VRouteListe pVRouteListCourrante;
 	private List<VRouteListe> pVRoutesList;
 
 	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
@@ -70,15 +72,10 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelCarte.addView(wImage_Fond);
 
 		this.pRouteMain = aNiveau.getBots().get(0).getRouteMain();
+		this.pVRouteListCourrante = null;
 		this.pVRoutesList = new LinkedList<VRouteListe>();
 
 		initView();
-	}
-
-	private int findPosition(Vector2f aPosition) {
-		int wDeplX = (int) aPosition.x / VRoute.LARGEUR;
-		int wDplY = (int) aPosition.y / VRoute.HAUTEUR;
-		return wDplY * 4 + wDeplX;
 	}
 
 	/**
@@ -132,7 +129,10 @@ public class FenetreNiveau extends View implements Observer {
 						this.pControler.setBotCourant(((VBot) wView).getBot());
 					} else if (wView instanceof VRouteListe) {
 						/* Change la route courante */
-						this.pControler.setRouteCourant(((VRouteListe) wView).getRoute());
+						this.pVRouteListCourrante.setTitreColor(Color.BLACK);
+						this.pVRouteListCourrante = ((VRouteListe) wView);
+						this.pVRouteListCourrante.setTitreColor(Color.RED);
+						this.pControler.setRouteCourant(this.pVRouteListCourrante.getRoute());
 					} else if (wView instanceof VAction) {
 						if (this.pPanelActions.contains(wPosition)) {
 							/* Ajoute une action dans la courante */
@@ -142,7 +142,7 @@ public class FenetreNiveau extends View implements Observer {
 							wPosition = Vector2f.sub(wPosition, this.pPanelRoutes.getOrigin());
 							VRouteListe wVRoute = findVRoute(wPosition);
 							wPosition = Vector2f.sub(wPosition, wVRoute.getOrigin());
-							int wIndice = findPosition(wPosition);
+							int wIndice = wVRoute.findPosition(wPosition);
 							this.pControler.removeFromRoute(wVRoute.getRoute(), wIndice);
 						}
 					}
@@ -200,19 +200,24 @@ public class FenetreNiveau extends View implements Observer {
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 
-	public void initRoutes() {
-		VRouteListe wVRouteMain = new VRouteListe(this.pRouteMain, new FloatRect(0, 0, 4 * VRoute.LARGEUR,
-				3 * VRoute.HAUTEUR));
+	private void initRoutes() {
+		int wLargeurRoute = 4 * VRoute.LARGEUR;
+		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
+		VRouteListe wVRouteMain = new VRouteListe(this.pRouteMain, new FloatRect(0, 0, wLargeurRoute,
+				depl_cadre));
 		this.pVRoutesList.clear();
+		this.pVRouteListCourrante = wVRouteMain;
+		this.pVRouteListCourrante.setTitreColor(Color.RED);
 		this.pVRoutesList.add(wVRouteMain);
 		this.pPanelRoutes.addView(wVRouteMain);
-		int depl_cadre = 3 * VRoute.HAUTEUR + 10;
+		depl_cadre = depl_cadre + 15;
+		int wHauteurRoute = 2 * VRoute.HAUTEUR + VRouteListe.OFFSET;
 		for (Route wRoute : this.pNiveau.getRoutes()) {
-			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, depl_cadre, 4 * VRoute.LARGEUR,
-					2 * VRoute.HAUTEUR));
+			VRouteListe wVRoute = new VRouteListe(wRoute, new FloatRect(0, depl_cadre, wLargeurRoute,
+					wHauteurRoute));
 			this.pVRoutesList.add(wVRoute);
 			this.pPanelRoutes.addView(wVRoute);
-			depl_cadre = depl_cadre + 2 * VRoute.HAUTEUR + 10;
+			depl_cadre = depl_cadre + wHauteurRoute + 10;
 		}
 	}
 
@@ -235,7 +240,22 @@ public class FenetreNiveau extends View implements Observer {
 	}
 
 	public void setRouteMain(Route aRouteMain) {
+		this.pVRouteListCourrante.setTitreColor(Color.BLACK);
 		this.pRouteMain = aRouteMain;
+		int wLargeurRoute = 4 * VRoute.LARGEUR;
+		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
+		VRouteListe wVRouteMain = new VRouteListe(aRouteMain, new FloatRect(0, 0, wLargeurRoute, depl_cadre));
+
+		this.pVRouteListCourrante = wVRouteMain;
+		wVRouteMain.setTitreColor(Color.RED);
+		if (!this.pVRoutesList.isEmpty()) {
+			this.pVRoutesList.remove(0);
+			this.pVRoutesList.add(0, wVRouteMain);
+		}
+		this.pPanelRoutes.clearView();
+		for (VRouteListe wVRoute : this.pVRoutesList) {
+			this.pPanelRoutes.addView(wVRoute);
+		}
 
 	}
 

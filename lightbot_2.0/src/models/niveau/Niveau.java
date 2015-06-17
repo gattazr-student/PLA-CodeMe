@@ -80,7 +80,7 @@ public class Niveau extends ObservableModel {
 
 	/**
 	 * Ajoute une action en fin de la liste d'action
-	 * 
+	 *
 	 * @return
 	 */
 	public ArrayList<Action> getActions() {
@@ -153,6 +153,16 @@ public class Niveau extends ObservableModel {
 			}
 		}
 		return true;
+	}
+
+	public void resetBot() {
+		for (Bot wBot : this.pBots) {
+			wBot.reset();
+		}
+	}
+
+	public void resetCarte() {
+		this.pCarte.reset();
 	}
 
 	/**

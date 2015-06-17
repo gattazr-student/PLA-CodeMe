@@ -100,8 +100,11 @@ public class ControlerNiveau {
 	 * Remet le niveau à son état initial
 	 */
 	public void resetLevel() {
-		/* TODO: ControllerNiveau.resetLevel */
 		/* Crééer la fonction reset dans Niveau */
+		this.pNiveau.resetCarte();
+		this.pNiveau.resetBot();
+		this.pVNiveau.redraw();
+		System.out.println("reset ok");
 	}
 
 	public void run() {
@@ -132,12 +135,12 @@ public class ControlerNiveau {
 		this.pBotCourant = aBot;
 		setRouteCourant(aBot.getRouteMain());
 		this.pVNiveau.setRouteMain(aBot.getRouteMain());
-		this.pVNiveau.initRoutes();
 		this.pVNiveau.redraw();
 	}
 
 	public void setRouteCourant(Route aRouteCourant) {
 		this.pRouteCourant = aRouteCourant;
+		this.pVNiveau.redraw();
 	}
 
 	/**
