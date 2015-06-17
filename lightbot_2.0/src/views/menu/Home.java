@@ -154,27 +154,14 @@ public class Home extends View {
 
 						// TODO : Gerer le lien entre click et ouverture de page
 						Vector2f pos = new Vector2f(wMouseEvent.position);
-						/*
-						 * System.out.println(pos
-						 * + " "
-						 * + (this.pPanelJouer.getWidth() / 2 - wWidth / 2)
-						 * + " "
-						 * + (this.pPanelJouer.getHeight() / 2 - wHeight / 2 + this.pPanelEntete
-						 * .getHeight())
-						 * + " "
-						 * + (this.pPanelJouer.getWidth() / 2 + wWidth / 2)
-						 * + " "
-						 * + (this.pPanelJouer.getHeight() / 2 + wHeight / 2 + this.pPanelEntete
-						 * .getHeight()));
-						 */
 
 						if (this.pPanelJouer.contains(pos)
 								&& !(pos.x < (this.pPanelJouer.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelJouer.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight())
-								&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
-								&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
-										+ this.pPanelEntete.getHeight())) {
+										&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
+										&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
+												+ this.pPanelEntete.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_c.png");
@@ -190,9 +177,9 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelTuto.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelTuto.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())
-								&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
-								&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
-										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
+										&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
+										&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
+												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
@@ -208,10 +195,10 @@ public class Home extends View {
 								&& !(pos.y < (this.pPanelOptions.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
 										+ this.pPanelTuto.getHeight())
-								&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
-								&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
-										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
-										+ this.pPanelTuto.getHeight())) {
+										&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
+										&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
+												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
+												+ this.pPanelTuto.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
@@ -238,9 +225,9 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelJouer.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelJouer.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight())
-								&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
-								&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
-										+ this.pPanelEntete.getHeight())) {
+										&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
+										&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
+												+ this.pPanelEntete.getHeight())) {
 
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
@@ -258,9 +245,9 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelTuto.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelTuto.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())
-								&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
-								&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
-										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
+										&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
+										&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
+												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
@@ -276,10 +263,10 @@ public class Home extends View {
 								&& !(pos.y < (this.pPanelOptions.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
 										+ this.pPanelTuto.getHeight())
-								&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
-								&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
-										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
-										+ this.pPanelTuto.getHeight())) {
+										&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
+										&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
+												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
+												+ this.pPanelTuto.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
