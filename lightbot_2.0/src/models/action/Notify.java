@@ -10,13 +10,11 @@ public class Notify extends Action {
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
-		/* TODO Notify.apply : make function */
-
+		/* Notify ne doit pas être appliqué */
 	}
 
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		/* TODO Notify.valid : make function */
 		return false;
 	}
 
