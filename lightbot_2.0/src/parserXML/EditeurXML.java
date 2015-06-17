@@ -75,7 +75,7 @@ public class EditeurXML {
 				/**
 				 * Bot et couleur
 				 */
-				System.out.println("Veuillez saisir la couleur du bot  " + (i + 1) + " : ");
+				System.out.println("Veuillez saisir le nom du bot  (minion1 ou minion2) " + (i + 1) + " : ");
 				String couleur = sc.nextLine();
 				final Element aBot = document.createElement("bot");
 				aBot.setAttribute("couleur", couleur);

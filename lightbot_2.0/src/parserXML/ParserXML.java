@@ -124,7 +124,7 @@ public class ParserXML {
 				if (botslist.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element bot = (Element) botslist.item(i);
 
-					final String aName = bot.getAttribute("couleur");
+					final String aName = bot.getAttribute("name");
 
 					// position
 					final Element position = (Element) bot.getElementsByTagName("position").item(0);

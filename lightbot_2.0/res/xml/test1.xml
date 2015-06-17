@@ -14,12 +14,12 @@
 		<action>divise</action>
 	</actions>
 	<bots>
-    		<bot couleur="bleu">
+    		<bot name="minion1">
         		<position x="0" y="0" />
 			<orientation init="EST" />
     		</bot>
 	</bots>
-	<record num="20" />
+	<record coups="20" actions="0" />
 	<map>
 		<dimensions x="4" y="4" />
 		<cellules>

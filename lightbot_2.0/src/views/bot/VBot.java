@@ -17,7 +17,7 @@ import views.View;
 
 public class VBot extends View implements Observer {
 
-	public static float DEPL_X = 19;
+	public static float DEPL_X = 10;
 	public static float DEPL_Y = 73;
 	public static float HAUTEUR = 102;
 	public static float LARGEUR = 47;
@@ -61,7 +61,7 @@ public class VBot extends View implements Observer {
 
 			try {
 				StringBuilder wStringBuilder = new StringBuilder();
-				wStringBuilder.append("res/lightbot/bot_");
+				wStringBuilder.append("res/lightbot/minion1_");
 				switch (this.pBot.getCouleur()) {
 				case BLANC:
 					wStringBuilder.append("BLANC_");

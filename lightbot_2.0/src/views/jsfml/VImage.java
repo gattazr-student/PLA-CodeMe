@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.IntRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
@@ -25,6 +26,11 @@ public class VImage extends View {
 	}
 
 	@Override
+	public boolean contains(Vector2f aPosition) {
+		return false;
+	}
+
+	@Override
 	public void draw(RenderTarget aTarget, RenderStates aState) {
 		if (this.pSprite == null) {
 			initView();
@@ -40,7 +46,8 @@ public class VImage extends View {
 	public void initView() {
 		Texture wTexture = new Texture();
 		try {
-			wTexture.loadFromFile(Paths.get(this.pTextureFileName));
+			wTexture.loadFromFile(Paths.get(this.pTextureFileName), new IntRect(0, 0, (int) getWidth(),
+					(int) getHeight()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

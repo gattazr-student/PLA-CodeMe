@@ -10,17 +10,17 @@
 			<action>testAvancer</action>
 		</actions>
 	<bots>
-    		<bot couleur="bleu">
+    		<bot name="minion1">
 
         		<position x="0" y="0" />
         		<orientation init="SUD" />
     		</bot>
-    		<bot couleur="rouge">
+    		<bot name="minion2">
         		<position x="4" y="0" />
         		<orientation init="SUD" />
     		</bot>
 	</bots>
-	<record num="11" />
+	<record coups="11" actions="0" />
 	<map>
         <dimensions x="6" y="6" />
 		<cellules>
