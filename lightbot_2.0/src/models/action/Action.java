@@ -4,6 +4,7 @@ import models.ObservableModel;
 import models.basic.Couleur;
 import models.bot.Bot;
 import models.niveau.Carte;
+import exceptions.LightBotException;
 
 /**
  * Représentation d'une action de lightbot
@@ -28,8 +29,10 @@ public abstract class Action extends ObservableModel {
 	 *            Bot sur lequelle appliquer l'action
 	 * @param aCarte
 	 *            Carte sur laquelle le bot se trouve
+	 * @throws LightBotException
+	 *             TODO
 	 */
-	abstract public void apply(Bot aBot, Carte aCarte);
+	abstract public void apply(Bot aBot, Carte aCarte) throws LightBotException;
 
 	/**
 	 * Retourne la couleur de l'Action.

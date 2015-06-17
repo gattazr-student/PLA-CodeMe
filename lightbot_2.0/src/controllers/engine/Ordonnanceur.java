@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Stack;
 
 import models.action.Action;
+import models.action.Break;
 import models.action.Route;
+import models.basic.Couleur;
 import models.basic.Etat;
 import models.bot.Bot;
 import models.niveau.Niveau;
+import exceptions.LightBotException;
 
 public class Ordonnanceur {
 
@@ -36,7 +39,7 @@ public class Ordonnanceur {
 	 *
 	 * @return : true s'il reste des actions a effectuer
 	 */
-	public boolean step() {
+	public boolean step() throws LightBotException {
 		int i = 0;
 		boolean wRes = false;
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
@@ -54,8 +57,14 @@ public class Ordonnanceur {
 	 *            : robot courant
 	 * @return : s'il reste des actions
 	 */
-	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) {
-		while (aStack.isEmpty() == false && aStack.peek() == null) {
+	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) throws LightBotException {
+
+		if (aBot.getEtat() == Etat.PASSIF) {
+			/* Le bot est en attente d'être réveillé */
+			return true;
+		}
+
+		while (!aStack.isEmpty() && aStack.peek() == null) {
 			aStack.pop();
 		}
 		if (aStack.isEmpty()) {
@@ -67,30 +76,35 @@ public class Ordonnanceur {
 		} else {
 			if (wIt.hasNext()) {
 				Action wAction = wIt.next();
-				if (wAction instanceof Route) {
-					aStack.push(((Route) wAction).iterator());
-					return stepOne(aStack, aBot);
-				} else {
-					// TODO : effectuer l'action sur le bot
-					if (aBot.getEtat() == Etat.ACTIF && wAction.valid(aBot, this.pNiveau.getCarte())) {
-						if (wAction.getName() != "break") {
-							wAction.apply(aBot, this.pNiveau.getCarte());
-							return true;
-						} else {
+				while ((wAction.getCouleur() == Couleur.ROUGE || wAction.getCouleur() == Couleur.VERT)
+						&& wAction.getCouleur() != aBot.getCouleur() && wIt.hasNext()) {
+					wAction = wIt.next();
+				}
+				if (wAction.getCouleur() == Couleur.BLANC || wAction.getCouleur() == aBot.getCouleur()) {
+					if (wAction instanceof Route) {
+						aStack.push(((Route) wAction).iterator());
+						return stepOne(aStack, aBot);
+					} else {
+						if (wAction instanceof Break) {
 							aStack.pop();
+							return stepOne(aStack, aBot);
+						} else {
+							try {
+								wAction.apply(aBot, this.pNiveau.getCarte());
+							} catch (LightBotException wException) {
+								/* TODO Gérer les Exceptions */
+								/*
+								 * Arreter l'execution de l'ordonanceur à la fin de ce step
+								 */
+								System.err.println(wException.getMessage());
+							}
 							return true;
 						}
 					}
-					if (aBot.getEtat() == Etat.PASSIF) {
-						// inserer wAction dans la pile et passer au Bot suivant
-						// aStack.push(((Route) wAction).iterator());
-						return false;
-					} else {
-						/* TODO: throw Exception pour gérer les erreurs d'éxecutions */
-						return true;
-					}
-
+				} else {
+					return true;
 				}
+
 			} else {
 				aStack.pop();
 				return stepOne(aStack, aBot);
@@ -98,5 +112,4 @@ public class Ordonnanceur {
 		}
 		return false;
 	}
-
 }

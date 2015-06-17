@@ -11,7 +11,6 @@ import org.jsfml.graphics.Texture;
 public class VBreak extends VAction {
 
 	public VBreak(Break aBreak, FloatRect aZone) {
-
 		super(aBreak, aZone);
 		aBreak.addObserver(this);
 		initView();
@@ -47,7 +46,5 @@ public class VBreak extends VAction {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
-
 	}
 }

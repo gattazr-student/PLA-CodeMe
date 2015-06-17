@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<Level1_MultliBots>
+<level>
 	<name> 2 Robots </name>
 	    <actions> 
 	    	<action>avancer</action>
@@ -118,4 +118,4 @@
 		</cellules>
 	</map>
 	<coups nb="2" main="7" p1="4" />
- </Level1_MultliBots>
+ </level>

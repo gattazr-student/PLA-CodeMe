@@ -23,7 +23,6 @@ public class CaseLampe extends Case {
 		this.pEtat = ETAT_LAMPE.ETEINT;
 	}
 
-	@Override
 	public void activate() {
 		/* Change l'état de la lampe */
 		if (this.pEtat == ETAT_LAMPE.ETEINT) {

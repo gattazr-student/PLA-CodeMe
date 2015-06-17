@@ -48,9 +48,9 @@ public class VTexte extends View {
 			e.printStackTrace();
 		}
 		Text wTexte = new Text(this.pMessageAfficher, this.wFont, this.pTailleTexte);
-		wTexte.getColor();
-		Vector2f wOrigin = getOrigin();
+		wTexte.setColor(Color.BLUE);
 
+		Vector2f wOrigin = getOrigin();
 		wTexte.setPosition(wOrigin);
 		this.pTexte = wTexte;
 	}

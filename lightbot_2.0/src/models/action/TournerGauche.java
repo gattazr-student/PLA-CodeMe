@@ -1,5 +1,6 @@
 package models.action;
 
+import exceptions.LightBotException;
 import models.basic.Orientation;
 import models.bot.Bot;
 import models.niveau.Carte;
@@ -13,7 +14,7 @@ public class TournerGauche extends Action {
 	final static String pNameAction = "gauche";
 
 	@Override
-	public void apply(Bot aBot, Carte aCarte) {
+	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
 		if (aBot.getOrientation() == Orientation.EST) {
 			aBot.setOrientation(Orientation.NORD);
 		} else if (aBot.getOrientation() == Orientation.NORD) {
