@@ -4,6 +4,7 @@ import models.basic.Position;
 import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.Case;
+import exceptions.LightBotException;
 
 /**
  * Action Avancer
@@ -14,7 +15,13 @@ public class Avancer extends Action {
 	final static String pNameAction = "avancer";
 
 	@Override
-	public void apply(Bot aBot, Carte aCarte) {
+	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
+		if (!destinationExists(aBot, aCarte)) {
+			throw new LightBotException("Segmentation Fault ! La destination n'existe pas");
+		}
+		if (!destinationReachable(aBot, aCarte)) {
+			throw new LightBotException("Erreur ! Impossible d'avancer sur la case");
+		}
 		/*
 		 * Effectue l'action Avancer
 		 */
@@ -24,18 +31,16 @@ public class Avancer extends Action {
 
 	}
 
-	@Override
-	public boolean valid(Bot aBot, Carte aCarte) {
+	private boolean destinationExists(Bot aBot, Carte aCarte) {
 		/*
 		 * Acion valide si pas de case (segfault) ou si case destination sur même niveau
 		 */
-		Case wCaseCourant, wCaseDestination;
+		Case wCaseDestination;
 		Position wPositionCourant, wNextPosition;
 
 		wPositionCourant = aBot.getPosition();
 		wNextPosition = wPositionCourant.move(aBot.getOrientation());
 
-		wCaseCourant = aCarte.getCase(wPositionCourant);
 		wCaseDestination = aCarte.getCase(wNextPosition);
 
 		/*
@@ -44,6 +49,18 @@ public class Avancer extends Action {
 		if (wCaseDestination == null) {
 			return false;
 		}
+		return true;
+	}
+
+	private boolean destinationReachable(Bot aBot, Carte aCarte) {
+		Case wCaseDestination;
+		Position wPositionCourant, wNextPosition;
+
+		wPositionCourant = aBot.getPosition();
+		wNextPosition = wPositionCourant.move(aBot.getOrientation());
+
+		Case wCaseCourant = aCarte.getCase(wPositionCourant);
+		wCaseDestination = aCarte.getCase(wNextPosition);
 
 		int wDestinationHauteur = wCaseDestination.getHauteur();
 		int wCouranthauteur = wCaseCourant.getHauteur();
@@ -56,5 +73,10 @@ public class Avancer extends Action {
 
 		/* La destination et le courant ne sont pas sur le même niveau */
 		return false;
+	}
+
+	@Override
+	public boolean valid(Bot aBot, Carte aCarte) {
+		return destinationExists(aBot, aCarte) && destinationReachable(aBot, aCarte);
 	}
 }
