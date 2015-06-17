@@ -20,8 +20,4 @@ public class CaseBasique extends Case {
 		super(aPosition, aHauteur);
 	}
 
-	@Override
-	public void activate() {
-		/* Aucune action */
-	}
 }

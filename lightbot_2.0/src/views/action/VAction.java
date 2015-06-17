@@ -4,9 +4,13 @@ import models.action.Action;
 import models.action.Allumer;
 import models.action.Attendre;
 import models.action.Avancer;
+import models.action.Break;
 import models.action.Divise;
+import models.action.Notify;
 import models.action.Route;
 import models.action.Sauter;
+import models.action.TestAvancer;
+import models.action.TestSauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import mvc.Observer;
@@ -34,14 +38,26 @@ public abstract class VAction extends View implements Observer {
 		if (aAction instanceof Avancer) {
 			return new VAvancer((Avancer) aAction, aZone);
 		}
+		if (aAction instanceof Break) {
+			return new VBreak((Break) aAction, aZone);
+		}
 		if (aAction instanceof Divise) {
 			return new VDivise((Divise) aAction, aZone);
+		}
+		if (aAction instanceof Notify) {
+			return new VNotify((Notify) aAction, aZone);
 		}
 		if (aAction instanceof Route) {
 			return new VRoute((Route) aAction, aZone);
 		}
 		if (aAction instanceof Sauter) {
 			return new VSauter((Sauter) aAction, aZone);
+		}
+		if (aAction instanceof TestAvancer) {
+			return new VTestAvancer((TestAvancer) aAction, aZone);
+		}
+		if (aAction instanceof TestSauter) {
+			return new VTestSauter((TestSauter) aAction, aZone);
 		}
 		if (aAction instanceof TournerDroite) {
 			return new VTournerDroite((TournerDroite) aAction, aZone);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<Level2_MultiBots>
+<level>
 	<name> prog bloc </name>
 	    <actions> 
 	   		<action>avancer</action>
@@ -45,7 +45,7 @@
         <cellule>
 				<position  x="1" y="1" />
 				<cases>
-					<case type = "basique" h="0" />>
+					<case type = "basique" h="0" />
 				</cases>
 		</cellule>
         
@@ -124,6 +124,7 @@
 				<position x="3" y="2" />
 				<cases>
 					<case type = "basique" h="0" />
+					<case type = "basique" h="2" />
 				</cases>
 		</cellule>
         
@@ -368,7 +369,10 @@
 			<cellule>
 				<position x="10" y="2" />
 				<cases>
-					<case type = "interrupteur" h="0" />
+					<case type = "interrupteur" h="0">
+						<position x="2" y="2" />
+						<position x="3" y="3" />
+					</case>
 				</cases>
 			</cellule>
 
@@ -395,4 +399,4 @@
 		</cellules>
 	</map>
 	<coups nb="3" main="15" p1="8" p2="8" />
- </Level2_MultiBots>
+ </level>

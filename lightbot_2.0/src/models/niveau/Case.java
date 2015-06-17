@@ -31,11 +31,6 @@ public abstract class Case extends ObservableModel {
 	}
 
 	/**
-	 * Comportement de la case lorsque le bot effectue l'action Allumer dessus
-	 */
-	public abstract void activate();
-
-	/**
 	 * Retourne la hauteur de la Case
 	 *
 	 * @return hauteur de la Case

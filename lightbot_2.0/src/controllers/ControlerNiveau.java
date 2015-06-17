@@ -15,6 +15,7 @@ import org.jsfml.window.event.KeyEvent;
 
 import views.fenetre.FenetreNiveau;
 import controllers.engine.Ordonnanceur;
+import exceptions.LightBotException;
 
 public class ControlerNiveau {
 
@@ -84,12 +85,12 @@ public class ControlerNiveau {
 			wAction = new Sauter();
 		}
 		if (wAction != null) {
-			if (wAction.valid(this.pNiveau.getBots().get(0), this.pNiveau.getCarte())) {
+			try {
 				wAction.apply(this.pNiveau.getBots().get(0), this.pNiveau.getCarte());
-				this.pVNiveau.redraw();
-			} else {
-				System.err.println("Action impossible");
+			} catch (LightBotException wException) {
+				System.err.println(wException.getMessage());
 			}
+			this.pVNiveau.redraw();
 		}
 	}
 
@@ -117,7 +118,6 @@ public class ControlerNiveau {
 		this.pNiveau.resetCarte();
 		this.pNiveau.resetBot();
 		this.pVNiveau.redraw();
-		System.out.println("reset ok");
 	}
 
 	public void run() {
@@ -135,7 +135,7 @@ public class ControlerNiveau {
 							this.pNbCoups = this.pOrdonnanceur.getNbCoups();
 							this.pOrdonnanceur = null;
 						}
-					} catch (Exception aException) {
+					} catch (LightBotException aException) {
 						/* TODO: ControllerNiveau.run : gérer exception provenant de l'ordonanceur */
 					}
 					this.pVNiveau.redraw();

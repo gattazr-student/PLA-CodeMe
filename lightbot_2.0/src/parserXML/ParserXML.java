@@ -13,9 +13,13 @@ import models.action.Action;
 import models.action.Allumer;
 import models.action.Attendre;
 import models.action.Avancer;
+import models.action.Break;
 import models.action.Divise;
+import models.action.Notify;
 import models.action.Route;
 import models.action.Sauter;
+import models.action.TestAvancer;
+import models.action.TestSauter;
 import models.action.TournerDroite;
 import models.action.TournerGauche;
 import models.basic.Couleur;
@@ -26,7 +30,9 @@ import models.bot.Bot;
 import models.niveau.Carte;
 import models.niveau.Case;
 import models.niveau.CaseBasique;
+import models.niveau.CaseInterrupteur;
 import models.niveau.CaseLampe;
+import models.niveau.CaseVide;
 import models.niveau.Niveau;
 
 import org.w3c.dom.Document;
@@ -61,38 +67,51 @@ public class ParserXML {
 			final NodeList actionslist = actions.getElementsByTagName("action");
 			final int nbActions = actionslist.getLength();
 
+			Element action;
+			Action aAction;
 			for (int j = 0; j < nbActions; j++) {
-				final Element action = (Element) actionslist.item(j);
-
-				if ((action.getTextContent()).equals("allumer")) {
-					final Action aAction = new Allumer();
+				aAction = null;
+				action = (Element) actionslist.item(j);
+				switch (action.getTextContent()) {
+				case "allumer":
+					aAction = new Allumer();
+					break;
+				case "wait":
+					aAction = new Attendre();
+					break;
+				case "avancer":
+					aAction = new Avancer();
+					break;
+				case "break":
+					aAction = new Break();
+					break;
+				case "divise":
+					aAction = new Divise();
+					break;
+				case "notify":
+					aAction = new Notify();
+					break;
+				case "sauter":
+					aAction = new Sauter();
+					break;
+				case "testAvancer":
+					aAction = new TestAvancer();
+					break;
+				case "testSauter":
+					aAction = new TestSauter();
+					break;
+				case "droite":
+					aAction = new TournerDroite();
+					break;
+				case "gauche":
+					aAction = new TournerGauche();
+					break;
+				default:
+					break;
+				}
+				if (aAction != null) {
 					wLevel.addAction(aAction);
 				}
-				if ((action.getTextContent()).equals("wait")) {
-					final Action aAction = new Attendre();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("avancer")) {
-					final Action aAction = new Avancer();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("divise")) {
-					final Action aAction = new Divise();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("sauter")) {
-					final Action aAction = new Sauter();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("droite")) {
-					final Action aAction = new TournerDroite();
-					wLevel.addAction(aAction);
-				}
-				if ((action.getTextContent()).equals("gauche")) {
-					final Action aAction = new TournerGauche();
-					wLevel.addAction(aAction);
-				}
-
 			}
 
 			// Noeud 3 : list de bots
@@ -105,7 +124,7 @@ public class ParserXML {
 				if (botslist.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element bot = (Element) botslist.item(i);
 
-					final String aName = bot.getAttribute("couleur");
+					final String aName = bot.getAttribute("name");
 
 					// position
 					final Element position = (Element) bot.getElementsByTagName("position").item(0);
@@ -149,8 +168,10 @@ public class ParserXML {
 			 * Noeud 4 : Record
 			 */
 			final Element record = (Element) racine.getElementsByTagName("record").item(0);
-			final int aRecord = Integer.parseInt(record.getAttribute("num"));
-			wLevel.setRecord(aRecord);
+			final int aRecordCoups = Integer.parseInt(record.getAttribute("coups"));
+			final int aRecordActions = Integer.parseInt(record.getAttribute("actions"));
+			wLevel.setRecordCoups(aRecordCoups);
+			wLevel.setRecordActions(aRecordActions);
 
 			/*
 			 * Noeud 5 : La map
@@ -183,28 +204,39 @@ public class ParserXML {
 				final NodeList caseslist = cases.getElementsByTagName("case");
 				final int nbCases = caseslist.getLength();
 
+				Case aCase;
 				for (int k = 0; k < nbCases; k++) {
 					final Element uneCase = (Element) caseslist.item(k);
-
-					if ((uneCase.getAttribute("type")).equals("basique")) {
-						final Case aCase = new CaseBasique(aPosCase, Integer.parseInt(uneCase
+					aCase = null;
+					switch (uneCase.getAttribute("type")) {
+					case "basique":
+						aCase = new CaseBasique(aPosCase, Integer.parseInt(uneCase.getAttribute("h")));
+						break;
+					case "lampe":
+						aCase = new CaseLampe(aPosCase, Integer.parseInt(uneCase.getAttribute("h")));
+						break;
+					case "interrupteur":
+						CaseInterrupteur wCase = new CaseInterrupteur(aPosCase, Integer.parseInt(uneCase
 								.getAttribute("h")));
-						aCarte.addCase(aCase);
-					}
-					if ((uneCase.getAttribute("type")).equals("lampe")) {
 
-						final Case aCase = new CaseLampe(aPosCase,
-								Integer.parseInt(uneCase.getAttribute("h")));
-						aCarte.addCase(aCase);
+						/* TODO: Récupérer les positions ici */
+						// eg : wCase.addPosition(new Position(11, 3));
+						final NodeList positionlist = cases.getElementsByTagName("position");
+						final int nbPos = positionlist.getLength();
+						for (int j = 0; j < nbPos; j++) {
+							wCase.addPosition(new Position(Integer.parseInt(((Element) positionlist.item(j))
+									.getAttribute("x")), Integer.parseInt(((Element) positionlist.item(j))
+									.getAttribute("y"))));
+						}
+						aCase = wCase;
+						break;
+					case "vide":
+						aCase = new CaseVide(aPosCase);
+						break;
+					default:
+						break;
 					}
-					/*
-					 * if ((uneCase.getAttribute("type")).equals("interrupteur")) {
-					 * 
-					 * final Case aCase = new CaseInterrupteur(aPosCase,
-					 * Integer.parseInt(uneCase.getAttribute("h")));
-					 * aCarte.addCase(aCase);
-					 * }
-					 */
+					aCarte.addCase(aCase);
 				}
 
 			}
@@ -251,5 +283,4 @@ public class ParserXML {
 		}
 		return null;
 	}
-
 }

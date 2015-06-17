@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import models.bot.Bot;
 import models.niveau.Carte;
+import exceptions.LightBotException;
 
 /**
  * Ensemble d'Action à effectuer
@@ -38,18 +39,16 @@ public class Route extends Action {
 	}
 
 	@Override
-	public void apply(Bot aBot, Carte aCarte) {
-		int asize = this.action.size();
-		for (int i = 0; i < asize; i++) {
-			this.action.get(i).apply(aBot, aCarte);
-		}
-
+	public void apply(Bot aBot, Carte aCarte) throws LightBotException {
+		/* Un Route ne peut pas être appliqué */
+		throw new LightBotException("Une route ne peut pas être appliqué");
 	}
 
 	public ArrayList<Action> getAction() {
 		return this.action;
 	}
 
+	@Override
 	public String getName() {
 		return this.pName;
 	}
@@ -89,7 +88,6 @@ public class Route extends Action {
 
 	@Override
 	public boolean valid(Bot aBot, Carte aCarte) {
-		/* On peut toujours evaluer une route */
-		return true;
+		return false;
 	}
 }
