@@ -12,6 +12,7 @@ import org.jsfml.window.event.Event;
 import org.jsfml.window.event.MouseButtonEvent;
 
 import views.View;
+import views.fenetre.Panel;
 
 public class VPopup extends View {
 
@@ -19,11 +20,13 @@ public class VPopup extends View {
 	private String pMessage;
 	private VBouton pOk;
 	private Color pColor;
+	private int pSize;
 
 	public VPopup(RenderWindow aWindow, String aMessage, Color aColor) {
 		this.pMessage = aMessage;
 		this.pWindow = aWindow;
 		this.pColor = aColor;
+		this.pSize = 50;
 		Vector2i wSize = this.pWindow.getSize();
 		setZone(new FloatRect(0, 0, wSize.x, wSize.y));
 		initView();
@@ -31,27 +34,35 @@ public class VPopup extends View {
 
 	@Override
 	public void initView() {
-		/* Place le fond blanc */
-		VRectangle wRect = new VRectangle(new FloatRect(0, 0, getWidth(), getHeight()));
-		wRect.setFillColor(Color.WHITE);
-		addView(wRect);
-
-		/* Place le texte */
-		VTexte wTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pMessage, 50);
+		/* Offset dans la panel */
+		float wOffset = 25;
+		/* Creation de l'Objet VTexte */
+		VTexte wTexte = new VTexte(new FloatRect(wOffset, wOffset, 0, 0), this.pMessage, this.pSize);
 		wTexte.setColor(this.pColor);
 		FloatRect wBounds = wTexte.getLocalBounds();
-		float wX = getWidth() / 2 - wBounds.width / 2;
-		float wY = getHeight() / 2 - wBounds.height / 2;
-		wBounds = new FloatRect(wX, wY, wBounds.top, wBounds.height);
-		wTexte.setZone(wBounds);
 
-		addView(wTexte);
-
-		/* Place le bouton OK */
-		VBouton wBouton = new VBouton(new FloatRect(getWidth() / 2 - 48, wY + wBounds.height + 50, 96, 54),
-				"ok", "res/menu/marche.png");
+		float wHeightBouton = 40;
+		float wWidthBouton = 40;
+		float wOffsetBouton = 25;
+		float wPosXBouton = getOrigin().x + wBounds.width / 2 - wWidthBouton / 2;
+		float wPosYBouton = getOrigin().y + wBounds.height + this.pSize / 2 + wOffset + wOffsetBouton;
+		VBouton wBouton = new VBouton(new FloatRect(wPosXBouton, wPosYBouton, wWidthBouton, wHeightBouton),
+				"ok", "res/action/ok.bmp");
 		this.pOk = wBouton;
-		addView(wBouton);
+		//
+		/* Creation du Cadre */
+		VRectangle wRect = new VRectangle(new FloatRect(0, 0, wBounds.width + 4 * wOffset, wBounds.height
+				+ wHeightBouton + this.pSize / 2 + 2 * wOffset + wOffsetBouton));
+
+		// wTexte.setZone(new FloatRect(wOffset, wOffset, wBounds.width, wBounds.height));
+
+		/* Création d'un Panel */
+		Panel wPanel = new Panel(new FloatRect(getWidth() / 2 - wRect.getWidth() / 2, getHeight() / 2
+				- wRect.getHeight() / 2, wRect.getWidth(), wRect.getHeight()));
+		addView(wPanel);
+		wPanel.addView(wRect);
+		wPanel.addView(wTexte);
+		wPanel.addView(wBouton);
 	}
 
 	public void redraw() {
@@ -63,6 +74,10 @@ public class VPopup extends View {
 		redraw();
 		while (this.pWindow.isOpen()) {
 			for (Event wEvent : this.pWindow.pollEvents()) {
+				if (wEvent.type == Event.Type.RESIZED) {
+					this.pWindow.clear();
+					redraw();
+				}
 				if (wEvent.type == Event.Type.CLOSED) {
 					this.pWindow.close();
 					System.exit(0);
@@ -70,8 +85,10 @@ public class VPopup extends View {
 				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
 					Vector2f wPosition = new Vector2f(wMouseEvent.position);
+					System.out.println(wPosition.x + "-" + wPosition.y);
 					if (wMouseEvent.button == Button.LEFT) {
 						View wView = isClickedOn(wPosition);
+						System.out.println(wView);
 						if (wView == this.pOk) {
 							return;
 						}
