@@ -6,8 +6,8 @@ import org.jsfml.graphics.Color;
 
 import parserXML.ParserXML;
 import views.fenetre.Fenetre;
-import views.fenetre.FenetreNiveau;
 import views.jsfml.VPopup;
+import views.niveau.VNiveau;
 import controllers.ControlerNiveau;
 
 /**
@@ -23,7 +23,7 @@ public class Engine {
 		/* Création du model */
 		Niveau wModelNiveau = ParserXML.creatLevelXML(aFileName);
 		/* Création de la vue */
-		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
+		VNiveau wViewNiveau = new VNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
 		ControlerNiveau wControlerNiveau = new ControlerNiveau(wModelNiveau, wViewNiveau);
 
