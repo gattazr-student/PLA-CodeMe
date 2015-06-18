@@ -31,6 +31,7 @@ public class ControlerNiveau {
 
 	private Bot pBotCourant;
 	private Route pRouteCourant;
+	private boolean pKeyPress;
 
 	public ControlerNiveau(Niveau aNiveau, VNiveau aVNiveau) {
 		this.pNiveau = aNiveau;
@@ -38,6 +39,7 @@ public class ControlerNiveau {
 		this.pOrdonnanceur = null;
 		this.pBotCourant = this.pNiveau.getBots().get(0);
 		this.pRouteCourant = this.pBotCourant.getRouteMain();
+		this.pKeyPress = false;
 	}
 
 	/**
@@ -71,7 +73,7 @@ public class ControlerNiveau {
 	 * @return vrai si le niveau est terminé
 	 */
 	public boolean isFinished() {
-		return this.pNiveau.isFinished();
+		return !this.pKeyPress && this.pNiveau.isFinished();
 	}
 
 	/**
@@ -80,6 +82,7 @@ public class ControlerNiveau {
 	 * @param wSMFLKeyEvent
 	 */
 	public void keyboardAction(KeyEvent aSMFLKeyEvent) {
+		this.pKeyPress = true;
 		Action wAction = null;
 		if (aSMFLKeyEvent.key.compareTo(Key.UP) == 0) {
 			wAction = new Avancer();
@@ -124,6 +127,7 @@ public class ControlerNiveau {
 	public void resetLevel() {
 		/* Crééer la fonction reset dans Niveau */
 		this.pOrdonnanceur = null;
+		this.pKeyPress = false;
 		this.pNiveau.resetCarte();
 		this.pNiveau.resetBot();
 		this.pVNiveau.redraw();
