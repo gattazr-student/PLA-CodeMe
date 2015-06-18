@@ -188,8 +188,8 @@ public class EditeurXML {
 							String aPosX = sc.nextLine();
 							System.out.println("Veuillez saisir la position Y = ");
 							String aPosY = sc.nextLine();
-							aPos.setAttribute("x", aPosX);
-							aPos.setAttribute("y", aPosY);
+							aPositionI.setAttribute("x", aPosX);
+							aPositionI.setAttribute("y", aPosY);
 							aCase.appendChild(aPositionI);
 						}
 					}
@@ -269,6 +269,6 @@ public class EditeurXML {
 	}
 
 	public static void main(final String[] args) {
-		EditXML("res/xml/test3.xml");
+		EditXML("res/xml/test4.xml");
 	}
 }
