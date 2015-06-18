@@ -42,7 +42,7 @@ public class VRouteListe extends View implements Observer {
 
 	@Override
 	public void initView() {
-		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/menu/pourpre.png");
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/menu/cadre.png");
 		this.pFond = wImage_Fond;
 		VTexte wVTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pRoute.getName(), OFFSET - 10);
 		wVTexte.setColor(Color.BLACK);
