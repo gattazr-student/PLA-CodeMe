@@ -1,93 +1,69 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <level>
-	<name> 1 </name>
-	<actions> 
-	    	<action>avancer</action>
-	    	<action>droite</action>
-	    	<action>gauche</action>
-	    	<action>sauter</action>
-		<action>wait</action>
-		<action>notify</action>
-		<action>douche</action>
-		<action>break</action>
-		<action>test</action>
-		<action>divise</action>
-	</actions>
-	<bots>
-    		<bot name="minion1">
-        		<position x="0" y="0" />
-			<orientation init="EST" />
-    		</bot>
-	</bots>
-	<record coups="20" actions="0" />
-	<map>
-		<dimensions x="4" y="4" />
-		<cellules>
-			<cellule>
-				<position x="0" y="0" />
-				<cases>
-					<case type = "basique" h="0" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="0" y="1" />
-				<cases>
-					<case type = "basique" h="0" />
-					<case type = "lampe" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="0" y="2" />
-				<cases>
-					<case type = "lampe" h="0" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="1" y="0" />
-				<cases>
-					<case type = "lampe" h="1" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="1" y="1" />
-				<cases>
-					<case type = "lampe" h="1" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="1" y="2" />
-				<cases>
-					<case type = "lampe" h="1" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="2" y="0" />
-				<cases>
-					<case type = "lampe" h="0" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="2" y="1" />
-				<cases>
-					<case type = "basique" h="0" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-			<cellule>
-				<position x="2" y="2" />
-				<cases>
-					<case type = "basique" h="0" />
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-		</cellules>
-	</map>
-	<!--Nombre de route possible et nombre d'actions possible dans chaque route-->
-	<coups nb="3" main="6" p1="6" p2="4" />
- </level>
+  <name>Test 1</name>
+  <actions>
+    <action>avancer</action>
+    <action>allumer</action>
+  </actions>
+  <bots>
+    <bot name="minion1">
+      <position x="0" y="0"/>
+      <orientation init="EST"/>
+    </bot>
+  </bots>
+  <record actions="0" coups="5"/>
+  <map>
+    <dimensions x="8" y="1"/>
+    <cellules>
+      <cellule>
+        <cases>
+          <position x="0" y="0"/>
+          <case h="0" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="1" y="0"/>
+          <case h="1" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="2" y="0"/>
+          <case h="2" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="3" y="0"/>
+          <case h="3" type="lampe"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="4" y="0"/>
+          <case h="2" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="5" y="0"/>
+          <case h="1" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="6" y="0"/>
+          <case h="0" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="7" y="0"/>
+          <case h="0" type="lampe"/>
+        </cases>
+      </cellule>
+    </cellules>
+  </map>
+  <coups main="5" nb="2" p1="3"/>
+</level>

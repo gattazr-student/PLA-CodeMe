@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+  <name>Niveau Plus Complique</name>
+  <actions>
+    <action>allumer</action>
+    <action>avancer</action>
+    <action>wait</action>
+    <action>notify</action>
+  </actions>
+  <bots>
+    <bot name="minion1">
+      <position x="0" y="1"/>
+      <orientation init="EST"/>
+    </bot>
+    <bot name="minion2">
+      <position x="2" y="0"/>
+      <orientation init="OUEST"/>
+    </bot>
+  </bots>
+  <record actions="3" coups="3"/>
+  <map>
+    <dimensions x="3" y="2"/>
+    <cellules>
+      <cellule>
+        <cases>
+          <position x="0" y="1"/>
+          <case h="0" type="interrupteur">
+            <position x="1" y="0"/>
+          </case>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="1" y="0"/>
+          <case h="4" type="lampe"/>
+          <case h="0" type="lampe"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="2" y="0"/>
+          <case h="0" type="basique"/>
+        </cases>
+      </cellule>
+    </cellules>
+  </map>
+  <coups main="3" nb="1"/>
+</level>
