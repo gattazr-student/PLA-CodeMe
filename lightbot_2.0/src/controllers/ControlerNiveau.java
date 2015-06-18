@@ -118,6 +118,7 @@ public class ControlerNiveau {
 	 */
 	public void resetLevel() {
 		/* Crééer la fonction reset dans Niveau */
+		this.pOrdonnanceur = null;
 		this.pNiveau.resetCarte();
 		this.pNiveau.resetBot();
 		this.pVNiveau.redraw();
