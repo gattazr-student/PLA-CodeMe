@@ -70,9 +70,11 @@ public class VNiveau extends View implements Observer {
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
 
-		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
-				"res/menu/fond_minion.png");
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/font/fond1.png");
 		this.pPanelCarte.addView(wImage_Fond);
+		// VImage wImage_Fond2 = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
+		// "res/font/fond.png");
+		// this.pPanelCarte.addView(wImage_Fond2);
 
 		this.pVActionsDisponibles = new LinkedList<VAction>();
 
