@@ -15,6 +15,7 @@ import models.action.Attendre;
 import models.action.Avancer;
 import models.action.Break;
 import models.action.Divise;
+import models.action.Douche;
 import models.action.Notify;
 import models.action.Route;
 import models.action.Sauter;
@@ -87,6 +88,9 @@ public class ParserXML {
 					break;
 				case "divise":
 					aAction = new Divise();
+					break;
+				case "douche":
+					aAction = new Douche();
 					break;
 				case "notify":
 					aAction = new Notify();
