@@ -13,7 +13,7 @@
 			<action>allumer</action>
 		</actions>
 	<bots>
-    		<bot couleur="bleu">
+    		<bot name="minion1">
     			<position x="0" y="3" />
     			<orientation init="EST" />
     		</bot>

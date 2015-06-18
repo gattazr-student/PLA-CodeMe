@@ -61,31 +61,32 @@ public class VBot extends View implements Observer {
 
 			try {
 				StringBuilder wStringBuilder = new StringBuilder();
-				wStringBuilder.append("res/lightbot/minion1_");
+				wStringBuilder.append("res/lightbot/");
+				wStringBuilder.append(this.pBot.getName());
 				switch (this.pBot.getCouleur()) {
 				case BLANC:
-					wStringBuilder.append("BLANC_");
+					wStringBuilder.append("_BLANC");
 					break;
 				case ROUGE:
-					wStringBuilder.append("ROUGE_");
+					wStringBuilder.append("_ROUGE");
 					break;
 				case VERT:
-					wStringBuilder.append("VERT_");
+					wStringBuilder.append("_VERT");
 					break;
 				}
 
 				switch (this.pBot.getOrientation()) {
 				case NORD:
-					wStringBuilder.append("NORD");
+					wStringBuilder.append("_NORD");
 					break;
 				case SUD:
-					wStringBuilder.append("SUD");
+					wStringBuilder.append("_SUD");
 					break;
 				case EST:
-					wStringBuilder.append("EST");
+					wStringBuilder.append("_EST");
 					break;
 				case OUEST:
-					wStringBuilder.append("OUEST");
+					wStringBuilder.append("_OUEST");
 					break;
 				}
 				wStringBuilder.append(".png");
