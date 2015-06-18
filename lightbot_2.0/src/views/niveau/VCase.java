@@ -70,10 +70,12 @@ public abstract class VCase extends View implements Observer {
 	}
 
 	private int pHauteur;
+	private Case pCase;
 
 	private List<Sprite> pSprites;
 
-	public VCase(FloatRect aZone) {
+	public VCase(Case aCase, FloatRect aZone) {
+		this.pCase = aCase;
 		this.pSprites = new LinkedList<Sprite>();
 		setZone(aZone);
 	}
@@ -100,6 +102,10 @@ public abstract class VCase extends View implements Observer {
 		for (Sprite wSprite : this.pSprites) {
 			wSprite.draw(aTarget, aState);
 		}
+	}
+
+	public Case getCase() {
+		return this.pCase;
 	}
 
 	public int getHauteur() {

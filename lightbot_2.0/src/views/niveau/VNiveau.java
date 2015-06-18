@@ -8,6 +8,7 @@ import models.action.Action;
 import models.action.Route;
 import models.basic.Couleur;
 import models.niveau.Carte;
+import models.niveau.CaseInterrupteur;
 import models.niveau.Niveau;
 import mvc.Observer;
 
@@ -125,7 +126,7 @@ public class VNiveau extends View implements Observer {
 							this.pControler.resetLevel();
 							break;
 						case "back":
-							/* TODO: back to Menu */
+							this.pControler.exit();
 							break;
 						case "play":
 							this.pControler.startRunning();
@@ -146,6 +147,10 @@ public class VNiveau extends View implements Observer {
 					} else if (wView instanceof VBot) {
 						/* Changement du bot courant */
 						this.pControler.setBotCourant(((VBot) wView).getBot());
+					} else if (wView instanceof VCaseInterrupteur) {
+						((CaseInterrupteur) (((VCaseInterrupteur) wView).getCase())).changeCase(this.pNiveau
+								.getCarte());
+						redraw();
 					} else if (wView instanceof VRouteListe) {
 						/* Change la route courante */
 						this.pVRouteListCourrante.setTitreColor(Color.BLACK);

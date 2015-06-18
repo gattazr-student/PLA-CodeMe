@@ -6,13 +6,10 @@ import org.jsfml.graphics.FloatRect;
 
 public class VCaseVide extends VCase {
 
-	private CaseVide pCaseVide;
-
 	public VCaseVide(CaseVide aCaseVide, FloatRect aZone) {
-		super(aZone);
-		this.pCaseVide = aCaseVide;
-		this.pCaseVide.addObserver(this);
-		setHauteur(this.pCaseVide.getHauteur());
+		super(aCaseVide, aZone);
+		aCaseVide.addObserver(this);
+		setHauteur(aCaseVide.getHauteur());
 		initView();
 	}
 

@@ -12,13 +12,10 @@ import org.jsfml.system.Vector2f;
 
 public class VCaseInterrupteur extends VCase {
 
-	private CaseInterrupteur pCaseLampe;
-
 	public VCaseInterrupteur(CaseInterrupteur aCaseInterrupteur, FloatRect aZone) {
-		super(aZone);
-		this.pCaseLampe = aCaseInterrupteur;
-		this.pCaseLampe.addObserver(this);
-		setHauteur(this.pCaseLampe.getHauteur());
+		super(aCaseInterrupteur, aZone);
+		aCaseInterrupteur.addObserver(this);
+		setHauteur(aCaseInterrupteur.getHauteur());
 		initView();
 	}
 
@@ -39,7 +36,7 @@ public class VCaseInterrupteur extends VCase {
 		addSprite(wSprite);
 		/* pour affichage de la hauteur */
 		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
-		for (int wI = 0; wI < this.pCaseLampe.getHauteur(); wI++) {
+		for (int wI = 0; wI < getHauteur(); wI++) {
 			wSprite = new Sprite();
 			wOrigin = Vector2f.add(wOrigin, wW);
 			wSprite.setPosition(wOrigin);
