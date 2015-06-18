@@ -13,12 +13,9 @@ import org.jsfml.system.Vector2f;
 
 public class VCaseLampe extends VCase {
 
-	private CaseLampe pCaseLampe;
-
 	public VCaseLampe(CaseLampe aCaseLampe, FloatRect aZone) {
-		super(aZone);
-		this.pCaseLampe = aCaseLampe;
-		this.pCaseLampe.addObserver(this);
+		super(aCaseLampe, aZone);
+		aCaseLampe.addObserver(this);
 		setHauteur(aCaseLampe.getHauteur());
 		initView();
 	}
@@ -27,7 +24,7 @@ public class VCaseLampe extends VCase {
 	public void initView() {
 		Texture wTexture = new Texture();
 		try {
-			if (this.pCaseLampe.getEtat() == ETAT_LAMPE.ALLUMEE) {
+			if (((CaseLampe) getCase()).getEtat() == ETAT_LAMPE.ALLUMEE) {
 				wTexture.loadFromFile(Paths.get("res/cases/case_JAUNE.png"));
 			} else {
 				wTexture.loadFromFile(Paths.get("res/cases/case_BLEU.png"));
@@ -44,7 +41,7 @@ public class VCaseLampe extends VCase {
 		addSprite(wSprite);
 		/* pour affichage de la hauteur */
 		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
-		for (int wI = 0; wI < this.pCaseLampe.getHauteur(); wI++) {
+		for (int wI = 0; wI < getHauteur(); wI++) {
 			wSprite = new Sprite();
 			wOrigin = Vector2f.add(wOrigin, wW);
 			wSprite.setPosition(wOrigin);

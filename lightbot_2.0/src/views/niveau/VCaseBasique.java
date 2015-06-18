@@ -12,12 +12,9 @@ import org.jsfml.system.Vector2f;
 
 public class VCaseBasique extends VCase {
 
-	private CaseBasique pCaseBasique;
-
 	public VCaseBasique(CaseBasique aCaseBasique, FloatRect aZone) {
-		super(aZone);
-		this.pCaseBasique = aCaseBasique;
-		this.pCaseBasique.addObserver(this);
+		super(aCaseBasique, aZone);
+		aCaseBasique.addObserver(this);
 		setHauteur(aCaseBasique.getHauteur());
 		initView();
 	}
@@ -38,7 +35,7 @@ public class VCaseBasique extends VCase {
 		addSprite(wSprite);
 		/* pour affichage de la hauteur */
 		Vector2f wW = new Vector2f(0, -VCase.DEPL_HAUTEUR);
-		for (int wI = 0; wI < this.pCaseBasique.getHauteur(); wI++) {
+		for (int wI = 0; wI < getHauteur(); wI++) {
 			wSprite = new Sprite();
 			wOrigin = Vector2f.add(wOrigin, wW);
 			wSprite.setPosition(wOrigin);

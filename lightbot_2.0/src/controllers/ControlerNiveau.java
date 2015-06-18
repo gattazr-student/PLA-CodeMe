@@ -52,6 +52,11 @@ public class ControlerNiveau {
 		this.pNbAction++;
 	}
 
+	public void exit() {
+		// TODO Quitte le niveau
+
+	}
+
 	public int getNbAction() {
 		return this.pNbAction;
 	}
