@@ -6,6 +6,7 @@ import models.action.Attendre;
 import models.action.Avancer;
 import models.action.Break;
 import models.action.Divise;
+import models.action.Douche;
 import models.action.Notify;
 import models.action.Route;
 import models.action.Sauter;
@@ -44,6 +45,9 @@ public abstract class VAction extends View implements Observer {
 		}
 		if (aAction instanceof Divise) {
 			return new VDivise((Divise) aAction, aZone);
+		}
+		if (aAction instanceof Douche) {
+			return new VDouche((Douche) aAction, aZone);
 		}
 		if (aAction instanceof Notify) {
 			return new VNotify((Notify) aAction, aZone);
