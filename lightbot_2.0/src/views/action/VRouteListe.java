@@ -45,7 +45,8 @@ public class VRouteListe extends View implements Observer {
 		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
 				"res/menu/cadreblanc.png");
 		this.pFond = wImage_Fond;
-		VTexte wVTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pRoute.getName(), OFFSET - 10);
+		VTexte wVTexte = new VTexte(new FloatRect(0, 0, 0, 0), this.pRoute.getName() + "  ("
+				+ this.pRoute.getTailleMax() + ")", OFFSET - 10);
 		wVTexte.setColor(Color.BLACK);
 		this.pVTexte = wVTexte;
 		updateActions();
