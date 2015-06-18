@@ -1,11 +1,13 @@
 package controllers.engine;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 import models.action.Action;
+import models.action.Avancer;
 import models.action.Break;
 import models.action.Notify;
 import models.action.Route;
@@ -22,6 +24,8 @@ public class Ordonnanceur {
 
 	List<Stack<Iterator<Action>>> pStacks;
 	private Niveau pNiveau;
+	/* List contenant la dernière Action effectué par chancun des Bots */
+	private List<Action> pPrev;
 
 	public Ordonnanceur(Niveau aNiveau) {
 		this.pNiveau = aNiveau;
@@ -33,6 +37,10 @@ public class Ordonnanceur {
 			wStack.push(wMain.iterator());
 			this.pStacks.add(wStack);
 		}
+		/* Création de deux éléments fictifs pour simuler les anciennes actions */
+		this.pPrev = new ArrayList<>();
+		this.pPrev.add(new Avancer());
+		this.pPrev.add(new Avancer());
 	}
 
 	public int getNbCoups() {
@@ -52,7 +60,12 @@ public class Ordonnanceur {
 		int i = 0;
 		boolean wRes = false;
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
-			wRes = wRes | stepOne(wStack, this.pNiveau.getBots().get(i));
+			this.pPrev.get(i).clearBotsCourant();
+			Bot wBot = this.pNiveau.getBots().get(i);
+			if (stepOne(wStack, wBot, i)) {
+				this.pPrev.get(i).addBotCourant(wBot.getName());
+				wRes = true;
+			}
 			i++;
 		}
 		List<Bot> wBots = this.pNiveau.getBots();
@@ -85,7 +98,7 @@ public class Ordonnanceur {
 	 *            : robot courant
 	 * @return : s'il reste des actions
 	 */
-	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot) throws LightBotException {
+	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot, int aIdentif) throws LightBotException {
 
 		if (aBot.getEtat() == Etat.PASSIF) {
 			/* Le bot est en attente d'être réveillé */
@@ -112,15 +125,18 @@ public class Ordonnanceur {
 				if (wAction.getCouleur() == Couleur.BLANC || wAction.getCouleur() == aBot.getCouleur()) {
 					if (wAction instanceof Route) {
 						aStack.push(((Route) wAction).iterator());
-						return stepOne(aStack, aBot);
+						return stepOne(aStack, aBot, aIdentif);
 					} else {
 						if (wAction instanceof Break) {
 							aStack.pop();
-							return stepOne(aStack, aBot);
+							return stepOne(aStack, aBot, aIdentif);
 						}
 						if (wAction instanceof Notify) {
 							this.pNotify = true;
 						} else {
+							/* Signale l'Action en cours */
+							this.pPrev.set(aIdentif, wAction);
+							/* Applique l'Action */
 							wAction.apply(aBot, this.pNiveau.getCarte());
 						}
 						this.pNbCoups++;
@@ -132,7 +148,7 @@ public class Ordonnanceur {
 
 			} else {
 				aStack.pop();
-				return stepOne(aStack, aBot);
+				return stepOne(aStack, aBot, aIdentif);
 			}
 		}
 		return false;

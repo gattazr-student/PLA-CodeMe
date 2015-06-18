@@ -1,5 +1,8 @@
 package models.action;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import models.ObservableModel;
 import models.basic.Couleur;
 import models.bot.Bot;
@@ -18,8 +21,24 @@ public abstract class Action extends ObservableModel {
 	private Couleur pCouleur;
 	private String pNameAction;
 
+	private List<String> pCourant;
+
 	public Action() {
 		this.pCouleur = Couleur.BLANC;
+		this.pNameAction = new String();
+		this.pCourant = new LinkedList<String>();
+	}
+
+	public void addBotCourant(String aName) {
+		this.pCourant.add(aName);
+	}
+	
+	public List<String> getBotsCourant() {
+		return this.pCourant;
+	}
+	
+	public void clearBotsCourant(){
+		this.pCourant.clear();
 	}
 
 	/**
@@ -36,7 +55,7 @@ public abstract class Action extends ObservableModel {
 
 	/**
 	 * Retourne une copie de l'Objet
-	 * 
+	 *
 	 * @return
 	 */
 	public abstract Action copy();

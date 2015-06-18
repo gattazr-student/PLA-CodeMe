@@ -40,7 +40,6 @@ public class Engine {
 			/* Comparaison des records */
 			int pNbCoups = wControlerNiveau.getNbCoups();
 			int pNbActions = wControlerNiveau.getNbAction();
-			// TODO Améliorer les messages
 			if (wModelNiveau.getRecordActions() != 0 && pNbActions <= wModelNiveau.getRecordActions()) {
 				wSuccessed = true;
 				new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN).run();
