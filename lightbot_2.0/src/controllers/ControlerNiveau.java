@@ -136,13 +136,15 @@ public class ControlerNiveau {
 	public void run() {
 		/* Boucle générale du niveau */
 		this.pVNiveau.redraw();
-		int wI = 0;
+		long wTime = System.currentTimeMillis();
+		long wCour, wDiff;
 		while (!isFinished()) {
+			wCour = System.currentTimeMillis();
+			wDiff = wCour - wTime;
 			this.pVNiveau.handleEvents();
 			/* Exécution de l'ordonanceur */
 			if (this.pOrdonnanceur != null) {
-				wI++;
-				if (wI == 10000) {
+				if (wDiff > 500) {
 					try {
 						if (!this.pOrdonnanceur.step()) {
 							this.pNbCoups = this.pOrdonnanceur.getNbCoups();
@@ -153,7 +155,7 @@ public class ControlerNiveau {
 						this.pOrdonnanceur = null;
 					}
 					this.pVNiveau.redraw();
-					wI = 0;
+					wTime = System.currentTimeMillis();
 				}
 			}
 		}
