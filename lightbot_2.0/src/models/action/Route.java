@@ -48,9 +48,9 @@ public class Route extends Action {
 	@Override
 	public Action copy() {
 		Route wRoute = new Route();
-		wRoute.setName(this.pName);
-		wRoute.setTailleMax(this.pTailleMax);
-
+		wRoute.action = this.action;
+		wRoute.pName = this.pName;
+		wRoute.pTailleMax = this.pTailleMax;
 		wRoute.setCouleur(getCouleur());
 		return wRoute;
 	}

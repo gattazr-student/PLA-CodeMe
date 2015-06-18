@@ -1,4 +1,4 @@
-package views.fenetre;
+package views.niveau;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -28,13 +28,12 @@ import views.action.VAction;
 import views.action.VRoute;
 import views.action.VRouteListe;
 import views.bot.VBot;
+import views.fenetre.Panel;
 import views.jsfml.VBouton;
 import views.jsfml.VImage;
-import views.niveau.VCarte;
-import views.niveau.VCase;
 import controllers.ControlerNiveau;
 
-public class FenetreNiveau extends View implements Observer {
+public class VNiveau extends View implements Observer {
 
 	private Niveau pNiveau;
 	private RenderWindow pWindow;
@@ -51,7 +50,7 @@ public class FenetreNiveau extends View implements Observer {
 
 	private List<VAction> pVActionsDisponibles;
 
-	public FenetreNiveau(RenderWindow aWindow, Niveau aNiveau) {
+	public VNiveau(RenderWindow aWindow, Niveau aNiveau) {
 		this.pWindow = aWindow;
 		this.pNiveau = aNiveau;
 		/* Création des quatres panels */
@@ -71,9 +70,11 @@ public class FenetreNiveau extends View implements Observer {
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
 
-		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
-				"res/menu/fond_minion.png");
+		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/font/fond1.png");
 		this.pPanelCarte.addView(wImage_Fond);
+		// VImage wImage_Fond2 = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
+		// "res/font/fond.png");
+		// this.pPanelCarte.addView(wImage_Fond2);
 
 		this.pVActionsDisponibles = new LinkedList<VAction>();
 

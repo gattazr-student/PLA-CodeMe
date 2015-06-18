@@ -15,7 +15,7 @@ import models.niveau.CaseBasique;
 import models.niveau.CaseLampe;
 import models.niveau.Niveau;
 import views.fenetre.Fenetre;
-import views.fenetre.FenetreNiveau;
+import views.niveau.VNiveau;
 import controllers.ControlerNiveau;
 import controllers.engine.Ordonnanceur;
 import exceptions.LightBotException;
@@ -100,7 +100,7 @@ public class MyFirstLevel {
 		Niveau wModelNiveau = createModel();
 		// Niveau wModelNiveau = parserXML.creatLevelXML("res/XML/Conditions/level6.xml");
 		/* Création de la vue */
-		FenetreNiveau wViewNiveau = new FenetreNiveau(Fenetre.FENETRE, wModelNiveau);
+		VNiveau wViewNiveau = new VNiveau(Fenetre.FENETRE, wModelNiveau);
 		/* Création du contrôleur */
 		ControlerNiveau wControlerNiveau = new ControlerNiveau(wModelNiveau, wViewNiveau);
 

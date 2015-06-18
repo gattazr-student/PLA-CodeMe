@@ -26,7 +26,7 @@ public class VCaseInterrupteur extends VCase {
 	public void initView() {
 		Texture wTexture = new Texture();
 		try {
-			wTexture.loadFromFile(Paths.get("res/cases/case_ORANGE.png"));
+			wTexture.loadFromFile(Paths.get("res/cases/case_VIOLET.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();

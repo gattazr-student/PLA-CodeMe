@@ -15,8 +15,8 @@ import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.KeyEvent;
 
 import views.fenetre.Fenetre;
-import views.fenetre.FenetreNiveau;
 import views.jsfml.VPopup;
+import views.niveau.VNiveau;
 import controllers.engine.Ordonnanceur;
 import exceptions.LightBotException;
 
@@ -26,13 +26,13 @@ public class ControlerNiveau {
 	private int pNbCoups = 0;
 
 	private Niveau pNiveau;
-	private FenetreNiveau pVNiveau;
+	private VNiveau pVNiveau;
 	private Ordonnanceur pOrdonnanceur;
 
 	private Bot pBotCourant;
 	private Route pRouteCourant;
 
-	public ControlerNiveau(Niveau aNiveau, FenetreNiveau aVNiveau) {
+	public ControlerNiveau(Niveau aNiveau, VNiveau aVNiveau) {
 		this.pNiveau = aNiveau;
 		this.pVNiveau = aVNiveau;
 		this.pOrdonnanceur = null;
@@ -118,6 +118,7 @@ public class ControlerNiveau {
 	 */
 	public void resetLevel() {
 		/* Crééer la fonction reset dans Niveau */
+		this.pOrdonnanceur = null;
 		this.pNiveau.resetCarte();
 		this.pNiveau.resetBot();
 		this.pVNiveau.redraw();

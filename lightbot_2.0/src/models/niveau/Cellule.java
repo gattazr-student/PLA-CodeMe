@@ -56,8 +56,7 @@ public class Cellule extends ObservableModel {
 
 	public void nextCourante() {
 		if (this.pCourante + 1 > this.pCases.size()) {
-			// throw new Exception("Pas assez de case dans la cellule");
-			return;
+			this.pCourante = 0;
 		}
 		this.pCourante++;
 		notifyObserver("cellule_switch", null);
