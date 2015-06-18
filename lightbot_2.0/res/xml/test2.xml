@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+  <name>Test 2</name>
+  <actions>
+    <action>sauter</action>
+    <action>allumer</action>
+    <action>gauche</action>
+  </actions>
+  <bots>
+    <bot name="minion2">
+      <position x="0" y="1"/>
+      <orientation init="EST"/>
+    </bot>
+  </bots>
+  <record actions="4" coups="4"/>
+  <map>
+    <dimensions x="2" y="2"/>
+    <cellules>
+      <cellule>
+        <cases>
+          <position x="0" y="1"/>
+          <case h="0" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="1" y="1"/>
+          <case h="1" type="lampe"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="1" y="0"/>
+          <case h="0" type="lampe"/>
+        </cases>
+      </cellule>
+    </cellules>
+  </map>
+  <coups main="4" nb="1"/>
+</level>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+  <name>Test simple</name>
+  <actions>
+    <action>avancer</action>
+    <action>allumer</action>
+  </actions>
+  <bots>
+    <bot name="minion1">
+      <position x="0" y="0"/>
+      <orientation init="EST"/>
+    </bot>
+  </bots>
+  <record actions="2" coups="2"/>
+  <map>
+    <dimensions x="2" y="1"/>
+    <cellules>
+      <cellule>
+        <cases>
+          <position x="0" y="0"/>
+          <case h="0" type="basique"/>
+        </cases>
+      </cellule>
+      <cellule>
+        <cases>
+          <position x="1" y="0"/>
+          <case h="0" type="lampe"/>
+        </cases>
+      </cellule>
+    </cellules>
+  </map>
+  <coups main="2" nb="1"/>
+</level>

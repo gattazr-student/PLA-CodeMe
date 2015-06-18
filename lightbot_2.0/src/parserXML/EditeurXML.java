@@ -78,7 +78,7 @@ public class EditeurXML {
 				System.out.println("Veuillez saisir le nom du bot  (minion1 ou minion2) " + (i + 1) + " : ");
 				String couleur = sc.nextLine();
 				final Element aBot = document.createElement("bot");
-				aBot.setAttribute("couleur", couleur);
+				aBot.setAttribute("name", couleur);
 
 				/**
 				 * Position init du Bot
@@ -269,6 +269,6 @@ public class EditeurXML {
 	}
 
 	public static void main(final String[] args) {
-		EditXML("res/xml/test.xml");
+		EditXML("res/xml/test3.xml");
 	}
 }
