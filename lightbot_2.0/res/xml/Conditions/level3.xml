@@ -12,8 +12,8 @@
 	</actions>
 	<bots>
     		<bot name="minion1">
-        		<position x="0" y="4" />
-        		<orientation init="EST" />
+        		<position x="5" y="0" />
+        		<orientation init="SUD" />
     		</bot>
 	</bots>
 	<record coups="10" actions="0" />
