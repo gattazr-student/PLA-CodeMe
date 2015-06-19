@@ -40,7 +40,7 @@
 				</cases>
 			</cellule>
         <cellule>
-				<position x="1" y="3" />
+				<position x="0" y="3" />
 				<cases>
 					<case type = "interrupteur" h="0" />
 						<position x="0" y="5"/>
