@@ -5,13 +5,9 @@ package models.basic;
  *
  */
 public class Position {
-	/**
-	 * Position sur l'axe des abscisse
-	 */
+	/** Position sur l'axe des abscisse */
 	private int pX;
-	/**
-	 * Position sur l'axe des ordonnées
-	 */
+	/** Position sur l'axe des ordonnées */
 	private int pY;
 
 	/**

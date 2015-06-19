@@ -11,6 +11,7 @@ import exceptions.LightBotException;
  */
 public class Attendre extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "wait";
 
 	@Override

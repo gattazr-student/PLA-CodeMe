@@ -16,9 +16,18 @@ import controllers.ControlerNiveau;
  */
 public class Engine {
 
+	/**
+	 * Constructeur vide
+	 */
 	public Engine() {
 	}
 
+	/**
+	 * Lance un niveau
+	 * 
+	 * @param aFileName
+	 *            Fichier XML contenant le niveau
+	 */
 	public void startLevel(String aFileName) {
 		/* Création du model */
 		Niveau wModelNiveau = ParserXML.creatLevelXML(aFileName);
@@ -33,17 +42,27 @@ public class Engine {
 		wModelNiveau.addObserver(wViewNiveau);
 
 		/* Démarrage du niveau */
-		wControlerNiveau.run();
-
-		/* Comparaison des records */
-		int pNbCoups = wControlerNiveau.getNbCoups();
-		int pNbActions = wControlerNiveau.getNbAction();
-		// TODO Améliorer les messages
-		if (wModelNiveau.getRecordActions() != 0 && pNbActions <= wModelNiveau.getRecordActions()) {
-			new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN).run();
-		}
-		if (wModelNiveau.getRecordCoups() != 0 && pNbCoups <= wModelNiveau.getRecordCoups()) {
-			new VPopup(Fenetre.FENETRE, "Bravo ! Le temps d'execution etait tres court", Color.GREEN).run();
-		}
+		boolean wSuccessed = false;
+		do {
+			wControlerNiveau.resetLevel();
+			wControlerNiveau.run();
+			/* Comparaison des records */
+			int pNbCoups = wControlerNiveau.getNbCoups();
+			int pNbActions = wControlerNiveau.getNbAction();
+			if (wModelNiveau.getRecordActions() != 0 && pNbActions <= wModelNiveau.getRecordActions()) {
+				wSuccessed = true;
+				new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN).run();
+			}
+			if (wModelNiveau.getRecordCoups() != 0 && pNbCoups <= wModelNiveau.getRecordCoups()) {
+				wSuccessed = true;
+				new VPopup(Fenetre.FENETRE, "Bravo ! Le temps d'execution etait tres court", Color.GREEN)
+						.run();
+			}
+			if (!wSuccessed) {
+				new VPopup(Fenetre.FENETRE, "Bravo ! Mais vous pouvez ameliorer votre score", Color.GREEN)
+						.run();
+				System.out.println("Valid");
+			}
+		} while (!wSuccessed);
 	}
 }

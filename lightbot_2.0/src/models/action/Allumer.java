@@ -9,9 +9,11 @@ import exceptions.LightBotException;
 
 /**
  * Action Allumer
+ *
  */
 public class Allumer extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "allumer";
 
 	@Override

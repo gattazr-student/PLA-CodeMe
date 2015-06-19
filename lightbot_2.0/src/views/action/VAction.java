@@ -17,11 +17,14 @@ import models.action.TournerGauche;
 import models.basic.Couleur;
 import mvc.Observer;
 
+import org.jsfml.graphics.CircleShape;
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Transform;
+import org.jsfml.system.Vector2f;
 
 import views.View;
 
@@ -89,9 +92,29 @@ public abstract class VAction extends View implements Observer {
 		}
 		/* Calcul de la position asbolue */
 		Transform wTranslation = Transform.translate(new Transform(), getOrigin());
-		RenderStates wNewState = new RenderStates(aState.blendMode, Transform.combine(wTranslation,
-				aState.transform), aState.texture, aState.shader);
+		Transform wNewTransform = Transform.combine(wTranslation, aState.transform);
+		RenderStates wNewState = new RenderStates(aState.blendMode, wNewTransform, aState.texture,
+				aState.shader);
 		this.pSprite.draw(aTarget, wNewState);
+		int wI = 0;
+		for (String aName : getAction().getBotsCourant()) {
+			CircleShape wCircle = new CircleShape(5);
+			switch (aName) {
+			case "minion1":
+				wCircle.setFillColor(Color.BLUE);
+				break;
+			case "minion2":
+				wCircle.setFillColor(Color.MAGENTA);
+				break;
+			default:
+				wCircle = null;
+			}
+			if (wCircle != null) {
+				wCircle.setPosition(new Vector2f(5 + wI * 10, 5));
+				wCircle.draw(aTarget, wNewState);
+				wI++;
+			}
+		}
 	}
 
 	public Action getAction() {
@@ -118,5 +141,9 @@ public abstract class VAction extends View implements Observer {
 	}
 
 	public abstract void setTexture();
+
+	@Override
+	public void update(String aString, Object aObjet) {
+	}
 
 }

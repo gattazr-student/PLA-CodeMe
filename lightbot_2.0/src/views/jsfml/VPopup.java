@@ -85,10 +85,8 @@ public class VPopup extends View {
 				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
 					Vector2f wPosition = new Vector2f(wMouseEvent.position);
-					System.out.println(wPosition.x + "-" + wPosition.y);
 					if (wMouseEvent.button == Button.LEFT) {
 						View wView = isClickedOn(wPosition);
-						System.out.println(wView);
 						if (wView == this.pOk) {
 							return;
 						}

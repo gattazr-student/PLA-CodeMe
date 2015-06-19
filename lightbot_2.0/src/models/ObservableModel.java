@@ -6,10 +6,18 @@ import java.util.List;
 import mvc.Observable;
 import mvc.Observer;
 
+/**
+ * Model Observable
+ *
+ */
 public class ObservableModel implements Observable {
 
+	/** Liste des Observer sur le model Observable */
 	private List<Observer> pObservers;
 
+	/**
+	 * Création du model Observable
+	 */
 	public ObservableModel() {
 		this.pObservers = new LinkedList<Observer>();
 	}

@@ -1,5 +1,8 @@
 package models.action;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import models.ObservableModel;
 import models.basic.Couleur;
 import models.bot.Bot;
@@ -7,19 +10,35 @@ import models.niveau.Carte;
 import exceptions.LightBotException;
 
 /**
- * Représentation d'une action de lightbot
+ * Représentation d'une Action de lightbot
  *
  */
 public abstract class Action extends ObservableModel {
 
-	/**
-	 * Couleur de l'Action
-	 */
+	/** Couleur de l'Action */
 	private Couleur pCouleur;
+	/** Nom de l'Action */
 	private String pNameAction;
+	/** Liste des noms des Bots effectuant cette Action */
+	private List<String> pCourant;
 
+	/**
+	 * Constructeur d'une Action sans nom de couleur Blanche
+	 */
 	public Action() {
 		this.pCouleur = Couleur.BLANC;
+		this.pNameAction = new String();
+		this.pCourant = new LinkedList<String>();
+	}
+
+	/**
+	 * Ajout d'un Bot dans la liste des Bots effectuant l'Action
+	 *
+	 * @param aName
+	 *            Nom d'un Bot effectuant l'Action
+	 */
+	public void addBotCourant(String aName) {
+		this.pCourant.add(aName);
 	}
 
 	/**
@@ -30,16 +49,32 @@ public abstract class Action extends ObservableModel {
 	 * @param aCarte
 	 *            Carte sur laquelle le bot se trouve
 	 * @throws LightBotException
-	 *             TODO
+	 *             Retourne une exception si l'application de l'Action des invalide
 	 */
 	abstract public void apply(Bot aBot, Carte aCarte) throws LightBotException;
 
 	/**
-	 * Retourne une copie de l'Objet
-	 * 
-	 * @return
+	 * Vide la liste des Bots courant de l'Action
+	 */
+	public void clearBotsCourant() {
+		this.pCourant.clear();
+	}
+
+	/**
+	 * Retourne une copie de l'Action.
+	 *
+	 * @return Action copie
 	 */
 	public abstract Action copy();
+
+	/**
+	 * Retourne la liste des Bots courant
+	 *
+	 * @return Liste des Bots courants
+	 */
+	public List<String> getBotsCourant() {
+		return this.pCourant;
+	}
 
 	/**
 	 * Retourne la couleur de l'Action.

@@ -10,6 +10,7 @@ import exceptions.LightBotException;
  */
 public class Divise extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "divise";
 
 	@Override

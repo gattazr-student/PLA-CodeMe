@@ -12,6 +12,7 @@ import exceptions.LightBotException;
  */
 public class Avancer extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "avancer";
 
 	@Override

@@ -9,7 +9,9 @@ import models.basic.Position;
  */
 public abstract class Case extends ObservableModel {
 
+	/** Position de la Case */
 	private Position pPosition;
+	/** Hauteur de la Case */
 	private int pHauteur;
 
 	/**

@@ -6,6 +6,7 @@ import exceptions.LightBotException;
 
 public class Break extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "break";
 
 	@Override
