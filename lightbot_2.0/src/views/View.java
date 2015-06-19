@@ -11,23 +11,34 @@ import org.jsfml.graphics.RenderTarget;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Vector2f;
 
+/**
+ * View. Objet graphique de base. Cet Objet peut être dessiné et/ou être un conteneur pour d'autre objets View
+ *
+ */
 public abstract class View implements Drawable {
 
-	/**
-	 * List des éléments dessinés dans cet élément view
-	 */
+	/** List des éléments dessinés dans cet élément view */
 	private List<View> pViews;
-
 	/**
-	 * Zone utilisé par la view dans une fenetre JSFML
+	 * Zone utilisé par la view. Décrit la position dans la vue container supérieur et la taille de la View
+	 * courante
 	 */
 	private FloatRect pZone;
 
+	/**
+	 * Création d'un objet view vide placé en 0,0 et de taille 0,0.
+	 */
 	public View() {
 		this.pViews = new LinkedList<View>();
 		this.pZone = new FloatRect(0, 0, 0, 0);
 	}
 
+	/**
+	 * Création d'un objet View à la position et la taille donnée
+	 * 
+	 * @param aRect
+	 *            position et taille de la View
+	 */
 	public View(FloatRect aRect) {
 		this.pViews = new LinkedList<View>();
 		this.pZone = aRect;

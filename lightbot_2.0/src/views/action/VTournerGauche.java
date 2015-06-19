@@ -8,6 +8,10 @@ import models.action.TournerGauche;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions TournerGauche
+ *
+ */
 public class VTournerGauche extends VAction {
 
 	public VTournerGauche(TournerGauche aTournerGauche, FloatRect aZone) {

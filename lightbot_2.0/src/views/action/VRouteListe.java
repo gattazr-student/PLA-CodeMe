@@ -14,6 +14,10 @@ import views.View;
 import views.jsfml.VImage;
 import views.jsfml.VTexte;
 
+/**
+ * Représentation graphique des listes d'Actions contenus dans la Route
+ *
+ */
 public class VRouteListe extends View implements Observer {
 
 	public static final int OFFSET = 35;

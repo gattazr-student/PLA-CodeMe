@@ -14,6 +14,10 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
+/**
+ * Surcouche à la bibliothèque JSFML permettant la gestion de textes
+ *
+ */
 public class VTexte extends View {
 
 	private String pMessageAfficher;

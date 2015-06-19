@@ -14,14 +14,32 @@ import org.jsfml.window.event.MouseButtonEvent;
 import views.View;
 import views.fenetre.Panel;
 
+/**
+ * Surcouche à la bibliothèque JSFML permettant la gestion de Popup
+ *
+ */
 public class VPopup extends View {
 
+	/** Fenetre dans laquelle afficher */
 	private RenderWindow pWindow;
+	/** message du popup */
 	private String pMessage;
+	/** Bouton OK permettant de fermer la popup */
 	private VBouton pOk;
+	/** Couleur du texte affiché */
 	private Color pColor;
+	/** Taille du message */
 	private int pSize;
 
+	/**
+	 *
+	 * @param aWindow
+	 *            Fenêtre dans lequel faire apparatire le popup
+	 * @param aMessage
+	 *            Message à afficher
+	 * @param aColor
+	 *            Couleur du message
+	 */
 	public VPopup(RenderWindow aWindow, String aMessage, Color aColor) {
 		this.pMessage = aMessage;
 		this.pWindow = aWindow;
@@ -65,11 +83,18 @@ public class VPopup extends View {
 		wPanel.addView(wBouton);
 	}
 
+	/**
+	 * Dessine le popup
+	 */
 	public void redraw() {
 		draw(this.pWindow, new RenderStates(new Transform()));
 		this.pWindow.display();
 	}
 
+	/**
+	 * Gestion du fil d'éxécution de la popup
+	 * TODO: externaliser run et le placer dans un controlleur
+	 */
 	public void run() {
 		redraw();
 		while (this.pWindow.isOpen()) {

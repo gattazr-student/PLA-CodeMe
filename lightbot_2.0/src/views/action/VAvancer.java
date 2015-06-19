@@ -8,6 +8,10 @@ import models.action.Avancer;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Avancer
+ *
+ */
 public class VAvancer extends VAction {
 
 	public VAvancer(Avancer aAvancer, FloatRect aZone) {

@@ -12,12 +12,26 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
+/**
+ * Surcouche de la bibliothèque JSFML permettant la gestion de Boutons
+ *
+ */
 public class VBouton extends View {
-
+	/** chemin vers le fichier contenant la texture du Bouton */
 	private String pTextureFileName;
+	/** Sprite du Bouton */
 	private Sprite pSprite;
+	/** Nom du bouton */
 	private String pName;
 
+	/**
+	 * @param aZone
+	 *            emplacement et taille du bouton
+	 * @param aName
+	 *            nom du bouton
+	 * @param aTextureFileName
+	 *            chemin vers le fichier contenant la texture du bouton
+	 */
 	public VBouton(FloatRect aZone, String aName, String aTextureFileName) {
 		setZone(aZone);
 		this.pName = aName;
@@ -33,6 +47,11 @@ public class VBouton extends View {
 		this.pSprite.draw(aTarget, aState);
 	}
 
+	/**
+	 * Retourne le nom du bouton
+	 *
+	 * @return nom du bouton
+	 */
 	public String getName() {
 		return this.pName;
 	}

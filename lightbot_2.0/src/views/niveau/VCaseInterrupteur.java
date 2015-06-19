@@ -10,8 +10,19 @@ import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2f;
 
+/**
+ * Représentation graphique d'une CaseInterrupteur
+ *
+ */
 public class VCaseInterrupteur extends VCase {
 
+	/**
+	 *
+	 * @param aCaseInterrupteur
+	 *            Case à représenter
+	 * @param aZone
+	 *            Position et taille de la VCaseInterrupteur
+	 */
 	public VCaseInterrupteur(CaseInterrupteur aCaseInterrupteur, FloatRect aZone) {
 		super(aCaseInterrupteur, aZone);
 		aCaseInterrupteur.addObserver(this);

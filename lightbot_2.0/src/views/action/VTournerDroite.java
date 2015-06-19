@@ -8,6 +8,10 @@ import models.action.TournerDroite;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions TournerDroite
+ *
+ */
 public class VTournerDroite extends VAction {
 
 	public VTournerDroite(TournerDroite aTournerDroite, FloatRect aZone) {

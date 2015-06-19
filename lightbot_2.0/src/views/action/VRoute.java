@@ -8,6 +8,10 @@ import models.action.Route;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Route
+ *
+ */
 public class VRoute extends VAction {
 
 	public VRoute(Route aRoute, FloatRect aZone) {

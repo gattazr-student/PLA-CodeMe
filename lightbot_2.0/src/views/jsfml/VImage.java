@@ -14,11 +14,23 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
+/**
+ * Surcouche de la bibliothèque JSFML permettant la gestion d'images
+ *
+ */
 public class VImage extends View {
-
+	/** chemin vers le fichier contenant la texture du Bouton */
 	private String pTextureFileName;
+	/** Sprite du Bouton */
 	private Sprite pSprite;
 
+	/**
+	 *
+	 * @param aZone
+	 *            Position et taille de la VImage
+	 * @param aTextureFileName
+	 *            chemin vers le fichier contenant la texture
+	 */
 	public VImage(FloatRect aZone, String aTextureFileName) {
 		setZone(aZone);
 		this.pTextureFileName = aTextureFileName;
