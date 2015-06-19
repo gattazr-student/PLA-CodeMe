@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<level>
+	<name> Modif Env </name>
+	    <actions> 
+	    	<action>avancer</action>
+	    	<action>droite</action>
+	    	<action>gauche</action>
+			<action>douche</action>
+			<action>break</action>
+			<action>allumer</action>
+			<action>testAvancer</action>
+		</actions>
+	<bots>
+    		<bot name="minion1">
+
+        		<position x="0" y="0" />
+        		<orientation init="SUD" />
+    		</bot>
+	</bots>
+	<record coups="11" actions="0" />
+	<map>
+        <dimensions x="1" y="8" />
+		<cellules>
+			<cellule>
+				<position x="0" y="0" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="0" y="1" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+		<cellule>
+				<position x="0" y="2" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="1" y="3" />
+				<cases>
+					<case type = "interrupteur" h="0" />
+						<position x="0" y="5"/>
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="0" y="4" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="0" y="5" />
+				<cases>
+					<case type = "basique" h="3" />
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="0" y="6" />
+				<cases>
+					<case type = "basique" h="0" />
+				</cases>
+			</cellule>
+        <cellule>
+				<position x="0" y="7" />
+				<cases>
+					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+
+		</cellules>
+	</map>
+	<coups nb="2" main="7" p1="4" />
+ </level>
