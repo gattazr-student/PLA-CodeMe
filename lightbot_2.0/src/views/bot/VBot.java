@@ -15,16 +15,33 @@ import org.jsfml.graphics.Transform;
 
 import views.View;
 
+/**
+ * Représentation graphique des Bots
+ *
+ */
 public class VBot extends View implements Observer {
 
+	/** Déplacement en X du Bot pour le centrer sur une case */
 	public static float DEPL_X = 10;
+	/** Déplacement en Y du Bot pour le centrer sur une case */
 	public static float DEPL_Y = 73;
+	/** Hauteur du bot */
 	public static float HAUTEUR = 102;
+	/** Largeur du bot */
 	public static float LARGEUR = 47;
-
+	/** Bot représenté */
 	private Bot pBot;
+	/** Sprite du Bot */
 	private Sprite pSprite;
 
+	/**
+	 * Création d'une VBot associé au Bot et à la position donée
+	 *
+	 * @param aBot
+	 *            Bot à représenter
+	 * @param aZone
+	 *            Position et taille de la vue
+	 */
 	public VBot(Bot aBot, FloatRect aZone) {
 		super(aZone);
 		this.pBot = aBot;
@@ -55,6 +72,9 @@ public class VBot extends View implements Observer {
 		resetTexture();
 	}
 
+	/**
+	 * Mise en place de la texture du bot
+	 */
 	public void resetTexture() {
 		if (this.pSprite != null) {
 			Texture wTexture = new Texture();

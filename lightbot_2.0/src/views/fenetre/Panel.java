@@ -5,8 +5,7 @@ import org.jsfml.graphics.FloatRect;
 import views.View;
 
 /**
- * Panel est un espace de dessin dans une fênetre. Il est uniquement repéré par
- * son origine (le coin haut gauche)
+ * Panel est un espace de dessin dans une fênetre. Il est repéré par un rectangle
  *
  */
 public class Panel extends View {

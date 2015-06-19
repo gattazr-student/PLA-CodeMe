@@ -42,8 +42,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * Parser XML permetant la création d'un niveau
+ *
+ */
 public class ParserXML {
 
+	/**
+	 * Création d'un Niveau à partir d'un fichier XML
+	 *
+	 * @param fichierXML
+	 *            chemin vers le fichier contenant le XML décrivant un Niveau
+	 * @return Niveau construit
+	 */
 	public static Niveau creatLevelXML(String fichierXML) {
 
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

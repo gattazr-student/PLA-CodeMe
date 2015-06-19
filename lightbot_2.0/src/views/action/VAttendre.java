@@ -8,6 +8,10 @@ import models.action.Attendre;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Attendre
+ *
+ */
 public class VAttendre extends VAction {
 
 	public VAttendre(Attendre aAttendre, FloatRect aZone) {

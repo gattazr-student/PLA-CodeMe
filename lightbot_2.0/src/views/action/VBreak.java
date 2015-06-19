@@ -8,6 +8,10 @@ import models.action.Break;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Break
+ *
+ */
 public class VBreak extends VAction {
 
 	public VBreak(Break aBreak, FloatRect aZone) {

@@ -8,6 +8,10 @@ import models.action.Douche;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Douche
+ *
+ */
 public class VDouche extends VAction {
 
 	public VDouche(Douche aDouche, FloatRect aZone) {

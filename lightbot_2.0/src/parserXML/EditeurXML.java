@@ -17,8 +17,18 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+/**
+ * Classe permettant la crÃ©ation d'un fichier XML Ã  partir d'une description faite au terminal
+ *
+ */
 public class EditeurXML {
 
+	/**
+	 * CrÃ©ation du fichier XML nomFichier contenant la carte qui sera dÃ©crit
+	 *
+	 * @param nomfichier
+	 *            nom du fichier de sortie contenant le XML
+	 */
 	public static void EditXML(String nomfichier) {
 		/*
 		 * Recuperation d'une instance de la classe "DocumentBuilderFactory"
@@ -31,7 +41,7 @@ public class EditeurXML {
 			final Document document = builder.newDocument();
 
 			/*
-			 * Création de l'Element racine
+			 * Crï¿½ation de l'Element racine
 			 */
 			final Element racine = document.createElement("level");
 			document.appendChild(racine);
@@ -39,7 +49,7 @@ public class EditeurXML {
 			Scanner sc = new Scanner(System.in);
 
 			/*
-			 * Création du nom du niveau
+			 * Crï¿½ation du nom du niveau
 			 */
 
 			System.out.println("Veuillez saisir le nom du niveau :");
@@ -180,7 +190,7 @@ public class EditeurXML {
 					System.out.println("Veuillez saisir le type de la case : ");
 					String aType = sc.nextLine();
 					if (aType.equals("interrupteur")) {
-						System.out.println("Veuillez saisir le nombre de case lié à l'interrupteur : ");
+						System.out.println("Veuillez saisir le nombre de case liï¿½ ï¿½ l'interrupteur : ");
 						String aNbPos = sc.nextLine();
 						for (int p = 0; p < Integer.parseInt(aNbPos); p++) {
 							final Element aPositionI = document.createElement("position");
@@ -266,9 +276,5 @@ public class EditeurXML {
 		} catch (TransformerException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(final String[] args) {
-		EditXML("res/xml/test4.xml");
 	}
 }

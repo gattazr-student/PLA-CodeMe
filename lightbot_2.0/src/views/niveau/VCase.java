@@ -20,14 +20,31 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
+/**
+ * Représentation graphique d'une Case
+ *
+ */
 public abstract class VCase extends View implements Observer {
 
+	/** Diagonale horizontale de la case */
 	public static final float DIAG_HORIZONTALE = 70;
+	/** Diagonale verticle de la case */
 	public static final float DIAG_VERTICALE = 37;
+	/** Déplacement horizontale */
 	public static final float DEPL_HAUTEUR = 18;
+	/** Hauteur de la case */
 	public static final float HAUTEUR = 74;
+	/** Largeur de la case */
 	public static final float LARGEUR = 55;
 
+	/**
+	 * Calcule le vecteur de déplacement à appliquer pour placer une case à la position donnée en 2D
+	 * isométrique
+	 *
+	 * @param aPosition
+	 *            Position de la Case
+	 * @return vecteur de déplacement à appliquer pour placer la case dans la VCarte
+	 */
 	public static Vector2f deplacementCase(Position aPosition) {
 		/* Déplacement selon u */
 		Transform wU = Transform.translate(new Transform(),
@@ -69,17 +86,33 @@ public abstract class VCase extends View implements Observer {
 		return null;
 	}
 
+	/** hauteur de la Csase */
 	private int pHauteur;
+	/** Case représenté */
 	private Case pCase;
 
+	/** Liste de case permettant la représentation de la VCase */
 	private List<Sprite> pSprites;
 
+	/**
+	 *
+	 * @param aCase
+	 *            Case à représenter
+	 * @param aZone
+	 *            Position et taille de la VCase
+	 */
 	public VCase(Case aCase, FloatRect aZone) {
 		this.pCase = aCase;
 		this.pSprites = new LinkedList<Sprite>();
 		setZone(aZone);
 	}
 
+	/**
+	 * Ajoute un Sprite à la liste des sprites permettant la représentation d'une VCase
+	 *
+	 * @param aSprite
+	 *            Sprite à rajouter
+	 */
 	public void addSprite(Sprite aSprite) {
 		this.pSprites.add(aSprite);
 	}
@@ -104,14 +137,30 @@ public abstract class VCase extends View implements Observer {
 		}
 	}
 
+	/**
+	 * Retourne la Case associé à la VCase
+	 *
+	 * @return Case associé à la VCase
+	 */
 	public Case getCase() {
 		return this.pCase;
 	}
 
+	/**
+	 * Retourne la hauteur de la VCase
+	 *
+	 * @return hauteur de la VCase
+	 */
 	public int getHauteur() {
 		return this.pHauteur;
 	}
 
+	/**
+	 * Définit la hauteur de la VCase
+	 *
+	 * @param aHauteur
+	 *            hauteur de la CVase
+	 */
 	public void setHauteur(int aHauteur) {
 		this.pHauteur = aHauteur;
 	}

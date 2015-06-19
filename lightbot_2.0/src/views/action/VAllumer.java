@@ -8,6 +8,10 @@ import models.action.Allumer;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Allumer
+ *
+ */
 public class VAllumer extends VAction {
 
 	public VAllumer(Allumer aAllumer, FloatRect aZone) {

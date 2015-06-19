@@ -14,7 +14,7 @@
 		</actions>
 	<bots>
     		<bot name="minion1">
-    			<position x="0" y="3" />
+    			<position x="0" y="0" />
     			<orientation init="EST" />
     		</bot>
 	</bots>
