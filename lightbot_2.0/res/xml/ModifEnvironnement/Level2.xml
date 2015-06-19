@@ -14,7 +14,7 @@
 		</actions>
 	<bots>
     		<bot name="minion1">
-    			<position x="0" y="0" />
+    			<position x="0" y="3" />
     			<orientation init="EST" />
     		</bot>
 	</bots>
@@ -53,7 +53,7 @@
 			<cellule>
                 		<position x="4" y="0" />
 				<cases>
-					<case type = "interrupteur" h="2"/>
+					<case type = "interrupteur" h="3"/>
 						<position x="4" y="3"/>
 				</cases>
 			</cellule>
@@ -83,7 +83,7 @@
 			<cellule>
                 <position x="4" y="4" />
 				<cases>
-					<case type = "lampe" h="3" />
+					<case type = "lampe" h="4" />
 				</cases>
 			</cellule>
 
@@ -105,7 +105,7 @@
 			<cellule>
                 <position x="6" y="0" />
 				<cases>
-					<case type = "interrupteur" h="1">
+					<case type = "interrupteur" h="2">
 						<position x="5" y="0"/>
 					</case>
 				</cases>
