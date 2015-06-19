@@ -23,6 +23,9 @@ public class CaseLampe extends Case {
 		this.pEtat = ETAT_LAMPE.ETEINT;
 	}
 
+	/**
+	 * Action effectué lorsque le Bot activer la CaseLampe. La case change d'ETAT_LAMPE
+	 */
 	public void activate() {
 		/* Change l'état de la lampe */
 		if (this.pEtat == ETAT_LAMPE.ETEINT) {

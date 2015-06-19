@@ -14,39 +14,35 @@ import models.basic.Position;
  */
 public class Bot extends ObservableModel {
 
-	/**
-	 * Position du bot sur une Carte
-	 */
+	/** Position du bot sur une Carte */
 	private Position pPosition;
-	/**
-	 * Orientation du Bot sur une Carte
-	 */
+	/** Orientation du Bot sur une Carte */
 	private Orientation pOrientation;
-	/**
-	 * Couleur du Bot
-	 */
+	/** Couleur du Bot */
 	private Couleur pCouleur;
-
+	/** Route Main d'un Bot */
 	private Route pRouteMain;
-
+	/** Nom du Bot */
 	private String pName;
-
-	/**
-	 * Etat du Bot (Actif ou Passif)
-	 */
+	/** Etat du Bot (Actif ou Passif) */
 	private Etat pEtat;
+	/** Sauvegarde de la Couleur */
 	private Couleur pCouleurSauvegarde;
+	/** Sauvegarde de l'Orientation */
 	private Orientation pOrientationSauvergarde;
+	/** Sauvegarde de la Position originale */
 	private Position pPositionSauvergarde;
 
 	/**
 	 * Constructeur par défault. Placé en 0,0, Orienté vers Nord et de Couleur Blanche
 	 */
-
 	public Bot() {
 		this.pCouleur = Couleur.BLANC;
+		this.pCouleurSauvegarde = this.pCouleur;
 		this.pPosition = new Position();
+		this.pPositionSauvergarde = this.pPosition;
 		this.pOrientation = Orientation.NORD;
+		this.pOrientationSauvergarde = this.pOrientation;
 		this.pRouteMain = new Route();
 		this.pEtat = Etat.ACTIF;
 	}
@@ -139,6 +135,9 @@ public class Bot extends ObservableModel {
 		this.pRouteMain.removeAction(numberAction);
 	}
 
+	/**
+	 * Remet le Bot dans son etat sauvegardé
+	 */
 	public void reset() {
 		this.pCouleur = this.pCouleurSauvegarde;
 		this.pOrientation = this.pOrientationSauvergarde;

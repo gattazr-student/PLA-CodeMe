@@ -6,6 +6,7 @@ import exceptions.LightBotException;
 
 public class Notify extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "notify";
 
 	@Override

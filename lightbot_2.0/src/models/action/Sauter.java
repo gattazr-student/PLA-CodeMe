@@ -12,6 +12,7 @@ import exceptions.LightBotException;
  */
 public class Sauter extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "sauter";
 
 	@Override
@@ -38,6 +39,15 @@ public class Sauter extends Action {
 		return wSauter;
 	}
 
+	/**
+	 * Retourne true si la destination existe. false sinon
+	 *
+	 * @param aBot
+	 *            aBot à avancer
+	 * @param aCarte
+	 *            Carte sur lequel le Bot se trouve
+	 * @return true si la destination existe. false sinon
+	 */
 	private boolean destinationExists(Bot aBot, Carte aCarte) {
 		/*
 		 * Acion valide si pas de case (segfault) ou si case destination sur même niveau
@@ -59,6 +69,15 @@ public class Sauter extends Action {
 		return true;
 	}
 
+	/**
+	 * Retourn true si la destination est atteignable. false sinon
+	 *
+	 * @param aBot
+	 *            Bot a déplacer
+	 * @param aCarte
+	 *            Carte sur lequel le Bot se trouve
+	 * @return true si la destination est atteignable. false sinon
+	 */
 	private boolean destinationReachable(Bot aBot, Carte aCarte) {
 		Case wCaseDestination;
 		Position wPositionCourant, wNextPosition;

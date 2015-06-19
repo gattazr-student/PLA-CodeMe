@@ -5,7 +5,14 @@ import models.bot.Bot;
 import models.niveau.Carte;
 import exceptions.LightBotException;
 
+/**
+ * Action TestAvancer
+ *
+ */
 public class TestAvancer extends Action {
+
+	/** Nom de l'Action */
+	final static String pNameAction = "testAvancer";
 
 	@Override
 	public void apply(Bot aBot, Carte aCarte) throws LightBotException {

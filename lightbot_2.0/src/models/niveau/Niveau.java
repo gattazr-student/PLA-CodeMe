@@ -17,33 +17,21 @@ import models.niveau.CaseLampe.ETAT_LAMPE;
  */
 public class Niveau extends ObservableModel {
 
-	/**
-	 * Carte du niveau
-	 */
+	/** Carte du niveau */
 	private Carte pCarte;
-	/**
-	 * Liste de Bots présent pour ce Niveau
-	 */
+	/** Liste de Bots présent pour ce Niveau */
 	private List<Bot> pBots;
-	/**
-	 * Record du niveau (nombre de coups à battre)
-	 */
+	/** Record du niveau (nombre de coups à battre) */
 	private int pRecordCoups;
 	private int pRecordActions;
 
-	/**
-	 * P1,P2....
-	 */
+	/** Route partagés pas tous les Bots disponible pour ce Niveau */
 	private ArrayList<Route> pRoutes;
 
-	/**
-	 * Nom du niveau
-	 */
+	/** Nom du niveau */
 	private String nom;
 
-	/**
-	 * List des actions possible dans le niveau
-	 */
+	/** List des actions possible dans le niveau */
 	private ArrayList<Action> pActions;
 
 	/**
@@ -56,10 +44,10 @@ public class Niveau extends ObservableModel {
 	}
 
 	/**
-	 * Ajoute une action en fin de la liste d'action
+	 * Ajoute une action dans la liste d'action
 	 */
 	public void addAction(Action aAction) {
-		(this.pActions).add(aAction);
+		this.pActions.add(aAction);
 	}
 
 	/**
@@ -73,16 +61,19 @@ public class Niveau extends ObservableModel {
 	}
 
 	/**
-	 * ajout d'un route dans le Niveau
+	 * Ajout d'une Route partagé dans le Niveau
+	 *
+	 * @param aRoute
+	 *            Route partagé à rajouter
 	 */
 	public void addRoute(Route aRoute) {
 		this.pRoutes.add(aRoute);
 	}
 
 	/**
-	 * Ajoute une action en fin de la liste d'action
+	 * Retourne la liste des Actions disponibles pour le niveau
 	 *
-	 * @return
+	 * @return liste des Actions disponibles pour le niveau
 	 */
 	public ArrayList<Action> getActions() {
 		return this.pActions;
@@ -91,7 +82,7 @@ public class Niveau extends ObservableModel {
 	/**
 	 * Retourne la liste des Bots présent dans le Niveau
 	 *
-	 * @return List des Bots présents dans le Niveau
+	 * @return liste des Bots présents dans le Niveau
 	 */
 	public List<Bot> getBots() {
 		return this.pBots;
@@ -109,25 +100,25 @@ public class Niveau extends ObservableModel {
 	/**
 	 * Recupere le nom du niveau
 	 *
-	 * @return
+	 * @return nom du Niveau
 	 */
 	public String getNom() {
 		return this.nom;
 	}
 
 	/**
-	 * Retourne le record du Niveau.
+	 * Retourne le record en nombre d'actions du Niveau.
 	 *
-	 * @return record du Niveau
+	 * @return record en nombre d'actions du Niveau.
 	 */
 	public int getRecordActions() {
 		return this.pRecordActions;
 	}
 
 	/**
-	 * Retourne le record du Niveau.
+	 * Retourne le record en nombre de coups du Niveau.
 	 *
-	 * @return record du Niveau
+	 * @return record en nombre de coups du Niveau.
 	 */
 	public int getRecordCoups() {
 		return this.pRecordCoups;
@@ -165,12 +156,18 @@ public class Niveau extends ObservableModel {
 		return true;
 	}
 
+	/**
+	 * Reset tous les Bots contenus dans le Niveau
+	 */
 	public void resetBot() {
 		for (Bot wBot : this.pBots) {
 			wBot.reset();
 		}
 	}
 
+	/**
+	 * Reset la Carte
+	 */
 	public void resetCarte() {
 		this.pCarte.reset();
 	}

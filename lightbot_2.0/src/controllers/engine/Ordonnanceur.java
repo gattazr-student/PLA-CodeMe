@@ -17,19 +17,37 @@ import models.bot.Bot;
 import models.niveau.Niveau;
 import exceptions.LightBotException;
 
+/**
+ * Ordonanceur permettant l'execution de plusieurs robots en parallele
+ *
+ * @author gattazr
+ *
+ */
 public class Ordonnanceur {
 
-	private int pNbCoups = 0;
+	/** Nombre de coups effectué depuis le début de l'ordonanceur */
+	private int pNbCoups;
+	/** Flag permetant d'effectuer le Notify à la fin de la gestion du step */
 	private boolean pNotify;
-
+	/** Liste de pile d'itérateur d'Action. Utilisé pour conserver la position des bots dans les fonctions */
 	List<Stack<Iterator<Action>>> pStacks;
+	/** Niveau sur lequel l'Ordonanceur est lancé */
 	private Niveau pNiveau;
-	/* List contenant la dernière Action effectué par chancun des Bots */
+	/**
+	 * Liste contenant la dernière Action effectuée par chancun des Bots. Utilisée pour les affichages
+	 * "Action courante"
+	 */
 	private List<Action> pPrev;
 
+	/**
+	 * Création de l'Ordonanceur pour un niveau donné
+	 *
+	 * @param aNiveau
+	 */
 	public Ordonnanceur(Niveau aNiveau) {
 		this.pNiveau = aNiveau;
 		this.pNotify = false;
+		this.pNbCoups = 0;
 		this.pStacks = new LinkedList<Stack<Iterator<Action>>>();
 		for (Bot wBot : aNiveau.getBots()) {
 			Route wMain = wBot.getRouteMain();
@@ -37,12 +55,17 @@ public class Ordonnanceur {
 			wStack.push(wMain.iterator());
 			this.pStacks.add(wStack);
 		}
-		/* Création de deux éléments fictifs pour simuler les anciennes actions */
+		/* Création de deux éléments fictifs pour simuler les anciennes dernière actions */
 		this.pPrev = new ArrayList<>();
 		this.pPrev.add(new Avancer());
 		this.pPrev.add(new Avancer());
 	}
 
+	/**
+	 * Retourne le nombre de coups effectué depuis le début de l'ordonanceur
+	 *
+	 * @return
+	 */
 	public int getNbCoups() {
 		return this.pNbCoups;
 	}
@@ -52,13 +75,16 @@ public class Ordonnanceur {
 	}
 
 	/**
-	 * @param : none
+	 * Executé une Action pour chacun des bots.
 	 *
-	 * @return : true s'il reste des actions a effectuer
+	 * @return vrai si au moins une action a été effectué. false sinon.
+	 * @throws LightBotException
+	 *             si une exception a été levé pendant l'exécution de l'Action.
 	 */
 	public boolean step() throws LightBotException {
 		int i = 0;
 		boolean wRes = false;
+		/* Effectue une action pour chacun des bots */
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
 			this.pPrev.get(i).clearBotsCourant();
 			Bot wBot = this.pNiveau.getBots().get(i);
@@ -68,7 +94,9 @@ public class Ordonnanceur {
 			}
 			i++;
 		}
+
 		List<Bot> wBots = this.pNiveau.getBots();
+		/* Notify si le flag a été levé */
 		if (this.pNotify) {
 			for (Bot wBot : wBots) {
 				wBot.setEtat(Etat.ACTIF);
@@ -91,66 +119,84 @@ public class Ordonnanceur {
 	}
 
 	/**
+	 * Effetue une action pour un bot donnée
 	 *
 	 * @param aStack
-	 *            : pile d'iterator d'actions
+	 *            Pile d'irateur contenant les Actions à effectuer par le Bot
 	 * @param aBot
-	 *            : robot courant
-	 * @return : s'il reste des actions
+	 *            Bot sur lequel appliquer les Action
+	 * @param aIdentif
+	 *            numéro identifiant le Bot dans les structure de la classe
+	 * @return Vrai une Action a été effectué ou que le Bot est en attente. False sinon
+	 * @throws LightBotException
 	 */
 	private boolean stepOne(Stack<Iterator<Action>> aStack, Bot aBot, int aIdentif) throws LightBotException {
 
+		/* Le bot est en attente d'être réveillé (Wait) */
 		if (aBot.getEtat() == Etat.PASSIF) {
-			/* Le bot est en attente d'être réveillé */
 			return true;
 		}
 
+		/* Recherche du premier élément non null dans la pile */
 		while (!aStack.isEmpty() && aStack.peek() == null) {
 			aStack.pop();
 		}
+		/* Retourne faux si la pile est vide */
 		if (aStack.isEmpty()) {
 			return false;
 		}
+		/* Récupère l'Iterator sans le retirer de la pile */
 		Iterator<Action> wIt = aStack.peek();
 		if (wIt == null) {
+			/* L'Iterator est null, ce qui est une erreur normalement impossible */
 			System.err.println("Unexpected iterator null");
+			return false;
 		} else {
+			/* Vérifie que l'itérator à un élément suivant */
 			if (wIt.hasNext()) {
 				Action wAction = wIt.next();
-
+				/* Recher la prochaine action à effectuer dans cette liste */
 				while ((wAction.getCouleur() == Couleur.ROUGE || wAction.getCouleur() == Couleur.VERT)
 						&& wAction.getCouleur() != aBot.getCouleur() && wIt.hasNext()) {
 					wAction = wIt.next();
 				}
+				/* Si la pile contenait une Action executable */
 				if (wAction.getCouleur() == Couleur.BLANC || wAction.getCouleur() == aBot.getCouleur()) {
+					/* Si il s'agit d'une route, on empile la route et on relancer oneStep */
 					if (wAction instanceof Route) {
 						aStack.push(((Route) wAction).iterator());
 						return stepOne(aStack, aBot, aIdentif);
 					} else {
+						/* Si il s'agit d'un Break, on dépile et on relance oneStep */
 						if (wAction instanceof Break) {
 							aStack.pop();
 							return stepOne(aStack, aBot, aIdentif);
 						}
+						/* Si il s'agit de Notify, on met à jour le flag et on retourne vrai */
 						if (wAction instanceof Notify) {
 							this.pNotify = true;
 						} else {
-							/* Signale l'Action en cours */
+							/*
+							 * Si il s'agit d'un action, on signale l'Action en cours, on l'applique et on
+							 * retoune vrai
+							 */
 							this.pPrev.set(aIdentif, wAction);
-							/* Applique l'Action */
 							wAction.apply(aBot, this.pNiveau.getCarte());
 						}
 						this.pNbCoups++;
 						return true;
 					}
 				} else {
-					return true;
+					/* Si aucune action n'a été trouvé dans cette liste, on dépile et on relancer oneStep */
+					aStack.pop();
+					return stepOne(aStack, aBot, aIdentif);
 				}
 
 			} else {
+				/* Si on a déja récupéré la fin de la liste, on dépile et on relancer oneStep */
 				aStack.pop();
 				return stepOne(aStack, aBot, aIdentif);
 			}
 		}
-		return false;
 	}
 }

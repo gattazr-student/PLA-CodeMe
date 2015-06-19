@@ -16,9 +16,18 @@ import controllers.ControlerNiveau;
  */
 public class Engine {
 
+	/**
+	 * Constructeur vide
+	 */
 	public Engine() {
 	}
 
+	/**
+	 * Lance un niveau
+	 * 
+	 * @param aFileName
+	 *            Fichier XML contenant le niveau
+	 */
 	public void startLevel(String aFileName) {
 		/* Création du model */
 		Niveau wModelNiveau = ParserXML.creatLevelXML(aFileName);

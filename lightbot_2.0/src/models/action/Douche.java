@@ -7,6 +7,7 @@ import exceptions.LightBotException;
 
 public class Douche extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "douche";
 
 	@Override

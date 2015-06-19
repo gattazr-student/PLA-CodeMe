@@ -20,19 +20,37 @@ import views.niveau.VNiveau;
 import controllers.engine.Ordonnanceur;
 import exceptions.LightBotException;
 
+/**
+ * Controler utilisé pour un Niveau
+ *
+ */
 public class ControlerNiveau {
 
+	/** Nombre d'action utilisé pour résoudre le niveau */
 	private int pNbAction = 0;
+	/** Nombre de coups effectués pour résoudre le niveau */
 	private int pNbCoups = 0;
-
+	/** Niveau */
 	private Niveau pNiveau;
+	/** VNniveau */
 	private VNiveau pVNiveau;
+	/** Ordonnanceur */
 	private Ordonnanceur pOrdonnanceur;
-
+	/** Bot courant (le main affiché dans la fenêtre est le sien) */
 	private Bot pBotCourant;
+	/** Route en cours de modification */
 	private Route pRouteCourant;
+	/** Booleén signalant l'utilisation du clavier */
 	private boolean pKeyPress;
 
+	/**
+	 * Construit un Controller de Niveau à partir d'un Niveau et d'une vue Niveau.
+	 *
+	 * @param aNiveau
+	 *            Niveau à utiliser
+	 * @param aVNiveau
+	 *            Vue à utiliser
+	 */
 	public ControlerNiveau(Niveau aNiveau, VNiveau aVNiveau) {
 		this.pNiveau = aNiveau;
 		this.pVNiveau = aVNiveau;
@@ -54,15 +72,27 @@ public class ControlerNiveau {
 		this.pNbAction++;
 	}
 
+	/**
+	 * Quitte le Niveau
+	 */
 	public void exit() {
 		// TODO Quitte le niveau
-
 	}
 
+	/**
+	 * Retourne le nombre d'Actions utilisés pour résoudre le niveau
+	 *
+	 * @return nombre d'Actions utilisés pour résoudre le niveau
+	 */
 	public int getNbAction() {
 		return this.pNbAction;
 	}
 
+	/**
+	 * Retourne le nombre de Coups effectués pour résoudre le niveau
+	 *
+	 * @return nombre de Coups effectués pour résoudre le niveau
+	 */
 	public int getNbCoups() {
 		return this.pNbCoups;
 	}
@@ -77,7 +107,7 @@ public class ControlerNiveau {
 	}
 
 	/**
-	 * Fonction temporaire permettant de tester facilement les actions
+	 * Fonction permettant de controler le Bot au clavier
 	 *
 	 * @param wSMFLKeyEvent
 	 */
@@ -133,6 +163,9 @@ public class ControlerNiveau {
 		this.pVNiveau.redraw();
 	}
 
+	/**
+	 * Execution du Niveau
+	 */
 	public void run() {
 		/* Boucle générale du niveau */
 		this.pVNiveau.redraw();
@@ -165,6 +198,12 @@ public class ControlerNiveau {
 
 	}
 
+	/**
+	 * Définit le Bot courant. Remplace la route Main affiché par la route Main de ce Bot.
+	 *
+	 * @param aBot
+	 *            nouveau Bot courant
+	 */
 	public void setBotCourant(Bot aBot) {
 		this.pBotCourant = aBot;
 		setRouteCourant(aBot.getRouteMain());
@@ -172,6 +211,12 @@ public class ControlerNiveau {
 		this.pVNiveau.redraw();
 	}
 
+	/**
+	 * Définit la route en cours de modification
+	 *
+	 * @param aRouteCourant
+	 *            nouvelle Route courante
+	 */
 	public void setRouteCourant(Route aRouteCourant) {
 		this.pRouteCourant = aRouteCourant;
 		this.pVNiveau.redraw();

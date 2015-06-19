@@ -9,17 +9,11 @@ import models.niveau.CaseLampe.ETAT_LAMPE;
  *
  */
 public class Carte extends ObservableModel {
-	/**
-	 * Position maximum sur l'axe des abscisses
-	 */
+	/** Position maximum sur l'axe des abscisses */
 	private int pMaxX;
-	/**
-	 * Position maximum sur l'axe des ordonnées
-	 */
+	/** Position maximum sur l'axe des ordonnées */
 	private int pMaxY;
-	/**
-	 * Carte
-	 */
+	/** Cellules composant la Ccarte */
 	private Cellule[][] pCellules;
 
 	/**
@@ -166,6 +160,9 @@ public class Carte extends ObservableModel {
 		return positionValid(aPosition.getX(), aPosition.getY());
 	}
 
+	/**
+	 * Remet la Carte dans son état Original
+	 */
 	public void reset() {
 		for (int wY = 0; wY < this.pMaxY; wY++) {
 			for (int wX = 0; wX < this.pMaxX; wX++) {

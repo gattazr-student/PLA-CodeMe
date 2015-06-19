@@ -1,5 +1,9 @@
 package exceptions;
 
+/**
+ * LightBotException
+ *
+ */
 public class LightBotException extends Exception {
 
 	/**

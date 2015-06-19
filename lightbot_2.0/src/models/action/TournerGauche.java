@@ -11,6 +11,7 @@ import exceptions.LightBotException;
  */
 public class TournerGauche extends Action {
 
+	/** Nom de l'Action */
 	final static String pNameAction = "gauche";
 
 	@Override
