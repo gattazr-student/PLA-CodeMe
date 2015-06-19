@@ -14,7 +14,7 @@
 		</actions>
 	<bots>
     		<bot name="minion1">
-    			<position x="0" y="0" />
+    			<position x="0" y="2" />
     			<orientation init="EST" />
     		</bot>
 	</bots>
@@ -23,72 +23,125 @@
 		<dimensions x="11" y="5" />
 		<cellules>
 			<cellule>
-                <position x="0" y="3" />
+                <position x="0" y="2" />
 				<cases>
-					<case type = "basique" h="0" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 
 			<cellule>
                 <position x="1" y="0" />
 				<cases>
-					<case type = "basique" h="0" />
+					<case type = "interrupteur" h="2" />
+						<position x="9" y="2"/>
 				</cases>
 			</cellule>
 
 			<cellule>
-                <position x="2" y="3" />
+                <position x="1" y="2" />
 				<cases>
-					<case type = "basique" h="0" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 
 			<cellule>
-                <position x="3" y="3" />
+                		<position x="1" y="3" />
 				<cases>
-					<case type = "basique" h="0" />
+					<case type = "basique" h="2"/>
 				</cases>
 			</cellule>
 
 			<cellule>
-                		<position x="4" y="0" />
+                <position x="1" y="4" />
 				<cases>
-					<case type = "interrupteur" h="2"/>
-						<position x="4" y="3"/>
+					<case type = "interrupteur" h="2" />
+						<position x="8" y="2"/>
 				</cases>
 			</cellule>
 
 			<cellule>
-                <position x="4" y="1" />
+            	<position x="2" y="0" />
 				<cases>
-					<case type = "basique" h="3" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 
 			<cellule>
-            	<position x="4" y="2" />
+                <position x="2" y="4" />
 				<cases>
-					<case type = "basique" h="3" />
-				</cases>
-			</cellule>
-
-			<cellule>
-                <position x="4" y="3" />
-				<cases>
-					<case type = "basique" h="0" />
-					<case type = "basique" h="3" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 			
 			<cellule>
+                <position x="3" y="0" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="3" y="4" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="4" y="0" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
                 <position x="4" y="4" />
 				<cases>
-					<case type = "lampe" h="3" />
+					<case type = "basique" h="2">
+					</case>
 				</cases>
 			</cellule>
 
 			<cellule>
                 <position x="5" y="0" />
+				<cases>
+					<case type = "interrupteur" h="2" />
+						<position x="7" y="2"/>
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="5" y="1" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="5" y="2" />
+				<cases>
+					<case type = "basique" h="2">
+					</case>
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="5" y="3" />
+				<cases>
+					<case type = "basique" h="2" />
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="5" y="4" />
+				<cases>
+					<case type = "interrupteur" h="2" />
+						<position x="6" y="2"/>
+				</cases>
+			</cellule>
+
+			<cellule>
+                <position x="6" y="2" />
 				<cases>
 					<case type = "basique" h="0" />
 					<case type = "basique" h="2" />
@@ -96,42 +149,33 @@
 			</cellule>
 
 			<cellule>
-                <position x="5" y="3" />
+                <position x="7" y="2" />
 				<cases>
 					<case type = "basique" h="0" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 
 			<cellule>
-                <position x="6" y="0" />
+                <position x="8" y="2" />
 				<cases>
-					<case type = "interrupteur" h="1">
-						<position x="5" y="0"/>
-					</case>
+					<case type = "basique" h="0" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 
 			<cellule>
-                <position x="6" y="1" />
+                <position x="9" y="1" />
 				<cases>
-					<case type = "basique" h="3" />
-					<case type = "basique" h="1" />
+					<case type = "lampe" h="2" />
 				</cases>
 			</cellule>
 
 			<cellule>
-                <position x="6" y="2" />
+                <position x="9" y="2" />
 				<cases>
-					<case type = "basique" h="1" />
-				</cases>
-			</cellule>
-
-			<cellule>
-                <position x="6" y="3" />
-				<cases>
-					<case type = "interrupteur" h="1">
-						<position x="6" y="1"/>
-					</case>
+					<case type = "basique" h="0" />
+					<case type = "basique" h="2" />
 				</cases>
 			</cellule>
 
