@@ -22,7 +22,7 @@
 			<orientation init="EST" />
     		</bot>
 	</bots>
-	<record coups="20" actions="0" />
+	<record coups="0" actions="10" />
 	<map>
 		<dimensions x="7" y="3" />
 		<cellules>
@@ -111,5 +111,5 @@
 
 		</cellules>
 	</map>
-	<coups nb="3" main="6" p1="6" p2="4" />
+	<coups nb="2" main="5" p1="6" />
  </level>
