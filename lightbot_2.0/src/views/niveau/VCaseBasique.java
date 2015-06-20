@@ -10,8 +10,19 @@ import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2f;
 
+/**
+ * Représentation graphique d'une CaseBasique
+ *
+ */
 public class VCaseBasique extends VCase {
 
+	/**
+	 *
+	 * @param aCaseBasique
+	 *            Case à représenter
+	 * @param aZone
+	 *            Position et taille de la VCaseBasique
+	 */
 	public VCaseBasique(CaseBasique aCaseBasique, FloatRect aZone) {
 		super(aCaseBasique, aZone);
 		aCaseBasique.addObserver(this);

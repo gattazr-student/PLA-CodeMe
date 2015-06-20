@@ -15,12 +15,28 @@ import org.jsfml.system.Vector2f;
 import views.View;
 import views.bot.VBot;
 
+/**
+ * Représentation graphique d'une Carte
+ *
+ */
 public class VCarte extends View implements Observer {
 
+	/** Carte */
 	private Carte pCarte;
+	/** Liste des Bots représenté dans la carte */
 	private List<Bot> pBots;
+	/** Liste des VBots utilisé dans la carte */
 	private List<VBot> pVBots;
 
+	/**
+	 *
+	 * @param aCarte
+	 *            Carte à représenter
+	 * @param aBots
+	 *            Liste des Bots à représenter
+	 * @param aZone
+	 *            Position et taille de la VCarte
+	 */
 	public VCarte(Carte aCarte, List<Bot> aBots, FloatRect aZone) {
 		super(aZone);
 		this.pCarte = aCarte;

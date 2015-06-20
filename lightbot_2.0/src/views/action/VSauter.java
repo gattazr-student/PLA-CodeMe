@@ -8,6 +8,10 @@ import models.action.Sauter;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Sauter
+ *
+ */
 public class VSauter extends VAction {
 
 	public VSauter(Sauter aSauter, FloatRect aZone) {

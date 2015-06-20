@@ -62,6 +62,16 @@ public class Ordonnanceur {
 	}
 
 	/**
+	 * Retirer les pastiles sur les Actions courantes
+	 */
+	public void clearPrev() {
+		/* TODO: Transformer en MVC */
+		for (Action wAction : this.pPrev) {
+			wAction.clearBotsCourant();
+		}
+	}
+
+	/**
 	 * Retourne le nombre de coups effectué depuis le début de l'ordonanceur
 	 *
 	 * @return
@@ -70,6 +80,11 @@ public class Ordonnanceur {
 		return this.pNbCoups;
 	}
 
+	/**
+	 * Retourne le Niveau lié à l'Ordonanceur
+	 *
+	 * @return Niveau lié à l'Ordonnanceur
+	 */
 	public Niveau getNiveau() {
 		return this.pNiveau;
 	}
@@ -84,6 +99,7 @@ public class Ordonnanceur {
 	public boolean step() throws LightBotException {
 		int i = 0;
 		boolean wRes = false;
+		clearPrev();
 		/* Effectue une action pour chacun des bots */
 		for (Stack<Iterator<Action>> wStack : this.pStacks) {
 			this.pPrev.get(i).clearBotsCourant();

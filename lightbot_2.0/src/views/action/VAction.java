@@ -28,11 +28,25 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 
+/**
+ * Représentation graphique d'une Action
+ *
+ */
 public abstract class VAction extends View implements Observer {
-
+	/** Hauteur des sprites VAction */
 	public static final int HAUTEUR = 55;
+	/** Largeur des sprites VAction */
 	public static final int LARGEUR = 55;
 
+	/**
+	 * Création d'une VAction représentant l'Action passé en paramètre
+	 *
+	 * @param aAction
+	 *            Action à représenter
+	 * @param aZone
+	 *            Zone ou positionner la VAction
+	 * @return
+	 */
 	public static VAction makeVAction(Action aAction, FloatRect aZone) {
 		if (aAction instanceof Allumer) {
 			return new VAllumer((Allumer) aAction, aZone);
@@ -76,9 +90,19 @@ public abstract class VAction extends View implements Observer {
 		return null;
 	}
 
+	/** Action représenté */
 	private Action pAction;
+	/** Sprite de la VAction */
 	private Sprite pSprite;
 
+	/**
+	 * Création d'une VAction à partir d'une Action et d'une zone
+	 *
+	 * @param aAction
+	 *            Action représenté
+	 * @param aZone
+	 *            position et taille de la VActions
+	 */
 	public VAction(Action aAction, FloatRect aZone) {
 		setZone(aZone);
 		this.pAction = aAction;
@@ -101,7 +125,7 @@ public abstract class VAction extends View implements Observer {
 			CircleShape wCircle = new CircleShape(5);
 			switch (aName) {
 			case "minion1":
-				wCircle.setFillColor(Color.BLUE);
+				wCircle.setFillColor(Color.YELLOW);
 				break;
 			case "minion2":
 				wCircle.setFillColor(Color.MAGENTA);
@@ -117,10 +141,20 @@ public abstract class VAction extends View implements Observer {
 		}
 	}
 
+	/**
+	 * Retourne l'Action qui est représenté
+	 *
+	 * @return l'Action qui est représenté
+	 */
 	public Action getAction() {
 		return this.pAction;
 	}
 
+	/**
+	 * Retourne le Sprite utilisé pour l'affichage graphique
+	 *
+	 * @return le Sprite utilisé pour l'affichage graphique
+	 */
 	public Sprite getSprite() {
 		return this.pSprite;
 	}
@@ -131,15 +165,29 @@ public abstract class VAction extends View implements Observer {
 		setTexture();
 	}
 
+	/**
+	 * Définit la couleur de la VAction
+	 *
+	 * @param aCouleur
+	 */
 	public void setCouleur(Couleur aCouleur) {
 		this.pAction.setCouleur(aCouleur);
 		setTexture();
 	}
 
+	/**
+	 * Définit la Sprite à utiliser pour l'affichage
+	 *
+	 * @param aSprite
+	 *            nouveau Sprite à utiliser
+	 */
 	public void setSprite(Sprite aSprite) {
 		this.pSprite = aSprite;
 	}
 
+	/**
+	 * Définition de la Structure à utiliser pour le Sprite
+	 */
 	public abstract void setTexture();
 
 	@Override

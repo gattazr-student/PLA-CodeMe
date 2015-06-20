@@ -8,6 +8,10 @@ import models.action.TestAvancer;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions TestAvancer
+ *
+ */
 public class VTestAvancer extends VAction {
 
 	public VTestAvancer(TestAvancer aTestAvancer, FloatRect aZone) {

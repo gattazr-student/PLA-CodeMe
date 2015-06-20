@@ -8,6 +8,10 @@ import models.action.Notify;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Notify
+ *
+ */
 public class VNotify extends VAction {
 
 	public VNotify(Notify aNotify, FloatRect aZone) {
@@ -46,8 +50,6 @@ public class VNotify extends VAction {
 
 	@Override
 	public void update(String aString, Object aObjet) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

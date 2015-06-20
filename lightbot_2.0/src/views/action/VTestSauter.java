@@ -8,6 +8,10 @@ import models.action.TestSauter;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions TestSauter
+ *
+ */
 public class VTestSauter extends VAction {
 
 	public VTestSauter(TestSauter aTestSauter, FloatRect aZone) {

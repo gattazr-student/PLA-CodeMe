@@ -193,6 +193,7 @@ public class ControlerNiveau {
 			}
 		}
 		if (this.pOrdonnanceur != null) {
+			this.pOrdonnanceur.clearPrev();
 			this.pNbCoups = this.pOrdonnanceur.getNbCoups();
 		}
 

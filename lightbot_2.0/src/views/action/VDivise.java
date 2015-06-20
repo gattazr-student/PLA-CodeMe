@@ -8,6 +8,10 @@ import models.action.Divise;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
+/**
+ * Représentation graphique des Actions Divise
+ *
+ */
 public class VDivise extends VAction {
 
 	public VDivise(Divise aDivise, FloatRect aZone) {
