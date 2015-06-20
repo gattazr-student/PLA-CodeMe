@@ -8,7 +8,7 @@ public class MySecondLevel {
 		System.out.println("Hello World!");
 
 		Engine wEngine = new Engine();
-		wEngine.startLevel("res/xml/ModifEnvironnement/Level2.xml");
+		wEngine.startLevel("res/xml/ModifEnvironnement/Level4.xml");
 
 		System.out.println("Goodbye World!");
 	}
