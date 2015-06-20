@@ -34,23 +34,46 @@ import views.jsfml.VBouton;
 import views.jsfml.VImage;
 import controllers.ControlerNiveau;
 
+/**
+ *
+ * Représentation graphique d'un Niveau. La représentation d'un niveau utilise une fenêtre complète
+ *
+ */
 public class VNiveau extends View implements Observer {
 
+	/** Niveau à représenter */
 	private Niveau pNiveau;
+	/** RenderWindow à utiliser pour l'affichage */
 	private RenderWindow pWindow;
+	/** Controlleur associé au Niveau */
 	private ControlerNiveau pControler;
 
+	/** Panel pour la Carte */
 	private Panel pPanelCarte;
+	/** Panel pour les Routes */
 	private Panel pPanelRoutes;
+	/** Panel pour les Actions */
 	private Panel pPanelActions;
+	/** Panel pour le Menu */
 	private Panel pPanelMenu;
 
+	/** Route main courant à afficher */
 	private Route pRouteMain;
+	/** Représentation Liste de la Route en cours de modification */
 	private VRouteListe pVRouteListCourrante;
+	/** Liste des représentation des Routes du Niveau */
 	private List<VRouteListe> pVRoutesList;
 
+	/** Liste des représentations graphiques des Actions disponibles pour ce Niveau */
 	private List<VAction> pVActionsDisponibles;
 
+	/**
+	 *
+	 * @param aWindow
+	 *            Fenêtre à utiliser pour le rendu
+	 * @param aNiveau
+	 *            Niveau à représenter
+	 */
 	public VNiveau(RenderWindow aWindow, Niveau aNiveau) {
 		this.pWindow = aWindow;
 		this.pNiveau = aNiveau;
@@ -71,11 +94,9 @@ public class VNiveau extends View implements Observer {
 		addView(this.pPanelActions);
 		addView(this.pPanelMenu);
 
+		/** Image de fond */
 		VImage wImage_Fond = new VImage(new FloatRect(0, 0, getWidth(), getHeight()), "res/font/fond1.png");
 		this.pPanelCarte.addView(wImage_Fond);
-		// VImage wImage_Fond2 = new VImage(new FloatRect(0, 0, getWidth(), getHeight()),
-		// "res/font/fond.png");
-		// this.pPanelCarte.addView(wImage_Fond2);
 
 		this.pVActionsDisponibles = new LinkedList<VAction>();
 
@@ -101,6 +122,9 @@ public class VNiveau extends View implements Observer {
 		return null;
 	}
 
+	/**
+	 * Gestion des évènements de la fenêtre
+	 */
 	public void handleEvents() {
 		for (Event wEvent : this.pWindow.pollEvents()) {
 			if (wEvent.type == Event.Type.CLOSED) {
@@ -220,6 +244,9 @@ public class VNiveau extends View implements Observer {
 				wLargeur, wHauteur)));
 	}
 
+	/**
+	 * Initialisation du panel pPanelMenu
+	 */
 	private void initMenu() {
 		float wY = (this.pPanelMenu.getHeight() - 54) / 2;
 		float wX = (this.pPanelMenu.getWidth() - 154 - 59) / 2;
@@ -233,6 +260,9 @@ public class VNiveau extends View implements Observer {
 		this.pPanelMenu.addView(wButton_Reset);
 	}
 
+	/**
+	 * Initialisation du panel pPanelRoutes
+	 */
 	private void initRoutes() {
 		int wLargeurRoute = 4 * VRoute.LARGEUR;
 		int depl_cadre = 3 * VRoute.HAUTEUR + VRouteListe.OFFSET;
@@ -262,22 +292,41 @@ public class VNiveau extends View implements Observer {
 		initRoutes();
 	}
 
+	/**
+	 * Dessine la fenêtre
+	 */
 	public void redraw() {
 		this.pWindow.clear();
 		draw(this.pWindow, new RenderStates(new Transform()));
 		this.pWindow.display();
 	}
 
+	/**
+	 *
+	 * @param aControlerNiveau
+	 */
 	public void setController(ControlerNiveau aControlerNiveau) {
 		this.pControler = aControlerNiveau;
 	}
 
+	/**
+	 * Définit la couleur des actions disponibles.
+	 *
+	 * @param aCouleur
+	 *            nouvelle couleur à appliquer
+	 */
 	private void setCouleurActions(Couleur aCouleur) {
 		for (VAction VAction : this.pVActionsDisponibles) {
 			VAction.setCouleur(aCouleur);
 		}
 	}
 
+	/**
+	 * Définit la Route main courante
+	 * 
+	 * @param aRouteMain
+	 *            nouvelle Route main courantes
+	 */
 	public void setRouteMain(Route aRouteMain) {
 		this.pVRouteListCourrante.setTitreColor(Color.BLACK);
 		this.pRouteMain = aRouteMain;
