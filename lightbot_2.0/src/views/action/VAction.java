@@ -125,7 +125,7 @@ public abstract class VAction extends View implements Observer {
 			CircleShape wCircle = new CircleShape(5);
 			switch (aName) {
 			case "minion1":
-				wCircle.setFillColor(Color.BLUE);
+				wCircle.setFillColor(Color.YELLOW);
 				break;
 			case "minion2":
 				wCircle.setFillColor(Color.MAGENTA);
