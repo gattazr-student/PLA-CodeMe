@@ -8,7 +8,7 @@ import org.jsfml.window.Window;
 import views.View;
 
 /**
- * Fenetre contient la création d'une fenêtre JSFML
+ * Fenetre JSFML
  *
  */
 public class Fenetre extends View {

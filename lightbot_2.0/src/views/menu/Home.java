@@ -14,13 +14,26 @@ import views.fenetre.Fenetre;
 import views.fenetre.Panel;
 import views.jsfml.VBouton;
 
+/**
+ * Home est la première fenêtre de l'application
+ *
+ */
 public class Home extends Fenetre {
 
+	/** Panel entête */
 	private Panel pPanelEntete;
+	/** Panel Jouer */
 	private Panel pPanelJouer;
+	/** Panel tutoriel */
 	private Panel pPanelTuto;
+	/** Panel options */
 	private Panel pPanelOptions;
 
+	/**
+	 *
+	 * @param aWindow
+	 *            RenderWindow à utiliser
+	 */
 	public Home(RenderWindow aWindow) {
 		super(aWindow);
 		/* Création des panels */
@@ -45,6 +58,14 @@ public class Home extends Fenetre {
 		initView();
 	}
 
+	/**
+	 * Initialisation du panel Entête
+	 * 
+	 * @param aNomBouton
+	 *            nom du bouton dans le Panel
+	 * @param aNomSprite
+	 *            chemin vers le Sprite du bouton
+	 */
 	private void initEntete(String aNomBouton, String aNomSprite) {
 		float wWidth = 983;
 		float wHeight = 350;
@@ -55,6 +76,14 @@ public class Home extends Fenetre {
 		addView(this.pPanelEntete);
 	}
 
+	/**
+	 * Initialisation du panel Jouer
+	 * 
+	 * @param aNomBouton
+	 *            nom du bouton dans le Panel
+	 * @param aNomSprite
+	 *            chemin vers le Sprite du bouton
+	 */
 	private void initJouer(String aNomBouton, String aNomSprite) {
 		float wWidth = 302;
 		float wHeight = 57;
@@ -65,6 +94,14 @@ public class Home extends Fenetre {
 		addView(this.pPanelJouer);
 	}
 
+	/**
+	 * Initialisation du panel Options
+	 * 
+	 * @param aNomBouton
+	 *            nom du bouton dans le Panel
+	 * @param aNomSprite
+	 *            chemin vers le Sprite du bouton
+	 */
 	private void initOptions(String aNomBouton, String aNomSprite) {
 		float wWidth = 302;
 		float wHeight = 57;
@@ -75,6 +112,14 @@ public class Home extends Fenetre {
 		addView(this.pPanelOptions);
 	}
 
+	/**
+	 * Initialisation du panel Tuto
+	 * 
+	 * @param aNomBouton
+	 *            nom du bouton dans le Panel
+	 * @param aNomSprite
+	 *            chemin vers le Sprite du bouton
+	 */
 	private void initTuto(String aNomBouton, String aNomSprite) {
 		float wWidth = 302;
 		float wHeight = 57;
@@ -93,12 +138,18 @@ public class Home extends Fenetre {
 		initOptions("Options", "res/menu/sprite_opt_n.png");
 	}
 
+	/**
+	 * Lancement de la vue Option
+	 */
 	public void optionMenu() {
 		// Nettoyage de la fenetre
 		clearView();
 		getWindow().display();
 	}
 
+	/**
+	 * Redessine la fenêtre
+	 */
 	public void redraw() {
 		RenderWindow wWindow = getWindow();
 		wWindow.clear();
@@ -107,6 +158,9 @@ public class Home extends Fenetre {
 		wWindow.display();
 	}
 
+	/**
+	 * Boucle de gestion de la fenêtre
+	 */
 	public void runHome() {
 		RenderWindow aWindow = getWindow();
 		float wWidth = 302;
@@ -136,9 +190,9 @@ public class Home extends Fenetre {
 								&& !(pos.x < (this.pPanelJouer.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelJouer.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight())
-										&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight())) {
+								&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight())) {
 							// Click sur le Bouton Jouer
 							selectLevel();
 							redraw();
@@ -147,9 +201,9 @@ public class Home extends Fenetre {
 								&& !(pos.x < (this.pPanelTuto.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelTuto.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())
-										&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
+								&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
 							// Click sur le Bouton tuto
 							tutoMenu();
 							redraw();
@@ -159,10 +213,10 @@ public class Home extends Fenetre {
 								&& !(pos.y < (this.pPanelOptions.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
 										+ this.pPanelTuto.getHeight())
-										&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
-												+ this.pPanelTuto.getHeight())) {
+								&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
+										+ this.pPanelTuto.getHeight())) {
 							// click sur le bouton Option
 							optionMenu();
 							redraw();
@@ -173,6 +227,9 @@ public class Home extends Fenetre {
 		}
 	}
 
+	/**
+	 * Lancement de la fenêtre selection du niveau
+	 */
 	public void selectLevel() {
 		// Nettoyage de la fenetre
 		clearView();
@@ -180,6 +237,9 @@ public class Home extends Fenetre {
 		getWindow().display();
 	}
 
+	/**
+	 * Lancement de la fenêtre tutoriel
+	 */
 	public void tutoMenu() {
 		// Nettoyage de la fenetre
 		clearView();
