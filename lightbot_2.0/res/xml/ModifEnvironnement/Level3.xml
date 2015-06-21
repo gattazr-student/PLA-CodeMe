@@ -20,7 +20,7 @@
 	</bots>
 	<record coups="0" actions="11" />
 	<map>
-		<dimensions x="8" y="5" />
+		<dimensions x="9" y="5" />
 		<cellules>
 			<cellule>
                 <position x="0" y="0" />
@@ -123,6 +123,13 @@
                 <position x="7" y="0" />
 				<cases>
 					<case type = "lampe" h="0" />
+				</cases>
+			</cellule>
+			
+			<cellule>
+                <position x="8" y="0" />
+				<cases>
+					<case type = "basique" h="1" />
 				</cases>
 			</cellule>
 
