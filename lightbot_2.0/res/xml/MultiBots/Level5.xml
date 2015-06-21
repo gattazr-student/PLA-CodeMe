@@ -11,10 +11,16 @@
 			<action>testAvancer</action>
 			<action>testSauter</action>
 			<action>allumer</action>
+			<action>wait</action>
+			<action>notify</action>
 		</actions>
 	<bots>
     		<bot name="minion1">
-    			<position x="0" y="2" />
+    			<position x="0" y="1" />
+    			<orientation init="EST" />
+    		</bot>
+    		<bot name="minion2">
+    			<position x="0" y="3" />
     			<orientation init="EST" />
     		</bot>
 	</bots>

@@ -105,7 +105,7 @@
 			<cellule>
 				<position x="6" y="2" />
 				<cases>
-					<case type = "interrupteur" h="0">
+					<case type = "interrupteur" h="1">
 						<position x="4" y="0"/>
 					</case>
 				</cases>

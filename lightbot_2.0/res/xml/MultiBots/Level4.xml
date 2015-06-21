@@ -11,6 +11,8 @@
 		<action>testAvancer</action>
 		<action>testSauter</action>
 		<action>allumer</action>
+		<action>notify</action>
+		<action>wait</action>
 	</actions>
 	<bots>
     		<bot name="minion1">

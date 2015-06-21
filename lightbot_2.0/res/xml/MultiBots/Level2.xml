@@ -232,7 +232,7 @@
 		<cellule>
 				<position x="6" y="2" />
 				<cases>
-					<case type = "lampe" h="0" />
+					<case type = "basique" h="0" />
 				</cases>
 		</cellule>
 

@@ -10,6 +10,8 @@
 			<action>break</action>
 			<action>testAvancer</action>
 			<action>allumer</action>
+			<action>wait</action>
+			<action>notify</action>
 		</actions>
 	<bots>
     		<bot name="minion1">
