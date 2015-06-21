@@ -54,20 +54,28 @@ public class Engine {
 				/* Comparaison des records */
 				int pNbCoups = wControlerNiveau.getNbCoups();
 				int pNbActions = wControlerNiveau.getNbAction();
-				if (wModelNiveau.getRecordActions() != 0 && pNbActions <= wModelNiveau.getRecordActions()) {
-					wSuccessed = true;
-					new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN).run();
+				if (wModelNiveau.getRecordActions() != 0) {
+					if (pNbActions <= wModelNiveau.getRecordActions()) {
+						wSuccessed = true;
+						new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN)
+						.run();
+					} else {
+						new VPopup(Fenetre.FENETRE,
+								"Bravo ! Mais vous pouvez réduire la taille du programme", Color.GREEN).run();
+					}
 				}
-				if (wModelNiveau.getRecordCoups() != 0 && pNbCoups <= wModelNiveau.getRecordCoups()) {
-					wSuccessed = true;
-					new VPopup(Fenetre.FENETRE, "Bravo ! Le temps d'execution etait tres court", Color.GREEN)
-					.run();
-				}
-				if (!wSuccessed) {
-					new VPopup(Fenetre.FENETRE, "Bravo ! Mais vous pouvez ameliorer votre score", Color.GREEN)
-					.run();
+				if (wModelNiveau.getRecordCoups() != 0) {
+					if (pNbCoups <= wModelNiveau.getRecordCoups()) {
+						wSuccessed = true;
+						new VPopup(Fenetre.FENETRE, "Bravo ! Le temps d'execution etait tres court",
+								Color.GREEN).run();
+					} else {
+						new VPopup(Fenetre.FENETRE, "Bravo ! Mais vous pouvez réduire le temps d'éxécution",
+								Color.GREEN).run();
+					}
 				}
 			} else {
+				// Le niveau a été quitté avec le bouton returned
 				wSuccessed = true;
 			}
 		} while (!wSuccessed);
