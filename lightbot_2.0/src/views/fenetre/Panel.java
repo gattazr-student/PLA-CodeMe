@@ -11,10 +11,8 @@ import views.View;
 public class Panel extends View {
 
 	/**
-	 * Créé un panel dans une fenêtre donnée
+	 * Créé un panel
 	 *
-	 * @param aWindow
-	 *            RenderWindow dans lequel sera le Panel
 	 * @param aZone
 	 *            Rectangle dans la fenêtre définissant le Panel
 	 */

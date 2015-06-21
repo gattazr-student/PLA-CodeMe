@@ -31,7 +31,7 @@ public class Niveau extends ObservableModel {
 	/** Nom du niveau */
 	private String nom;
 
-	/** List des actions possible dans le niveau */
+	/** List des actions autorisés dans le niveau */
 	private ArrayList<Action> pActions;
 
 	/**
@@ -44,7 +44,10 @@ public class Niveau extends ObservableModel {
 	}
 
 	/**
-	 * Ajoute une action dans la liste d'action
+	 * Ajoute une action dans la liste d'action autorisé
+	 *
+	 * @param aAction
+	 *            Action à ajouter dans les Action autorisé
 	 */
 	public void addAction(Action aAction) {
 		this.pActions.add(aAction);
@@ -184,15 +187,18 @@ public class Niveau extends ObservableModel {
 
 	/**
 	 * Changement du nom
+	 *
+	 * @param nom
+	 *            nouveau nom
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
 	/**
-	 * Définit le record du Niveau
+	 * Définit le record en actions du Niveau
 	 *
-	 * @param aRecord
+	 * @param aRecordActions
 	 *            Nouveau record à utiliser
 	 */
 	public void setRecordActions(int aRecordActions) {
@@ -200,9 +206,9 @@ public class Niveau extends ObservableModel {
 	}
 
 	/**
-	 * Définit le record du Niveau
+	 * Définit le record en coups du Niveau
 	 *
-	 * @param aRecord
+	 * @param aRecordCoups
 	 *            Nouveau record à utiliser
 	 */
 	public void setRecordCoups(int aRecordCoups) {

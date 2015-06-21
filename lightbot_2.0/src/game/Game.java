@@ -19,6 +19,7 @@ public class Game {
 	 * Point d'entré du programme
 	 *
 	 * @param aArgs
+	 *            Paramètres
 	 */
 	public static void main(String[] aArgs) {
 		SoundBuffer wSoundBuffer = new SoundBuffer();

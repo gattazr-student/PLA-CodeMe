@@ -35,7 +35,7 @@ public abstract class View implements Drawable {
 
 	/**
 	 * Création d'un objet View à la position et la taille donnée
-	 * 
+	 *
 	 * @param aRect
 	 *            position et taille de la View
 	 */
@@ -62,10 +62,11 @@ public abstract class View implements Drawable {
 	}
 
 	/**
-	 * Retourne vrai si la position passé en paramètre est contenue dans la vue
+	 * Retourne true si la position passé en paramètre est contenue dans la vue. False sinon
 	 *
 	 * @param aPosition
-	 * @return
+	 *            position à tester
+	 * @return true si la position passé en paramètre est contenue dans la vue. False sinon
 	 */
 	public boolean contains(Vector2f aPosition) {
 		return this.pZone.contains(aPosition);
@@ -116,6 +117,8 @@ public abstract class View implements Drawable {
 	/**
 	 * Retourne l'objet View qui a été la cible du click
 	 *
+	 * @param aPosition
+	 *            position du click dans la View
 	 * @return View qui a été clické
 	 */
 	public View isClickedOn(Vector2f aPosition) {

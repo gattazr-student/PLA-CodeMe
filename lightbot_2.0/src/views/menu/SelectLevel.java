@@ -108,8 +108,6 @@ public class SelectLevel extends Fenetre {
 	 *            : nom du bouton d'entete
 	 * @param aNomSpriteEntete
 	 *            : chemin de l'image associée au bouton d'entête
-	 * @param aNomBoutonBack
-	 *            : nom du bouton de retour
 	 * @param aNomSpriteBack
 	 *            ; chemin de l'image associée au bouton de reotur
 	 */
@@ -258,8 +256,6 @@ public class SelectLevel extends Fenetre {
 	/**
 	 * Fonction permettant de redessiner la fenêtre
 	 *
-	 * @param aWindow
-	 *            : une fenetre
 	 */
 	public void redraw() {
 		RenderWindow aWindow = getWindow();
@@ -271,7 +267,6 @@ public class SelectLevel extends Fenetre {
 	/**
 	 * Fonction permettant d'effectuer la selection du niveau
 	 *
-	 * @param aWindow
 	 */
 	public void runSelect() {
 		RenderWindow aWindow = getWindow();

@@ -20,7 +20,10 @@ public class Engine {
 	private RenderWindow pWindow;
 
 	/**
-	 * Constructeur vide
+	 * Création d'un objet Engine permettant de gérer l'éxécution d'un Niveau
+	 * 
+	 * @param aWindow
+	 *            Fenêtre à utiliser pour l'Engine
 	 */
 	public Engine(RenderWindow aWindow) {
 		this.pWindow = aWindow;

@@ -43,6 +43,7 @@ public class Ordonnanceur {
 	 * Création de l'Ordonanceur pour un niveau donné
 	 *
 	 * @param aNiveau
+	 *            niveau à utiliser
 	 */
 	public Ordonnanceur(Niveau aNiveau) {
 		this.pNiveau = aNiveau;
@@ -74,7 +75,7 @@ public class Ordonnanceur {
 	/**
 	 * Retourne le nombre de coups effectué depuis le début de l'ordonanceur
 	 *
-	 * @return
+	 * @return nombre de coups effectué depuis le début de l'ordonanceur
 	 */
 	public int getNbCoups() {
 		return this.pNbCoups;

@@ -45,7 +45,7 @@ public abstract class VAction extends View implements Observer {
 	 *            Action à représenter
 	 * @param aZone
 	 *            Zone ou positionner la VAction
-	 * @return
+	 * @return VAction créée
 	 */
 	public static VAction makeVAction(Action aAction, FloatRect aZone) {
 		if (aAction instanceof Allumer) {
@@ -169,6 +169,7 @@ public abstract class VAction extends View implements Observer {
 	 * Définit la couleur de la VAction
 	 *
 	 * @param aCouleur
+	 *            nouvelle Couleur de l'Action
 	 */
 	public void setCouleur(Couleur aCouleur) {
 		this.pAction.setCouleur(aCouleur);

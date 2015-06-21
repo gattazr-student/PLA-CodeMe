@@ -60,8 +60,10 @@ public class Carte extends ObservableModel {
 	/**
 	 * Retourne la Case à la Position donnée dans la Carte
 	 *
-	 * @param aPosition
-	 *            Position à utiliser
+	 * @param aX
+	 *            Abscisse
+	 * @param aY
+	 *            Ordonnée
 	 * @return une Case. Null si il n'y a pas de case à la position donnée.
 	 */
 	public Case getCase(int aX, int aY) {

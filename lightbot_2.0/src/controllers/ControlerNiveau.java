@@ -109,7 +109,8 @@ public class ControlerNiveau {
 	/**
 	 * Fonction permettant de controler le Bot au clavier
 	 *
-	 * @param wSMFLKeyEvent
+	 * @param aSMFLKeyEvent
+	 *            évènement clavier
 	 */
 	public void keyboardAction(KeyEvent aSMFLKeyEvent) {
 		this.pKeyPress = true;

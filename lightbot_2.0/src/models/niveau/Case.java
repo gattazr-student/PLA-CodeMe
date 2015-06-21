@@ -25,7 +25,9 @@ public abstract class Case extends ObservableModel {
 	 * Construit une case selon sa position et sa hauteur
 	 *
 	 * @param aPosition
+	 *            Position de la Case
 	 * @param aHauteur
+	 *            hauteur de la Case
 	 */
 	public Case(Position aPosition, int aHauteur) {
 		this.pPosition = aPosition;

@@ -56,6 +56,8 @@ public class Bot extends ObservableModel {
 	 *            Orientation du bot
 	 * @param aCouleur
 	 *            Couleur du bot
+	 * @param aEtat
+	 *            Etat du bot
 	 */
 	public Bot(Position aPosition, Orientation aOrientation, Couleur aCouleur, Etat aEtat) {
 		this.pPosition = aPosition;
@@ -71,6 +73,9 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * ajoute une action a la liste
+	 *
+	 * @param aAction
+	 *            Acion à ajouter
 	 */
 	public void addAction(Action aAction) {
 		this.pRouteMain.addAction(aAction);
@@ -96,6 +101,8 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * Retourne le nom du Bot
+	 *
+	 * @return nom du Bot
 	 */
 	public String getName() {
 		return this.pName;
@@ -130,6 +137,9 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * remove une action
+	 *
+	 * @param numberAction
+	 *            indice de l'action dans la Route main
 	 */
 	public void removeAction(int numberAction) {
 		this.pRouteMain.removeAction(numberAction);
@@ -159,6 +169,9 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * Modifie l'etat du Bot
+	 *
+	 * @param aEtat
+	 *            nouvel Etat du Bot
 	 */
 	public void setEtat(Etat aEtat) {
 		this.pEtat = aEtat;
@@ -166,6 +179,9 @@ public class Bot extends ObservableModel {
 
 	/**
 	 * Modifie le nom du Bot
+	 *
+	 * @param aName
+	 *            nouveau nom du Bot
 	 */
 	public void setName(String aName) {
 		this.pName = aName;

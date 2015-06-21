@@ -67,8 +67,10 @@ public abstract class VCase extends View implements Observer {
 	 * Retourne une case contenant une méthode draw à partir d'une case du Modèle
 	 *
 	 * @param aCase
-	 *            Case
-	 * @return VCase
+	 *            Case à représenter
+	 * @param aZone
+	 *            Zone de la Case
+	 * @return VCase créé
 	 */
 	public static VCase makeVCase(Case aCase, FloatRect aZone) {
 		if (aCase instanceof CaseBasique) {

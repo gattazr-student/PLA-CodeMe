@@ -25,9 +25,10 @@ public class Cellule extends ObservableModel {
 	}
 
 	/**
-	 * Ajoute une case dans le cellule.
+	 * Ajoute une case dans le Cellule.
 	 *
 	 * @param aCase
+	 *            Case à ajouter dans la Cellule
 	 */
 	public void addCase(Case aCase) {
 		this.pCases.add(aCase);

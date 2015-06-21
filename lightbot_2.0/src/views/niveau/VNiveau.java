@@ -303,8 +303,10 @@ public class VNiveau extends Fenetre implements Observer {
 	}
 
 	/**
-	 *
+	 * Définit le controlleur du Niveau
+	 * 
 	 * @param aControlerNiveau
+	 *            Nouveau controller du niveau
 	 */
 	public void setController(ControlerNiveau aControlerNiveau) {
 		this.pControler = aControlerNiveau;
