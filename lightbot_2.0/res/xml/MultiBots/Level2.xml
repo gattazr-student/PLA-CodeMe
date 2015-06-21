@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <level>
 	<name> prog bloc </name>
-	    <actions> 
-	   		<action>avancer</action>
-			<action>droite</action>
-	   	    <action>gauche</action>
-	   	    <action>sauter</action>
-			<action>douche</action>
-			<action>break</action>
-			<action>testAvancer</action>
-			<action>testSauter</action>
-			<action>allumer</action>
-		</actions>
+	<actions> 
+	   	<action>avancer</action>
+		<action>droite</action>
+		<action>gauche</action>
+		<action>sauter</action>
+		<action>douche</action>
+		<action>break</action>
+		<action>testAvancer</action>
+		<action>testSauter</action>
+		<action>allumer</action>
+		<action>avancer</action>
+		<action>wait</action>
+		<action>notify</action>
+	</actions>
 	<bots>
     		<bot name="minion1">
         		<position  x="0" y="2" />

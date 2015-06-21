@@ -10,7 +10,7 @@
 		<action>allumer</action>
 		</actions>
 	<bots>
-    		<bot name="minions">
+    		<bot name="minion1">
         		<position x="0" y="0" />
         		<orientation init="EST" />
     		</bot>
