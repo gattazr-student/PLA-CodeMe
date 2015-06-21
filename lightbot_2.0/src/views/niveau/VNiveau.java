@@ -29,6 +29,7 @@ import views.action.VAction;
 import views.action.VRoute;
 import views.action.VRouteListe;
 import views.bot.VBot;
+import views.fenetre.Fenetre;
 import views.fenetre.Panel;
 import views.jsfml.VBouton;
 import views.jsfml.VImage;
@@ -39,12 +40,10 @@ import controllers.ControlerNiveau;
  * Représentation graphique d'un Niveau. La représentation d'un niveau utilise une fenêtre complète
  *
  */
-public class VNiveau extends View implements Observer {
+public class VNiveau extends Fenetre implements Observer {
 
 	/** Niveau à représenter */
 	private Niveau pNiveau;
-	/** RenderWindow à utiliser pour l'affichage */
-	private RenderWindow pWindow;
 	/** Controlleur associé au Niveau */
 	private ControlerNiveau pControler;
 
@@ -75,11 +74,11 @@ public class VNiveau extends View implements Observer {
 	 *            Niveau à représenter
 	 */
 	public VNiveau(RenderWindow aWindow, Niveau aNiveau) {
-		this.pWindow = aWindow;
+		super(aWindow);
 		this.pNiveau = aNiveau;
 		/* Création des quatres panels */
 		float wXSep, wYSep;
-		Vector2i wSize = this.pWindow.getSize();
+		Vector2i wSize = getWindow().getSize();
 		setZone(new FloatRect(0, 0, wSize.x, wSize.y));
 
 		wXSep = wSize.x - 4 * VRoute.LARGEUR; // Calcul 70% de la largeur de la fenêtre
@@ -126,9 +125,10 @@ public class VNiveau extends View implements Observer {
 	 * Gestion des évènements de la fenêtre
 	 */
 	public void handleEvents() {
-		for (Event wEvent : this.pWindow.pollEvents()) {
+		RenderWindow wWindow = getWindow();
+		for (Event wEvent : wWindow.pollEvents()) {
 			if (wEvent.type == Event.Type.CLOSED) {
-				this.pWindow.close();
+				wWindow.close();
 				System.exit(0);
 			}
 			if (wEvent.type == Event.Type.RESIZED) {
@@ -150,7 +150,7 @@ public class VNiveau extends View implements Observer {
 							this.pControler.resetLevel();
 							break;
 						case "back":
-							this.pControler.exit();
+							this.pControler.quitLevel();
 							break;
 						case "play":
 							this.pControler.startRunning();
@@ -296,9 +296,10 @@ public class VNiveau extends View implements Observer {
 	 * Dessine la fenêtre
 	 */
 	public void redraw() {
-		this.pWindow.clear();
-		draw(this.pWindow, new RenderStates(new Transform()));
-		this.pWindow.display();
+		RenderWindow wWindow = getWindow();
+		wWindow.clear();
+		draw(wWindow, new RenderStates(new Transform()));
+		wWindow.display();
 	}
 
 	/**
@@ -323,7 +324,7 @@ public class VNiveau extends View implements Observer {
 
 	/**
 	 * Définit la Route main courante
-	 * 
+	 *
 	 * @param aRouteMain
 	 *            nouvelle Route main courantes
 	 */
