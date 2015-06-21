@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <level>
 	<name> 2 Robots </name>
-	    <actions> 
+	<actions> 
 	    	<action>avancer</action>
 	    	<action>droite</action>
 	    	<action>gauche</action>
-			<action>douche</action>
-			<action>break</action>
-			<action>allumer</action>
-			<action>testAvancer</action>
-		</actions>
+		<action>douche</action>
+		<action>break</action>
+		<action>allumer</action>
+		<action>testAvancer</action>
+	</actions>
 	<bots>
     		<bot name="minion1">
 
