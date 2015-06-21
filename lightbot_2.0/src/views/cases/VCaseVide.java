@@ -1,6 +1,6 @@
-package views.niveau;
+package views.cases;
 
-import models.niveau.CaseVide;
+import models.cases.CaseVide;
 
 import org.jsfml.graphics.FloatRect;
 

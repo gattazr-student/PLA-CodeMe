@@ -3,7 +3,7 @@ package views.niveau;
 import java.util.LinkedList;
 import java.util.List;
 
-import models.niveau.Case;
+import models.cases.Case;
 import models.niveau.Cellule;
 import mvc.Observer;
 
@@ -12,6 +12,7 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 import views.bot.VBot;
+import views.cases.VCase;
 
 /**
  * Représentation graphique d'une CaseVide

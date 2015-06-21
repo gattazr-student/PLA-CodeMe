@@ -2,8 +2,8 @@ package models.action;
 
 import models.basic.Position;
 import models.bot.Bot;
+import models.cases.Case;
 import models.niveau.Carte;
-import models.niveau.Case;
 import exceptions.LightBotException;
 
 /**

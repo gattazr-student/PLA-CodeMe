@@ -2,7 +2,9 @@ package models.niveau;
 
 import models.ObservableModel;
 import models.basic.Position;
-import models.niveau.CaseLampe.ETAT_LAMPE;
+import models.cases.Case;
+import models.cases.CaseLampe;
+import models.cases.CaseLampe.ETAT_LAMPE;
 
 /**
  * Carte représente le monde d'un Niveau

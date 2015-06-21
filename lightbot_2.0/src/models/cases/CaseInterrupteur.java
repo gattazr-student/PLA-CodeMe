@@ -1,9 +1,11 @@
-package models.niveau;
+package models.cases;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import models.basic.Position;
+import models.niveau.Carte;
+import models.niveau.Cellule;
 
 /**
  * CaseInterrupteur représentant une case qui va permettre la modificiation de la Carte dans laquelle elle se

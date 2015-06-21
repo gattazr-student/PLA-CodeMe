@@ -1,10 +1,10 @@
 package models.action;
 
 import models.bot.Bot;
+import models.cases.Case;
+import models.cases.CaseInterrupteur;
+import models.cases.CaseLampe;
 import models.niveau.Carte;
-import models.niveau.Case;
-import models.niveau.CaseInterrupteur;
-import models.niveau.CaseLampe;
 import exceptions.LightBotException;
 
 /**

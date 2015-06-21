@@ -1,14 +1,14 @@
-package views.niveau;
+package views.cases;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import models.basic.Position;
-import models.niveau.Case;
-import models.niveau.CaseBasique;
-import models.niveau.CaseInterrupteur;
-import models.niveau.CaseLampe;
-import models.niveau.CaseVide;
+import models.cases.Case;
+import models.cases.CaseBasique;
+import models.cases.CaseInterrupteur;
+import models.cases.CaseLampe;
+import models.cases.CaseVide;
 import mvc.Observer;
 
 import org.jsfml.graphics.FloatRect;

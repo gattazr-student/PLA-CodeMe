@@ -1,9 +1,9 @@
-package views.niveau;
+package views.cases;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import models.niveau.CaseInterrupteur;
+import models.cases.CaseBasique;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Sprite;
@@ -11,22 +11,22 @@ import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2f;
 
 /**
- * Représentation graphique d'une CaseInterrupteur
+ * Représentation graphique d'une CaseBasique
  *
  */
-public class VCaseInterrupteur extends VCase {
+public class VCaseBasique extends VCase {
 
 	/**
 	 *
-	 * @param aCaseInterrupteur
+	 * @param aCaseBasique
 	 *            Case à représenter
 	 * @param aZone
-	 *            Position et taille de la VCaseInterrupteur
+	 *            Position et taille de la VCaseBasique
 	 */
-	public VCaseInterrupteur(CaseInterrupteur aCaseInterrupteur, FloatRect aZone) {
-		super(aCaseInterrupteur, aZone);
-		aCaseInterrupteur.addObserver(this);
-		setHauteur(aCaseInterrupteur.getHauteur());
+	public VCaseBasique(CaseBasique aCaseBasique, FloatRect aZone) {
+		super(aCaseBasique, aZone);
+		aCaseBasique.addObserver(this);
+		setHauteur(aCaseBasique.getHauteur());
 		initView();
 	}
 
@@ -34,8 +34,7 @@ public class VCaseInterrupteur extends VCase {
 	public void initView() {
 		Texture wTexture = new Texture();
 		try {
-			wTexture.loadFromFile(Paths.get("res/cases/case_VIOLET.png"));
-
+			wTexture.loadFromFile(Paths.get("res/cases/case_BLANC.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,5 +57,6 @@ public class VCaseInterrupteur extends VCase {
 
 	@Override
 	public void update(String aString, Object aObjet) {
+		// Pas de mise à jour de cette classe
 	}
 }

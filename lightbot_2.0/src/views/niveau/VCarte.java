@@ -14,6 +14,7 @@ import org.jsfml.system.Vector2f;
 
 import views.View;
 import views.bot.VBot;
+import views.cases.VCase;
 
 /**
  * Représentation graphique d'une Carte

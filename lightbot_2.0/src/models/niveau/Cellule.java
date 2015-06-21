@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import models.ObservableModel;
+import models.cases.Case;
 
 /**
  * Cellule représente un emplacement dans la Carte avec son contenu.

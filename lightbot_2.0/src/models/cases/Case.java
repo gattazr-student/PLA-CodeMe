@@ -1,4 +1,4 @@
-package models.niveau;
+package models.cases;
 
 import models.ObservableModel;
 import models.basic.Position;

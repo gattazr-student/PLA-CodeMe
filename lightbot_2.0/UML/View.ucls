@@ -37,8 +37,8 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="views.niveau.VCase" project="lightbot_2.0" 
-    file="/lightbot_2.0/src/views/niveau/VCase.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="views.cases.VCase" project="lightbot_2.0" 
+    file="/lightbot_2.0/src/views/cases/VCase.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="941" y="413"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,46 +46,42 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <generalization id="6">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="7">    
-    <bendpoint x="669" y="156"/>    
-    <bendpoint x="653" y="183"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="8" name="pViews">        
-        <position height="18" width="48" x="683" y="237"/>      
-      </attribute>      
-      <multiplicity id="9" minimum="0" maximum="2147483647">        
-        <position height="16" width="23" x="660" y="174"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="10">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="11">    
+  <association id="6">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="12" name="pVActionsDisponibles">        
+      <attribute id="7" name="pVActionsDisponibles">        
         <position height="18" width="128" x="221" y="385"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="2147483647">        
+      <multiplicity id="8" minimum="0" maximum="2147483647">        
         <position height="16" width="23" x="229" y="430"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="14">    
+  <association id="9">    
+    <bendpoint x="669" y="156"/>    
+    <bendpoint x="653" y="183"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="10" name="pViews">        
+        <position height="18" width="48" x="683" y="237"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="2147483647">        
+        <position height="16" width="23" x="660" y="174"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="13">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="5"/>    
+  <generalization id="14">    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

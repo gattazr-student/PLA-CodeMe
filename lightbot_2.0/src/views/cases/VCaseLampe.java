@@ -1,10 +1,10 @@
-package views.niveau;
+package views.cases;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import models.niveau.CaseLampe;
-import models.niveau.CaseLampe.ETAT_LAMPE;
+import models.cases.CaseLampe;
+import models.cases.CaseLampe.ETAT_LAMPE;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Sprite;

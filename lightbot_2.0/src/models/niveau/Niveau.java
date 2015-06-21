@@ -8,7 +8,9 @@ import models.ObservableModel;
 import models.action.Action;
 import models.action.Route;
 import models.bot.Bot;
-import models.niveau.CaseLampe.ETAT_LAMPE;
+import models.cases.Case;
+import models.cases.CaseLampe;
+import models.cases.CaseLampe.ETAT_LAMPE;
 
 /**
  * Niveau Représente un niveau du jeu. Contenant des informations lus depuis un fichier XML, c'est le contenu

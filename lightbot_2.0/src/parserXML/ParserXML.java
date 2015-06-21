@@ -28,12 +28,12 @@ import models.basic.Etat;
 import models.basic.Orientation;
 import models.basic.Position;
 import models.bot.Bot;
+import models.cases.Case;
+import models.cases.CaseBasique;
+import models.cases.CaseInterrupteur;
+import models.cases.CaseLampe;
+import models.cases.CaseVide;
 import models.niveau.Carte;
-import models.niveau.Case;
-import models.niveau.CaseBasique;
-import models.niveau.CaseInterrupteur;
-import models.niveau.CaseLampe;
-import models.niveau.CaseVide;
 import models.niveau.Niveau;
 
 import org.w3c.dom.Document;

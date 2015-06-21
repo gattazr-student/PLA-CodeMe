@@ -7,8 +7,8 @@ import java.util.List;
 import models.action.Action;
 import models.action.Route;
 import models.basic.Couleur;
+import models.cases.CaseInterrupteur;
 import models.niveau.Carte;
-import models.niveau.CaseInterrupteur;
 import models.niveau.Niveau;
 import mvc.Observer;
 
@@ -29,6 +29,8 @@ import views.action.VAction;
 import views.action.VRoute;
 import views.action.VRouteListe;
 import views.bot.VBot;
+import views.cases.VCase;
+import views.cases.VCaseInterrupteur;
 import views.fenetre.Fenetre;
 import views.fenetre.Panel;
 import views.jsfml.VBouton;

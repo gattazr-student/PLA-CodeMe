@@ -1,4 +1,4 @@
-package models.niveau;
+package models.cases;
 
 import models.basic.Position;
 
