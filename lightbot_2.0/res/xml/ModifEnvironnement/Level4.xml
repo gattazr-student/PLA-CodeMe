@@ -165,7 +165,7 @@
 			</cellule>
 
 			<cellule>
-                <position x="9" y="1" />
+                <position x="9" y="3" />
 				<cases>
 					<case type = "lampe" h="2" />
 				</cases>
@@ -181,5 +181,5 @@
 
 		</cellules>
 	</map>
-	<coups nb="3" main="12" p1="7" p2="3" />
+	<coups nb="3" main="12" p1="7" p2="5" />
  </level>
