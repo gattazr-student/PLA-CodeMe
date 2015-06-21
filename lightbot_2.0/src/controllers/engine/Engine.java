@@ -58,10 +58,10 @@ public class Engine {
 					if (pNbActions <= wModelNiveau.getRecordActions()) {
 						wSuccessed = true;
 						new VPopup(Fenetre.FENETRE, "Bravo ! Le programme etait tres court !", Color.GREEN)
-						.run();
+								.run();
 					} else {
 						new VPopup(Fenetre.FENETRE,
-								"Bravo ! Mais vous pouvez réduire la taille du programme", Color.GREEN).run();
+								"Bravo ! Mais vous pouvez reduire la taille du programme", Color.GREEN).run();
 					}
 				}
 				if (wModelNiveau.getRecordCoups() != 0) {
@@ -70,7 +70,7 @@ public class Engine {
 						new VPopup(Fenetre.FENETRE, "Bravo ! Le temps d'execution etait tres court",
 								Color.GREEN).run();
 					} else {
-						new VPopup(Fenetre.FENETRE, "Bravo ! Mais vous pouvez réduire le temps d'éxécution",
+						new VPopup(Fenetre.FENETRE, "Bravo ! Mais vous pouvez reduire le temps d'execution",
 								Color.GREEN).run();
 					}
 				}
