@@ -1,4 +1,4 @@
-package controllers;
+package game;
 
 import views.fenetre.Fenetre;
 import views.menu.Home;
@@ -7,7 +7,7 @@ import views.menu.Home;
  * Point d'entrée du programme
  *
  */
-public class ControllerGame {
+public class Game {
 
 	/**
 	 * Point d'entré du programme
