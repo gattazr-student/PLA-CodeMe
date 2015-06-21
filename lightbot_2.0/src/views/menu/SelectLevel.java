@@ -18,17 +18,30 @@ import views.fenetre.Panel;
 import views.jsfml.VBouton;
 import controllers.engine.Engine;
 
+/**
+ * Vue Selection du niveau
+ *
+ */
 public class SelectLevel extends Fenetre {
 
+	/** Panel entête */
 	private Panel pPanelEntete;
+	/** Panel Monde1 */
 	private Panel pPanelWorld1;
+	/** Panel Monde2 */
 	private Panel pPanelWorld2;
+	/** Panel Monde3 */
 	private Panel pPanelWorld3;
 
+	/** Booleén retour à true lorsque l'on clicke sur le bouton Return */
 	private boolean pReturn;
+	/** Bouton return utilisé pour sortir de la vue */
 	private VBouton pBoutonReturn;
+	/** Bouton dans le panel Monde1 */
 	private List<VBouton> pBoutonWorld1;
+	/** Bouton dans le panel Monde2 */
 	private List<VBouton> pBoutonWorld2;
+	/** Bouton dans le panel Monde3 */
 	private List<VBouton> pBoutonWorld3;
 
 	/**
