@@ -18,15 +18,14 @@ import views.jsfml.VBouton;
 public class Home extends View {
 
 	public static void main(String[] aArgs) {
-
-		/* Création de la vue */
+		RenderWindow aWindow = new RenderWindow();
+		aWindow = Fenetre.FENETRE;
 		Home wViewHome = new Home(Fenetre.FENETRE);
-		wViewHome.runHome();
+		wViewHome.runHome(aWindow);
 		System.out.println("Goodbye World!");
 
 	}
 
-	private RenderWindow pWindow;
 	private Panel pPanelEntete;
 	private Panel pPanelJouer;
 	private Panel pPanelTuto;
@@ -34,20 +33,19 @@ public class Home extends View {
 	private Panel pPanelPied;
 
 	public Home(RenderWindow aWindow) {
-		this.pWindow = aWindow;
 
 		/* Création des panels */
 		float wXSep, wYSep;
 		float wYSepBouton, wYSepPied;
-		Vector2i wSize = this.pWindow.getSize();
+		Vector2i wSize = aWindow.getSize();
 
 		setZone(new FloatRect(0, 0, wSize.x, wSize.y));
 
 		wXSep = wSize.x; // Calcul 100% de la largeur de la fenêtre
-		wYSep = (float) (wSize.y * 0.25); // Calcul 25% de la hauteur de la fenêtre
+		wYSep = (float) (wSize.y * 0.35); // Calcul 25% de la hauteur de la fenêtre
 
 		wYSepBouton = (float) (wSize.y * 0.20); // Calcul 20% de la hauteur de la fenêtre
-		wYSepPied = (float) (wSize.y * 0.15); // Calcul 15% de la hauteur de la fenêtre
+		wYSepPied = (float) (wSize.y * 0.05); // Calcul 5% de la hauteur de la fenêtre
 
 		/* Ajoute les 5 panels dans la liste des éléments de la vue */
 
@@ -68,8 +66,8 @@ public class Home extends View {
 
 	public void initEntete(String aNomBouton, String aNomSprite) {
 
-		float wWidth = 479;
-		float wHeight = 167;
+		float wWidth = 983;
+		float wHeight = 350;
 		VBouton wButton_Entete = new VBouton(new FloatRect((this.pPanelEntete.getWidth() / 2 - wWidth / 2),
 				(this.pPanelEntete.getHeight() / 2 - wHeight / 2), wWidth, wHeight), aNomBouton, aNomSprite);
 		this.pPanelEntete.addView(wButton_Entete);
@@ -102,7 +100,7 @@ public class Home extends View {
 	@Override
 	public void initView() {
 		// TODO Auto-generated method stub
-		initEntete("Entete", "res/menu/sprite_codeme.png");
+		initEntete("Entete", "res/logo/logo.png");
 		initJouer("Jouer", "res/menu/sprite_jouer_n.png");
 		initTuto("Tutoriel", "res/menu/sprite_tuto_n.png");
 		initOptions("Options", "res/menu/sprite_opt_n.png");
@@ -118,33 +116,33 @@ public class Home extends View {
 		//
 	}
 
-	public void redraw() {
-		this.pWindow.clear();
-		draw(this.pWindow, new RenderStates(new Transform()));
-		this.pWindow.display();
+	public void redraw(RenderWindow aWindow) {
+		aWindow.clear();
+		draw(aWindow, new RenderStates(new Transform()));
+		aWindow.display();
 	}
 
 	public void run_monde() {
 
 	}
 
-	public void runHome() {
+	public void runHome(RenderWindow aWindow) {
 		float wWidth = 302;
 		float wHeight = 57;
 
-		redraw();
+		redraw(aWindow);
 
 		/* Limite le framerate */
-		this.pWindow.setFramerateLimit(30);
-		while (this.pWindow.isOpen()) {
+		aWindow.setFramerateLimit(30);
+		while (aWindow.isOpen()) {
 
 			/* Gère les events */
-			for (Event wEvent : this.pWindow.pollEvents()) {
+			for (Event wEvent : aWindow.pollEvents()) {
 				if (wEvent.type == Event.Type.CLOSED) {
-					this.pWindow.close();
+					aWindow.close();
 				}
 				if (wEvent.type == Event.Type.RESIZED) {
-					redraw();
+					redraw(aWindow);
 				}
 				if (wEvent.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					MouseButtonEvent wMouseEvent = wEvent.asMouseButtonEvent();
@@ -159,17 +157,17 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelJouer.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelJouer.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight())
-										&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight())) {
+								&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_c.png");
 							initTuto("Tutoriel", "res/menu/sprite_tuto_n.png");
 							initOptions("Options", "res/menu/sprite_opt_n.png");
-							redraw();
+							redraw(aWindow);
 
-							runHome();
+							runHome(aWindow);
 
 							// TODO : ouvrir nouvelle fenetre des mondes
 
@@ -177,17 +175,17 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelTuto.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelTuto.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())
-										&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
+								&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
 							initTuto("Tutoriel", "res/menu/sprite_tuto_c.png");
 							initOptions("Options", "res/menu/sprite_opt_n.png");
-							redraw();
+							redraw(aWindow);
 
-							runHome();
+							runHome(aWindow);
 
 							// TODO : ouvrir fenetre tuto
 						} else if (this.pPanelOptions.contains(pos)
@@ -195,18 +193,18 @@ public class Home extends View {
 								&& !(pos.y < (this.pPanelOptions.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
 										+ this.pPanelTuto.getHeight())
-										&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
-												+ this.pPanelTuto.getHeight())) {
+								&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
+										+ this.pPanelTuto.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
 							initTuto("Tutoriel", "res/menu/sprite_tuto_n.png");
 							initOptions("Options", "res/menu/sprite_opt_c.png");
-							redraw();
+							redraw(aWindow);
 
-							runHome();
+							runHome(aWindow);
 
 							// TODO : ouvrir options
 						} else {
@@ -225,16 +223,16 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelJouer.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelJouer.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight())
-										&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight())) {
+								&& !(pos.x > (this.pPanelJouer.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelJouer.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight())) {
 
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
 							initTuto("Tutoriel", "res/menu/sprite_tuto_n.png");
 							initOptions("Options", "res/menu/sprite_opt_n.png");
-							redraw();
+							redraw(aWindow);
 
 							selectLevel();
 
@@ -245,15 +243,15 @@ public class Home extends View {
 								&& !(pos.x < (this.pPanelTuto.getWidth() / 2 - wWidth / 2))
 								&& !(pos.y < (this.pPanelTuto.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())
-										&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
+								&& !(pos.x > (this.pPanelTuto.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelTuto.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
 							initTuto("Tutoriel", "res/menu/sprite_tuto_n.png");
 							initOptions("Options", "res/menu/sprite_opt_n.png");
-							redraw();
+							redraw(aWindow);
 
 							tutoMenu();
 
@@ -263,16 +261,16 @@ public class Home extends View {
 								&& !(pos.y < (this.pPanelOptions.getHeight() / 2 - wHeight / 2)
 										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
 										+ this.pPanelTuto.getHeight())
-										&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
-										&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
-												+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
-												+ this.pPanelTuto.getHeight())) {
+								&& !(pos.x > (this.pPanelOptions.getWidth() / 2 + wWidth / 2))
+								&& !(pos.y > (this.pPanelOptions.getHeight() / 2 + wHeight / 2)
+										+ this.pPanelEntete.getHeight() + this.pPanelJouer.getHeight()
+										+ this.pPanelTuto.getHeight())) {
 							// changement de l'image pour visualiser le clic
 							initEntete("Entete", "res/menu/sprite_codeme.png");
 							initJouer("Jouer", "res/menu/sprite_jouer_n.png");
 							initTuto("Tutoriel", "res/menu/sprite_tuto_n.png");
 							initOptions("Options", "res/menu/sprite_opt_n.png");
-							redraw();
+							redraw(aWindow);
 
 							optionMenu();
 
