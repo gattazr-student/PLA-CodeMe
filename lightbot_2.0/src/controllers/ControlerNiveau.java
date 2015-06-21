@@ -42,6 +42,8 @@ public class ControlerNiveau {
 	private Route pRouteCourant;
 	/** Booleén signalant l'utilisation du clavier */
 	private boolean pKeyPress;
+	/** Booléen permettant le retour au menu quand mis à true */
+	private boolean pReturned;
 
 	/**
 	 * Construit un Controller de Niveau à partir d'un Niveau et d'une vue Niveau.
@@ -58,6 +60,7 @@ public class ControlerNiveau {
 		this.pBotCourant = this.pNiveau.getBots().get(0);
 		this.pRouteCourant = this.pBotCourant.getRouteMain();
 		this.pKeyPress = false;
+		this.pReturned = false;
 	}
 
 	/**
@@ -70,13 +73,6 @@ public class ControlerNiveau {
 		this.pRouteCourant.addAction(aAction.copy());
 		this.pVNiveau.redraw();
 		this.pNbAction++;
-	}
-
-	/**
-	 * Quitte le Niveau
-	 */
-	public void exit() {
-		// TODO Quitte le niveau
 	}
 
 	/**
@@ -95,6 +91,10 @@ public class ControlerNiveau {
 	 */
 	public int getNbCoups() {
 		return this.pNbCoups;
+	}
+
+	public boolean isExited() {
+		return this.pReturned;
 	}
 
 	/**
@@ -135,6 +135,10 @@ public class ControlerNiveau {
 		}
 	}
 
+	public void quitLevel() {
+		this.pReturned = true;
+	}
+
 	/**
 	 * Retire l'Action à la position aPosition de la Route donnée
 	 *
@@ -171,7 +175,7 @@ public class ControlerNiveau {
 		this.pVNiveau.redraw();
 		long wTime = System.currentTimeMillis();
 		long wCour, wDiff;
-		while (!isFinished()) {
+		while (!this.pReturned && !isFinished()) {
 			wCour = System.currentTimeMillis();
 			wDiff = wCour - wTime;
 			this.pVNiveau.handleEvents();
@@ -196,7 +200,6 @@ public class ControlerNiveau {
 			this.pOrdonnanceur.clearPrev();
 			this.pNbCoups = this.pOrdonnanceur.getNbCoups();
 		}
-
 	}
 
 	/**
