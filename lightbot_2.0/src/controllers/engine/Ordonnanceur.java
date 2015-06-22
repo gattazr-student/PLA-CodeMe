@@ -20,8 +20,6 @@ import exceptions.LightBotException;
 /**
  * Ordonanceur permettant l'execution de plusieurs robots en parallele
  *
- * @author gattazr
- *
  */
 public class Ordonnanceur {
 
